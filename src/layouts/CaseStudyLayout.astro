@@ -1,0 +1,71 @@
+---
+/**
+ * CaseStudyLayout — layout for individual case study pages.
+ *
+ * Wraps PageLayout and adds:
+ * - A metadata bar (industry, company, role)
+ * - The project title
+ * - A full-bleed hero image
+ * - A constrained prose container for the MDX body
+ * - An Impact section with metrics (if provided)
+ *
+ * This layout is used by `src/pages/work/[...slug].astro` and receives
+ * the case study's frontmatter data as props.
+ */
+import PageLayout from "./PageLayout.astro";
+import CaseStudyHero from "../components/casestudy/CaseStudyHero.astro";
+import ImpactMetrics from "../components/casestudy/ImpactMetrics.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  company: string;
+  role: string;
+  industry: string;
+  description: string;
+  heroImage: ImageMetadata;
+  metrics?: Array<{ label: string; value: string }>;
+}
+
+const { title, company, role, industry, description, heroImage, metrics } = Astro.props;
+---
+
+<PageLayout title={`${title} — ${company}`} description={description}>
+  <article>
+    {/* Metadata bar — shows contextual info about the project */}
+    <div class="mx-auto max-w-6xl px-6 pt-12 pb-8">
+      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-500">
+        <div>
+          <span class="font-semibold text-gray-900">Industry</span>
+          <span class="ml-2">{industry}</span>
+        </div>
+        <div>
+          <span class="font-semibold text-gray-900">Company</span>
+          <span class="ml-2">{company}</span>
+        </div>
+        <div>
+          <span class="font-semibold text-gray-900">Role</span>
+          <span class="ml-2">{role}</span>
+        </div>
+      </div>
+
+      {/* Project title */}
+      <h1 class="mt-6 font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+        {title}
+      </h1>
+    </div>
+
+    {/* Full-bleed hero image */}
+    <CaseStudyHero image={heroImage} alt={title} />
+
+    {/* MDX body content — constrained width with prose styling */}
+    <div class="prose prose-lg prose-gray mx-auto max-w-3xl px-6 py-12">
+      <slot />
+    </div>
+
+    {/* Impact metrics — only rendered if the case study defines them */}
+    {metrics && metrics.length > 0 && (
+      <ImpactMetrics metrics={metrics} />
+    )}
+  </article>
+</PageLayout>

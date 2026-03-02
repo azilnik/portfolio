@@ -1,0 +1,19 @@
+---
+/**
+ * GoatCounter — privacy-friendly analytics.
+ *
+ * Only renders in production builds (`import.meta.env.PROD`), so the dev
+ * server stays clean. Replace the `data-goatcounter` URL with your own
+ * GoatCounter instance once you have one set up.
+ *
+ * GoatCounter doesn't use cookies and is GDPR-friendly out of the box.
+ */
+---
+
+{import.meta.env.PROD && (
+  <script
+    data-goatcounter="https://ari-design.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js"
+  />
+)}

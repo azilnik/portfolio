@@ -1,0 +1,82 @@
+---
+/**
+ * MobileMenu — full-screen slide-over navigation panel.
+ *
+ * Hidden by default. Toggled open/closed by the hamburger button in
+ * the Header component. Uses vanilla JS — no React/Vue needed.
+ */
+import Navigation from "./Navigation.astro";
+---
+
+{/* Overlay backdrop — click to close */}
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+></div>
+
+{/* Slide-over panel */}
+<div
+  id="mobile-menu-panel"
+  class="fixed inset-y-0 right-0 z-50 w-72 translate-x-full bg-white shadow-xl transition-transform duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation"
+>
+  <div class="flex flex-col h-full p-8">
+    {/* Close button */}
+    <button
+      id="mobile-menu-close"
+      class="self-end mb-8"
+      aria-label="Close navigation menu"
+    >
+      <svg class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    {/* Vertical nav links */}
+    <Navigation vertical />
+  </div>
+</div>
+
+{/* Toggle logic — plain JS, no framework needed */}
+<script>
+  // Wait for the DOM to be ready before attaching event listeners.
+  function initMobileMenu() {
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const close = document.getElementById("mobile-menu-close");
+    const overlay = document.getElementById("mobile-menu-overlay");
+    const panel = document.getElementById("mobile-menu-panel");
+
+    if (!toggle || !close || !overlay || !panel) return;
+
+    function openMenu() {
+      panel!.classList.remove("translate-x-full");
+      overlay!.classList.remove("opacity-0", "pointer-events-none");
+      toggle!.setAttribute("aria-expanded", "true");
+      // Prevent body scroll while menu is open.
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+      panel!.classList.add("translate-x-full");
+      overlay!.classList.add("opacity-0", "pointer-events-none");
+      toggle!.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    toggle.addEventListener("click", openMenu);
+    close.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    // Close on Escape key.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  }
+
+  // Run on initial load and on Astro page transitions (View Transitions).
+  initMobileMenu();
+  document.addEventListener("astro:after-swap", initMobileMenu);
+</script>
