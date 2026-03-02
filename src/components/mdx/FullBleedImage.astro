@@ -1,0 +1,43 @@
+---
+/**
+ * FullBleedImage — breaks out of the prose container to span full viewport width.
+ *
+ * Use this in MDX files when you want an image to stretch edge-to-edge,
+ * ignoring the narrow prose column. Uses a CSS "breakout" technique.
+ *
+ * Usage in .mdx:
+ *   import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+ *   import myImage from "./images/my-screenshot.png";
+ *
+ *   <FullBleedImage src={myImage} alt="Description of the image" />
+ */
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  /** Optional caption shown below the image. */
+  caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+---
+
+{/*
+  CSS breakout trick: `left-1/2 -ml-[50vw] w-screen` centers the element
+  relative to the viewport, breaking out of any parent max-width container.
+*/}
+<figure class="relative left-1/2 -ml-[50vw] w-screen my-12">
+  <Image
+    src={src}
+    alt={alt}
+    widths={[640, 960, 1280, 1920]}
+    sizes="100vw"
+    class="w-full h-auto"
+  />
+  {caption && (
+    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm text-gray-400">
+      {caption}
+    </figcaption>
+  )}
+</figure>

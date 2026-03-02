@@ -1,0 +1,52 @@
+---
+/**
+ * VideoPlayer — HTML5 video with GIF fallback for case study demos.
+ *
+ * Renders an autoplay, muted, looping video. If the browser doesn't
+ * support <video>, falls back to the GIF image.
+ *
+ * Usage in .mdx:
+ *   import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
+ *
+ *   <VideoPlayer
+ *     src="/videos/my-demo.mp4"
+ *     fallback="/videos/my-demo.gif"
+ *     alt="Demo of the new checkout flow"
+ *   />
+ *
+ * Video files go in `public/videos/`. Use `scripts/convert-video.sh`
+ * to convert screen recordings to mp4 + gif.
+ */
+
+interface Props {
+  /** Path to the .mp4 file (in public/videos/). */
+  src: string;
+  /** Path to the .gif fallback (in public/videos/). */
+  fallback: string;
+  /** Alt text describing the video content. */
+  alt: string;
+  /** Optional caption shown below the video. */
+  caption?: string;
+}
+
+const { src, fallback, alt, caption } = Astro.props;
+---
+
+<figure class="my-8 overflow-hidden rounded-lg">
+  {/* HTML5 video — autoplay, muted, looping (silent background demo) */}
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="w-full h-auto"
+    aria-label={alt}
+  >
+    <source src={src} type="video/mp4" />
+    {/* Fallback: if <video> is not supported, show the GIF instead */}
+    <img src={fallback} alt={alt} class="w-full h-auto" loading="lazy" />
+  </video>
+  {caption && (
+    <figcaption class="mt-3 text-center text-sm text-gray-400">{caption}</figcaption>
+  )}
+</figure>

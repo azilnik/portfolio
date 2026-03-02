@@ -1,0 +1,31 @@
+---
+/**
+ * Callout — highlighted text block for important notes in case studies.
+ *
+ * Renders a styled box with an accent left border. Use it in MDX to
+ * call attention to key insights, design decisions, or takeaways.
+ *
+ * Usage in .mdx:
+ *   import Callout from "../../components/mdx/Callout.astro";
+ *
+ *   <Callout>
+ *     This is an important insight about the design process.
+ *   </Callout>
+ */
+
+interface Props {
+  /** Optional label shown above the callout text (e.g., "Key Insight"). */
+  label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+<aside class="my-8 rounded-r-lg border-l-4 border-accent bg-blue-50 p-6">
+  {label && (
+    <p class="mb-2 text-xs font-bold uppercase tracking-wider text-accent">{label}</p>
+  )}
+  <div class="text-gray-700 leading-relaxed">
+    <slot />
+  </div>
+</aside>
