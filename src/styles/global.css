@@ -76,8 +76,11 @@
 
 @layer base {
   html {
-    /* Smooth anchor scrolling (e.g., "See my work" link on homepage) */
-    scroll-behavior: smooth;
+    /* Only smooth-scroll when an anchor link is clicked (not during normal scrolling).
+       The media query ensures users who prefer reduced motion get instant jumps. */
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
