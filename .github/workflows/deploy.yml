@@ -1,0 +1,52 @@
+# ============================================================
+# GitHub Actions — Deploy Astro site to GitHub Pages
+#
+# Triggers on every push to `main`. Uses the official Astro
+# GitHub Action to build the site, then deploys to Pages.
+#
+# Before this works, you need to enable GitHub Pages in your
+# repo settings:
+#   Settings → Pages → Source → "GitHub Actions"
+# ============================================================
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+  # Allow running this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+# Grant the GITHUB_TOKEN permission to deploy to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only allow one deployment at a time (skip queued runs).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install, build, and upload
+        uses: withastro/action@v3
+        # No config needed — the action auto-detects Astro projects.
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
