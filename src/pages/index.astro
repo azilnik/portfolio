@@ -1,0 +1,17 @@
+---
+/**
+ * Homepage — the main landing page at ari.design.
+ *
+ * Sections: Hero → Testimonials → My Work (employer blocks with case studies).
+ */
+import PageLayout from "../layouts/PageLayout.astro";
+import Hero from "../components/home/Hero.astro";
+import TestimonialCarousel from "../components/home/TestimonialCarousel.astro";
+import WorkSection from "../components/home/WorkSection.astro";
+---
+
+<PageLayout title="Ari Zilnik" description="Ari Zilnik — Design leader crafting thoughtful digital experiences. Head of Design at Join.">
+  <Hero />
+  <TestimonialCarousel />
+  <WorkSection />
+</PageLayout>

@@ -1,0 +1,114 @@
+---
+/**
+ * TestimonialCarousel — horizontal scroll carousel of quotes.
+ *
+ * Uses CSS scroll-snap for smooth, snappy scrolling and vanilla JS for
+ * dot indicators and optional auto-rotation. No library dependencies.
+ */
+import { getCollection } from "astro:content";
+
+const testimonials = await getCollection("testimonials");
+---
+
+<section class="bg-gray-50 py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="mb-12 text-center font-heading text-2xl font-bold text-gray-900">
+      What people say
+    </h2>
+
+    {/* Scrollable container — snap to each testimonial card */}
+    <div
+      id="testimonial-track"
+      class="hide-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4"
+    >
+      {testimonials.map((t) => (
+        <blockquote class="flex-none w-full snap-center rounded-2xl bg-white p-8 shadow-sm sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+          <p class="text-lg leading-relaxed text-gray-700">"{t.data.quote}"</p>
+          <footer class="mt-6">
+            <p class="font-semibold text-gray-900">{t.data.authorName}</p>
+            <p class="text-sm text-gray-500">{t.data.authorTitle}</p>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+
+    {/* Dot indicators */}
+    <div id="testimonial-dots" class="mt-6 flex justify-center gap-2">
+      {testimonials.map((_, i) => (
+        <button
+          class="testimonial-dot h-2 w-2 rounded-full bg-gray-300 transition-colors"
+          data-index={i}
+          aria-label={`Go to testimonial ${i + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  /**
+   * Testimonial carousel logic — dot indicators + auto-rotation.
+   *
+   * Uses IntersectionObserver to detect which card is currently visible,
+   * then updates the active dot. Also auto-advances every 5 seconds.
+   */
+  function initCarousel() {
+    const track = document.getElementById("testimonial-track");
+    const dots = document.querySelectorAll(".testimonial-dot");
+    if (!track || dots.length === 0) return;
+
+    const cards = track.querySelectorAll("blockquote");
+    let currentIndex = 0;
+    let autoplayInterval: ReturnType<typeof setInterval>;
+
+    // Update which dot is "active" (highlighted).
+    function setActiveDot(index: number) {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("bg-accent", i === index);
+        dot.classList.toggle("bg-gray-300", i !== index);
+      });
+      currentIndex = index;
+    }
+
+    // Watch which card scrolls into view.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(cards).indexOf(entry.target as HTMLElement);
+            if (index >= 0) setActiveDot(index);
+          }
+        });
+      },
+      { root: track, threshold: 0.6 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    // Click a dot to scroll to that card.
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const index = Number((dot as HTMLElement).dataset.index);
+        cards[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      });
+    });
+
+    // Auto-rotate every 5 seconds, pause on hover.
+    function startAutoplay() {
+      autoplayInterval = setInterval(() => {
+        const next = (currentIndex + 1) % cards.length;
+        cards[next]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }, 5000);
+    }
+
+    track.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
+    track.addEventListener("mouseleave", startAutoplay);
+    startAutoplay();
+
+    // Set the first dot as active initially.
+    setActiveDot(0);
+  }
+
+  initCarousel();
+  document.addEventListener("astro:after-swap", initCarousel);
+</script>
