@@ -50,7 +50,11 @@ const testimonials = await getCollection("testimonials");
    * Testimonial carousel logic — dot indicators + auto-rotation.
    *
    * Uses IntersectionObserver to detect which card is currently visible,
-   * then updates the active dot. Also auto-advances every 5 seconds.
+   * then updates the active dot. Auto-advances every 5 seconds, but only
+   * when the carousel is visible on screen (to avoid hijacking page scroll).
+   *
+   * IMPORTANT: We use track.scrollTo() instead of scrollIntoView() so that
+   * scrolling stays inside the carousel container and never moves the page.
    */
   function initCarousel() {
     const track = document.getElementById("testimonial-track");
@@ -60,6 +64,14 @@ const testimonials = await getCollection("testimonials");
     const cards = track.querySelectorAll("blockquote");
     let currentIndex = 0;
     let autoplayInterval: ReturnType<typeof setInterval>;
+    let isVisible = false;
+
+    // Scroll to a specific card by index — only moves the carousel, not the page.
+    function scrollToCard(index: number) {
+      const card = cards[index] as HTMLElement;
+      if (!card) return;
+      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+    }
 
     // Update which dot is "active" (highlighted).
     function setActiveDot(index: number) {
@@ -70,8 +82,8 @@ const testimonials = await getCollection("testimonials");
       currentIndex = index;
     }
 
-    // Watch which card scrolls into view.
-    const observer = new IntersectionObserver(
+    // Watch which card scrolls into view within the track.
+    const cardObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -83,21 +95,30 @@ const testimonials = await getCollection("testimonials");
       { root: track, threshold: 0.6 }
     );
 
-    cards.forEach((card) => observer.observe(card));
+    cards.forEach((card) => cardObserver.observe(card));
+
+    // Track whether the carousel section is visible on the page.
+    // Auto-rotation only runs when the user can actually see it.
+    const sectionObserver = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0.3 }
+    );
+    sectionObserver.observe(track.closest("section")!);
 
     // Click a dot to scroll to that card.
     dots.forEach((dot) => {
       dot.addEventListener("click", () => {
         const index = Number((dot as HTMLElement).dataset.index);
-        cards[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        scrollToCard(index);
       });
     });
 
-    // Auto-rotate every 5 seconds, pause on hover.
+    // Auto-rotate every 5 seconds, pause on hover or when off-screen.
     function startAutoplay() {
       autoplayInterval = setInterval(() => {
+        if (!isVisible) return;
         const next = (currentIndex + 1) % cards.length;
-        cards[next]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        scrollToCard(next);
       }, 5000);
     }
 
