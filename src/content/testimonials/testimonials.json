@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "quote": "Ari is an exceptional designer who combines strategic thinking with pixel-perfect execution. He elevated our entire product experience.",
+    "authorName": "Sarah Chen",
+    "authorTitle": "VP of Product, Join"
+  },
+  {
+    "id": "2",
+    "quote": "Working with Ari transformed how our team thinks about design. He brought clarity to complex problems and delivered results that moved the needle.",
+    "authorName": "Michael Torres",
+    "authorTitle": "CTO, Blockdaemon"
+  },
+  {
+    "id": "3",
+    "quote": "Ari has a rare ability to balance user needs with business goals. His work on our developer tools was a game-changer for adoption.",
+    "authorName": "Emily Park",
+    "authorTitle": "Head of Product, Gradle"
+  }
+]
