@@ -1,109 +1,49 @@
 ---
-# ============================================================
-# Case Study: Join Navigation Redesign
-#
-# This file is a template showing how to write a case study.
-# Replace the content below with your real project details.
-# The frontmatter above the --- lines is required metadata.
-# ============================================================
-title: "Navigation Redesign"
+title: "Join's New Navigation"
 company: "Join"
-role: "Head of Design"
-industry: "HR Tech"
-description: "Redesigning Join's navigation to improve discoverability and reduce time-to-task for hiring teams."
-heroImage: "./images/join-nav-hero.jpg"
-thumbnail: "./images/join-nav-thumb.jpg"
-thumbnailAlt: "Screenshot of the redesigned Join navigation"
+role: "Head of Design, Lead Designer and Researcher"
+industry: "Construction"
+description: "Aiding users in orientation, and the breadth of functionality within Join."
+heroImage: "./images/join-nav-hero.png"
+thumbnail: "./images/join-nav-hero.png"
+thumbnailAlt: "Join's New Navigation"
 employer: "join"
 sortOrder: 1
 draft: false
 metrics:
-  - label: "Task completion rate"
-    value: "+28%"
-  - label: "Time to hire"
-    value: "-15%"
-  - label: "User satisfaction"
-    value: "4.6/5"
+  - label: "Customer"
+    value: "33% reduction in support tickets."
+  - label: "Product"
+    value: "10x increase in organizational feature use over 3 months."
+  - label: "People and process"
+    value: "Managed a team of 4 to kick-start a foundational user-centered research project."
 ---
 
-{/* ============================================================
-    MDX BODY — everything below the frontmatter is your content.
-
-    You can write regular Markdown here, plus import and use
-    custom components for rich media (images, video, callouts).
-    ============================================================ */}
-
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import ImageGrid from "../../components/mdx/ImageGrid.astro";
-import Callout from "../../components/mdx/Callout.astro";
 
-{/* Import images used in the body content */}
-import navBefore from "./images/join-nav-before.jpg";
-import navAfter from "./images/join-nav-after.jpg";
-import navFullBleed from "./images/join-nav-fullbleed.jpg";
+import joinNav02 from "./images/join-nav-02.png";
+import joinNav03 from "./images/join-nav-03.png";
+import joinNav04 from "./images/join-nav-04.png";
+import joinNav05 from "./images/join-nav-05.png";
 
-## The Challenge
+Join is a project management platform that helps construction companies, owners, and architects make better, more informed decisions.
 
-Join's hiring platform had grown organically over several years, and the navigation
-reflected that history. Key features were buried in nested menus, users couldn't
-find what they needed quickly, and onboarding new team members took too long.
+As new features have been added to Join, the app's breadth has made critical features undiscoverable, and customers have cited workflows as overly cumbersome.
 
-Our analytics showed that users averaged **4.2 clicks** to reach their most-used
-features, and support tickets about "where do I find X?" were one of the top
-three categories.
+This project simplified our navigation by revisiting the architecture from top to bottom, resulting in a redesigned workflow that lets users zoom into details within a project and zoom out to get an overview of their project portfolio with just two clicks. The result is happier users, fewer support tickets, and greater app use overall.
 
-<Callout label="Key Insight">
-  Users had developed workarounds — bookmarking deep links and sharing direct URLs
-  in Slack. The navigation wasn't just inconvenient, it was invisible to many users.
-</Callout>
+<FullBleedImage src={joinNav02} alt="Join navigation design exploration" />
 
-## Research & Discovery
+<FullBleedImage src={joinNav03} alt="Join navigation redesign" />
 
-I led a research sprint that included:
+<FullBleedImage src={joinNav04} alt="Join navigation in context" />
 
-- **15 user interviews** with hiring managers, recruiters, and executives
-- **Heatmap analysis** of existing navigation usage patterns
-- **Card sorting sessions** to understand users' mental models
-- **Competitive audit** of 8 similar platforms
+<FullBleedImage src={joinNav05} alt="Join navigation final design" />
 
-The research revealed three core problems: information hierarchy didn't match user
-priorities, terminology was inconsistent, and the mobile experience was essentially
-broken.
+## Quotes
 
-## Before & After
+> "The team at Join is very brave for tackling this kind of UX issue."
 
-<ImageGrid
-  images={[
-    { src: navBefore, alt: "The old navigation with nested menus" },
-    { src: navAfter, alt: "The redesigned flat navigation" },
-  ]}
-  caption="Left: The original nested navigation. Right: The streamlined redesign."
-/>
+> "So valuable for end users and their organizations as they will discover and use more of Join's capabilitues!"
 
-## Design Solution
-
-We restructured the entire navigation around user tasks rather than system features.
-The key changes were:
-
-1. **Flat hierarchy** — reduced from 3 levels to 2
-2. **Role-based defaults** — the nav adapts based on whether you're a recruiter,
-   hiring manager, or executive
-3. **Quick actions bar** — one-click access to the 5 most common tasks
-4. **Global search** — a command-palette-style search that finds anything
-
-{/* Full-bleed image breaks out of the prose column to span the full viewport */}
-<FullBleedImage
-  src={navFullBleed}
-  alt="Full-width view of the redesigned navigation in context"
-  caption="The redesigned navigation in the context of the full application."
-/>
-
-## Results
-
-The redesign shipped in Q3 2024 after 6 weeks of development. Key results
-measured after 30 days:
-
-- **Task completion rate** improved by 28%
-- **Average time-to-task** dropped from 4.2 clicks to 1.8 clicks
-- **Support tickets** about navigation decreased by 62%
-- **User satisfaction** (measured via in-app survey) rose from 3.1 to 4.6/5
+> "Nice! Nav is one of the hardest parts to change in an app, usually there are lots of different opinions from users."
