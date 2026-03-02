@@ -1,0 +1,40 @@
+---
+/**
+ * CaseStudyCard — thumbnail card for the /work listing grid.
+ *
+ * Shows the case study thumbnail, company name, and project title.
+ * Links to the full case study page at /work/[slug].
+ */
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  study: CollectionEntry<"work">;
+}
+
+const { study } = Astro.props;
+---
+
+<a
+  href={`/work/${study.id}`}
+  class="group block overflow-hidden rounded-2xl border border-gray-100 bg-white transition-shadow hover:shadow-lg"
+>
+  <Image
+    src={study.data.thumbnail}
+    alt={study.data.thumbnailAlt}
+    widths={[400, 600, 800]}
+    sizes="(min-width: 768px) 50vw, 100vw"
+    class="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+  />
+  <div class="p-5">
+    <p class="text-xs font-medium uppercase tracking-wider text-gray-400">
+      {study.data.company}
+    </p>
+    <h3 class="mt-1 font-heading text-lg font-semibold text-gray-900">
+      {study.data.title}
+    </h3>
+    <p class="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-2">
+      {study.data.description}
+    </p>
+  </div>
+</a>

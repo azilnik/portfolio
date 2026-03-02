@@ -1,0 +1,27 @@
+---
+/**
+ * CaseStudyHero — full-width hero image for case study pages.
+ *
+ * Uses Astro's built-in <Image> component for automatic optimization
+ * (WebP/AVIF, responsive srcset, lazy loading).
+ */
+import { Image } from "astro:assets";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+}
+
+const { image, alt } = Astro.props;
+---
+
+<div class="w-full">
+  <Image
+    src={image}
+    alt={alt}
+    widths={[640, 960, 1280, 1920]}
+    sizes="100vw"
+    class="w-full h-auto object-cover"
+    loading="eager"
+  />
+</div>

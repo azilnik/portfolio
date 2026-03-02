@@ -1,0 +1,30 @@
+---
+/**
+ * ImpactMetrics — a row of 1–3 key metrics shown at the end of a case study.
+ *
+ * Each metric has a `value` (the big number/stat) and a `label` (what it means).
+ * Displayed in a 3-column grid that stacks on mobile.
+ */
+
+interface Props {
+  metrics: Array<{ label: string; value: string }>;
+}
+
+const { metrics } = Astro.props;
+---
+
+<section class="bg-gray-50 py-16">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="mb-10 text-center font-heading text-2xl font-bold text-gray-900">
+      Impact
+    </h2>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+      {metrics.map((metric) => (
+        <div class="text-center">
+          <p class="font-heading text-4xl font-bold text-accent">{metric.value}</p>
+          <p class="mt-2 text-sm text-gray-600">{metric.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
