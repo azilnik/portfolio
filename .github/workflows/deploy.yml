@@ -38,7 +38,12 @@ jobs:
 
       - name: Install, build, and upload
         uses: withastro/action@v3
-        # No config needed — the action auto-detects Astro projects.
+        with:
+          # Override site + base at build time for the GitHub Pages subpath.
+          # astro.config.mjs keeps the final ari.design values, but the CI
+          # build targets ari.zilnik.com/portfolio/ so asset paths resolve
+          # correctly. Remove these flags once the site moves to ari.design.
+          build-args: --site https://ari.zilnik.com --base /portfolio
 
   deploy:
     needs: build
