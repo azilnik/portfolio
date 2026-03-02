@@ -1,0 +1,19 @@
+---
+/**
+ * MetricItem — a single metric displayed in the employer block grid.
+ *
+ * Shows a value (e.g., "3x") and a label (e.g., "Growth").
+ */
+
+interface Props {
+  label: string;
+  value: string;
+}
+
+const { label, value } = Astro.props;
+---
+
+<div class="text-center">
+  <p class="font-heading text-2xl font-bold text-gray-900">{value}</p>
+  <p class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500">{label}</p>
+</div>

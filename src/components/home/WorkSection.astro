@@ -1,0 +1,30 @@
+---
+/**
+ * WorkSection — the "My Work" area of the homepage.
+ *
+ * Renders one EmployerBlock per employer, each with its associated
+ * case studies pulled from the content collection.
+ */
+import { getCollection } from "astro:content";
+import { employers } from "../../data/employers";
+import EmployerBlock from "./EmployerBlock.astro";
+
+// Fetch all non-draft case studies, sorted by sortOrder.
+const allWork = (await getCollection("work", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+---
+
+<section id="work" class="mx-auto max-w-6xl px-6 py-20">
+  <h2 class="mb-4 font-heading text-3xl font-bold text-gray-900 md:text-4xl">
+    My work
+  </h2>
+  <p class="mb-12 text-lg text-gray-500">
+    A selection of projects from my career as a design leader.
+  </p>
+
+  {employers.map((employer) => {
+    // Filter case studies that belong to this employer.
+    const employerStudies = allWork.filter((s) => s.data.employer === employer.id);
+    return <EmployerBlock employer={employer} caseStudies={employerStudies} />;
+  })}
+</section>
