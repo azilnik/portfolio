@@ -62,11 +62,14 @@ const work = defineCollection({
  */
 const testimonials = defineCollection({
   loader: file("./src/content/testimonials/testimonials.json"),
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       quote: z.string(),
       authorName: z.string(),
       authorTitle: z.string(),
+      // Optional headshot — drop a .jpg/.png into src/content/testimonials/avatars/
+      avatar: image().optional(),
+      linkedinUrl: z.string().url().optional(),
     }),
 });
 
