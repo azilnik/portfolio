@@ -72,6 +72,16 @@ in `src/content.config.ts`. A missing or invalid field will cause a build error.
 
 Requires FFmpeg: `brew install ffmpeg`
 
+## Code Comments
+
+Write comments for a novice developer. Focus on **why**, not what.
+
+- **Explain the purpose** of decisions, not the syntax — a beginner can read `forEach` but not why you chose it over `map`
+- **Explain non-obvious "why"s** — business logic, workarounds, tradeoffs, browser quirks, framework gotchas
+- **Add context a newcomer would lack** — e.g. why a z-index is a specific value, why an event listener is passive, why a timeout exists
+- **Keep comments close to the code they explain** — inline or directly above the relevant line/block
+- **Skip comments for self-evident code** — don't annotate every variable or import, only where intent isn't obvious from reading
+
 ## Conventions
 
 - **Tailwind v4 theme**: Defined in `src/styles/global.css` using `@theme`, not a config file
