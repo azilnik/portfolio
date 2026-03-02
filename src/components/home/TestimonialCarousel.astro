@@ -6,8 +6,22 @@
  * dot indicators and optional auto-rotation. No library dependencies.
  */
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const testimonials = await getCollection("testimonials");
+
+/**
+ * Extract initials from a full name (e.g. "Kevin Scott" → "KS").
+ * Used as a fallback when no avatar image is provided.
+ */
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
 ---
 
 <section class="bg-gray-50 py-20">
@@ -24,10 +38,48 @@ const testimonials = await getCollection("testimonials");
       {testimonials.map((t) => (
         <blockquote class="flex-none w-full snap-center rounded-2xl bg-white p-8 shadow-sm sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
           <p class="text-lg leading-relaxed text-gray-700">"{t.data.quote}"</p>
-          <footer class="mt-6">
-            <p class="font-semibold text-gray-900">{t.data.authorName}</p>
-            <p class="text-sm text-gray-500">{t.data.authorTitle}</p>
-          </footer>
+          {/* Wrap the entire footer (avatar + name + title) in one link when LinkedIn is available */}
+          {t.data.linkedinUrl ? (
+            <a href={t.data.linkedinUrl} target="_blank" rel="noopener noreferrer" class="mt-6 flex items-center gap-3 group">
+              {t.data.avatar ? (
+                <Image
+                  src={t.data.avatar}
+                  alt={t.data.authorName}
+                  width={48}
+                  height={48}
+                  class="h-12 w-12 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-white">
+                  {getInitials(t.data.authorName)}
+                </div>
+              )}
+              <div>
+                <p class="font-semibold text-gray-900 group-hover:text-accent transition-colors">{t.data.authorName}</p>
+                <p class="text-sm text-gray-500">{t.data.authorTitle}</p>
+              </div>
+            </a>
+          ) : (
+            <footer class="mt-6 flex items-center gap-3">
+              {t.data.avatar ? (
+                <Image
+                  src={t.data.avatar}
+                  alt={t.data.authorName}
+                  width={48}
+                  height={48}
+                  class="h-12 w-12 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-white">
+                  {getInitials(t.data.authorName)}
+                </div>
+              )}
+              <div>
+                <p class="font-semibold text-gray-900">{t.data.authorName}</p>
+                <p class="text-sm text-gray-500">{t.data.authorTitle}</p>
+              </div>
+            </footer>
+          )}
         </blockquote>
       ))}
     </div>
