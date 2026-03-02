@@ -1,0 +1,56 @@
+---
+/**
+ * ImageGrid — display 2–3 images side by side in a responsive grid.
+ *
+ * On mobile, images stack vertically. On desktop, they sit in a row.
+ *
+ * Usage in .mdx:
+ *   import ImageGrid from "../../components/mdx/ImageGrid.astro";
+ *   import img1 from "./images/screen-1.png";
+ *   import img2 from "./images/screen-2.png";
+ *
+ *   <ImageGrid images={[
+ *     { src: img1, alt: "First screen" },
+ *     { src: img2, alt: "Second screen" },
+ *   ]} />
+ */
+import { Image } from "astro:assets";
+
+interface GridImage {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  images: GridImage[];
+  /** Optional caption shown below the grid. */
+  caption?: string;
+}
+
+const { images, caption } = Astro.props;
+
+// Determine grid columns based on number of images.
+const colsClass =
+  images.length === 2
+    ? "grid-cols-1 sm:grid-cols-2"
+    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+---
+
+<figure class="my-8">
+  <div class:list={["grid gap-4", colsClass]}>
+    {images.map((img) => (
+      <Image
+        src={img.src}
+        alt={img.alt}
+        widths={[320, 480, 640]}
+        sizes={images.length === 2
+          ? "(min-width: 640px) 50vw, 100vw"
+          : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+        class="w-full h-auto rounded-lg"
+      />
+    ))}
+  </div>
+  {caption && (
+    <figcaption class="mt-3 text-center text-sm text-gray-400">{caption}</figcaption>
+  )}
+</figure>
