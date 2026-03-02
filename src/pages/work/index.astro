@@ -1,0 +1,38 @@
+---
+/**
+ * Work listing page — /work
+ *
+ * Shows all non-draft case studies in a 2-column responsive grid.
+ * Sorted by the `sortOrder` field in each case study's frontmatter.
+ */
+import PageLayout from "../../layouts/PageLayout.astro";
+import CaseStudyCard from "../../components/work/CaseStudyCard.astro";
+import { getCollection } from "astro:content";
+
+// Fetch all published (non-draft) case studies, sorted by sortOrder.
+const allWork = (await getCollection("work", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+---
+
+<PageLayout title="Work" description="Selected case studies from Ari Zilnik's career as a design leader.">
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    {/* Page header */}
+    <h1 class="font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+      Designing Success
+    </h1>
+    <p class="mt-4 text-lg text-gray-500">
+      A collection of projects where thoughtful design drove meaningful results.
+    </p>
+
+    {/* Case study grid — 2 columns on desktop, 1 on mobile */}
+    {allWork.length > 0 ? (
+      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+        {allWork.map((study) => (
+          <CaseStudyCard study={study} />
+        ))}
+      </div>
+    ) : (
+      <p class="mt-12 text-gray-400">Case studies coming soon.</p>
+    )}
+  </section>
+</PageLayout>

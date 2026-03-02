@@ -1,0 +1,34 @@
+---
+/**
+ * Dynamic case study page — /work/[slug]
+ *
+ * Generates one page per case study in the `work` content collection.
+ * Uses `getStaticPaths()` so Astro knows all the URLs at build time.
+ * The MDX body is rendered inside the CaseStudyLayout.
+ */
+import { getCollection, render } from "astro:content";
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+
+export async function getStaticPaths() {
+  const work = await getCollection("work", ({ data }) => !data.draft);
+  return work.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<CaseStudyLayout
+  title={entry.data.title}
+  company={entry.data.company}
+  role={entry.data.role}
+  industry={entry.data.industry}
+  description={entry.data.description}
+  heroImage={entry.data.heroImage}
+  metrics={entry.data.metrics}
+>
+  <Content />
+</CaseStudyLayout>
