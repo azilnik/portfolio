@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Global Styles — ari.design portfolio
+
+   This file is the single entry point for all CSS. It imports Tailwind v4,
+   declares self-hosted fonts, defines the custom theme (colors, fonts),
+   and adds a few global base styles.
+   ========================================================================== */
+
+@import "tailwindcss";
+
+/* --------------------------------------------------------------------------
+   Self-hosted variable fonts
+
+   We load DM Sans (headings) and Inter (body) as variable fonts so a single
+   file covers all weights. The `font-weight` range tells the browser which
+   weights are available in the file.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/DMSans-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/DMSans-Variable-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Inter-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Inter-Variable-Italic.woff2") format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+   Theme — Tailwind v4 custom design tokens
+
+   In Tailwind v4, the @theme directive replaces tailwind.config.js for
+   defining design tokens. These become available as utility classes
+   (e.g., `font-heading`, `text-accent`, `bg-accent`).
+   -------------------------------------------------------------------------- */
+
+@theme {
+  /* Font families — use as `font-sans`, `font-heading`, `font-display` */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand accent color — the signature blue used for links and CTAs */
+  --color-accent: rgb(0, 89, 255);
+  --color-accent-hover: rgb(0, 70, 210);
+}
+
+/* --------------------------------------------------------------------------
+   Base styles
+
+   Applied globally to all pages. We set the default font, text color,
+   and background, plus a few utility resets.
+   -------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    /* Smooth anchor scrolling (e.g., "See my work" link on homepage) */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #1a1a1a;
+    background-color: #ffffff;
+    /* Prevent horizontal overflow from full-bleed images */
+    overflow-x: hidden;
+  }
+
+  /* Make all images in prose/MDX content have rounded corners */
+  .prose img {
+    border-radius: 0.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utility: hide scrollbar
+
+   Used on the testimonial carousel so it scrolls horizontally but doesn't
+   show an ugly scrollbar. Apply with `class="hide-scrollbar"`.
+   -------------------------------------------------------------------------- */
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
