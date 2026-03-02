@@ -1,0 +1,37 @@
+---
+/**
+ * PageLayout — standard page wrapper with Header + Footer.
+ *
+ * Wraps BaseLayout and adds the sticky header, mobile menu, and footer
+ * that appear on every page. Content goes inside the <main> tag.
+ *
+ * Usage in a page file:
+ *   <PageLayout title="Work">
+ *     <h1>My content here</h1>
+ *   </PageLayout>
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/global/Header.astro";
+import MobileMenu from "../components/global/MobileMenu.astro";
+import Footer from "../components/global/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+  <Header />
+  <MobileMenu />
+
+  {/* Main content area — `flex-1` ensures it fills the space between header and footer */}
+  <main class="flex-1">
+    <slot />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+/**
+ * BaseLayout — the outermost HTML shell used by every page.
+ *
+ * Handles the <html>, <head>, and <body> tags along with:
+ * - Meta tags for SEO and social sharing (Open Graph / Twitter)
+ * - Self-hosted font preloads
+ * - Global CSS import
+ * - GoatCounter analytics (production only)
+ *
+ * Other layouts (PageLayout, CaseStudyLayout) nest inside this one.
+ */
+import GoatCounter from "../components/global/GoatCounter.astro";
+import "../styles/global.css";
+
+interface Props {
+  /** The page <title>. Gets " — Ari Zilnik" appended automatically. */
+  title: string;
+  /** Meta description for search engines and social previews. */
+  description?: string;
+  /** URL to an Open Graph image for social sharing. */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "Ari Zilnik — Design leader crafting thoughtful digital experiences.",
+  ogImage,
+} = Astro.props;
+
+// Build the full page title with a suffix.
+const fullTitle = title === "Ari Zilnik" ? title : `${title} — Ari Zilnik`;
+
+// Canonical URL for this page (used by search engines and OG tags).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Page title and description */}
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    {/* Canonical URL — prevents duplicate content in search engines */}
+    <link rel="canonical" href={canonicalURL.href} />
+
+    {/* Favicon */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/* Preload fonts so they render immediately instead of FOUT */}
+    <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    {/* Open Graph / social sharing meta */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    {/* Twitter card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    {/* GoatCounter analytics — only loads in production */}
+    <GoatCounter />
+  </head>
+
+  <body class="min-h-screen antialiased">
+    {/* Page content gets injected here by child layouts / pages */}
+    <slot />
+  </body>
+</html>
