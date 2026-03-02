@@ -1,0 +1,42 @@
+---
+/**
+ * FullBleedGif — same visual breakout as FullBleedImage, but for animated GIFs.
+ *
+ * Astro's <Image> component uses Sharp for optimization, which strips
+ * animation frames from GIFs. This component uses a plain <img> tag instead,
+ * preserving the animation. GIFs should live in `public/videos/` and the
+ * `src` prop should be the path from public root (e.g., "/videos/my-anim.gif").
+ *
+ * Usage in .mdx:
+ *   import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+ *
+ *   <FullBleedGif src="/videos/my-animation.gif" alt="Description" />
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  /** Optional caption shown below the image. */
+  caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+---
+
+{/*
+  Same CSS breakout trick as FullBleedImage — `left-1/2 -ml-[50vw] w-screen`
+  centers the element relative to the viewport, breaking out of the prose container.
+*/}
+<figure class="relative left-1/2 -ml-[50vw] w-screen my-12">
+  <img
+    src={src}
+    alt={alt}
+    class="w-full h-auto"
+    loading="lazy"
+  />
+  {caption && (
+    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm text-gray-400">
+      {caption}
+    </figcaption>
+  )}
+</figure>

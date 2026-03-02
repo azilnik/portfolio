@@ -1,20 +1,38 @@
 [
   {
     "id": "1",
-    "quote": "Ari is an exceptional designer who combines strategic thinking with pixel-perfect execution. He elevated our entire product experience.",
-    "authorName": "Sarah Chen",
-    "authorTitle": "VP of Product, Join"
+    "quote": "Ari is one of the most talented people I know. He brings a keen design expertise to every project, paired with deep empathy for the user. He's equally at home working with product, design, or engineers — most often balancing all three simultaneously.",
+    "authorName": "Kevin Scott",
+    "authorTitle": "Senior System Software Engineer, NVIDIA"
   },
   {
     "id": "2",
-    "quote": "Working with Ari transformed how our team thinks about design. He brought clarity to complex problems and delivered results that moved the needle.",
-    "authorName": "Michael Torres",
-    "authorTitle": "CTO, Blockdaemon"
+    "quote": "Ari significantly improved our understanding of UX issues within the main product and spearheaded our design system initiative. His strategic understanding of design and excellent communication skills make him a visionary leader.",
+    "authorName": "Rob Lucha",
+    "authorTitle": "Engineering Lead, Gradle"
   },
   {
     "id": "3",
-    "quote": "Ari has a rare ability to balance user needs with business goals. His work on our developer tools was a game-changer for adoption.",
-    "authorName": "Emily Park",
-    "authorTitle": "Head of Product, Gradle"
+    "quote": "Ari is an exceptional product design leader who brings clarity and vision to complex projects. He fostered a supportive and collaborative environment, encouraging the team to push creative boundaries and deliver impactful designs.",
+    "authorName": "Andrew Athinodorou",
+    "authorTitle": "Lead Product Designer, Blockdaemon"
+  },
+  {
+    "id": "4",
+    "quote": "Ari is a wonderfully positive and innovative designer. He pushes himself to go beyond expectations and uses his wealth of knowledge with design and human psychology to create amazing experiences. He is a great asset on any team.",
+    "authorName": "Nikki Wolfe",
+    "authorTitle": "Principal Product Designer, VeraScore"
+  },
+  {
+    "id": "5",
+    "quote": "What stands out about Ari is his desire and ability to focus on the true challenge and solve the problem in every possible way. Time and again, I have watched him be highly influential on teams and with clients in delivering excellent work.",
+    "authorName": "David Drake",
+    "authorTitle": "Project Manager, Soostone"
+  },
+  {
+    "id": "6",
+    "quote": "Ari has been a tremendous mentor throughout my journey as a designer. He offers clear, constructive feedback grounded in real-world experience, with a unique ability to really listen, understand, and provide relevant advice.",
+    "authorName": "Huyen Bui",
+    "authorTitle": "Senior UX Designer, Keller Williams"
   }
 ]
