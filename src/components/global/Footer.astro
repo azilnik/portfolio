@@ -1,16 +1,19 @@
 ---
 /**
- * Footer — dark CTA section at the bottom of every page.
+ * Footer — CTA section at the bottom of every page.
  *
  * Includes a "Get in touch" call-to-action and a link back to the
- * work page, matching the style of the current ari.design footer.
+ * work page. Uses theme CSS variables for all colors.
  */
 ---
 
-<footer class="bg-gray-950 text-white">
+<footer style="background-color: var(--theme-footer-bg); color: var(--theme-footer-text);">
   <div class="mx-auto max-w-6xl px-6 py-20 text-center">
     {/* Main CTA */}
-    <p class="text-sm font-medium uppercase tracking-widest text-gray-400 mb-4">
+    <p
+      class="text-sm font-medium uppercase tracking-widest mb-4"
+      style="color: var(--theme-footer-muted);"
+    >
       Interested in working together?
     </p>
     <h2 class="font-heading text-4xl font-bold md:text-5xl mb-8">
@@ -19,20 +22,22 @@
     <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
       <a
         href="mailto:ari@ari.design"
-        class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
+        class="inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold text-white transition-colors"
+        style="background-color: var(--theme-accent);"
       >
         Say hello
       </a>
       <a
         href="/work"
-        class="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white transition-colors hover:border-white/40"
+        class="inline-flex items-center gap-2 rounded-full border px-8 py-3 text-sm font-semibold transition-colors"
+        style="border-color: var(--theme-footer-border); color: var(--theme-footer-text);"
       >
         See my work
       </a>
     </div>
 
     {/* Copyright */}
-    <p class="mt-16 text-xs text-gray-500">
+    <p class="mt-16 text-xs" style="color: var(--theme-footer-muted);">
       &copy; {new Date().getFullYear()} Ari Zilnik. All rights reserved.
     </p>
   </div>

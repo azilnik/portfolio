@@ -5,6 +5,8 @@
  * Renders the nav links from `src/data/navigation.ts` as a list of <a> tags.
  * The active page gets a bold style. Pass `vertical` to stack links vertically
  * (used in the mobile menu).
+ *
+ * Uses theme CSS variables so link colors adapt to the active theme.
  */
 import { navLinks } from "../../data/navigation";
 
@@ -38,10 +40,10 @@ const currentPath = Astro.url.pathname;
         <li>
           <a
             href={link.href}
-            class:list={[
-              "transition-colors hover:text-accent",
-              isActive ? "font-semibold text-accent" : "text-gray-600",
-            ]}
+            class="transition-colors"
+            style={isActive
+              ? "font-weight: 600; color: var(--theme-accent);"
+              : "color: var(--theme-text-secondary);"}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             {link.label}

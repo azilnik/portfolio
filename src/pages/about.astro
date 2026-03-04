@@ -7,20 +7,23 @@ import PageLayout from "../layouts/PageLayout.astro";
 
 <PageLayout title="About" description="About Ari Zilnik — design leader with 13+ years of experience shipping products at the intersection of complex systems and human needs.">
   <section class="mx-auto max-w-3xl px-6 py-20">
-    <h1 class="font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+    <h1
+      class="font-heading text-4xl font-bold md:text-5xl"
+      style="color: var(--theme-text-primary);"
+    >
       About me
     </h1>
 
-    <div class="mt-8 space-y-6 text-lg leading-relaxed text-gray-600">
+    <div class="mt-8 space-y-6 text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
       <p>
-        I'm <span class="font-semibold text-gray-900">Ari Zilnik</span>, a hands-on design leader with
+        I'm <span class="font-semibold" style="color: var(--theme-text-primary);">Ari Zilnik</span>, a hands-on design leader with
         over 13 years of experience crafting digital products. I currently serve as
-        <span class="font-semibold text-gray-900">Head of Design at Join</span>, where I lead product
+        <span class="font-semibold" style="color: var(--theme-text-primary);">Head of Design at Join</span>, where I lead product
         design, design systems, and team growth.
       </p>
 
       <p>
-        Throughout my career, I've worked across <span class="font-semibold text-gray-900">construction tech, blockchain infrastructure, and developer tools</span> —
+        Throughout my career, I've worked across <span class="font-semibold" style="color: var(--theme-text-primary);">construction tech, blockchain infrastructure, and developer tools</span> —
         always at the intersection of complex systems and human needs. I believe great design
         makes the complex feel simple.
       </p>
@@ -41,7 +44,8 @@ import PageLayout from "../layouts/PageLayout.astro";
     <div class="mt-12">
       <a
         href="mailto:ari@ari.design"
-        class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
+        class="inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold text-white transition-colors"
+        style="background-color: var(--theme-accent);"
       >
         Get in touch
       </a>

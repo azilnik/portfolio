@@ -1,0 +1,818 @@
+/* ==========================================================================
+   Theme Definitions — 10 distinct visual themes for ari.design
+
+   Each theme defines a complete set of design tokens via CSS custom properties.
+   Themes are activated by setting `data-theme="name"` on the <html> element.
+
+   The default theme (no data-theme attribute) uses the original site styles.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared foundation — these are the CSS variable names every theme must define.
+   The :root block sets the "Default" theme (original site design).
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Page backgrounds */
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #f9fafb;          /* gray-50 equivalent */
+  --theme-bg-tertiary: #f3f4f6;           /* gray-100 equivalent */
+
+  /* Text colors — a hierarchy from primary to quaternary */
+  --theme-text-primary: #1a1a1a;
+  --theme-text-secondary: #6b7280;         /* gray-500 */
+  --theme-text-tertiary: #9ca3af;          /* gray-400 */
+  --theme-text-quaternary: #d1d5db;        /* gray-300 */
+
+  /* Accent color for links, buttons, active states */
+  --theme-accent: rgb(0, 89, 255);
+  --theme-accent-hover: rgb(0, 70, 210);
+  --theme-accent-subtle: rgb(239, 246, 255); /* blue-50 equivalent */
+
+  /* Surface colors for cards, panels */
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #f9fafb;
+  --theme-border: #f3f4f6;                 /* gray-100 */
+  --theme-border-strong: #e5e7eb;          /* gray-200 */
+
+  /* Typography */
+  --theme-font-heading: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Display font defaults to matching the heading font — themes can override */
+  --theme-font-display: var(--theme-font-heading);
+  --theme-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* Typographic scale — modular scale based on 1.25 ratio (Major Third) */
+  --theme-text-xs: 0.75rem;     /* 12px */
+  --theme-text-sm: 0.875rem;    /* 14px */
+  --theme-text-base: 1rem;      /* 16px */
+  --theme-text-lg: 1.125rem;    /* 18px */
+  --theme-text-xl: 1.25rem;     /* 20px */
+  --theme-text-2xl: 1.5rem;     /* 24px */
+  --theme-text-3xl: 1.875rem;   /* 30px */
+  --theme-text-4xl: 2.25rem;    /* 36px */
+  --theme-text-5xl: 3rem;       /* 48px */
+  --theme-text-6xl: 3.75rem;    /* 60px */
+
+  /* Font weights */
+  --theme-weight-normal: 400;
+  --theme-weight-medium: 500;
+  --theme-weight-semibold: 600;
+  --theme-weight-bold: 700;
+  --theme-weight-heading: 700;
+
+  /* Line heights */
+  --theme-leading-tight: 1.15;
+  --theme-leading-snug: 1.3;
+  --theme-leading-normal: 1.5;
+  --theme-leading-relaxed: 1.65;
+
+  /* Letter spacing */
+  --theme-tracking-tight: -0.02em;
+  --theme-tracking-normal: 0em;
+  --theme-tracking-wide: 0.05em;
+  --theme-tracking-wider: 0.1em;
+
+  /* Spacing */
+  --theme-section-gap: 5rem;     /* space between major sections */
+  --theme-content-width: 72rem;  /* max-w-6xl = 72rem */
+  --theme-prose-width: 48rem;    /* max-w-3xl = 48rem */
+
+  /* Border radius */
+  --theme-radius-sm: 0.375rem;
+  --theme-radius-md: 0.5rem;
+  --theme-radius-lg: 0.75rem;
+  --theme-radius-xl: 1rem;
+  --theme-radius-2xl: 1.5rem;
+  --theme-radius-full: 9999px;
+
+  /* Shadows */
+  --theme-shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --theme-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --theme-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+
+  /* Footer */
+  --theme-footer-bg: #030712;             /* gray-950 */
+  --theme-footer-text: #ffffff;
+  --theme-footer-muted: #9ca3af;
+
+  /* Header */
+  --theme-header-bg: rgba(255, 255, 255, 0.9);
+  --theme-header-border: #f3f4f6;
+
+  /* Image treatment */
+  --theme-image-radius: 0.5rem;
+  --theme-image-shadow: none;
+  --theme-image-border: none;
+
+  /* Prose — MDX content styling overrides */
+  --theme-prose-heading-color: var(--theme-text-primary);
+  --theme-prose-body-color: var(--theme-text-secondary);
+  --theme-prose-link-color: var(--theme-accent);
+  --theme-prose-quote-border: var(--theme-accent);
+  --theme-prose-quote-text: var(--theme-text-secondary);
+  --theme-prose-hr-color: var(--theme-border);
+}
+
+
+/* ==========================================================================
+   THEME 1: Editorial Swiss
+   Inspired by: Tobias Ahlin — Bold typographic hierarchy, warm cream bg,
+   oversized section headings, magazine-like rhythm
+   ========================================================================== */
+
+[data-theme="editorial-swiss"] {
+  --theme-bg: #fffbf5;
+  --theme-bg-secondary: #faf5ed;
+  --theme-bg-tertiary: #f5efe5;
+
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #555555;
+  --theme-text-tertiary: #888888;
+  --theme-text-quaternary: #bbbbbb;
+
+  --theme-accent: #26555d;
+  --theme-accent-hover: #1d4349;
+  --theme-accent-subtle: #e8f0f1;
+
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #faf5ed;
+  --theme-border: #ebe5da;
+  --theme-border-strong: #d9d0c3;
+
+  /* Playfair Display — high-contrast serif with dramatic thick/thin strokes,
+     perfect for the oversized editorial headings on warm cream backgrounds */
+  --theme-font-heading: "Playfair Display", Georgia, serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Larger typographic scale — 1.333 ratio (Perfect Fourth) */
+  --theme-text-4xl: 2.5rem;
+  --theme-text-5xl: 3.5rem;
+  --theme-text-6xl: 5rem;
+
+  --theme-weight-heading: 800;
+  --theme-leading-tight: 1.05;
+  --theme-tracking-tight: -0.03em;
+
+  --theme-section-gap: 6rem;
+
+  --theme-radius-sm: 0.25rem;
+  --theme-radius-md: 0.375rem;
+  --theme-radius-lg: 0.5rem;
+  --theme-radius-xl: 0.75rem;
+  --theme-radius-2xl: 1rem;
+
+  --theme-shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --theme-shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --theme-shadow-lg: 0 12px 24px rgba(0,0,0,0.08);
+
+  --theme-footer-bg: #2b2f3c;
+  --theme-footer-text: #ffffff;
+  --theme-footer-muted: #8b90a0;
+
+  --theme-header-bg: rgba(255, 251, 245, 0.92);
+  --theme-header-border: #ebe5da;
+
+  --theme-image-radius: 0.375rem;
+  --theme-image-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+
+/* ==========================================================================
+   THEME 2: Dark Editorial
+   Inspired by: Glenn Hitchcock — Sophisticated dark with serif/sans pairing,
+   warm dark gray background, opacity-based text hierarchy, dashed lines
+   ========================================================================== */
+
+[data-theme="dark-editorial"] {
+  --theme-bg: #212121;
+  --theme-bg-secondary: #2a2a2a;
+  --theme-bg-tertiary: #333333;
+
+  --theme-text-primary: rgba(255, 255, 255, 0.9);
+  --theme-text-secondary: rgba(255, 255, 255, 0.65);
+  --theme-text-tertiary: rgba(255, 255, 255, 0.4);
+  --theme-text-quaternary: rgba(255, 255, 255, 0.2);
+
+  --theme-accent: #e8c47a;
+  --theme-accent-hover: #f0d48e;
+  --theme-accent-subtle: rgba(232, 196, 122, 0.1);
+
+  --theme-surface: #2a2a2a;
+  --theme-surface-hover: #333333;
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-strong: rgba(255, 255, 255, 0.15);
+
+  /* Newsreader — the actual font Glenn uses. Elegant, narrow serif with beautiful
+     italics, pairs naturally with a dark sophisticated palette and gold accents */
+  --theme-font-heading: "Newsreader", Georgia, serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-weight-heading: 400;
+  --theme-weight-bold: 600;
+  --theme-leading-relaxed: 1.75;
+  --theme-tracking-tight: -0.01em;
+
+  --theme-section-gap: 5rem;
+
+  --theme-radius-sm: 0.375rem;
+  --theme-radius-md: 0.5rem;
+  --theme-radius-lg: 0.75rem;
+  --theme-radius-xl: 1rem;
+  --theme-radius-2xl: 1.25rem;
+
+  --theme-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --theme-shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --theme-shadow-lg: 0 12px 24px rgba(0,0,0,0.5);
+
+  --theme-footer-bg: #1a1a1a;
+  --theme-footer-text: rgba(255, 255, 255, 0.9);
+  --theme-footer-muted: rgba(255, 255, 255, 0.4);
+
+  --theme-header-bg: rgba(33, 33, 33, 0.92);
+  --theme-header-border: rgba(255, 255, 255, 0.06);
+
+  --theme-image-radius: 0.5rem;
+  --theme-image-shadow: 0 8px 24px rgba(0,0,0,0.3);
+
+  --theme-prose-quote-border: var(--theme-accent);
+  --theme-prose-quote-text: rgba(255, 255, 255, 0.7);
+}
+
+
+/* ==========================================================================
+   THEME 3: Midnight Developer
+   Inspired by: Brian Lovin — True black, mono-weight Inter, opacity hierarchy,
+   no decoration, feels like a well-designed terminal
+   ========================================================================== */
+
+[data-theme="midnight-dev"] {
+  --theme-bg: #000000;
+  --theme-bg-secondary: #0a0a0a;
+  --theme-bg-tertiary: #141414;
+
+  --theme-text-primary: rgba(255, 255, 255, 0.9);
+  --theme-text-secondary: rgba(255, 255, 255, 0.55);
+  --theme-text-tertiary: rgba(255, 255, 255, 0.35);
+  --theme-text-quaternary: rgba(255, 255, 255, 0.18);
+
+  --theme-accent: rgba(255, 255, 255, 0.9);
+  --theme-accent-hover: #ffffff;
+  --theme-accent-subtle: rgba(255, 255, 255, 0.05);
+
+  --theme-surface: #0a0a0a;
+  --theme-surface-hover: #141414;
+  --theme-border: rgba(255, 255, 255, 0.06);
+  --theme-border-strong: rgba(255, 255, 255, 0.12);
+
+  --theme-font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-text-4xl: 2rem;
+  --theme-text-5xl: 2.5rem;
+  --theme-text-6xl: 3rem;
+
+  --theme-weight-heading: 600;
+  --theme-weight-bold: 600;
+  --theme-weight-semibold: 500;
+  --theme-leading-tight: 1.2;
+  --theme-leading-relaxed: 1.7;
+  --theme-tracking-tight: -0.01em;
+
+  --theme-section-gap: 4rem;
+  --theme-prose-width: 40rem;
+
+  --theme-radius-sm: 0.25rem;
+  --theme-radius-md: 0.375rem;
+  --theme-radius-lg: 0.5rem;
+  --theme-radius-xl: 0.625rem;
+  --theme-radius-2xl: 0.75rem;
+
+  --theme-shadow-sm: none;
+  --theme-shadow-md: none;
+  --theme-shadow-lg: none;
+
+  --theme-footer-bg: #000000;
+  --theme-footer-text: rgba(255, 255, 255, 0.9);
+  --theme-footer-muted: rgba(255, 255, 255, 0.35);
+
+  --theme-header-bg: rgba(0, 0, 0, 0.85);
+  --theme-header-border: rgba(255, 255, 255, 0.06);
+
+  --theme-image-radius: 0.375rem;
+  --theme-image-shadow: none;
+  --theme-image-border: 1px solid rgba(255, 255, 255, 0.06);
+
+  --theme-prose-quote-border: rgba(255, 255, 255, 0.2);
+  --theme-prose-quote-text: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ==========================================================================
+   THEME 4: Heavy Impact
+   Inspired by: Claudio Guglieri — Ultra-heavy type, tight tracking,
+   dramatic weight contrast, full-bleed sections, agency-bold
+   ========================================================================== */
+
+[data-theme="heavy-impact"] {
+  --theme-bg: #0a0a0a;
+  --theme-bg-secondary: #111111;
+  --theme-bg-tertiary: #1a1a1a;
+
+  --theme-text-primary: #ffffff;
+  --theme-text-secondary: #999999;
+  --theme-text-tertiary: #666666;
+  --theme-text-quaternary: #444444;
+
+  --theme-accent: #ff4d00;
+  --theme-accent-hover: #ff6a2e;
+  --theme-accent-subtle: rgba(255, 77, 0, 0.08);
+
+  --theme-surface: #111111;
+  --theme-surface-hover: #1a1a1a;
+  --theme-border: #222222;
+  --theme-border-strong: #333333;
+
+  /* Sora — geometric sans-serif designed for large display sizes. Its perfectly
+     circular bowls and uniform stroke width look punchy at 900 weight, matching
+     the agency-bold, full-bleed aesthetic Claudio Guglieri uses */
+  --theme-font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Dramatically large headings */
+  --theme-text-4xl: 3rem;
+  --theme-text-5xl: 4rem;
+  --theme-text-6xl: 6rem;
+
+  --theme-weight-heading: 900;
+  --theme-weight-bold: 800;
+  --theme-leading-tight: 0.95;
+  --theme-tracking-tight: -0.04em;
+
+  --theme-section-gap: 6rem;
+
+  --theme-radius-sm: 0;
+  --theme-radius-md: 0;
+  --theme-radius-lg: 0;
+  --theme-radius-xl: 0;
+  --theme-radius-2xl: 0;
+
+  --theme-shadow-sm: none;
+  --theme-shadow-md: none;
+  --theme-shadow-lg: none;
+
+  --theme-footer-bg: #000000;
+  --theme-footer-text: #ffffff;
+  --theme-footer-muted: #666666;
+
+  --theme-header-bg: rgba(10, 10, 10, 0.95);
+  --theme-header-border: #222222;
+
+  --theme-image-radius: 0;
+  --theme-image-shadow: none;
+  --theme-image-border: 1px solid #222222;
+
+  --theme-prose-quote-border: var(--theme-accent);
+  --theme-prose-quote-text: #999999;
+}
+
+
+/* ==========================================================================
+   THEME 5: Warm Minimal
+   Inspired by: Tom Petty — Warm light gray background, single typeface,
+   conversational tone, text-forward, minimal decoration
+   ========================================================================== */
+
+[data-theme="warm-minimal"] {
+  --theme-bg: #f5f5f0;
+  --theme-bg-secondary: #eeeee8;
+  --theme-bg-tertiary: #e5e5de;
+
+  --theme-text-primary: #101010;
+  --theme-text-secondary: #555555;
+  --theme-text-tertiary: #888888;
+  --theme-text-quaternary: #bbbbbb;
+
+  --theme-accent: #101010;
+  --theme-accent-hover: #333333;
+  --theme-accent-subtle: #e5e5de;
+
+  --theme-surface: #fafaf6;
+  --theme-surface-hover: #f0f0ea;
+  --theme-border: #ddddd5;
+  --theme-border-strong: #cccccc;
+
+  /* System UI — uses the OS's native font (San Francisco on Mac, Segoe on Windows).
+     A single typeface for headings and body creates the conversational, unpretentious
+     tone of Tom Petty's site. No downloaded fonts = pure minimalism */
+  --theme-font-heading: system-ui, -apple-system, sans-serif;
+  --theme-font-body: system-ui, -apple-system, sans-serif;
+
+  --theme-text-4xl: 2rem;
+  --theme-text-5xl: 2.5rem;
+  --theme-text-6xl: 3rem;
+
+  --theme-weight-heading: 600;
+  --theme-weight-bold: 600;
+  --theme-weight-semibold: 500;
+  --theme-leading-tight: 1.2;
+  --theme-leading-relaxed: 1.6;
+  --theme-tracking-tight: -0.01em;
+
+  --theme-section-gap: 4rem;
+  --theme-content-width: 64rem;
+
+  --theme-radius-sm: 0.5rem;
+  --theme-radius-md: 0.625rem;
+  --theme-radius-lg: 0.75rem;
+  --theme-radius-xl: 1rem;
+  --theme-radius-2xl: 1.25rem;
+
+  --theme-shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
+  --theme-shadow-md: 0 2px 8px rgba(0,0,0,0.04);
+  --theme-shadow-lg: 0 4px 16px rgba(0,0,0,0.06);
+
+  --theme-footer-bg: #101010;
+  --theme-footer-text: #f5f5f0;
+  --theme-footer-muted: #888888;
+
+  --theme-header-bg: rgba(245, 245, 240, 0.92);
+  --theme-header-border: #ddddd5;
+
+  --theme-image-radius: 0.75rem;
+  --theme-image-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+  --theme-prose-quote-border: #101010;
+  --theme-prose-quote-text: #555555;
+}
+
+
+/* ==========================================================================
+   THEME 6: Apple Light
+   Inspired by: Karolis Kosas — Pure white, thin light-weight type,
+   extreme whitespace, pill-shaped buttons, product-focused
+   ========================================================================== */
+
+[data-theme="apple-light"] {
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #fafafa;
+  --theme-bg-tertiary: #f5f5f5;
+
+  --theme-text-primary: #1d1d1f;
+  --theme-text-secondary: #6e6e73;
+  --theme-text-tertiary: #a1a1a6;
+  --theme-text-quaternary: #d2d2d7;
+
+  --theme-accent: #1d1d1f;
+  --theme-accent-hover: #424245;
+  --theme-accent-subtle: #f5f5f7;
+
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #fafafa;
+  --theme-border: #e8e8ed;
+  --theme-border-strong: #d2d2d7;
+
+  /* Apple system font stack — San Francisco on Mac, Segoe on Windows.
+     The thin weight-300 headings mimic Apple's product marketing pages
+     where ultra-light type floats over clean white space */
+  --theme-font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  --theme-font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+
+  --theme-text-lg: 1.25rem;
+  --theme-text-xl: 1.375rem;
+  --theme-text-4xl: 2.5rem;
+  --theme-text-5xl: 3.5rem;
+  --theme-text-6xl: 4.5rem;
+
+  --theme-weight-heading: 300;
+  --theme-weight-bold: 600;
+  --theme-weight-semibold: 500;
+  --theme-leading-tight: 1.1;
+  --theme-leading-snug: 1.25;
+  --theme-leading-relaxed: 1.7;
+  --theme-tracking-tight: -0.025em;
+
+  --theme-section-gap: 7rem;
+
+  --theme-radius-sm: 0.5rem;
+  --theme-radius-md: 0.75rem;
+  --theme-radius-lg: 1rem;
+  --theme-radius-xl: 1.25rem;
+  --theme-radius-2xl: 1.5rem;
+  --theme-radius-full: 9999px;
+
+  --theme-shadow-sm: none;
+  --theme-shadow-md: 0 2px 12px rgba(0,0,0,0.04);
+  --theme-shadow-lg: 0 8px 28px rgba(0,0,0,0.06);
+
+  --theme-footer-bg: #1d1d1f;
+  --theme-footer-text: #f5f5f7;
+  --theme-footer-muted: #86868b;
+
+  --theme-header-bg: rgba(255, 255, 255, 0.72);
+  --theme-header-border: rgba(0, 0, 0, 0.04);
+
+  --theme-image-radius: 1rem;
+  --theme-image-shadow: 0 8px 28px rgba(0,0,0,0.06);
+
+  --theme-prose-quote-border: #1d1d1f;
+  --theme-prose-quote-text: #6e6e73;
+}
+
+
+/* ==========================================================================
+   THEME 7: Gradient Editorial
+   Inspired by: Nick Heise — Pastel gradient accents, large text,
+   colored keyword highlights, editorial confidence
+   ========================================================================== */
+
+[data-theme="gradient-editorial"] {
+  --theme-bg: #fefefe;
+  --theme-bg-secondary: #f8f7ff;
+  --theme-bg-tertiary: #f0eeff;
+
+  --theme-text-primary: #2d2d3d;
+  --theme-text-secondary: #5e5e72;
+  --theme-text-tertiary: #8e8ea0;
+  --theme-text-quaternary: #c2c2d0;
+
+  --theme-accent: #6c5ce7;
+  --theme-accent-hover: #5a4bd6;
+  --theme-accent-subtle: #f0eeff;
+
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #f8f7ff;
+  --theme-border: #e8e6f5;
+  --theme-border-strong: #d5d2eb;
+
+  /* Space Grotesk — a quirky geometric sans with a monospaced DNA (its ancestor
+     is Space Mono). The slightly unusual letterforms add playfulness that pairs
+     well with gradient accents and pastel highlights */
+  --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-text-lg: 1.25rem;
+  --theme-text-4xl: 2.5rem;
+  --theme-text-5xl: 3.25rem;
+  --theme-text-6xl: 4.5rem;
+
+  --theme-weight-heading: 700;
+  --theme-weight-bold: 700;
+  --theme-leading-tight: 1.1;
+  --theme-leading-relaxed: 1.7;
+  --theme-tracking-tight: -0.02em;
+
+  --theme-section-gap: 5rem;
+
+  --theme-radius-sm: 0.5rem;
+  --theme-radius-md: 0.75rem;
+  --theme-radius-lg: 1rem;
+  --theme-radius-xl: 1.25rem;
+  --theme-radius-2xl: 1.5rem;
+
+  --theme-shadow-sm: 0 1px 3px rgba(108, 92, 231, 0.06);
+  --theme-shadow-md: 0 4px 12px rgba(108, 92, 231, 0.08);
+  --theme-shadow-lg: 0 12px 32px rgba(108, 92, 231, 0.1);
+
+  --theme-footer-bg: #2d2d3d;
+  --theme-footer-text: #f8f7ff;
+  --theme-footer-muted: #8e8ea0;
+
+  --theme-header-bg: rgba(254, 254, 254, 0.88);
+  --theme-header-border: #e8e6f5;
+
+  --theme-image-radius: 1rem;
+  --theme-image-shadow: 0 4px 16px rgba(108, 92, 231, 0.08);
+
+  --theme-prose-quote-border: #6c5ce7;
+  --theme-prose-quote-text: #5e5e72;
+
+  /* ── Mesh gradient background ──────────────────────────────────────────
+     Soft pastel blobs layered on top of --theme-bg to create an ambient
+     mesh-gradient effect (inspired by nickheise.com).
+     To change the palette, just swap these five RGBA values — the blob
+     positions and sizes stay the same. */
+  --theme-gradient-1: rgba(245, 190, 235, 0.45);   /* pink — top-left */
+  --theme-gradient-2: rgba(190, 210, 255, 0.40);   /* sky — top-right */
+  --theme-gradient-3: rgba(215, 200, 255, 0.30);   /* lavender — center */
+  --theme-gradient-4: rgba(255, 200, 220, 0.35);   /* rose — bottom-right */
+  --theme-gradient-5: rgba(185, 225, 255, 0.35);   /* cyan — bottom-left */
+
+  --theme-bg-gradient:
+    radial-gradient(ellipse 80% 50% at 10% 0%,   var(--theme-gradient-1) 0%, transparent 100%),
+    radial-gradient(ellipse 60% 70% at 90% 5%,   var(--theme-gradient-2) 0%, transparent 100%),
+    radial-gradient(ellipse 70% 50% at 50% 45%,  var(--theme-gradient-3) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 60% at 85% 85%,  var(--theme-gradient-4) 0%, transparent 100%),
+    radial-gradient(ellipse 60% 60% at 5% 80%,   var(--theme-gradient-5) 0%, transparent 100%);
+}
+
+
+/* ==========================================================================
+   THEME 8: Warm Serif
+   A warm, literary aesthetic — serif headings, cream tones, generous leading,
+   feels like a beautifully designed book or art catalogue
+   ========================================================================== */
+
+[data-theme="warm-serif"] {
+  --theme-bg: #faf8f4;
+  --theme-bg-secondary: #f3f0e8;
+  --theme-bg-tertiary: #ebe7dc;
+
+  --theme-text-primary: #2c2620;
+  --theme-text-secondary: #6b6256;
+  --theme-text-tertiary: #9b9182;
+  --theme-text-quaternary: #c4bba8;
+
+  --theme-accent: #a0522d;
+  --theme-accent-hover: #8b4726;
+  --theme-accent-subtle: #f5ede6;
+
+  --theme-surface: #fffdf8;
+  --theme-surface-hover: #f5f2ea;
+  --theme-border: #e6e0d4;
+  --theme-border-strong: #d4cdc0;
+
+  /* Serif headings with sans body — classic editorial pairing */
+  --theme-font-heading: Georgia, "Times New Roman", serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-text-lg: 1.125rem;
+  --theme-text-4xl: 2.25rem;
+  --theme-text-5xl: 3rem;
+  --theme-text-6xl: 3.75rem;
+
+  --theme-weight-heading: 400;
+  --theme-weight-bold: 700;
+  --theme-leading-tight: 1.15;
+  --theme-leading-snug: 1.35;
+  --theme-leading-relaxed: 1.75;
+  --theme-tracking-tight: 0em;
+  --theme-tracking-normal: 0.01em;
+
+  --theme-section-gap: 5rem;
+
+  --theme-radius-sm: 0.25rem;
+  --theme-radius-md: 0.375rem;
+  --theme-radius-lg: 0.5rem;
+  --theme-radius-xl: 0.625rem;
+  --theme-radius-2xl: 0.75rem;
+
+  --theme-shadow-sm: 0 1px 3px rgba(44,38,32,0.04);
+  --theme-shadow-md: 0 3px 10px rgba(44,38,32,0.06);
+  --theme-shadow-lg: 0 8px 24px rgba(44,38,32,0.08);
+
+  --theme-footer-bg: #2c2620;
+  --theme-footer-text: #faf8f4;
+  --theme-footer-muted: #9b9182;
+
+  --theme-header-bg: rgba(250, 248, 244, 0.92);
+  --theme-header-border: #e6e0d4;
+
+  --theme-image-radius: 0.25rem;
+  --theme-image-shadow: 0 3px 10px rgba(44,38,32,0.06);
+
+  --theme-prose-quote-border: var(--theme-accent);
+  --theme-prose-quote-text: #6b6256;
+}
+
+
+/* ==========================================================================
+   THEME 9: Monospace Technical
+   A developer/engineer aesthetic — monospace accents, structured grid feel,
+   terminal-inspired color scheme, precise geometry
+   ========================================================================== */
+
+[data-theme="mono-technical"] {
+  --theme-bg: #f7f7f7;
+  --theme-bg-secondary: #eeeeee;
+  --theme-bg-tertiary: #e5e5e5;
+
+  --theme-text-primary: #1a1a2e;
+  --theme-text-secondary: #4a4a5a;
+  --theme-text-tertiary: #7a7a8a;
+  --theme-text-quaternary: #acacb8;
+
+  --theme-accent: #0066ff;
+  --theme-accent-hover: #0052cc;
+  --theme-accent-subtle: #e6f0ff;
+
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #f7f7f7;
+  --theme-border: #dcdce0;
+  --theme-border-strong: #b8b8c0;
+
+  /* JetBrains Mono — purpose-built for code readability with increased letter height
+     and unique character shapes. Upgrades from system mono to give the technical
+     theme a distinctive, intentional developer aesthetic */
+  --theme-font-heading: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-text-xs: 0.6875rem;
+  --theme-text-sm: 0.8125rem;
+  --theme-text-4xl: 2rem;
+  --theme-text-5xl: 2.5rem;
+  --theme-text-6xl: 3rem;
+
+  --theme-weight-heading: 700;
+  --theme-weight-bold: 700;
+  --theme-leading-tight: 1.15;
+  --theme-leading-relaxed: 1.65;
+  --theme-tracking-tight: -0.03em;
+  --theme-tracking-wide: 0.08em;
+
+  --theme-section-gap: 4rem;
+
+  --theme-radius-sm: 0.25rem;
+  --theme-radius-md: 0.25rem;
+  --theme-radius-lg: 0.375rem;
+  --theme-radius-xl: 0.375rem;
+  --theme-radius-2xl: 0.5rem;
+
+  --theme-shadow-sm: 0 1px 2px rgba(26,26,46,0.06);
+  --theme-shadow-md: 0 2px 8px rgba(26,26,46,0.08);
+  --theme-shadow-lg: 0 4px 16px rgba(26,26,46,0.1);
+
+  --theme-footer-bg: #1a1a2e;
+  --theme-footer-text: #f7f7f7;
+  --theme-footer-muted: #7a7a8a;
+
+  --theme-header-bg: rgba(247, 247, 247, 0.92);
+  --theme-header-border: #dcdce0;
+
+  --theme-image-radius: 0.25rem;
+  --theme-image-shadow: none;
+  --theme-image-border: 1px solid #dcdce0;
+
+  --theme-prose-quote-border: #0066ff;
+  --theme-prose-quote-text: #4a4a5a;
+}
+
+
+/* ==========================================================================
+   THEME 10: High Contrast Magazine
+   Bold, high-contrast, magazine-inspired — large serif headings, stark black/white,
+   strong visual hierarchy, dramatic pullquotes
+   ========================================================================== */
+
+[data-theme="magazine"] {
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #f2f2f2;
+  --theme-bg-tertiary: #e5e5e5;
+
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #444444;
+  --theme-text-tertiary: #777777;
+  --theme-text-quaternary: #aaaaaa;
+
+  --theme-accent: #e60000;
+  --theme-accent-hover: #cc0000;
+  --theme-accent-subtle: #fff0f0;
+
+  --theme-surface: #ffffff;
+  --theme-surface-hover: #f8f8f8;
+  --theme-border: #e0e0e0;
+  --theme-border-strong: #cccccc;
+
+  /* Libre Baskerville — a web-optimized Baskerville with strong vertical strokes
+     and generous x-height. More authoritative than Georgia, evoking newspaper
+     mastheads and magazine cover lines with the red accent and zero border-radius */
+  --theme-font-heading: "Libre Baskerville", Georgia, serif;
+  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --theme-text-lg: 1.1875rem;
+  --theme-text-4xl: 2.75rem;
+  --theme-text-5xl: 3.75rem;
+  --theme-text-6xl: 5rem;
+
+  --theme-weight-heading: 700;
+  --theme-weight-bold: 700;
+  --theme-leading-tight: 1.05;
+  --theme-leading-snug: 1.2;
+  --theme-leading-relaxed: 1.7;
+  --theme-tracking-tight: -0.02em;
+
+  --theme-section-gap: 5rem;
+
+  --theme-radius-sm: 0;
+  --theme-radius-md: 0;
+  --theme-radius-lg: 0;
+  --theme-radius-xl: 0;
+  --theme-radius-2xl: 0;
+
+  --theme-shadow-sm: none;
+  --theme-shadow-md: none;
+  --theme-shadow-lg: 0 6px 20px rgba(0,0,0,0.1);
+
+  --theme-footer-bg: #000000;
+  --theme-footer-text: #ffffff;
+  --theme-footer-muted: #777777;
+
+  --theme-header-bg: rgba(255, 255, 255, 0.95);
+  --theme-header-border: #000000;
+
+  --theme-image-radius: 0;
+  --theme-image-shadow: none;
+
+  --theme-prose-quote-border: #e60000;
+  --theme-prose-quote-text: #000000;
+}
