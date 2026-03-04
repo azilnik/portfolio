@@ -36,7 +36,7 @@ const { src, alt, caption } = Astro.props;
     class="w-full h-auto"
   />
   {caption && (
-    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm text-gray-400">
+    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm" style="color: var(--theme-text-tertiary);">
       {caption}
     </figcaption>
   )}

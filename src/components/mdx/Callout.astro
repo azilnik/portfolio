@@ -21,11 +21,14 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<aside class="my-8 rounded-r-lg border-l-4 border-accent bg-blue-50 p-6">
+<aside
+  class="my-8 rounded-r-lg border-l-4 p-6"
+  style="border-color: var(--theme-accent); background-color: var(--theme-bg);"
+>
   {label && (
-    <p class="mb-2 text-xs font-bold uppercase tracking-wider text-accent">{label}</p>
+    <p class="mb-2 text-xs font-bold uppercase tracking-wider" style="color: var(--theme-accent);">{label}</p>
   )}
-  <div class="text-gray-700 leading-relaxed">
+  <div class="leading-relaxed" style="color: var(--theme-text-secondary);">
     <slot />
   </div>
 </aside>

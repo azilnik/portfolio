@@ -47,6 +47,6 @@ const { src, fallback, alt, caption } = Astro.props;
     <img src={fallback} alt={alt} class="w-full h-auto" loading="lazy" />
   </video>
   {caption && (
-    <figcaption class="mt-3 text-center text-sm text-gray-400">{caption}</figcaption>
+    <figcaption class="mt-3 text-center text-sm" style="color: var(--theme-text-tertiary);">{caption}</figcaption>
   )}
 </figure>

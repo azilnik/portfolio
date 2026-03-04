@@ -34,23 +34,26 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
   <article>
     {/* Metadata bar — shows contextual info about the project */}
     <div class="mx-auto max-w-6xl px-6 pt-12 pb-8">
-      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-500">
+      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm" style="color: var(--theme-text-secondary);">
         <div>
-          <span class="font-semibold text-gray-900">Industry</span>
+          <span class="font-semibold" style="color: var(--theme-text-primary);">Industry</span>
           <span class="ml-2">{industry}</span>
         </div>
         <div>
-          <span class="font-semibold text-gray-900">Company</span>
+          <span class="font-semibold" style="color: var(--theme-text-primary);">Company</span>
           <span class="ml-2">{company}</span>
         </div>
         <div>
-          <span class="font-semibold text-gray-900">Role</span>
+          <span class="font-semibold" style="color: var(--theme-text-primary);">Role</span>
           <span class="ml-2">{role}</span>
         </div>
       </div>
 
       {/* Project title */}
-      <h1 class="mt-6 font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+      <h1
+        class="mt-6 font-heading text-4xl font-bold md:text-5xl"
+        style="color: var(--theme-text-primary);"
+      >
         {title}
       </h1>
     </div>
@@ -59,7 +62,8 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
     <CaseStudyHero image={heroImage} alt={title} />
 
     {/* MDX body content — constrained width with prose styling */}
-    <div class="prose prose-lg prose-gray mx-auto max-w-3xl px-6 py-12">
+    {/* prose-gray removed — prose colors now come from theme CSS variables in global.css */}
+    <div class="prose prose-lg mx-auto max-w-3xl px-6 py-12">
       <slot />
     </div>
 
