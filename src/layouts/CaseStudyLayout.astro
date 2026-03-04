@@ -49,10 +49,10 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
         </div>
       </div>
 
-      {/* Project title */}
+      {/* Project title — uses theme tracking + leading so it renders correctly across all themes */}
       <h1
-        class="mt-6 font-heading text-4xl font-bold md:text-5xl"
-        style="color: var(--theme-text-primary);"
+        class="mt-4 font-heading text-5xl md:text-6xl"
+        style="color: var(--theme-text-primary); font-weight: var(--theme-weight-heading); letter-spacing: var(--theme-tracking-tight); line-height: var(--theme-leading-tight);"
       >
         {title}
       </h1>
