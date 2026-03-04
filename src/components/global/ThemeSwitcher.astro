@@ -1,0 +1,138 @@
+---
+/**
+ * ThemeSwitcher — floating panel to switch between visual themes.
+ *
+ * Renders a small palette icon in the bottom-right corner. Clicking it
+ * opens a panel listing all available themes. The active theme is stored
+ * in localStorage so it persists across page loads.
+ */
+
+const themes = [
+  { id: "", label: "Default", description: "Original site design" },
+  { id: "editorial-swiss", label: "Editorial Swiss", description: "Warm cream, bold type, magazine rhythm" },
+  { id: "dark-editorial", label: "Dark Editorial", description: "Sophisticated dark, warm tones" },
+  { id: "midnight-dev", label: "Midnight Dev", description: "True black, opacity hierarchy, minimal" },
+  { id: "heavy-impact", label: "Heavy Impact", description: "Ultra-heavy type, tight tracking, bold" },
+  { id: "warm-minimal", label: "Warm Minimal", description: "Warm gray, single typeface, restrained" },
+  { id: "apple-light", label: "Apple Light", description: "Thin type, extreme whitespace, elegant" },
+  { id: "gradient-editorial", label: "Gradient Editorial", description: "Pastel accents, purple tones, playful" },
+  { id: "warm-serif", label: "Warm Serif", description: "Literary, serif headings, book-like" },
+  { id: "mono-technical", label: "Mono Technical", description: "Monospace accents, structured, precise" },
+  { id: "magazine", label: "Magazine", description: "High contrast, serif headings, editorial" },
+];
+---
+
+{/* Toggle button — fixed in bottom-right corner */}
+<button
+  id="theme-toggle"
+  class="fixed bottom-6 right-6 z-[100] flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all hover:scale-110"
+  style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
+  aria-label="Switch theme"
+  title="Switch theme"
+>
+  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
+  </svg>
+</button>
+
+{/* Theme panel — hidden by default */}
+<div
+  id="theme-panel"
+  class="fixed bottom-20 right-6 z-[100] hidden w-72 overflow-hidden rounded-xl shadow-2xl"
+  style="background-color: var(--theme-surface); border: 1px solid var(--theme-border-strong);"
+  role="dialog"
+  aria-label="Theme switcher"
+>
+  <div class="px-4 py-3" style="border-bottom: 1px solid var(--theme-border);">
+    <p class="text-sm font-semibold" style="color: var(--theme-text-primary); font-family: var(--theme-font-heading);">
+      Choose a theme
+    </p>
+  </div>
+
+  <div class="max-h-[400px] overflow-y-auto p-2">
+    {themes.map((theme) => (
+      <button
+        class="theme-option flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors"
+        data-theme-id={theme.id}
+        style="color: var(--theme-text-primary);"
+      >
+        <span
+          class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2"
+          style="border-color: var(--theme-border-strong);"
+        >
+          {/* Active indicator dot — filled via JS */}
+          <span class="theme-dot hidden h-2 w-2 rounded-full" style="background-color: var(--theme-accent);"></span>
+        </span>
+        <div>
+          <p class="text-sm font-medium" style="font-family: var(--theme-font-heading);">{theme.label}</p>
+          <p class="text-xs" style="color: var(--theme-text-tertiary);">{theme.description}</p>
+        </div>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  /**
+   * Theme switcher logic — persists selection in localStorage,
+   * applies via data-theme attribute on <html>.
+   */
+  function initThemeSwitcher() {
+    const toggle = document.getElementById("theme-toggle");
+    const panel = document.getElementById("theme-panel");
+    const options = document.querySelectorAll(".theme-option");
+    if (!toggle || !panel) return;
+
+    /* Restore saved theme on load — defaults to gradient-editorial
+       (matches the data-theme attribute set in BaseLayout's <html> tag) */
+    const savedTheme = localStorage.getItem("portfolio-theme");
+    applyTheme(savedTheme !== null ? savedTheme : "gradient-editorial");
+
+    /* Toggle panel visibility */
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      panel.classList.toggle("hidden");
+    });
+
+    /* Close panel when clicking outside */
+    document.addEventListener("click", (e) => {
+      if (!panel.contains(e.target as Node) && e.target !== toggle) {
+        panel.classList.add("hidden");
+      }
+    });
+
+    /* Handle theme selection */
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const themeId = (option as HTMLElement).dataset.themeId || "";
+        applyTheme(themeId);
+        localStorage.setItem("portfolio-theme", themeId);
+      });
+    });
+
+    function applyTheme(themeId: string) {
+      if (themeId) {
+        document.documentElement.setAttribute("data-theme", themeId);
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      /* Update active indicator dots */
+      options.forEach((opt) => {
+        const dot = opt.querySelector(".theme-dot");
+        const isActive = ((opt as HTMLElement).dataset.themeId || "") === themeId;
+        dot?.classList.toggle("hidden", !isActive);
+      });
+    }
+  }
+
+  initThemeSwitcher();
+  document.addEventListener("astro:after-swap", initThemeSwitcher);
+</script>
+
+{/* Inline script to prevent flash of wrong theme — runs before paint */}
+<script is:inline>
+  (function() {
+    var t = localStorage.getItem("portfolio-theme");
+    if (t !== null) document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
