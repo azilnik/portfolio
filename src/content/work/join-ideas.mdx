@@ -1,9 +1,9 @@
 ---
 title: "Join Ideas"
 company: "Join"
-role: "Head of Design, Lead Designer and Researcher"
+role: "Head of Design"
 industry: "Construction"
-description: "AI-powered recommendations to help construction teams build more innovative, more thoughtful projects."
+description: "How research turned a materials marketplace into an AI tool that delivered $500K in construction savings in 30 days."
 heroImage: "./images/join-ideas-01.png"
 thumbnail: "./images/join-ideas-01.png"
 thumbnailAlt: "Join Ideas — AI-powered recommendations"
@@ -11,37 +11,55 @@ employer: "join"
 sortOrder: 1
 draft: false
 metrics:
-  - label: "Customer"
-    value: "Decreased decision-making time by proactively suggesting directly relevant project items."
-  - label: "Product"
-    value: "Over 50% of beta test participants used Join Ideas within 1 week of launch."
-  - label: "People and process"
-    value: "Structured usability and beta tests, ensuring the feature launched with direct user feedback."
+  - label: "In accepted cost savings across beta users within 30 days of launch"
+    value: "$500K"
+  - label: "Beta adoption in week 1 — nearly double our 30% internal benchmark"
+    value: "50%+"
+  - label: "Research to launch, sole designer + acting PM"
+    value: "2 months"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import Callout from "../../components/mdx/Callout.astro";
 
-import joinIdeas01 from "./images/join-ideas-01.png";
 import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-Join is a project management platform that helps construction companies, owners, and architects make better, more informed decisions.
+## The problem
 
-Join Ideas is an AI/machine learning-enabled feature that helps construction teams brainstorm and consider alternate materials and processes. It suggests relevant contextual ideas for consideration and incorporation into a project.
+Join Ideas started as a materials marketplace. Research changed everything.
 
-<FullBleedImage src={joinIdeas01} alt="Join Ideas feature overview" />
+Construction estimators miss cost-saving opportunities not because they're careless — but because they can't know what they've never seen. A less experienced estimator might not realize a newer material can do the same job for a fraction of the cost. That gap in institutional knowledge compounds across every project they touch.
 
-<FullBleedImage src={joinIdeas02} alt="Join Ideas recommendations interface" />
+<Callout label="The research pivot">
+  We came in expecting to design a materials marketplace. Interviews and direct shadowing of estimators reframed it entirely. Users didn't need a place to browse — they needed a tool that would surface what they didn't know to look for, directly inside the workflow they already trusted.
+</Callout>
 
-<FullBleedImage src={joinIdeas03} alt="Join Ideas contextual suggestions" />
+<FullBleedImage src={joinIdeas02} alt="Join Ideas homepage showing suggestion carousels organized by cost-saving potential" />
 
-<FullBleedImage src={joinIdeas04} alt="Join Ideas integration with project workflow" />
+## How it works
+
+Join Ideas surfaces AI-generated suggestions as contextual carousels, ranked by cost-saving potential and scoped to the specific project at hand. A materials researcher curates and validates the underlying data. One click adds a suggestion to the project as a formal line item to present to the owner or client — and if approved, it flows into the drawings and plans for the building. These decisions affect real structures where people live and work.
+
+<FullBleedImage src={joinIdeas03} alt="Join Ideas detail view showing a suggestion with add-to-project action" />
+
+<FullBleedImage src={joinIdeas04} alt="Join Ideas idea tiles showing cost-savings tags and relevance scores" />
+
+## The impact
+
+We released to 25% of customers. In the first 30 days, beta users accepted $500K in cost savings across their construction projects. Our internal adoption benchmark was 30% in week one — we hit 50%.
+
+With real money on the line, opacity wasn't an option. We built an AI transparency report so users always understand how their project data is used and whether it contributes to suggestions for others.
+
+{/* TODO: Replace spacer below with the AI transparency report screen once designed in Figma (join-ideas-05.png) */}
+
+<div style="padding-top: 3rem"></div>
 
 ## Quotes
 
-> "I've never used anything like this in my 15 years in construction."
+> "We were able to save our client over $2M by exploring ideas we wouldn't have considered otherwise."
 
 > "This changes the way I think about value engineering."
 
-> "We were able to save our client over $2M by exploring ideas we wouldn't have considered otherwise."
+> "I've never used anything like this in my 15 years in construction."
