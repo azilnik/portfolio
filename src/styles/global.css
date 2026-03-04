@@ -2,11 +2,12 @@
    Global Styles — ari.design portfolio
 
    This file is the single entry point for all CSS. It imports Tailwind v4,
-   declares self-hosted fonts, defines the custom theme (colors, fonts),
-   and adds a few global base styles.
+   the theme system, declares self-hosted fonts, defines Tailwind design tokens,
+   and adds global base styles + theme-aware prose overrides.
    ========================================================================== */
 
 @import "tailwindcss";
+@import "./themes.css";
 
 /* --------------------------------------------------------------------------
    Self-hosted variable fonts
@@ -57,10 +58,13 @@
    -------------------------------------------------------------------------- */
 
 @theme {
-  /* Font families — use as `font-sans`, `font-heading`, `font-display` */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Font families — use as `font-sans`, `font-heading`, `font-display`.
+     These reference the theme CSS variables so they respond to data-theme
+     changes. Each theme defines its own --theme-font-* values in themes.css,
+     giving every theme a distinct typographic personality. */
+  --font-sans: var(--theme-font-body);
+  --font-heading: var(--theme-font-heading);
+  --font-display: var(--theme-font-display);
 
   /* Brand accent color — the signature blue used for links and CTAs */
   --color-accent: rgb(0, 89, 255);
@@ -71,30 +75,87 @@
    Base styles
 
    Applied globally to all pages. We set the default font, text color,
-   and background, plus a few utility resets.
+   and background using theme CSS variables so they respond to data-theme.
    -------------------------------------------------------------------------- */
 
 @layer base {
   html {
-    /* Only smooth-scroll when an anchor link is clicked (not during normal scrolling).
-       The media query ensures users who prefer reduced motion get instant jumps. */
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
     }
   }
 
   body {
-    font-family: var(--font-sans);
-    color: #1a1a1a;
-    background-color: #ffffff;
-    /* Prevent horizontal overflow from full-bleed images */
+    /* Theme-aware base styles — these CSS variables change per-theme */
+    font-family: var(--theme-font-body);
+    color: var(--theme-text-primary);
+    background-color: var(--theme-bg);
+    /* Smooth color transitions when switching themes */
+    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
   }
 
-  /* Make all images in prose/MDX content have rounded corners */
+  /* Theme-aware image treatment inside prose/MDX content */
   .prose img {
-    border-radius: 0.5rem;
+    border-radius: var(--theme-image-radius);
+    box-shadow: var(--theme-image-shadow);
+    border: var(--theme-image-border);
   }
+}
+
+/* --------------------------------------------------------------------------
+   Theme-aware prose overrides
+
+   Tailwind's @tailwindcss/typography (prose) uses hardcoded gray colors.
+   These overrides make prose content respond to the active theme so that
+   headings, body text, links, blockquotes, and horizontal rules all use
+   the correct theme colors.
+   -------------------------------------------------------------------------- */
+
+.prose {
+  --tw-prose-body: var(--theme-text-secondary);
+  --tw-prose-headings: var(--theme-prose-heading-color);
+  --tw-prose-links: var(--theme-prose-link-color);
+  --tw-prose-bold: var(--theme-text-primary);
+  --tw-prose-counters: var(--theme-text-tertiary);
+  --tw-prose-bullets: var(--theme-text-tertiary);
+  --tw-prose-hr: var(--theme-prose-hr-color);
+  --tw-prose-quotes: var(--theme-prose-quote-text);
+  --tw-prose-quote-borders: var(--theme-prose-quote-border);
+  --tw-prose-captions: var(--theme-text-tertiary);
+  --tw-prose-code: var(--theme-text-primary);
+  --tw-prose-pre-code: var(--theme-text-secondary);
+  --tw-prose-pre-bg: var(--theme-bg-tertiary);
+  --tw-prose-th-borders: var(--theme-border-strong);
+  --tw-prose-td-borders: var(--theme-border);
+  color: var(--theme-text-secondary);
+}
+
+/* Make prose headings use the theme heading font and weight */
+.prose :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--theme-font-heading);
+  font-weight: var(--theme-weight-heading);
+  color: var(--theme-prose-heading-color);
+  letter-spacing: var(--theme-tracking-tight);
+}
+
+/* Theme-aware blockquotes — consistent with ImpactMetrics sections */
+.prose :where(blockquote) {
+  border-left-color: var(--theme-prose-quote-border);
+  color: var(--theme-prose-quote-text);
+  font-style: normal;
+}
+
+.prose :where(a) {
+  color: var(--theme-prose-link-color);
+}
+
+.prose :where(strong) {
+  color: var(--theme-text-primary);
+}
+
+.prose :where(hr) {
+  border-color: var(--theme-prose-hr-color);
 }
 
 /* --------------------------------------------------------------------------

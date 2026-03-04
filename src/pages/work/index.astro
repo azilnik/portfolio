@@ -17,10 +17,13 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
 <PageLayout title="Work" description="Selected case studies from Ari Zilnik's career as a design leader.">
   <section class="mx-auto max-w-6xl px-6 py-20">
     {/* Page header */}
-    <h1 class="font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+    <h1
+      class="font-heading text-4xl font-bold md:text-5xl"
+      style="color: var(--theme-text-primary);"
+    >
       Designing Success
     </h1>
-    <p class="mt-4 text-lg text-gray-500">
+    <p class="mt-4 text-lg" style="color: var(--theme-text-secondary);">
       A collection of projects where thoughtful design drove meaningful results.
     </p>
 
@@ -32,7 +35,7 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
         ))}
       </div>
     ) : (
-      <p class="mt-12 text-gray-400">Case studies coming soon.</p>
+      <p class="mt-12" style="color: var(--theme-text-tertiary);">Case studies coming soon.</p>
     )}
   </section>
 </PageLayout>

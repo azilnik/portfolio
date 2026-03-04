@@ -13,16 +13,19 @@ interface Props {
 const { metrics } = Astro.props;
 ---
 
-<section class="bg-gray-50 py-16">
+<section class="py-16" style="background-color: var(--theme-bg);">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="mb-10 text-center font-heading text-2xl font-bold text-gray-900">
+    <h2
+      class="mb-10 text-center font-heading text-2xl font-bold"
+      style="color: var(--theme-text-primary);"
+    >
       Impact
     </h2>
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
       {metrics.map((metric) => (
         <div class="text-center">
-          <p class="font-heading text-4xl font-bold text-accent">{metric.value}</p>
-          <p class="mt-2 text-sm text-gray-600">{metric.label}</p>
+          <p class="font-heading text-4xl font-bold" style="color: var(--theme-accent);">{metric.value}</p>
+          <p class="mt-2 text-sm" style="color: var(--theme-text-secondary);">{metric.label}</p>
         </div>
       ))}
     </div>
