@@ -46,7 +46,8 @@ function getInitials(name: string): string {
           <p class="text-lg leading-relaxed" style="color: var(--theme-text-secondary);">"{t.data.quote}"</p>
           {/* Wrap the entire footer (avatar + name + title) in one link when LinkedIn is available */}
           {t.data.linkedinUrl ? (
-            <a href={t.data.linkedinUrl} target="_blank" rel="noopener noreferrer" class="mt-6 flex items-center gap-3 group">
+            <a href={t.data.linkedinUrl} target="_blank" rel="noopener noreferrer" class="mt-6 flex items-center gap-3 group"
+              data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}>
               {t.data.avatar ? (
                 <Image
                   src={t.data.avatar}
