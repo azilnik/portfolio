@@ -45,6 +45,8 @@ const currentPath = Astro.url.pathname;
               ? "font-weight: 600; color: var(--theme-accent);"
               : "color: var(--theme-text-secondary);"}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            {...(link.href.startsWith("mailto:") ? { "data-goatcounter-click": "contact-nav" } : {})}
+            {...(link.label === "Resume" ? { "data-goatcounter-click": "resume-nav" } : {})}
           >
             {link.label}
           </a>
