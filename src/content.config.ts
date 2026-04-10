@@ -34,7 +34,7 @@ const work = defineCollection({
 
       // --- Categorization ---
       // Links case studies to employer blocks on the homepage.
-      employer: z.enum(["join", "blockdaemon", "gradle", "freelance"]),
+      employer: z.enum(["join", "blockdaemon", "gradle", "freelance", "side-project"]),
 
       // --- Impact metrics (shown at the bottom of the case study) ---
       // Each metric is a { label, value } pair, e.g., { label: "User Growth", value: "3x" }

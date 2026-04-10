@@ -1,13 +1,14 @@
 ---
 /**
- * WorkSection — the "My Work" area of the homepage.
+ * WorkSection — featured case studies on the homepage.
  *
- * Renders one EmployerBlock per employer, each with its associated
- * case studies pulled from the content collection.
+ * Shows the 3 featured case studies as cards, sorted by sortOrder.
+ * Previously this section grouped case studies under employer blocks,
+ * but with 3 focused case studies (including a side project), a flat
+ * list of cards is cleaner and gives equal weight to each piece.
  */
 import { getCollection } from "astro:content";
-import { employers } from "../../data/employers";
-import EmployerBlock from "./EmployerBlock.astro";
+import CaseStudyCard from "../work/CaseStudyCard.astro";
 
 // Fetch all non-draft case studies, sorted by sortOrder.
 const allWork = (await getCollection("work", ({ data }) => !data.draft))
@@ -19,15 +20,20 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
     class="mb-4 font-heading text-3xl font-bold md:text-4xl"
     style="color: var(--theme-text-primary);"
   >
-    My work
+    Featured work
   </h2>
   <p class="mb-12 text-lg" style="color: var(--theme-text-secondary);">
-    A selection of projects from my career as a design leader.
+    Three projects that show how I think, lead, and build.
   </p>
 
-  {employers.map((employer) => {
-    // Filter case studies that belong to this employer.
-    const employerStudies = allWork.filter((s) => s.data.employer === employer.id);
-    return <EmployerBlock employer={employer} caseStudies={employerStudies} />;
-  })}
+  {/* Case study grid — responsive, 1 col on mobile, 2 on tablet, 3 on desktop */}
+  {allWork.length > 0 ? (
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {allWork.map((study) => (
+        <CaseStudyCard study={study} />
+      ))}
+    </div>
+  ) : (
+    <p style="color: var(--theme-text-tertiary);">Case studies coming soon.</p>
+  )}
 </section>

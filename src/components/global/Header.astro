@@ -8,6 +8,7 @@
  * Uses theme CSS variables for colors so the header adapts to the active theme.
  */
 import Navigation from "./Navigation.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <header
@@ -24,19 +25,25 @@ import Navigation from "./Navigation.astro";
       Ari Zilnik
     </a>
 
-    {/* Desktop nav — hidden on mobile */}
-    <Navigation class="hidden md:block" />
+    {/* Desktop nav + theme toggle — hidden on mobile */}
+    <div class="hidden items-center gap-4 md:flex">
+      <Navigation />
+      <ThemeSwitcher />
+    </div>
 
-    {/* Mobile hamburger button — visible on small screens only */}
-    <button
-      id="mobile-menu-toggle"
-      class="flex items-center justify-center md:hidden"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-    >
-      <svg class="h-6 w-6" style="color: var(--theme-text-secondary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+    {/* Mobile: theme toggle + hamburger — visible on small screens only */}
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeSwitcher />
+      <button
+        id="mobile-menu-toggle"
+        class="flex items-center justify-center"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <svg class="h-6 w-6" style="color: var(--theme-text-secondary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </div>
 </header>

@@ -1,11 +1,15 @@
 ---
 /**
  * About page — /about
+ *
+ * Conveys Ari's design philosophy and working style, drawn from the
+ * canonical interview-context.md. Targets hiring managers at premium
+ * product companies who want to understand how Ari thinks and leads.
  */
 import PageLayout from "../layouts/PageLayout.astro";
 ---
 
-<PageLayout title="About" description="About Ari Zilnik — design leader with 13+ years of experience shipping products at the intersection of complex systems and human needs.">
+<PageLayout title="About" description="About Ari Zilnik — design leader who builds teams, ships AI products, and stays close to the work.">
   <section class="mx-auto max-w-3xl px-6 py-20">
     <h1
       class="font-heading text-4xl font-bold md:text-5xl"
@@ -16,27 +20,48 @@ import PageLayout from "../layouts/PageLayout.astro";
 
     <div class="mt-8 space-y-6 text-lg leading-relaxed" style="color: var(--theme-text-secondary);">
       <p>
-        I'm <span class="font-semibold" style="color: var(--theme-text-primary);">Ari Zilnik</span>, a hands-on design leader with
-        over 13 years of experience crafting digital products. I currently serve as
-        <span class="font-semibold" style="color: var(--theme-text-primary);">Head of Design at Join</span>, where I lead product
-        design, design systems, and team growth.
+        I'm <span class="font-semibold" style="color: var(--theme-text-primary);">Ari Zilnik</span>.
+        I lead design teams and ship products. Currently
+        <span class="font-semibold" style="color: var(--theme-text-primary);">Head of Design at Join</span>,
+        a project management platform for construction.
       </p>
 
       <p>
-        Throughout my career, I've worked across <span class="font-semibold" style="color: var(--theme-text-primary);">construction tech, blockchain infrastructure, and developer tools</span> —
-        always at the intersection of complex systems and human needs. I believe great design
-        makes the complex feel simple.
+        I care more about making great things than about titles or lanes. If the
+        highest-impact thing I can do on a given day is run a research session, I
+        run it. If it's unblocking an engineer with a prototype, I build the
+        prototype. If it's presenting to the CEO to change a product direction, I
+        make the case. My job is to do whatever moves the work forward.
       </p>
 
       <p>
-        I'm equally comfortable leading a team of designers through a strategic initiative
-        and rolling up my sleeves to ship pixels. That range — from org-level strategy to
-        hands-on craft — is what I love most about this work.
+        I've spent most of my career in ambiguous, zero-to-one environments:
+        <span class="font-semibold" style="color: var(--theme-text-primary);">founding designer at Blockdaemon</span>
+        (crypto infrastructure for Goldman Sachs and Microsoft),
+        <span class="font-semibold" style="color: var(--theme-text-primary);">lead designer at Gradle</span>
+        (developer tools for Netflix and Salesforce), and now leading design at Join.
+        The common thread is taking something undefined and bringing structure
+        to it.
       </p>
 
       <p>
-        When I'm not designing, you'll find me fixing up vintage audio equipment,
-        tinkering with gadgets, or exploring new cities.
+        I lead by example. I stay close to the work, run crits, and tailor
+        mentorship to each person's level and career goals. At Join, I inherited
+        a junior team and upskilled them to run research projects and build AI
+        prototypes independently. At Blockdaemon, I grew the design org from one
+        person (me) to seven. I believe the best design leaders still ship.
+      </p>
+
+      <p>
+        I've worked fully remote since 2017, long before the pandemic made it
+        normal. Async communication, written decisions, and timezone-aware
+        collaboration aren't skills I had to learn for remote work. It's how I
+        naturally operate.
+      </p>
+
+      <p>
+        Outside of work, I automate things in my house, fix up vintage audio
+        equipment, and spend time with my two kids in Toronto.
       </p>
     </div>
 
@@ -44,8 +69,8 @@ import PageLayout from "../layouts/PageLayout.astro";
     <div class="mt-12">
       <a
         href="mailto:ari@ari.design"
-        class="inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold text-white transition-colors"
-        style="background-color: var(--theme-accent);"
+        class="inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold transition-colors"
+        style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
         data-goatcounter-click="contact-about"
       >
         Get in touch
