@@ -2,20 +2,20 @@
 /**
  * CaseStudyLayout — layout for individual case study pages.
  *
- * Wraps PageLayout and adds:
- * - A metadata bar (industry, company, role)
- * - The project title
- * - A full-bleed hero image
- * - A constrained prose container for the MDX body
- * - An Impact section with metrics (if provided)
+ * Structure:
+ *   1. Metadata bar (Industry · Company · Role)
+ *   2. Large editorial title
+ *   3. Lede paragraph (the one-sentence pitch)
+ *   4. Capped hero image
+ *   5. Prose body (constrained to the reading column)
+ *   6. Impact metrics (if provided)
  *
- * This layout is used by `src/pages/work/[...slug].astro` and receives
- * the case study's frontmatter data as props.
+ * Spacing and title sizing come from the theme's baseline-aligned tokens
+ * so every case study shares the same rhythm and proportions.
  */
 import PageLayout from "./PageLayout.astro";
 import CaseStudyHero from "../components/casestudy/CaseStudyHero.astro";
 import ImpactMetrics from "../components/casestudy/ImpactMetrics.astro";
-import { Image } from "astro:assets";
 
 interface Props {
   title: string;
@@ -32,39 +32,106 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
 
 <PageLayout title={`${title} — ${company}`} description={description}>
   <article>
-    {/* Metadata bar — shows contextual info about the project */}
-    <div class="mx-auto max-w-6xl px-6 pt-12 pb-8">
-      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm" style="color: var(--theme-text-secondary);">
-        <div>
-          <span class="font-semibold" style="color: var(--theme-text-primary);">Industry</span>
-          <span class="ml-2">{industry}</span>
+    {/* Header block — metadata, title, lede. The outer container matches
+        --theme-content-width so horizontal padding lines up with the site
+        header; the inner column matches --theme-prose-width and centers
+        inside the shell so the title sits on the same vertical axis as
+        the body prose below it. Centering puts the whole reading column
+        under the header's visual midpoint on wide displays. */}
+    <header
+      class="mx-auto px-6"
+      style="
+        max-width: var(--theme-content-width);
+        padding-top: var(--theme-space-7);
+        padding-bottom: var(--theme-space-5);
+      "
+    >
+      <div class="mx-auto" style="max-width: var(--theme-prose-width);">
+        {/* Metadata row — small uppercase eyebrow that sits above the title.
+            Tufte-ish "margin note" feel without going full sidenote. The
+            bottom margin matches the work/about page eyebrows (space-2)
+            so the h1 lands at the same y-position across pages. */}
+        <div
+          class="flex flex-wrap items-center gap-x-6 gap-y-1 text-xs font-medium uppercase"
+          style="
+            color: var(--theme-text-tertiary);
+            letter-spacing: var(--theme-tracking-wider);
+            margin-bottom: var(--theme-space-2);
+          "
+        >
+          <span>{industry}</span>
+          <span aria-hidden="true" style="color: var(--theme-text-quaternary);">·</span>
+          <span>{company}</span>
+          <span aria-hidden="true" style="color: var(--theme-text-quaternary);">·</span>
+          <span>{role}</span>
         </div>
-        <div>
-          <span class="font-semibold" style="color: var(--theme-text-primary);">Company</span>
-          <span class="ml-2">{company}</span>
-        </div>
-        <div>
-          <span class="font-semibold" style="color: var(--theme-text-primary);">Role</span>
-          <span class="ml-2">{role}</span>
-        </div>
-      </div>
 
-      {/* Project title — uses theme tracking + leading so it renders correctly across all themes */}
-      <h1
-        class="mt-4 font-heading text-5xl md:text-6xl"
-        style="color: var(--theme-text-primary); font-weight: var(--theme-weight-heading); letter-spacing: var(--theme-tracking-tight); line-height: var(--theme-leading-tight);"
-      >
-        {title}
-      </h1>
+        {/* Editorial title — sized from --theme-text-5xl which is a clamp()
+            so it scales fluidly from ~40px on mobile to ~52px on desktop.
+            No separate md:text-6xl override needed. */}
+        <h1
+          class="font-heading"
+          style="
+            color: var(--theme-text-primary);
+            font-weight: var(--theme-weight-heading);
+            letter-spacing: var(--theme-tracking-tight);
+            line-height: var(--theme-leading-tight);
+            font-size: var(--theme-text-5xl);
+            max-width: 18ch;
+          "
+        >
+          {title}
+        </h1>
+
+        {/* Lede — the description from frontmatter, shown as a larger pull
+            paragraph. Sits immediately under the title so the first thing
+            a reader sees is the business outcome. */}
+        <p
+          class="mt-6 font-sans"
+          style="
+            color: var(--theme-text-secondary);
+            font-size: var(--theme-text-xl);
+            line-height: var(--theme-leading-normal);
+            max-width: 56ch;
+          "
+        >
+          {description}
+        </p>
+      </div>
+    </header>
+
+    {/* Hero image — sits inside the same content shell as the header and
+        prose. Centered on the prose axis (not left-anchored) so it reads
+        as a balanced figure under the title rather than a block jutting
+        off the left edge. Capped at --theme-figure-wide so it reads as a
+        figure, not a banner. */}
+    <div
+      class="mx-auto px-6"
+      style="max-width: var(--theme-content-width);"
+    >
+      <div class="mx-auto" style="max-width: var(--theme-figure-wide);">
+        <CaseStudyHero image={heroImage} alt={title} />
+      </div>
     </div>
 
-    {/* Full-bleed hero image */}
-    <CaseStudyHero image={heroImage} alt={title} />
-
-    {/* MDX body content — constrained width with prose styling */}
-    {/* prose-gray removed — prose colors now come from theme CSS variables in global.css */}
-    <div class="prose prose-lg mx-auto max-w-3xl px-6 py-12">
-      <slot />
+    {/* MDX body content — same content shell as the header and hero, so
+        the reader's eye stays on one vertical axis. The inner `.prose` is
+        45rem (720px) — the natural reading measure — and is centered
+        inside the shell by `.prose { margin: 0 auto }` in global.css.
+        Wide figures break symmetrically out of the prose column via
+        negative margins, staying centered on the reading axis.
+        `prose` class styles come from global.css. */}
+    <div
+      class="mx-auto px-6"
+      style="
+        max-width: var(--theme-content-width);
+        margin-top: var(--theme-space-6);
+        margin-bottom: var(--theme-space-6);
+      "
+    >
+      <div class="prose">
+        <slot />
+      </div>
     </div>
 
     {/* Impact metrics — only rendered if the case study defines them */}

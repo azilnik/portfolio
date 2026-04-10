@@ -1,184 +1,216 @@
 ---
-title: "Join Ideas"
+title: "An AI recommendation engine that saved a construction customer $500K in 30 days"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "How research turned a materials marketplace into an LLM-powered recommendation engine that cut construction decision-making time by 50%."
+description: "Join Ideas is an LLM recommendation engine inside Join, a construction project management tool. As sole designer and acting PM, I shipped it in two months after customer research pivoted the product."
 heroImage: "./images/join-ideas-01.png"
 thumbnail: "./images/join-ideas-01.png"
-thumbnailAlt: "Join Ideas — AI-powered recommendations"
+thumbnailAlt: "Join Ideas, an AI-powered material recommendation engine for construction estimates"
 employer: "join"
 sortOrder: 1
 draft: false
 metrics:
+  - label: "Construction savings for one enterprise customer in the first 30 days"
+    value: "$500K"
   - label: "Reduction in customer decision-making time"
     value: "50%"
   - label: "From research kickoff to production launch, sole designer + acting PM"
     value: "2 months"
-  - label: "Product direction informed by customer interviews and direct observation"
-    value: "Research-driven pivot"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import Callout from "../../components/mdx/Callout.astro";
+import MetaCards from "../../components/mdx/MetaCards.astro";
+import PivotCard from "../../components/mdx/PivotCard.astro";
+import Impact from "../../components/mdx/Impact.astro";
+import Lessons from "../../components/mdx/Lessons.astro";
 
 import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-## Context
+<MetaCards
+  cards={[
+    {
+      label: "Role",
+      value: "Head of Design",
+      note: "Sole designer and acting PM for the full arc",
+    },
+    {
+      label: "Company",
+      value: "Join",
+      note: "Project management for construction teams",
+    },
+    {
+      label: "Timeline",
+      value: "2 months",
+      note: "Research kickoff to production launch",
+    },
+  ]}
+/>
 
-Join is a project management platform for construction. Think Jira, but for the
-people who build actual buildings. Construction companies, owners, and architects
-use it to collaborate around building plans, manage estimates, and make decisions
-about materials and methods.
+## The problem
 
-I joined as Head of Design, leading a small team while also doing hands-on IC work.
-The company wanted to expand into cost optimization. The original vision was a
-materials marketplace where contractors could browse and compare products. Leadership
-had conviction around this direction, and engineering was ready to build.
+<Impact>
+  Estimators were losing six figures per project to material substitutions
+  they didn't know existed.
+</Impact>
 
-My job was to validate the concept with users and design the experience.
+Construction estimators lose money they don't know about. A less
+experienced estimator specs a finish at full cost. An alternate would
+work for half. The gap is institutional knowledge, and it compounds
+across every project and every estimator.
 
-## The challenge
+Leadership wanted to solve this with a materials marketplace. My job was
+to pressure-test the concept before we built anything.
 
-Construction estimators lose money they don't even know they're losing. A less
-experienced estimator might spec terrazzo flooring at $2.9M without knowing that
-an alternate finish achieves the same result for a fraction of the cost. That
-knowledge gap compounds across every project and every estimator in the organization.
+## The insight
 
-The instinct was to solve this with a marketplace: give estimators a catalog of
-materials to browse and compare. But there was a problem with that framing that
-I needed to pressure-test before the team committed engineering resources to it.
+<Impact>
+  Customer research showed estimators didn't need a marketplace. They
+  needed the knowledge gap closed from inside their current workflow.
+</Impact>
 
-## Research and the pivot
+Estimators don't have time to browse catalogs. They don't know what to
+search for in the first place. What they need is a tool that surfaces
+the options they'd never thought to look for, directly inside the
+workflow they already trust.
 
-I ran customer interviews and direct observation sessions with estimators over two
-weeks. The goal was to validate the marketplace concept and understand how estimators
-actually make material decisions today.
+<PivotCard
+  summary="From a materials marketplace to an LLM recommendation engine"
+  cause="Estimators don't browse. The real gap is institutional knowledge."
+  result="Shipped in 2 months. Customer saved $500K in month one."
+/>
 
-What I found reframed the entire product direction.
-
-<Callout label="The research pivot">
-  Estimators didn't need a place to browse. They didn't have time for that, and
-  they didn't know what to search for in the first place. The real gap was
-  institutional knowledge: what materials exist, what substitutes are viable, and
-  what other estimators at the company have used before. They needed a tool that
-  surfaced what they didn't know to look for, directly inside the workflow they
-  already trusted.
-</Callout>
-
-I brought these findings to the VP of Product and the CEO. The conversation shifted
-from "let's build a marketplace" to "let's build a recommendation engine." Instead
-of asking users to browse, we'd push relevant suggestions to them based on what was
-already in their project estimate.
-
-This was a significant change in direction. The marketplace approach would have
-required building supplier integrations, pricing feeds, and a transactional layer.
-The recommendation approach was lighter, faster to ship, and more directly tied to
-the user's actual workflow. It also opened the door to LLM-powered intelligence,
-which became the core of the product.
+Three leaders had bought into the marketplace direction, and engineering
+was already scoped against it. I made the case to the VP of Partnerships
+first because her scope was most affected. Once she moved, the CEO and
+Head of Product Development followed. The evidence carried the move, not
+the argument.
 
 ## The solution
 
-Join Ideas surfaces AI-generated suggestions as contextual carousels, ranked by
-cost-saving potential and scoped to the specific project. The system scans an
-estimator's line items and matches them against a knowledge base of materials,
-methods, and alternatives curated by a dedicated materials researcher.
+<Impact>
+  Three design decisions kept the human as final decision-maker while the
+  LLM did the research.
+</Impact>
 
-<FullBleedImage src={joinIdeas02} alt="Join Ideas browsing page showing suggestion carousels organized by source: items found in the project estimate and items commonly considered at the 75% construction drawing stage" />
+Join Ideas surfaces AI-generated suggestions as contextual carousels,
+ranked by cost-saving potential. The interesting design problem isn't
+the carousels. It's what to do when the LLM is wrong. These are
+decisions that shape real buildings where real people live and work.
 
-Two carousel groupings anchor the experience. "Found in your estimate" shows
-suggestions triggered by specific line items in the current project. "Often
-considered" surfaces materials that other estimators frequently use at this stage
-of construction. Both rank by potential savings, so the highest-value opportunities
-surface first.
+<FullBleedImage
+  src={joinIdeas02}
+  alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
+/>
 
-Each suggestion card shows the material name, the dollar amount at stake in the
-project, and the relevant construction classification codes (UniFormat and
-MasterFormat). Estimators told us these codes were essential for trust. Without
-them, they wouldn't take a suggestion seriously.
+{/* [VISUAL: Motion artifact needed. 15-30 second screen recording of the
+    core Join Ideas flow: carousel scroll, card click, detail view with
+    cost comparison, then "Add Idea to Project." Convert via
+    scripts/convert-video.sh to MP4 + GIF fallback. Drop as a
+    <VideoPlayer> here. Priority: P0. Awaits Ari's screen recording. */}
 
-<FullBleedImage src={joinIdeas04} alt="Three Join Ideas suggestion cards showing alternate materials with cost data and classification codes" />
+### Three decisions, ranked by impact
 
-Clicking into a suggestion reveals the full detail view: an overview of the
-material, its characteristics, advantages and disadvantages, and a cost comparison
-against alternatives. The "Add Idea to Project" action converts a suggestion into
-a formal line item that flows into the estimate, gets presented to the owner, and
-if approved, ends up in the actual building drawings and plans.
+**1. A human curation layer.** A materials researcher at Join validates
+every LLM suggestion before it surfaces to estimators. The LLM is a
+first-draft engine, not the source of truth. This was the single most
+important decision. It made the system trustworthy on day one, even
+while the LLM was imperfect.
 
-<FullBleedImage src={joinIdeas03} alt="Detail view of an idea for Ember-Resistant Vents showing overview, characteristics, advantages, disadvantages, and a cost comparison chart" />
+**2. Provenance by classification code.** Each card shows UniFormat and
+MasterFormat codes, the industry's standard taxonomy. Estimators told
+us the codes were non-negotiable for trust. Without them, they wouldn't
+take a suggestion seriously.
 
-These decisions affect real structures where people live and work. A wrong
-recommendation isn't just a UX problem; it's a liability. That constraint shaped
-every design decision: the transparency of the AI, the curation layer, the
-classification codes, and the explicit approval workflow before anything hits the
-building plans.
+<FullBleedImage
+  src={joinIdeas04}
+  alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
+/>
 
-## What I chose not to build
+**3. Forced side-by-side cost comparison.** Clicking a suggestion opens
+a required comparison view. Every recommendation has to be weighed
+against alternatives before an estimator can accept it. The model
+suggests. The human decides.
 
-Two features came up repeatedly in research that I intentionally scoped out of V1.
+<FullBleedImage
+  src={joinIdeas03}
+  alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart against alternatives"
+/>
 
-**Supplier integration.** Estimators wanted real-time pricing from suppliers. This
-was the marketplace concept resurfacing. I argued against it for launch because it
-would have tripled the engineering timeline and the recommendation engine delivered
-value without it. We designed the architecture to support pricing later, but didn't
-let it block the first release.
+Nothing gets auto-applied. The "Add Idea to Project" action sends a
+suggestion into the estimate only on explicit approval, and from there
+it flows to the owner and into the actual building drawings.
 
-**Peer benchmarking.** Some users wanted to see how their estimates compared to
-similar projects at other companies. The data existed, but surfacing cross-company
-comparisons raised confidentiality concerns that we weren't ready to solve. I flagged
-it as a fast-follow after we had established data governance policies with the
-customer success team.
+### What I chose not to build
 
-## Impact
+**Supplier integration.** Real-time pricing would have tripled the
+engineering timeline. The recommendation engine delivered value without
+it. The architecture supports pricing later.
 
-Join Ideas cut decision-making time by 50%. Estimators who previously spent hours
-researching alternates and chasing down institutional knowledge could now get
-relevant, project-specific suggestions in seconds. The time saved wasn't just
-convenience; it meant estimators could evaluate more options per project, which
-directly translated to better cost outcomes for their clients.
+**Peer benchmarking.** Cross-company comparisons raised confidentiality
+concerns we weren't ready to solve. I flagged it as a fast-follow once
+data governance was in place.
 
-With real money on the line, opacity wasn't an option. I designed an AI transparency
-report so users always understand how their project data is used and whether it
-contributes to suggestions for others. Trust was a prerequisite, not a feature.
+## The outcome
 
-## How I worked
+<Impact>
+  $500K saved for one customer in month one. Decisions 50% faster across
+  the product. Two months from kickoff to launch.
+</Impact>
 
-I operated as the sole designer and acted as PM for this project. I ran the research,
-synthesized the findings, presented the pivot recommendation to leadership, designed
-the full experience, and worked directly with engineering through implementation.
+Within 30 days of rollout, one enterprise customer saved $500K on their
+first project estimate. Join measured the delta by comparing original
+line items against the ones swapped via accepted Ideas suggestions. That
+wasn't a prediction. It was money the customer would have spent and
+didn't.
 
-The timeline was aggressive: two months from research kickoff to production launch.
-I used AI-coded prototypes to validate interaction patterns against real data before
-engineering committed to implementation, which let us move faster without cutting
-corners on the design.
+Across the product, decision-making time dropped by 50%. Estimators who
+previously spent hours researching alternates could now get relevant,
+project-specific suggestions in seconds.
 
-## Leadership and collaboration
+## How the project ran
 
-The biggest leadership challenge wasn't the design itself. It was navigating the
-pivot. The company had already committed to a marketplace direction, and I was the
-person saying the research pointed somewhere else. I made the case by grounding the
-recommendation in user evidence, not personal preference, and by showing that the
-new direction was both cheaper to build and closer to the problem users actually
-described.
+<Impact>
+  AI-coded prototypes carried the pivot conversation. Two junior
+  designers left the project running research independently.
+</Impact>
 
-I also used this project to level up the design team. Two junior product designers
-were watching how I ran this process. I structured the research so they could observe
-interviews, participate in synthesis, and see how findings translated into design
-decisions. By the end of the project, both were running their own research initiatives
-independently.
+I built AI-coded prototypes against real LLM responses before engineering
+committed resources. Not a mockup. A working thing leadership could try.
+That artifact did more for the pivot conversation than any deck.
 
-## Reflection
+I also used the project to level up the team. Two junior designers at
+Join sat in on interviews and watched findings become design decisions.
+By the end, both were running their own research independently.
 
-If I were doing this again, I'd invest more time in the curation workflow. The
-materials researcher who validates suggestions is a bottleneck, and as the suggestion
-database grows, that role won't scale. I started sketching an admin interface for
-curation but deprioritized it for launch. That's the right call for shipping fast,
-but the operational cost of curation is the thing that will determine whether Ideas
-works at 10x the current scale.
+<Lessons
+  lessons={[
+    "Lead pivots with user evidence, not personal conviction.",
+    "In AI products, the human curation loop is the real product.",
+    "Descope V1 aggressively to ship fast.",
+  ]}
+/>
 
-I'd also run a more structured pilot. The initial rollout gave us strong adoption
-signals, but I would have liked a smaller group first where we could do longitudinal
-observation: watching the same estimators use Ideas across multiple projects over
-time, not just measuring early engagement in the first weeks.
+<details>
+  <summary><strong>Research details and longer reflection</strong></summary>
+
+**Methodology.** Intensive interviews with a small cohort of three to
+five key customers over two weeks, followed by a beta release to
+reference customers to validate the direction before general
+availability.
+
+**The curation bottleneck.** The materials researcher who validates
+suggestions is a real bottleneck. At 10x the current volume, that role
+won't keep up. I sketched an admin interface for curation but
+deprioritized it for launch. That was the right call for shipping fast.
+The operational cost of curation is the thing that will determine
+whether Join Ideas scales.
+
+**The pilot I'd run next time.** The initial rollout gave us strong
+adoption signals, but watching the same estimators use Join Ideas
+across multiple projects over weeks and months would have sharpened
+the view of how the tool affects estimator judgment over time.
+
+</details>

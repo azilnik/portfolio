@@ -1,0 +1,102 @@
+---
+/**
+ * MetaCards — a row of labeled mini-cards for case study metadata.
+ *
+ * Use this at the top of a case study body to convert the minimal
+ * eyebrow metadata (industry / company / role) into a richer set of
+ * scannable mini-cards with a small label, a main value, and a one-line
+ * impact-oriented note.
+ *
+ * Each card is structured as three lines so a 10-second scanner can
+ * absorb role, context, and impact angle without reading prose.
+ *
+ * Accepts a `cards` prop rather than a slot so the content is
+ * automation-friendly (machine-readable data, not nested JSX).
+ *
+ * Usage in .mdx:
+ *   <MetaCards cards={[
+ *     { label: "Role", value: "Head of Design", note: "Sole designer + acting PM" },
+ *     { label: "Company", value: "Join", note: "Jira for construction teams" },
+ *     { label: "Timeline", value: "2 months", note: "Research to production launch" }
+ *   ]} />
+ */
+
+interface Card {
+  /** Small uppercase label — e.g. "ROLE", "COMPANY", "TIMELINE". */
+  label: string;
+  /** Main value — the headline answer for this card. */
+  value: string;
+  /** Short one-line explanation or impact note beneath the value. */
+  note: string;
+}
+
+interface Props {
+  cards: Card[];
+}
+
+const { cards } = Astro.props;
+---
+
+<aside
+  class="meta-cards"
+  style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--theme-space-2);
+    margin-top: var(--theme-space-4);
+    margin-bottom: var(--theme-space-5);
+  "
+>
+  {cards.map((card) => (
+    <div
+      class="meta-card"
+      style="
+        padding: var(--theme-space-3);
+        background-color: var(--theme-surface);
+        border: 1px solid var(--theme-border);
+        border-radius: var(--theme-radius-lg);
+      "
+    >
+      {/* Small uppercase label — eyebrow metadata for the card. */}
+      <p
+        class="meta-card-label"
+        style="
+          margin: 0;
+          font-size: var(--theme-text-xs);
+          font-weight: var(--theme-weight-semibold);
+          text-transform: uppercase;
+          letter-spacing: var(--theme-tracking-wider);
+          color: var(--theme-text-tertiary);
+        "
+      >
+        {card.label}
+      </p>
+      {/* Main value — the headline answer. Uses the heading font so the
+          card reads as a small structured datum rather than body prose. */}
+      <p
+        class="meta-card-value font-heading"
+        style="
+          margin: var(--theme-space-1) 0 0 0;
+          font-size: var(--theme-text-xl);
+          font-weight: var(--theme-weight-heading);
+          line-height: var(--theme-leading-tight);
+          color: var(--theme-text-primary);
+        "
+      >
+        {card.value}
+      </p>
+      {/* Impact-oriented note — one line that adds context. */}
+      <p
+        class="meta-card-note"
+        style="
+          margin: var(--theme-space-1) 0 0 0;
+          font-size: var(--theme-text-sm);
+          line-height: var(--theme-leading-snug);
+          color: var(--theme-text-secondary);
+        "
+      >
+        {card.note}
+      </p>
+    </div>
+  ))}
+</aside>

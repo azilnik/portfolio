@@ -3,9 +3,12 @@
  * WorkSection — featured case studies on the homepage.
  *
  * Shows the 3 featured case studies as cards, sorted by sortOrder.
- * Previously this section grouped case studies under employer blocks,
- * but with 3 focused case studies (including a side project), a flat
- * list of cards is cleaner and gives equal weight to each piece.
+ * With 3 focused case studies (including a side project), a flat list
+ * of cards is cleaner than employer-grouped sub-sections and gives each
+ * piece equal weight.
+ *
+ * Spacing sits on the baseline grid so this section shares the same
+ * rhythm as the rest of the home page.
  */
 import { getCollection } from "astro:content";
 import CaseStudyCard from "../work/CaseStudyCard.astro";
@@ -15,25 +18,64 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
-<section id="work" class="mx-auto max-w-6xl px-6 py-20">
-  <h2
-    class="mb-4 font-heading text-3xl font-bold md:text-4xl"
-    style="color: var(--theme-text-primary);"
+<section
+  id="work"
+  class="mx-auto px-6"
+  style="
+    max-width: var(--theme-content-width);
+    padding-top: var(--theme-space-7);
+    padding-bottom: var(--theme-space-7);
+  "
+>
+  {/* Section eyebrow — small uppercase label that anchors the section
+      without stealing weight from the case study cards. */}
+  <p
+    class="text-xs font-semibold uppercase"
+    style="
+      color: var(--theme-text-tertiary);
+      letter-spacing: var(--theme-tracking-wider);
+      margin-bottom: var(--theme-space-2);
+    "
   >
     Featured work
-  </h2>
-  <p class="mb-12 text-lg" style="color: var(--theme-text-secondary);">
-    Three projects that show how I think, lead, and build.
   </p>
 
-  {/* Case study grid — responsive, 1 col on mobile, 2 on tablet, 3 on desktop */}
+  <h2
+    class="font-heading"
+    style="
+      color: var(--theme-text-primary);
+      font-weight: var(--theme-weight-heading);
+      letter-spacing: var(--theme-tracking-tight);
+      line-height: var(--theme-leading-tight);
+      font-size: var(--theme-text-4xl);
+      max-width: 22ch;
+    "
+  >
+    Three projects that show how I think, lead, and build.
+  </h2>
+
+  {/* Case study grid — 1 col mobile, 2 tablet, 3 desktop.
+      gap sized to the baseline grid so the cards feel related. */}
   {allWork.length > 0 ? (
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      style="
+        gap: var(--theme-space-4);
+        margin-top: var(--theme-space-5);
+      "
+    >
       {allWork.map((study) => (
         <CaseStudyCard study={study} />
       ))}
     </div>
   ) : (
-    <p style="color: var(--theme-text-tertiary);">Case studies coming soon.</p>
+    <p
+      style="
+        color: var(--theme-text-tertiary);
+        margin-top: var(--theme-space-5);
+      "
+    >
+      Case studies coming soon.
+    </p>
   )}
 </section>

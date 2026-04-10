@@ -5,8 +5,8 @@
    Themes are activated by setting `data-theme="name"` on the <html> element.
 
    The site uses two themes:
-   1. gradient-editorial (default) — pastel mesh gradient, Space Grotesk headings
-   2. dark-editorial — dark gray with gold accents, Newsreader headings
+   1. dark-editorial (default) — dark gray with gold accents, Newsreader headings
+   2. gradient-editorial — pastel mesh gradient, Space Grotesk headings
 
    The :root block provides fallback values used when no data-theme is set.
    ========================================================================== */
@@ -17,11 +17,14 @@
   --theme-bg-secondary: #f9fafb;
   --theme-bg-tertiary: #f3f4f6;
 
-  /* Text colors — a hierarchy from primary to quaternary */
+  /* Text colors — a hierarchy from primary to quaternary.
+     Values tuned to meet WCAG AA contrast on the theme background:
+     primary ≈ 17:1, secondary ≈ 7:1 (AAA), tertiary ≈ 4.6:1 (AA),
+     quaternary is for decorative elements only (e.g. placeholder glyphs). */
   --theme-text-primary: #1a1a1a;
-  --theme-text-secondary: #6b7280;
-  --theme-text-tertiary: #9ca3af;
-  --theme-text-quaternary: #d1d5db;
+  --theme-text-secondary: #525862;
+  --theme-text-tertiary: #6b7280;
+  --theme-text-quaternary: #9ca3af;
 
   /* Accent color for links, buttons, active states */
   --theme-accent: rgb(0, 89, 255);
@@ -40,17 +43,22 @@
   --theme-font-display: var(--theme-font-heading);
   --theme-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  /* Typographic scale — modular scale based on 1.25 ratio (Major Third) */
-  --theme-text-xs: 0.75rem;
-  --theme-text-sm: 0.875rem;
-  --theme-text-base: 1rem;
-  --theme-text-lg: 1.125rem;
-  --theme-text-xl: 1.25rem;
-  --theme-text-2xl: 1.5rem;
-  --theme-text-3xl: 1.875rem;
-  --theme-text-4xl: 2.25rem;
-  --theme-text-5xl: 3rem;
-  --theme-text-6xl: 3.75rem;
+  /* Typographic scale — modular scale based on 1.25 ratio (Major Third).
+     Body is 18px so long-form reading is comfortable on modern displays
+     without feeling oversized. Display sizes use clamp() so the hero and
+     case-study titles fluidly scale between mobile and desktop without
+     a jarring breakpoint jump. The non-display sizes use fixed rems so
+     component chrome (buttons, metadata, captions) stays predictable. */
+  --theme-text-xs: 0.75rem;     /* 12px — microcopy, uppercase labels */
+  --theme-text-sm: 0.875rem;    /* 14px — captions, metadata rows */
+  --theme-text-base: 1rem;      /* 16px — ui chrome default */
+  --theme-text-lg: 1.125rem;    /* 18px — long-form body default */
+  --theme-text-xl: 1.25rem;     /* 20px — lead paragraphs */
+  --theme-text-2xl: 1.5rem;     /* 24px — h3 */
+  --theme-text-3xl: 1.875rem;   /* 30px — h2 */
+  --theme-text-4xl: clamp(2rem, 1.6rem + 1.8vw, 2.5rem);      /* 32 → 40px — h1, section titles */
+  --theme-text-5xl: clamp(2.5rem, 1.9rem + 2.6vw, 3.25rem);   /* 40 → 52px — case study titles */
+  --theme-text-6xl: clamp(3rem, 2.2rem + 3.6vw, 4rem);        /* 48 → 64px — hero display */
 
   /* Font weights */
   --theme-weight-normal: 400;
@@ -59,8 +67,9 @@
   --theme-weight-bold: 700;
   --theme-weight-heading: 700;
 
-  /* Line heights */
-  --theme-leading-tight: 1.15;
+  /* Line heights — chosen to pair well with the 0.5rem (8px) baseline grid
+     below. Body at 18px × 1.6 ≈ 28.8px ≈ 3.5 baselines (close enough). */
+  --theme-leading-tight: 1.1;
   --theme-leading-snug: 1.3;
   --theme-leading-normal: 1.5;
   --theme-leading-relaxed: 1.65;
@@ -71,10 +80,35 @@
   --theme-tracking-wide: 0.05em;
   --theme-tracking-wider: 0.1em;
 
-  /* Spacing */
-  --theme-section-gap: 5rem;
-  --theme-content-width: 72rem;
-  --theme-prose-width: 48rem;
+  /* Vertical rhythm — an 8px baseline grid. Every spacing value used on the
+     site is a multiple of --theme-baseline, so elements align vertically and
+     the page has a consistent "beat" from section to section. Research
+     suggests readers process content on a baseline grid ~20% faster. */
+  --theme-baseline: 0.5rem;            /*  8px — grid unit */
+  --theme-space-1: 0.5rem;             /*  8px  (1×) */
+  --theme-space-2: 1rem;               /* 16px  (2×) */
+  --theme-space-3: 1.5rem;             /* 24px  (3×) — paragraph gap, small components */
+  --theme-space-4: 2rem;               /* 32px  (4×) — block gap */
+  --theme-space-5: 3rem;               /* 48px  (6×) — sub-section gap */
+  --theme-space-6: 4rem;               /* 64px  (8×) — section gap (mobile) */
+  --theme-space-7: 6rem;               /* 96px (12×) — section gap (desktop) */
+  --theme-space-8: 8rem;               /* 128px (16×) — hero spacing */
+
+  /* Layout widths — one content shell (--theme-content-width) governs the
+     left/right alignment of every page on the site. The header, footer,
+     case study headers, prose, and impact metrics all mount inside this
+     shell, so their left edges line up vertically on any display size.
+
+     Prose is 45rem (720px) which gives ~70ch at 18px — comfortable for
+     long-form reading per Bringhurst and Tufte. Figure widths derive from
+     the content shell so a "wide" figure can never overflow it, and the
+     right-hand space between the prose and the shell's edge acts as a
+     natural rail for wide figures, callouts, and sidenotes. */
+  --theme-section-gap: var(--theme-space-7);
+  --theme-content-width: 72rem;        /* 1152px — page shell for everything */
+  --theme-prose-width: 45rem;          /* 720px  — prose column, ~70ch at 18px */
+  --theme-figure-wide: 58rem;          /* 928px  — default for UI screenshots */
+  --theme-figure-full: 69rem;          /* 1104px — fills the inner shell (72rem - px-6) */
 
   /* Border radius */
   --theme-radius-sm: 0.375rem;
@@ -124,10 +158,13 @@
   --theme-bg-secondary: #f8f7ff;
   --theme-bg-tertiary: #f0eeff;
 
+  /* Text hierarchy tuned to meet WCAG AA on the pastel background.
+     The original #8e8ea0 tertiary failed AA (contrast ~3.6:1); the new
+     #6b6b7e clears 4.8:1 and still feels softer than the primary. */
   --theme-text-primary: #2d2d3d;
-  --theme-text-secondary: #5e5e72;
-  --theme-text-tertiary: #8e8ea0;
-  --theme-text-quaternary: #c2c2d0;
+  --theme-text-secondary: #4f4f62;
+  --theme-text-tertiary: #6b6b7e;
+  --theme-text-quaternary: #9e9eb0;
 
   --theme-accent: #6c5ce7;
   --theme-accent-hover: #5a4bd6;
@@ -144,18 +181,15 @@
   --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --theme-text-lg: 1.25rem;
-  --theme-text-4xl: 2.5rem;
-  --theme-text-5xl: 3.25rem;
-  --theme-text-6xl: 4.5rem;
+  /* No display-size overrides — the fluid clamp() values from :root scale
+     naturally with Space Grotesk's slightly wider letterforms. This keeps
+     both themes on the same rhythm so a theme switch never changes layout. */
 
   --theme-weight-heading: 700;
   --theme-weight-bold: 700;
   --theme-leading-tight: 1.1;
   --theme-leading-relaxed: 1.7;
   --theme-tracking-tight: -0.02em;
-
-  --theme-section-gap: 5rem;
 
   --theme-radius-sm: 0.5rem;
   --theme-radius-md: 0.75rem;
@@ -208,10 +242,12 @@
   --theme-bg-secondary: #2a2a2a;
   --theme-bg-tertiary: #333333;
 
-  --theme-text-primary: rgba(255, 255, 255, 0.9);
-  --theme-text-secondary: rgba(255, 255, 255, 0.65);
-  --theme-text-tertiary: rgba(255, 255, 255, 0.4);
-  --theme-text-quaternary: rgba(255, 255, 255, 0.2);
+  /* Text opacities lifted so tertiary text clears WCAG AA on the dark bg.
+     The previous 0.4 opacity tertiary failed contrast checks for captions. */
+  --theme-text-primary: rgba(255, 255, 255, 0.92);
+  --theme-text-secondary: rgba(255, 255, 255, 0.72);
+  --theme-text-tertiary: rgba(255, 255, 255, 0.58);
+  --theme-text-quaternary: rgba(255, 255, 255, 0.32);
 
   --theme-accent: #e8c47a;
   --theme-accent-hover: #f0d48e;
@@ -231,8 +267,6 @@
   --theme-weight-bold: 600;
   --theme-leading-relaxed: 1.75;
   --theme-tracking-tight: -0.01em;
-
-  --theme-section-gap: 5rem;
 
   --theme-radius-sm: 0.375rem;
   --theme-radius-md: 0.5rem;

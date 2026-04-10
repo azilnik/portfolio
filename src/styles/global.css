@@ -69,6 +69,14 @@
   /* Brand accent color — the signature blue used for links and CTAs */
   --color-accent: rgb(0, 89, 255);
   --color-accent-hover: rgb(0, 70, 210);
+
+  /* Expose the baseline-grid spacing scale as Tailwind utilities so we can
+     write `py-section` / `py-section-lg` / `gap-baseline` etc. everywhere
+     instead of reaching for arbitrary values. Keeps vertical rhythm
+     consistent from page to page. */
+  --spacing-baseline: var(--theme-baseline);
+  --spacing-section: var(--theme-space-6);
+  --spacing-section-lg: var(--theme-space-7);
 }
 
 /* --------------------------------------------------------------------------
@@ -90,9 +98,17 @@
     font-family: var(--theme-font-body);
     color: var(--theme-text-primary);
     background-color: var(--theme-bg);
+    font-size: var(--theme-text-base);
+    line-height: var(--theme-leading-normal);
+    /* Enable OpenType features for Inter: contextual alternates, tabular
+       figures in tables, and stylistic set 01 (a nicer single-story "a"). */
+    font-feature-settings: "cv11", "ss01", "calt";
     /* Smooth color transitions when switching themes */
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Theme-aware image treatment inside prose/MDX content */
@@ -101,15 +117,35 @@
     box-shadow: var(--theme-image-shadow);
     border: var(--theme-image-border);
   }
+
+  /* Accessible focus ring — visible only when keyboard-navigating, so it
+     doesn't distract mouse users but still meets WCAG 2.4.7 for focus. */
+  :focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Remove default focus for mouse users, keep it for keyboard. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
    Theme-aware prose overrides
 
-   Tailwind's @tailwindcss/typography (prose) uses hardcoded gray colors.
-   These overrides make prose content respond to the active theme so that
-   headings, body text, links, blockquotes, and horizontal rules all use
-   the correct theme colors.
+   Tailwind's @tailwindcss/typography (prose) uses hardcoded gray colors and
+   spacing that doesn't sit on our 8px baseline grid. These overrides make
+   prose content respond to the active theme AND aligns vertical spacing to
+   the baseline. The result is a consistent "beat" through case studies.
+
+   Key targets (body at 18px × 1.6 ≈ 28.8px line-height, ~3.5 baselines):
+     - Paragraph gap:    1.5rem (24px, 3 baselines)
+     - h2 top:           4rem  (64px, 8 baselines) — section break
+     - h2 bottom:        1rem  (16px, 2 baselines) — tight to first p
+     - h3 top:           2.5rem (40px, 5 baselines)
+     - h3 bottom:        0.75rem (12px) — headings hug the content below
    -------------------------------------------------------------------------- */
 
 .prose {
@@ -129,14 +165,87 @@
   --tw-prose-th-borders: var(--theme-border-strong);
   --tw-prose-td-borders: var(--theme-border);
   color: var(--theme-text-secondary);
+
+  /* Body text sits at 18px / 1.65. Keep the measure inside ~65ch so lines
+     don't outgrow the comfortable reading width identified by print
+     typographers (Bringhurst, Tufte).
+
+     The prose column centers inside the page's content shell. This matters
+     on wide displays: earlier the prose was anchored to the shell's left
+     edge, which made the title, lede, and hero read as "shifted left" under
+     the site header's nav. Centering puts the reading axis under the
+     header's visual midpoint so the whole page feels balanced. Wide and
+     full figures still break out of the prose column via negative margins
+     so they're wider than the text but stay centered on the same axis. */
+  font-size: var(--theme-text-lg);
+  line-height: var(--theme-leading-relaxed);
+  max-width: var(--theme-prose-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Make prose headings use the theme heading font and weight */
+/* Paragraph spacing — one "baseline × 3" gap between paragraphs. */
+.prose :where(p) {
+  margin-top: 0;
+  margin-bottom: var(--theme-space-3);
+}
+
+.prose :where(p):last-child {
+  margin-bottom: 0;
+}
+
+/* Heading type scale & weight. Prose headings use the theme heading font,
+   not the body font, so they keep their personality across themes. */
 .prose :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--theme-font-heading);
   font-weight: var(--theme-weight-heading);
   color: var(--theme-prose-heading-color);
   letter-spacing: var(--theme-tracking-tight);
+  line-height: var(--theme-leading-tight);
+}
+
+/* h2 — section divider. Big top gap so a new "##" feels like a new chapter;
+   small bottom gap so the heading hugs the paragraph below it (tight/loose
+   pairing is a core typography principle — things that belong together
+   should sit closer than things that don't). */
+.prose :where(h2) {
+  font-size: var(--theme-text-3xl);
+  margin-top: var(--theme-space-6);
+  margin-bottom: var(--theme-space-2);
+}
+
+/* First h2 has no top margin — it sits flush under the hero/intro block. */
+.prose :where(h2:first-child) {
+  margin-top: 0;
+}
+
+.prose :where(h3) {
+  font-size: var(--theme-text-2xl);
+  margin-top: var(--theme-space-5);
+  margin-bottom: var(--theme-space-2);
+}
+
+.prose :where(h4) {
+  font-size: var(--theme-text-xl);
+  margin-top: var(--theme-space-4);
+  margin-bottom: var(--theme-space-2);
+}
+
+/* Lists — tighten the space between items so bullet lists read as a unit. */
+.prose :where(ul, ol) {
+  margin-top: 0;
+  margin-bottom: var(--theme-space-3);
+  padding-left: var(--theme-space-3);
+}
+
+.prose :where(li) {
+  margin-top: 0;
+  margin-bottom: var(--theme-space-1);
+}
+
+.prose :where(li > p) {
+  margin-top: 0;
+  margin-bottom: var(--theme-space-1);
 }
 
 /* Theme-aware blockquotes — consistent with ImpactMetrics sections */
@@ -144,6 +253,9 @@
   border-left-color: var(--theme-prose-quote-border);
   color: var(--theme-prose-quote-text);
   font-style: normal;
+  margin-top: var(--theme-space-4);
+  margin-bottom: var(--theme-space-4);
+  padding-left: var(--theme-space-3);
 }
 
 .prose :where(a) {
@@ -152,10 +264,115 @@
 
 .prose :where(strong) {
   color: var(--theme-text-primary);
+  font-weight: 600;
 }
 
 .prose :where(hr) {
   border-color: var(--theme-prose-hr-color);
+  margin-top: var(--theme-space-5);
+  margin-bottom: var(--theme-space-5);
+}
+
+/* Figure captions sit tight under the image, small and quiet. */
+.prose :where(figcaption) {
+  font-size: var(--theme-text-sm);
+  line-height: var(--theme-leading-snug);
+  color: var(--theme-text-tertiary);
+  margin-top: var(--theme-space-2);
+  text-align: left;
+}
+
+/* --------------------------------------------------------------------------
+   Figure sizing utilities
+
+   Tufte's principle: figures should sit next to the text that discusses
+   them, not dwarf it. These three classes give us a predictable ladder
+   of figure widths from "inside the prose column" to "full viewport".
+
+   `figure-column` — same width as the prose column, images feel integrated
+                     with the surrounding text. Default for most screenshots.
+   `figure-wide`   — breaks out to ~896px, good for UI screens that need
+                     to show detail without overwhelming the page.
+   `figure-full`   — capped full-bleed at ~1280px. Reserved for the hero
+                     image and rare "wow" moments. Never 100vw — that's
+                     how you end up with 2000px screenshots eating the page.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   Figure widths
+
+   Three ladders: inside the prose column, symmetric breakout to a
+   mid-width, or symmetric breakout to the full content shell. All three
+   stay centered on the prose column's vertical axis so the reader's eye
+   never has to jump left or right as figures come and go.
+
+   The "symmetric breakout" trick works with negative left/right margins:
+   a figure wider than its prose parent (720px) overflows equally into
+   both gutters, keeping its visual center aligned with the prose. On
+   mobile, the prose column expands to 100% and the negative margins
+   collapse, so figures sit flush with the viewport.
+   -------------------------------------------------------------------------- */
+
+@layer components {
+  /* Inside the prose column. Use for small diagrams or inline illustrations
+     that don't need room to breathe past the text. */
+  .figure-column {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--theme-space-5);
+    margin-bottom: var(--theme-space-5);
+    max-width: 100%;
+  }
+
+  /* Mid-width breakout. Used for most UI screenshots in a case study. On
+     mobile it collapses to the viewport width; on desktop it expands to
+     --theme-figure-wide (928px) and breaks symmetrically out of the
+     720px prose column via negative margins. */
+  .figure-wide {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--theme-space-6);
+    margin-bottom: var(--theme-space-6);
+    max-width: 100%;
+  }
+
+  /* Full breakout — extends to the outer content shell's inner width.
+     Reserved for hero-like moments, not routine UI shots. */
+  .figure-full {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--theme-space-6);
+    margin-bottom: var(--theme-space-6);
+    max-width: 100%;
+  }
+}
+
+/* On wide displays, break the "wide" and "full" figures symmetrically out
+   of the prose column so they extend equally into the gutters on both
+   sides. Using negative left/right margins equal to half the extra width
+   keeps the figure centered on the prose axis. We only enable the
+   breakout once there's physically room for it: the trigger point is the
+   content shell width (72rem = 1152px). Below that the figures stay at
+   100% so they don't push past the viewport. */
+@media (min-width: 64rem) {
+  .prose .figure-wide {
+    width: var(--theme-figure-wide);
+    max-width: var(--theme-figure-wide);
+    /* (928px - 720px) / 2 = 104px on each side */
+    margin-left: calc((var(--theme-prose-width) - var(--theme-figure-wide)) / 2);
+    margin-right: calc((var(--theme-prose-width) - var(--theme-figure-wide)) / 2);
+  }
+
+  .prose .figure-full {
+    width: var(--theme-figure-full);
+    max-width: var(--theme-figure-full);
+    /* (1104px - 720px) / 2 = 192px on each side */
+    margin-left: calc((var(--theme-prose-width) - var(--theme-figure-full)) / 2);
+    margin-right: calc((var(--theme-prose-width) - var(--theme-figure-full)) / 2);
+  }
 }
 
 /* --------------------------------------------------------------------------

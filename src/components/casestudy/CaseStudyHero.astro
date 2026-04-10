@@ -1,9 +1,15 @@
 ---
 /**
- * CaseStudyHero — full-width hero image for case study pages.
+ * CaseStudyHero — capped-width hero image for case study pages.
  *
- * Uses Astro's built-in <Image> component for automatic optimization
- * (WebP/AVIF, responsive srcset, lazy loading).
+ * Sized as a 16:9 editorial landscape so it sits with the introductory
+ * paragraph instead of dominating the page. Source screenshots are
+ * usually square or 4:3, so we use `object-fit: cover` to crop into
+ * the 16:9 frame and `object-position` can be overridden per image
+ * if the crop cuts off something important.
+ *
+ * On mobile the frame relaxes to 4:3 so the hero doesn't feel like a
+ * narrow slit on a phone held in portrait.
  */
 import { Image } from "astro:assets";
 
@@ -15,13 +21,32 @@ interface Props {
 const { image, alt } = Astro.props;
 ---
 
-<div class="w-full">
+<div
+  class="case-study-hero w-full overflow-hidden"
+  style="border-radius: var(--theme-image-radius);"
+>
   <Image
     src={image}
     alt={alt}
-    widths={[640, 960, 1280, 1920]}
-    sizes="100vw"
-    class="w-full h-auto object-cover"
+    widths={[720, 960, 1280, 1600]}
+    sizes="(min-width: 1024px) 960px, 100vw"
+    class="w-full h-full object-cover"
+    style="object-position: center top;"
     loading="eager"
   />
 </div>
+
+<style>
+  /* Mobile: 4:3 so the hero isn't a letterbox on phones. */
+  .case-study-hero {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Desktop: 16:9 editorial landscape. Keeps the hero in a calm
+     proportion next to the title block. */
+  @media (min-width: 768px) {
+    .case-study-hero {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

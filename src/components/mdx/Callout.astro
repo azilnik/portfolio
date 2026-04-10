@@ -5,10 +5,11 @@
  * Renders a styled box with an accent left border. Use it in MDX to
  * call attention to key insights, design decisions, or takeaways.
  *
- * Usage in .mdx:
- *   import Callout from "../../components/mdx/Callout.astro";
+ * Sits inside the prose column and uses the theme's baseline-aligned
+ * spacing tokens so the rhythm of the article stays consistent.
  *
- *   <Callout>
+ * Usage in .mdx:
+ *   <Callout label="Key insight">
  *     This is an important insight about the design process.
  *   </Callout>
  */
@@ -22,13 +23,39 @@ const { label } = Astro.props;
 ---
 
 <aside
-  class="my-8 rounded-r-lg border-l-4 p-6"
-  style="border-color: var(--theme-accent); background-color: var(--theme-bg);"
+  class="callout"
+  style="
+    margin-top: var(--theme-space-4);
+    margin-bottom: var(--theme-space-4);
+    padding: var(--theme-space-3) var(--theme-space-4);
+    border-left: 3px solid var(--theme-accent);
+    background-color: var(--theme-accent-subtle);
+    border-radius: 0 var(--theme-radius-md) var(--theme-radius-md) 0;
+  "
 >
   {label && (
-    <p class="mb-2 text-xs font-bold uppercase tracking-wider" style="color: var(--theme-accent);">{label}</p>
+    <p
+      class="mb-2 text-xs font-semibold uppercase"
+      style="color: var(--theme-accent); letter-spacing: var(--theme-tracking-wider);"
+    >
+      {label}
+    </p>
   )}
-  <div class="leading-relaxed" style="color: var(--theme-text-secondary);">
+  <div
+    class="leading-relaxed"
+    style="color: var(--theme-text-primary); font-size: var(--theme-text-lg);"
+  >
     <slot />
   </div>
 </aside>
+
+<style>
+  /* Callout paragraphs need to honor the baseline rhythm but without the
+     default prose `margin-bottom: 1.5rem` that would leave orphan space. */
+  .callout :global(p) {
+    margin: 0;
+  }
+  .callout :global(p + p) {
+    margin-top: var(--theme-space-2);
+  }
+</style>
