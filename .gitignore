@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# obsidian vault settings (personal workspace, not project config)
+.obsidian/
+
+# ephemeral agent output — interview notes, reports, and worktrees are
+# per-run artifacts. The reusable agent definitions, commands, templates,
+# and POV library under .claude/ ARE committed.
+.claude/interviews/
+.claude/reports/
+.claude/worktrees/
+.claude/settings.local.json

@@ -77,14 +77,9 @@
   document.addEventListener("astro:after-swap", initThemeToggle);
 </script>
 
-{/* Inline script to prevent flash of wrong theme — runs before paint */}
-<script is:inline>
-  (function() {
-    var t = localStorage.getItem("portfolio-theme");
-    if (t === "dark-editorial") {
-      document.documentElement.setAttribute("data-theme", "dark-editorial");
-    } else {
-      document.documentElement.setAttribute("data-theme", "gradient-editorial");
-    }
-  })();
-</script>
+{/* NOTE: the inline "no flash" theme resolver script used to live here,
+    but it was moved to BaseLayout.astro's <head> so it runs BEFORE the
+    first paint. Keeping it inside a body-rendered component caused a
+    visible FOUC on pages where localStorage had "gradient-editorial" set,
+    because the browser painted the server default (dark) before the
+    script ran. Do not re-add the resolver here. */}

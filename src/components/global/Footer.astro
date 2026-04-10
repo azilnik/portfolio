@@ -3,26 +3,55 @@
  * Footer — CTA section at the bottom of every page.
  *
  * Includes a "Get in touch" call-to-action and a link back to the
- * work page. Uses theme CSS variables for all colors.
+ * work page. Spacing and type scale come from the baseline-grid theme
+ * tokens so the footer shares rhythm with the rest of the site.
  */
 ---
 
-<footer style="background-color: var(--theme-footer-bg); color: var(--theme-footer-text);">
-  <div class="mx-auto max-w-6xl px-6 py-20 text-center">
-    {/* Main CTA */}
+<footer
+  style="
+    background-color: var(--theme-footer-bg);
+    color: var(--theme-footer-text);
+    margin-top: var(--theme-space-7);
+  "
+>
+  <div
+    class="mx-auto px-6 text-center"
+    style="
+      max-width: var(--theme-content-width);
+      padding-top: var(--theme-space-7);
+      padding-bottom: var(--theme-space-6);
+    "
+  >
+    {/* Section eyebrow */}
     <p
-      class="text-sm font-medium uppercase tracking-widest mb-4"
-      style="color: var(--theme-footer-muted);"
+      class="text-xs font-semibold uppercase"
+      style="
+        color: var(--theme-footer-muted);
+        letter-spacing: var(--theme-tracking-wider);
+        margin-bottom: var(--theme-space-3);
+      "
     >
       Interested in working together?
     </p>
-    <h2 class="font-heading text-4xl font-bold md:text-5xl mb-8">
+
+    <h2
+      class="font-heading"
+      style="
+        font-weight: var(--theme-weight-heading);
+        letter-spacing: var(--theme-tracking-tight);
+        line-height: var(--theme-leading-tight);
+        font-size: var(--theme-text-5xl);
+        margin-bottom: var(--theme-space-5);
+      "
+    >
       Get in touch
     </h2>
-    <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+
+    <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
       <a
         href="mailto:ari@ari.design"
-        class="inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold text-white transition-colors"
+        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white transition-colors"
         style="background-color: var(--theme-accent);"
         data-goatcounter-click="contact-footer"
       >
@@ -30,15 +59,21 @@
       </a>
       <a
         href="/work"
-        class="inline-flex items-center gap-2 rounded-full border px-8 py-3 text-sm font-semibold transition-colors"
-        style="border-color: var(--theme-footer-border); color: var(--theme-footer-text);"
+        class="inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm font-semibold transition-colors"
+        style="border-color: var(--theme-footer-muted); color: var(--theme-footer-text);"
       >
         See my work
       </a>
     </div>
 
-    {/* Copyright */}
-    <p class="mt-16 text-xs" style="color: var(--theme-footer-muted);">
+    {/* Copyright — smaller and quieter, separated by a larger whitespace gap */}
+    <p
+      class="text-xs"
+      style="
+        color: var(--theme-footer-muted);
+        margin-top: var(--theme-space-6);
+      "
+    >
       &copy; {new Date().getFullYear()} Ari Zilnik. All rights reserved.
     </p>
   </div>

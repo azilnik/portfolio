@@ -1,0 +1,1 @@
+../../.claude/agents/mechanical-scan.md

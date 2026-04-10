@@ -1,0 +1,1 @@
+../../.claude/commands/new-case-study.md

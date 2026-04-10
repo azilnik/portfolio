@@ -1,0 +1,89 @@
+---
+/**
+ * Impact — a concise, visually distinct impact statement for the top of
+ * a major section.
+ *
+ * Drop one of these immediately under every section heading (Problem,
+ * Approach, Solution, Outcome, etc.) so a scanner always sees the
+ * one-line takeaway before the supporting prose. This is the component
+ * that operationalizes the "interleave impact throughout the body" rule
+ * rather than saving impact for the very end.
+ *
+ * Visually lighter than Callout and PivotCard on purpose — it needs to
+ * fit as a lead line under a heading without competing with the section
+ * content below it.
+ *
+ * Usage in .mdx:
+ *   <Impact>
+ *     Estimators were losing six-figures per project to missed substitutions.
+ *   </Impact>
+ */
+
+interface Props {
+  /**
+   * Optional label override — defaults to "IMPACT". Override only when
+   * a specific section needs a different word (e.g. "OUTCOME", "INSIGHT").
+   */
+  label?: string;
+}
+
+const { label = "Impact" } = Astro.props;
+---
+
+{/*
+  NOTE: the root element is intentionally <div>, not <p>.
+  MDX wraps paragraph-style children in an implicit <p> element, and a
+  <p> inside a <p> is invalid HTML — the browser auto-closes the outer
+  <p> before the inner one renders, which strips the styled container
+  off the slot content. Keep this as <div>.
+*/}
+<div
+  class="impact-line"
+  role="note"
+  aria-label={`${label}: `}
+  style="
+    display: flex;
+    align-items: flex-start;
+    gap: var(--theme-space-2);
+    margin-top: var(--theme-space-3);
+    margin-bottom: var(--theme-space-4);
+    padding: var(--theme-space-2) 0 var(--theme-space-2) var(--theme-space-3);
+    border-left: 3px solid var(--theme-accent);
+    font-size: var(--theme-text-lg);
+    line-height: var(--theme-leading-snug);
+    color: var(--theme-text-primary);
+    font-weight: var(--theme-weight-medium);
+  "
+>
+  {/* Small uppercase label — signals this is a standout impact line,
+      not body prose. Colored to match the accent border. */}
+  <span
+    aria-hidden="true"
+    style="
+      flex-shrink: 0;
+      font-size: var(--theme-text-xs);
+      font-weight: var(--theme-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--theme-tracking-wider);
+      color: var(--theme-accent);
+      padding-top: 0.25rem;
+    "
+  >
+    {label}
+  </span>
+  <div class="impact-body" style="flex: 1; min-width: 0;">
+    <slot />
+  </div>
+</div>
+
+<style>
+  /* The MDX slot wraps text in a <p>. Strip the prose paragraph margins
+     so the impact line stays tight and doesn't push the next section away
+     from the heading above it. */
+  .impact-body :global(p) {
+    margin: 0;
+  }
+  .impact-body :global(p + p) {
+    margin-top: var(--theme-space-2);
+  }
+</style>

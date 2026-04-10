@@ -4,6 +4,7 @@
  *
  * Shows all non-draft case studies in a 2-column responsive grid.
  * Sorted by the `sortOrder` field in each case study's frontmatter.
+ * Spacing and type scale come from the baseline-grid theme tokens.
  */
 import PageLayout from "../../layouts/PageLayout.astro";
 import CaseStudyCard from "../../components/work/CaseStudyCard.astro";
@@ -14,28 +15,84 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
-<PageLayout title="Work" description="Selected case studies from Ari Zilnik's career as a design leader.">
-  <section class="mx-auto max-w-6xl px-6 py-20">
-    {/* Page header */}
-    <h1
-      class="font-heading text-4xl font-bold md:text-5xl"
-      style="color: var(--theme-text-primary);"
-    >
-      Work
-    </h1>
-    <p class="mt-4 text-lg" style="color: var(--theme-text-secondary);">
-      Three projects that show how I think, lead, and build.
-    </p>
+<PageLayout
+  title="Work"
+  description="Selected case studies from Ari Zilnik's career as a design leader."
+>
+  <section
+    class="mx-auto px-6"
+    style="
+      max-width: var(--theme-content-width);
+      padding-top: var(--theme-space-7);
+      padding-bottom: var(--theme-space-7);
+    "
+  >
+    {/* Page header — editorial treatment with eyebrow + title + lede,
+        mirroring the case study header structure for consistency. The
+        header block is capped to --theme-prose-width and centered inside
+        the shell so the title sits on the same axis as case study titles
+        (under the site header's visual midpoint). The grid below stays
+        full-shell so the cards fill the available horizontal space. */}
+    <div class="mx-auto" style="max-width: var(--theme-prose-width);">
+      <p
+        class="text-xs font-semibold uppercase"
+        style="
+          color: var(--theme-text-tertiary);
+          letter-spacing: var(--theme-tracking-wider);
+          margin-bottom: var(--theme-space-2);
+        "
+      >
+        Case studies
+      </p>
+
+      <h1
+        class="font-heading"
+        style="
+          color: var(--theme-text-primary);
+          font-weight: var(--theme-weight-heading);
+          letter-spacing: var(--theme-tracking-tight);
+          line-height: var(--theme-leading-tight);
+          font-size: var(--theme-text-5xl);
+        "
+      >
+        Work
+      </h1>
+
+      <p
+        style="
+          color: var(--theme-text-secondary);
+          font-size: var(--theme-text-xl);
+          line-height: var(--theme-leading-normal);
+          margin-top: var(--theme-space-3);
+          max-width: 48ch;
+        "
+      >
+        Three projects that show how I think, lead, and build.
+      </p>
+    </div>
 
     {/* Case study grid — 2 columns on desktop, 1 on mobile */}
     {allWork.length > 0 ? (
-      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2"
+        style="
+          gap: var(--theme-space-4);
+          margin-top: var(--theme-space-6);
+        "
+      >
         {allWork.map((study) => (
           <CaseStudyCard study={study} />
         ))}
       </div>
     ) : (
-      <p class="mt-12" style="color: var(--theme-text-tertiary);">Case studies coming soon.</p>
+      <p
+        style="
+          color: var(--theme-text-tertiary);
+          margin-top: var(--theme-space-6);
+        "
+      >
+        Case studies coming soon.
+      </p>
     )}
   </section>
 </PageLayout>

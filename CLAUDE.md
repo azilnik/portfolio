@@ -124,7 +124,11 @@ The schema enforces:
 
 ## MDX Components
 
-Available for use in case study `.mdx` files:
+Available for use in case study `.mdx` files. Visual chrome components
+(`FullBleedImage`, `FullBleedGif`, `VideoPlayer`, `ImageGrid`) display
+media. Structure components (`MetaCards`, `PivotCard`, `Impact`,
+`Lessons`, `Callout`) carry the narrative and take structured props
+for automation-friendly content.
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
@@ -133,6 +137,10 @@ Available for use in case study `.mdx` files:
 | `VideoPlayer` | Autoplay muted looping video with GIF fallback | `src`, `fallback`, `alt`, `caption?` |
 | `ImageGrid` | 2-3 images side-by-side, responsive | `images` (array of {src, alt}), `caption?` |
 | `Callout` | Accent-bordered insight box | `label?` (uppercase header), children via slot |
+| `MetaCards` | Row of labeled mini-cards for role/company/timeline at the top of a case study | `cards` (array of `{ label, value, note }`) |
+| `PivotCard` | One dedicated highlighted block for the case study's pivot moment. Structured as summary + cause + result | `summary`, `cause`, `result` |
+| `Impact` | Concise per-section impact statement. Drop one under each major heading so impact is interleaved throughout the body | `label?` (defaults to "Impact"), children via slot |
+| `Lessons` | Numbered list of 3 actionable lessons. Sits near the end of the body | `lessons` (array of 3 strings), `heading?` |
 
 ## Converting Screen Recordings to Video
 
@@ -145,102 +153,145 @@ Requires FFmpeg: `brew install ffmpeg`
 
 ---
 
-## Writing Guidelines
+## Content Quality System
 
-These rules govern all portfolio copy — case studies, homepage, about page, and metadata.
-They are adapted from the resume-builder's writing style and interview context documents.
+The portfolio has a reusable, agent-driven system for writing and auditing
+case studies. Use it for every new case study and every meaningful revision.
 
-### Voice
+### Single source of truth for voice
 
-- **First person, active voice.** "I designed..." not "Designed..." or "Was responsible for..."
-- **Plain language.** "Like AWS for crypto" is the target register. Concrete analogies
-  over abstract descriptions. Would a non-designer hiring manager understand this on
-  first read?
-- **Confident but not breathless.** State what happened without overselling. No
-  exclamation points, no superlatives needed.
-- **Specific over vague.** Name the thing, explain why it matters, give numbers when
-  they're meaningful.
-- **Varied rhythm.** Mix shorter and longer sentences. Not every sentence should be the
-  same length or structure.
-- **Show the hard parts.** Acknowledge tradeoffs, constraints, and things that didn't
-  go as planned. Robotic positivity where everything is an achievement signals
-  inexperience (or AI-generated text).
+Voice rules, banned words, code contribution framing, canonical project facts,
+and the mechanical scan all live in a single shared file that both the
+resume-builder and the portfolio read:
 
-### Lead with Impact
+**`../resume-builder/voice/portfolio-voice.md`** — canonical voice rules.
 
-Every case study title, TL;DR, and opening sentence should answer: "Why should a
-hiring manager care?" Lead with the business outcome, not the project name or
-design method.
+When the rules here disagree with that file, the shared file wins. Update
+both together when voice rules change.
 
-- GOOD: "How research turned a materials marketplace into an AI tool that delivered
-  $500K in construction savings in 30 days"
+### The 2026 POV library
+
+**`.claude/pov/portfolio-pov-2026.md`** — 34 cited sources on what works
+in senior/staff/principal portfolios in 2026. Includes direct quotes from
+Polly D'Arcy (Wealthsimple), Carl Rivera (Shopify), Katie Dill (Stripe),
+Hannah Hearth (Vercel), and others. Agents cite this file when proposing
+changes. Refresh quarterly.
+
+### The 6 content agents
+
+All live in `.claude/agents/` and are symlinked to `.opencode/agents/` for
+OpenCode compatibility.
+
+| Agent | Purpose |
+|---|---|
+| `case-study-interviewer.md` | Conversational Q&A to gather canonical facts. Surfaces gaps first, sweeps the template arc, writes dated notes to `.claude/interviews/`. Proposes diffs for `interview-context.md`. |
+| `case-study-writer.md` | Drafts the MDX case study from verified interview notes. Reuses existing imports. Inserts `[VISUAL: ...]` placeholders for the visual critic. |
+| `mechanical-scan.md` | Deterministic 12-check scan (em-dashes, banned words, triplets, tense jumps, thematic echoes, unverified facts). Runs first on every draft and every revision. Caps score at 7 on any violation. |
+| `writing-style-audit.md` | Subjective audit across 7 dimensions (AI detection, voice match, business impact lead, conciseness, simplicity, scar authenticity, code contribution framing). |
+| `visual-critic.md` | Inventories visuals, calculates density, proposes P0/P1/P2 visuals with rationale grounded in the POV library. Never mocks up visuals. |
+| `ten-second-test.md` | Simulates the 10-second hiring-manager scan, then runs vibe check through named panelists (Polly, Carl, role-specific HM). |
+
+### The 2 slash commands
+
+Both in `.claude/commands/` with symlinks from `.opencode/commands/`.
+
+- **`/new-case-study {slug}`** — Full pipeline: interview → writer →
+  mechanical scan → style audit → visual critic → 10-second test → build.
+  Supports `--rewrite`, `--new`, `--from-draft`, `--skip-vibe`.
+- **`/revise-case-study {slug}`** — Lighter revision pipeline. Skips the
+  interview unless canonical gaps are detected. Supports `--scan-only`,
+  `--audit-only`, `--visual-only`, `--no-interview`.
+
+### The case study template
+
+**`.claude/templates/case-study-template.mdx`** — canonical structure with
+inline guidance and a writer self-check. Copy it into
+`src/content/work/{slug}.mdx` when starting a new case study.
+
+### Ship thresholds
+
+Every case study must meet all of these to ship:
+
+- Mechanical scan: **PASS**
+- Writing Style Audit: **≥ 8/10**
+- 10-second test: **≥ 8/10**
+- Vibe check: **at least 2 of 3 panelists ≥ 8/10**
+- Visual critic: **all P0 visuals resolved or explicitly waived**
+- `npm run build`: **clean**
+
+---
+
+## Writing Guidelines (summary)
+
+The full rules live in `../resume-builder/voice/portfolio-voice.md`. This
+section is a pointer, not a duplicate. Read the shared file before writing
+any portfolio copy.
+
+### Voice in one paragraph
+
+First person, active voice, paragraph style. Plain language and concrete
+analogies ("Like AWS for crypto"). Confident but not breathless. Specific
+over vague. Varied sentence rhythm. Show the hard parts. Warmth scales by
+surface: resume tightest, cover letter warmer, portfolio prose warmer
+still, about page warmest.
+
+### Lead with impact
+
+Every case study title, description (lede), and opening sentence leads
+with the business outcome. Pyramid principle — conclusion first.
+
+- GOOD: "How research turned a materials marketplace into an AI tool that
+  delivered $500K in construction savings in 30 days"
 - BAD: "Join Ideas: A Case Study in AI-Powered Design"
 
-### Code Contribution Framing (Critical)
+The frontmatter `description` field renders as a pull paragraph under the
+title — it is the visible TL;DR. Treat it as the case study's thesis
+statement, not an SEO meta description.
 
-**Design is the primary skill. Always.** Ari contributes to code, but this must NEVER
-be framed as "designer who also codes" or "full-stack designer." That positioning
-dilutes design credibility.
+### Code contribution framing (critical — never drift)
 
-What code contribution signals:
-- **Technical depth** — Speaks engineering's language, understands constraints
-- **AI coding fluency** — Uses AI tools to build prototypes that derisk decisions
-- **No-titles-as-limitations mindset** — Does whatever it takes to ship great work
+**Design is the primary skill. Always.** Never "designer who also codes"
+or "full-stack designer." Always "AI-coded prototypes to derisk decisions"
+or equivalent. Full rules in the shared voice file section 5.
 
-How to frame:
-- GOOD: "I build AI-coded prototypes to derisk library selection and validate
-  technical feasibility before engineering commits resources"
-- BAD: "I design and ship features full-stack, from research to production code"
-- BAD: "full-stack designer"
+### Banned words (partial list — full list in shared file)
 
-### Banned Words & Patterns
+delve, leverage, utilize, facilitate, spearhead, synergy, streamline (vague),
+holistic, robust, scalable (non-technical), innovative (self-applied),
+seamless, unlock, proven track record, detail-oriented, results-driven,
+self-starter, team player, passionate, thought leader.
 
-These make text sound AI-generated or like resume filler. Flag and replace every time:
+### Structural bans
 
-**AI-signature words:** delve, leverage, utilize, facilitate, spearhead, synergy,
-optimize (vague), elevate, empower, harness, embark, navigate (metaphorical), foster,
-cultivate, streamline (vague), landscape, realm, paradigm, holistic, robust, scalable
-(non-technical), innovative (self-applied), cutting-edge, transformative, game-changer,
-groundbreaking, seamless, unlock (potential/value), drive (impact/results — when vague)
+- No em-dashes (`—` U+2014). Literal character scan before ship.
+- No triplets of adjectives or parallel noun constructions.
+- No 4+ item inline lists.
+- No calling work "complex" — frame as simplifying complexity.
+- No arrow characters in prose.
+- No tense jumps within a paragraph.
+- No time-relative phrases ("yesterday," "last week") without a calibration
+  warning.
 
-**Resume cliches:** proven track record, detail-oriented, results-driven, self-starter,
-team player, passionate (about anything), thought leader, dynamic, strategic thinker,
-cross-functional synergies, wear many hats
+### Framing for senior/player-coach roles
 
-**Structural tells:** Triplets of adjectives ("fast, reliable, and secure"), rhetorical
-questions answered immediately, "Not only X, but also Y," "From X to Y" range flexes,
-"At the intersection of X and Y"
+1. **Business value** — Revenue, retention, efficiency gains with hard
+   numbers.
+2. **Strategic thinking** — Why this problem mattered, what constraints
+   shaped the approach, what you chose NOT to build and why.
+3. **Leadership through influence** — Organizational change, team
+   development, specific cross-functional stakeholders.
+4. **Ownership of outcomes** — Shepherded from research through
+   post-launch impact.
+5. **Executive-ready storytelling** — Scannable, pyramid principle, key
+   metrics visually prominent.
 
-**Other rules:**
-- Never call work "complex" — frame it as simplifying complexity
-- Don't use em-dashes in body copy — use semicolons or periods
-- No arrow characters in prose
+### Design philosophy (weave in, don't list)
 
-### Framing for Senior/Player-Coach Roles
-
-The portfolio targets hybrid IC/leadership roles. Content should demonstrate:
-
-1. **Business value** — Revenue, retention, efficiency gains with hard numbers
-2. **Strategic thinking** — Why this problem mattered, what constraints shaped the
-   approach, what you chose NOT to build and why
-3. **Leadership through influence** — Organizational change driven, team development,
-   cross-functional collaboration with specific stakeholders
-4. **Ownership of outcomes** — Shepherded from research through post-launch impact,
-   not just "handed off to engineering"
-5. **Executive-ready storytelling** — Scannable, pyramid principle (conclusion first),
-   key metrics visually prominent
-
-### Design Philosophy (from interview context)
-
-These are Ari's authentic values. Weave them into content naturally, don't list them:
-
-1. **Business-first mindset.** Cares about making great things, not titles or lanes.
-2. **Servant leader.** Leads by example, stays close to the work, unblocks the team.
-3. **Thrives in ambiguity.** 0-to-1 is where he's most energized. Brings structure
-   to undefined problems.
-4. **Design superpower:** Taking something overwhelming and bringing thoughtful
-   perspective to make people's lives easier.
-5. **Constant learner.** Always on a learning journey. Picks up new tools and domains.
+1. Business-first mindset — cares about making great things, not titles.
+2. Servant leader — leads by example, stays close to the work.
+3. Thrives in ambiguity — 0-to-1 is the energy zone.
+4. Design superpower — simplifying the overwhelming.
+5. Constant learner — picks up new tools and domains.
 
 ---
 
@@ -297,10 +348,10 @@ equal weight — adapt to the project. But every case study must have sections 1
 
 The site uses 2 themes:
 
-1. **`gradient-editorial`** (default) — Pastel mesh gradient background, Space Grotesk
-   headings. Distinctive and premium.
-2. **`dark-editorial`** — Dark gray with gold accents, Newsreader headings. Sophisticated
-   dark mode alternative.
+1. **`dark-editorial`** (default) — Dark gray with gold accents, Newsreader headings.
+   Sophisticated and editorial. This is what first-time visitors see.
+2. **`gradient-editorial`** — Pastel mesh gradient background, Space Grotesk headings.
+   Distinctive light-mode alternative.
 
 Theme selection persists via `localStorage` (key: `portfolio-theme`). A light/dark
 toggle in the header switches between the two.

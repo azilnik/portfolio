@@ -1,0 +1,1 @@
+../../.claude/agents/visual-critic.md

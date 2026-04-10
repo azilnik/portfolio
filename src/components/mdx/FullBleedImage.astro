@@ -1,42 +1,79 @@
 ---
 /**
- * FullBleedImage — breaks out of the prose container to span full viewport width.
+ * FullBleedImage — a figure that sits next to case study prose at one of
+ * three widths. Despite the historical name, the default is NOT full-bleed.
+ * Tufte's figure principle guides the sizing: graphics should sit with the
+ * text that discusses them, not dwarf it.
  *
- * Use this in MDX files when you want an image to stretch edge-to-edge,
- * ignoring the narrow prose column. Uses a CSS "breakout" technique.
+ * `size` prop:
+ *   - "column"        — stays inside the ~720px prose column (small diagrams)
+ *   - "wide" (default) — breaks out to ~960px for most UI screenshots
+ *   - "full"          — capped full-bleed (~1280px max); use sparingly
+ *
+ * We default to "wide" because almost every case-study image is a UI
+ * screenshot that needs more room to stay legible than the prose column
+ * can provide. The "column" size is reserved for small diagrams or
+ * inline illustrations.
+ *
+ * The width classes are defined in src/styles/global.css under the
+ * `@layer components` block.
  *
  * Usage in .mdx:
- *   import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
- *   import myImage from "./images/my-screenshot.png";
- *
- *   <FullBleedImage src={myImage} alt="Description of the image" />
+ *   <FullBleedImage src={myImg} alt="…" />              // wide (default)
+ *   <FullBleedImage src={myImg} alt="…" size="column" /> // small, inline
+ *   <FullBleedImage src={myImg} alt="…" size="full" />   // hero-scale
  */
 import { Image } from "astro:assets";
+
+type FigureSize = "column" | "wide" | "full";
 
 interface Props {
   src: ImageMetadata;
   alt: string;
+  /** Width treatment. Defaults to "wide" — most screenshots benefit from the breakout. */
+  size?: FigureSize;
   /** Optional caption shown below the image. */
   caption?: string;
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, size = "wide", caption } = Astro.props;
+
+// Pick the figure width class defined in global.css.
+const sizeClass = {
+  column: "figure-column",
+  wide: "figure-wide",
+  full: "figure-full",
+}[size];
+
+// Only request the image widths we'll actually render. This stops Sharp
+// from generating huge 1920px variants for figures that will never need them.
+const widthsForSize = {
+  column: [480, 720, 960],
+  wide: [720, 960, 1280, 1600],
+  full: [960, 1280, 1600, 1920],
+}[size];
+
+// `sizes` hint for the browser's responsive image picker.
+const sizesForSize = {
+  column: "(min-width: 768px) 720px, 100vw",
+  wide: "(min-width: 1024px) 960px, 100vw",
+  full: "(min-width: 1440px) 1280px, 100vw",
+}[size];
 ---
 
-{/*
-  CSS breakout trick: `left-1/2 -ml-[50vw] w-screen` centers the element
-  relative to the viewport, breaking out of any parent max-width container.
-*/}
-<figure class="relative left-1/2 -ml-[50vw] w-screen my-12">
+<figure class={sizeClass}>
   <Image
     src={src}
     alt={alt}
-    widths={[640, 960, 1280, 1920]}
-    sizes="100vw"
+    widths={widthsForSize}
+    sizes={sizesForSize}
     class="w-full h-auto"
   />
   {caption && (
-    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm" style="color: var(--theme-text-tertiary);">
+    <figcaption
+      class="mt-3 text-sm leading-snug"
+      style="color: var(--theme-text-tertiary);"
+    >
       {caption}
     </figcaption>
   )}

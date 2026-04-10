@@ -1,33 +1,38 @@
 ---
 /**
- * FullBleedGif — same visual breakout as FullBleedImage, but for animated GIFs.
+ * FullBleedGif — animated GIF variant of FullBleedImage. Uses a plain
+ * <img> tag because Astro's Image component (Sharp) strips animation
+ * frames from GIFs. GIFs must live in `public/videos/`.
  *
- * Astro's <Image> component uses Sharp for optimization, which strips
- * animation frames from GIFs. This component uses a plain <img> tag instead,
- * preserving the animation. GIFs should live in `public/videos/` and the
- * `src` prop should be the path from public root (e.g., "/videos/my-anim.gif").
+ * Supports the same `size` prop as FullBleedImage ("column", "wide",
+ * "full"). The width classes are defined in src/styles/global.css.
  *
  * Usage in .mdx:
- *   import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
- *
- *   <FullBleedGif src="/videos/my-animation.gif" alt="Description" />
+ *   <FullBleedGif src="/videos/my-anim.gif" alt="…" />
+ *   <FullBleedGif src="/videos/my-anim.gif" alt="…" size="wide" />
  */
+
+type FigureSize = "column" | "wide" | "full";
 
 interface Props {
   src: string;
   alt: string;
+  /** Width treatment. Defaults to "column" (stays in the prose column). */
+  size?: FigureSize;
   /** Optional caption shown below the image. */
   caption?: string;
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, size = "column", caption } = Astro.props;
+
+const sizeClass = {
+  column: "figure-column",
+  wide: "figure-wide",
+  full: "figure-full",
+}[size];
 ---
 
-{/*
-  Same CSS breakout trick as FullBleedImage — `left-1/2 -ml-[50vw] w-screen`
-  centers the element relative to the viewport, breaking out of the prose container.
-*/}
-<figure class="relative left-1/2 -ml-[50vw] w-screen my-12">
+<figure class={sizeClass}>
   <img
     src={src}
     alt={alt}
@@ -35,7 +40,10 @@ const { src, alt, caption } = Astro.props;
     loading="lazy"
   />
   {caption && (
-    <figcaption class="mx-auto max-w-3xl px-6 mt-3 text-center text-sm text-gray-400">
+    <figcaption
+      class="mt-3 text-sm leading-snug"
+      style="color: var(--theme-text-tertiary);"
+    >
       {caption}
     </figcaption>
   )}

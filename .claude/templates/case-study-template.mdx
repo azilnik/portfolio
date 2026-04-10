@@ -1,0 +1,283 @@
+---
+# Canonical case study template. Copy this into `src/content/work/{slug}.mdx`
+# and replace the placeholder content. Every field in the frontmatter is
+# enforced by the schema in `src/content.config.ts` — a missing or invalid
+# field will cause a build error.
+#
+# Writing rules: see `../resume-builder/voice/portfolio-voice.md`
+# POV guidance: see `.claude/pov/portfolio-pov-2026.md`
+# Strategy: see `CLAUDE.md`
+title: "{OUTCOME-LEAD TITLE — NOT THE PROJECT NAME}"
+# Examples:
+#   GOOD: "How research turned a materials marketplace into an AI tool
+#          that delivered $500K in construction savings in 30 days"
+#   GOOD: "How rate-of-change detection makes a range hood 10x faster
+#          to respond"
+#   BAD:  "Join Ideas"
+#   BAD:  "A Case Study in AI-Powered Design"
+
+company: "{CANONICAL COMPANY NAME}"
+# Use the canonical name. Join / Blockdaemon / Gradle / Richardson / etc.
+
+role: "{ARI'S ROLE AT THE TIME}"
+# Head of Design | Director of Design | Lead Designer | etc.
+
+industry: "{ONE OR TWO WORDS}"
+# Construction | Fintech, Crypto Infrastructure | Smart Home, Open Source
+
+description: "{THE LEDE — ONE SENTENCE, OUTCOME-FIRST, PYRAMID PRINCIPLE}"
+# This renders as a pull paragraph under the title. It is the visible TL;DR.
+# Lead with the business outcome, not the method or the company.
+#
+# Examples:
+#   GOOD: "Cut customer decision-making time by 50% in 2 months by pivoting
+#          a materials marketplace into an LLM-powered recommendation engine."
+#   GOOD: "Detects cooking activity 10x faster than threshold-based systems
+#          using a rate-of-change insight, for $85 in hardware and zero
+#          subscriptions."
+#   BAD:  "A case study exploring AI-powered design at Join."
+#   BAD:  "My experience designing Join Ideas."
+
+heroImage: "./images/{slug}-01.png"
+thumbnail: "./images/{slug}-01.png"
+thumbnailAlt: "{HONEST ALT TEXT — NOT MARKETING COPY}"
+
+employer: "{ENUM VALUE}"
+# Must be exactly one of:
+#   "join" | "blockdaemon" | "gradle" | "freelance" | "side-project"
+
+sortOrder: 1
+# Lower numbers appear first on listing pages. 1, 2, 3 for featured case
+# studies. Higher for drafts or secondary.
+
+draft: false
+# Set to true to hide from all listing pages while in progress.
+
+metrics:
+  - label: "{WHAT THIS NUMBER MEANS}"
+    value: "{THE NUMBER WITH UNIT, MULTIPLIER, OR TIME}"
+  - label: "{WHAT THIS NUMBER MEANS}"
+    value: "{THE NUMBER WITH UNIT, MULTIPLIER, OR TIME}"
+  - label: "{WHAT THIS NUMBER MEANS}"
+    value: "{THE NUMBER WITH UNIT, MULTIPLIER, OR TIME}"
+# Rules:
+#   - 1 to 3 items (schema enforces 1-3)
+#   - Every `value` must be a real number with a unit (50%), a multiplier
+#     (23x), a time (2 months), or currency ($500K). No qualitative phrases
+#     like "Research-driven pivot" or "Public repo" — those are features, not
+#     metrics.
+#   - Every number must trace to a canonical source: base.yaml,
+#     interview-context.md, or verified interview notes.
+---
+
+{/* MDX imports — use existing image imports when updating a case study;
+    add new ones for new visuals. Image paths are relative to this file. */}
+import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
+import ImageGrid from "../../components/mdx/ImageGrid.astro";
+import Callout from "../../components/mdx/Callout.astro";
+
+import heroShot from "./images/{slug}-01.png";
+import secondShot from "./images/{slug}-02.png";
+import thirdShot from "./images/{slug}-03.png";
+
+{/* -------------------------------------------------------------------------
+    Section 1 — Context & the challenge
+    -------------------------------------------------------------------------
+    - Open with the canonical company opener from
+      ../resume-builder/voice/portfolio-voice.md section 2.
+    - One plain-language sentence about what the company does.
+    - Describe Ari's specific role and the business problem. Name the
+      stakeholders when they matter.
+    - Keep this to 2-3 short paragraphs. Don't spend 6 paragraphs on setup.
+    ------------------------------------------------------------------------- */}
+
+## Context
+
+{CANONICAL OPENER}. {One sentence elaborating the analogy if helpful.}
+
+I joined as {role} {specific context: team size, reporting line, scope}.
+The business problem was {specific, measurable problem}. {One sentence on
+why it mattered.}
+
+My specific job was to {scope sentence — what was asked, what was authority,
+what constraints were non-negotiable}.
+
+## The challenge
+
+{One paragraph on the specific tension or constraint that made this hard.
+This is not "the brief was unclear" — it's the real, specific obstacle that
+senior case studies name directly. Example: "The instinct was to build a
+marketplace. But estimators don't have time to browse, and the research
+said so. I had to make the case for a different direction before engineering
+committed resources."}
+
+{/* -------------------------------------------------------------------------
+    Section 2 — Process & key decisions
+    -------------------------------------------------------------------------
+    - Research methodology and what you learned.
+    - The pivotal insight or decision point (use a <Callout>).
+    - At least one "what I chose not to build" moment. Required.
+    - AI fluency angle — specific, named way AI shaped the work. Required.
+    ------------------------------------------------------------------------- */}
+
+## Research and the pivot
+
+{Paragraph on methodology: sample size, duration, approach, what you were
+trying to validate.}
+
+{Paragraph on what you actually found and why it changed direction.}
+
+<Callout label="The insight">
+  {The single sentence that captures the pivotal insight. This is the
+  moment the case study turns on.}
+</Callout>
+
+{Paragraph on how you sold the pivot: who resisted, what evidence
+moved them, what you agreed to trade off.}
+
+## What I chose not to build
+
+{Required section. Name 1-2 things that came up in research but you
+intentionally scoped out. Explain why — what it would have cost and why
+the value wasn't worth it right now. This is the section that separates
+senior case studies from mid-level ones.}
+
+{/* -------------------------------------------------------------------------
+    Section 3 — The solution
+    -------------------------------------------------------------------------
+    - Full-bleed images showing the design work.
+    - Explain the "why" behind each key decision, not just what the screen
+      does.
+    - At least one motion artifact (video, gif, or animated interaction).
+      Required per POV library principle #4.
+    ------------------------------------------------------------------------- */}
+
+## The solution
+
+{Opening paragraph: what the final thing does in one sentence, then the
+thesis design decision — the one that shaped everything else.}
+
+<FullBleedImage
+  src={heroShot}
+  alt="{Honest, specific alt text describing what's on the screen}"
+  caption="{Optional caption that adds context the reader can't infer from
+  looking at the image}"
+/>
+
+{Paragraph on the "why" behind the primary interaction. What alternatives
+were considered? Why did this one win?}
+
+<FullBleedImage src={secondShot} alt="{Alt text}" />
+
+{Paragraph on a secondary decision — how it connects to the primary one.}
+
+{/* Motion artifact placeholder — see POV library principle #4. Every case
+    study needs at least one video or animated GIF. Replace the placeholder
+    below with a VideoPlayer or FullBleedGif. */}
+
+{/* [VISUAL: Motion artifact needed. A 20-second screen recording of the
+    core interaction, with natural pacing. Will become <VideoPlayer> with
+    MP4 + GIF fallback via scripts/convert-video.sh. */}
+
+<FullBleedImage src={thirdShot} alt="{Alt text}" />
+
+{Paragraph on the detail view / edge case / final piece of the story.}
+
+{/* -------------------------------------------------------------------------
+    Section 4 — Impact & outcomes
+    -------------------------------------------------------------------------
+    - Hard numbers with context. What the numbers mean, not just what they
+      are.
+    - How success was measured.
+    - Post-launch iterations and learnings.
+    ------------------------------------------------------------------------- */}
+
+## Impact
+
+{Paragraph on the primary metric with context. Don't just say "we cut X by
+50%." Say "we cut X by 50%, which meant Y could now happen." Connect the
+number to the business outcome.}
+
+{Paragraph on the secondary signals — qualitative feedback, behavioral
+shifts, sales conversations, stakeholder reactions.}
+
+{Paragraph on what happened after launch: iterations, surprises, things
+that broke, things that worked better than expected.}
+
+{/* -------------------------------------------------------------------------
+    Section 5 — Leadership & collaboration
+    -------------------------------------------------------------------------
+    - Stakeholders you influenced and how.
+    - Team development: mentoring, upskilling, hires.
+    - Organizational change you drove.
+    - For solo side projects, rename this section to "How I worked" and
+      focus on the builder/systems-thinking angle instead.
+    ------------------------------------------------------------------------- */}
+
+## Leadership and collaboration
+
+{Paragraph on the biggest leadership challenge — usually navigating a
+stakeholder or a pivot. Name specific people by role (not necessarily name)
+and specific decisions.}
+
+{Paragraph on team development: who did you mentor, how did you upskill
+them, what did they learn from this project that they didn't know before.}
+
+{Optional paragraph on organizational change: what rituals, decision
+rights, or cross-functional patterns did this work create?}
+
+{/* -------------------------------------------------------------------------
+    Section 6 — Reflection
+    -------------------------------------------------------------------------
+    - What you'd do differently. Required.
+    - What this project taught you that changed how you work.
+    - Signals maturity and self-awareness. Senior case studies that skip
+      reflection lose points on "scar authenticity."
+    ------------------------------------------------------------------------- */}
+
+## Reflection
+
+{Paragraph on what you'd do differently if you ran this again. Be specific.
+Not "I'd communicate more" — "I'd invest earlier in the curation workflow,
+because that's where the scalability bottleneck landed."}
+
+{Optional paragraph on what this project taught you that you now apply
+elsewhere.}
+
+{/* -------------------------------------------------------------------------
+    Writer self-check before declaring this draft done:
+
+    Frontmatter
+    - [ ] Title leads with business outcome, not project name
+    - [ ] description field is one sentence, pyramid-principle, visible as lede
+    - [ ] metrics array has 1-3 items, every value is a number+unit
+    - [ ] employer field matches the enum
+    - [ ] heroImage and thumbnail resolve to real files
+
+    Structure
+    - [ ] All required sections present (Context, Process, Solution, Impact,
+          Reflection; Leadership for team projects)
+    - [ ] At least one <Callout> wraps a real insight
+    - [ ] At least one motion artifact is embedded (video or gif)
+    - [ ] At least one "what I chose not to build" moment
+    - [ ] At least one scar / tradeoff / honest limitation
+
+    Voice
+    - [ ] First person active voice throughout
+    - [ ] Canonical company opener used verbatim
+    - [ ] No em-dashes (literal scan for — U+2014 and ASCII " -- ")
+    - [ ] No banned words (see portfolio-voice.md section 6)
+    - [ ] No triplet constructions
+    - [ ] No 4+ item inline lists
+    - [ ] No "complex" describing Ari's work
+    - [ ] Tense consistent within paragraphs
+    - [ ] Code contribution framed as AI-coded prototyping, never
+          "full-stack designer"
+
+    Facts
+    - [ ] Every number traces to canonical data or interview notes
+    - [ ] No [UNVERIFIED] tags
+    - [ ] No [VISUAL: ...] placeholders left unresolved
+    ------------------------------------------------------------------------- */}

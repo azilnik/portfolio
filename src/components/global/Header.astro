@@ -15,7 +15,14 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
   class="sticky top-0 z-50 border-b backdrop-blur-md"
   style="border-color: var(--theme-header-border); background-color: var(--theme-header-bg);"
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+  {/* Container is pinned to --theme-content-width so the logo lines up with
+      every page's leftmost text (case study titles, work page, about page,
+      footer). Changing this token is the single point of control for the
+      whole site's horizontal alignment. */}
+  <div
+    class="mx-auto flex items-center justify-between px-6 py-4"
+    style="max-width: var(--theme-content-width);"
+  >
     {/* Logo / home link */}
     <a
       href="/"

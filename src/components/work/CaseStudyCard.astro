@@ -1,9 +1,13 @@
 ---
 /**
- * CaseStudyCard — thumbnail card for the /work listing grid.
+ * CaseStudyCard — thumbnail card for the homepage work grid and /work.
  *
- * Shows the case study thumbnail, company name, and project title.
- * Links to the full case study page at /work/[slug].
+ * Shows the case study thumbnail, an uppercase eyebrow (company name),
+ * the project title, and a short description. Links to the full case
+ * study page at /work/[slug].
+ *
+ * Hover: a subtle image zoom + shadow lift. No heavy scale transforms
+ * that would betray the restrained editorial register.
  */
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -17,32 +21,56 @@ const { study } = Astro.props;
 
 <a
   href={`/work/${study.id}`}
-  class="group block overflow-hidden rounded-2xl border transition-shadow hover:shadow-lg"
-  style="border-color: var(--theme-border); background-color: var(--theme-surface);"
+  class="group block overflow-hidden transition-shadow hover:shadow-lg"
+  style="
+    border: 1px solid var(--theme-border);
+    background-color: var(--theme-surface);
+    border-radius: var(--theme-radius-xl);
+  "
 >
-  <Image
-    src={study.data.thumbnail}
-    alt={study.data.thumbnailAlt}
-    widths={[400, 600, 800]}
-    sizes="(min-width: 768px) 50vw, 100vw"
-    class="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-  />
-  <div class="p-5">
+  <div class="overflow-hidden">
+    <Image
+      src={study.data.thumbnail}
+      alt={study.data.thumbnailAlt}
+      widths={[400, 600, 800]}
+      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+    />
+  </div>
+  <div
+    style="
+      padding: var(--theme-space-3) var(--theme-space-3) var(--theme-space-4);
+    "
+  >
     <p
-      class="text-xs font-medium uppercase tracking-wider"
-      style="color: var(--theme-text-tertiary);"
+      class="text-xs font-semibold uppercase"
+      style="
+        color: var(--theme-text-tertiary);
+        letter-spacing: var(--theme-tracking-wider);
+      "
     >
       {study.data.company}
     </p>
     <h3
-      class="mt-1 font-heading text-lg font-semibold"
-      style="color: var(--theme-text-primary);"
+      class="font-heading"
+      style="
+        color: var(--theme-text-primary);
+        font-weight: var(--theme-weight-heading);
+        letter-spacing: var(--theme-tracking-tight);
+        line-height: var(--theme-leading-snug);
+        font-size: var(--theme-text-lg);
+        margin-top: var(--theme-space-1);
+      "
     >
       {study.data.title}
     </h3>
     <p
-      class="mt-2 text-sm leading-relaxed line-clamp-2"
-      style="color: var(--theme-text-secondary);"
+      class="leading-relaxed line-clamp-2"
+      style="
+        color: var(--theme-text-secondary);
+        font-size: var(--theme-text-sm);
+        margin-top: var(--theme-space-2);
+      "
     >
       {study.data.description}
     </p>

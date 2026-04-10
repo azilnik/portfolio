@@ -1,0 +1,107 @@
+---
+/**
+ * Lessons — a numbered list of 3 concise, actionable lessons learned.
+ *
+ * Use this near the end of a case study instead of a long reflection
+ * paragraph. Each lesson is one line, written as an actionable principle
+ * the reader could apply to their own work. Limiting to 3 forces
+ * selection and makes the takeaways memorable.
+ *
+ * Props are structured — the lessons array is the only input — so the
+ * content is automation-friendly and the visual treatment stays
+ * consistent across case studies.
+ *
+ * Usage in .mdx:
+ *   <Lessons lessons={[
+ *     "Lead pivots with user evidence, not personal conviction.",
+ *     "In AI products, the human curation loop is the real product.",
+ *     "Descope V1 aggressively to ship fast."
+ *   ]} />
+ */
+
+interface Props {
+  /** Exactly 3 short, actionable lessons. */
+  lessons: string[];
+  /** Optional heading override. Defaults to "What I'd change". */
+  heading?: string;
+}
+
+const { lessons, heading = "What I'd do differently" } = Astro.props;
+---
+
+<section
+  class="lessons"
+  aria-labelledby="lessons-heading"
+  style="
+    margin-top: var(--theme-space-5);
+    margin-bottom: var(--theme-space-5);
+    padding: var(--theme-space-4);
+    background-color: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-lg);
+  "
+>
+  <h3
+    id="lessons-heading"
+    class="font-heading"
+    style="
+      margin: 0 0 var(--theme-space-3) 0;
+      font-size: var(--theme-text-2xl);
+      font-weight: var(--theme-weight-heading);
+      line-height: var(--theme-leading-tight);
+      color: var(--theme-text-primary);
+    "
+  >
+    {heading}
+  </h3>
+
+  <ol
+    class="lessons-list"
+    style="
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--theme-space-3);
+    "
+  >
+    {lessons.map((lesson, index) => (
+      <li
+        class="lesson"
+        style="
+          display: grid;
+          grid-template-columns: 2.5rem 1fr;
+          gap: var(--theme-space-2);
+          align-items: baseline;
+        "
+      >
+        {/* Number badge — visually distinct from body numbers. Two-digit
+            format (01, 02, 03) reads as a small design detail rather than
+            a generic ordered list. */}
+        <span
+          class="lesson-number font-heading"
+          aria-hidden="true"
+          style="
+            font-size: var(--theme-text-xl);
+            font-weight: var(--theme-weight-heading);
+            color: var(--theme-accent);
+            letter-spacing: var(--theme-tracking-tight);
+          "
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span
+          class="lesson-text"
+          style="
+            font-size: var(--theme-text-lg);
+            line-height: var(--theme-leading-snug);
+            color: var(--theme-text-primary);
+          "
+        >
+          {lesson}
+        </span>
+      </li>
+    ))}
+  </ol>
+</section>
