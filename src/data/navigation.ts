@@ -15,8 +15,8 @@ export interface NavLink {
 export const navLinks: NavLink[] = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
-  // Resume link — update the href once you have a PDF or external URL.
-  { label: "Resume", href: "#" },
+  // Resume link — TODO: replace with generated PDF URL from resume-builder
+  { label: "Resume", href: "https://www.linkedin.com/in/arizilnik/", external: true },
   // Opens the user's email client.
   { label: "Get in touch", href: "mailto:ari@ari.design", external: true },
 ];

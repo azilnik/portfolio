@@ -1,0 +1,184 @@
+---
+title: "How rate-of-change detection makes a range hood 10x faster to respond"
+company: "Side Project"
+role: "Designer, Builder"
+industry: "Smart Home, Open Source"
+description: "A Home Assistant automation that turns a range hood on and off based on cooking activity. The key insight: watching rate of change instead of temperature thresholds makes it 10x faster."
+heroImage: "./images/hood-vent-dashboard.png"
+thumbnail: "./images/hood-vent-dashboard.png"
+thumbnailAlt: "Home Assistant dashboard showing rate-of-change detection during a cooking session"
+employer: "side-project"
+sortOrder: 3
+draft: false
+metrics:
+  - label: "Response time to detect cooking, vs 5-10 min for threshold-based systems"
+    value: "30-60 sec"
+  - label: "Total hardware cost, one-time, no subscriptions, all local"
+    value: "~$85"
+  - label: "Open source on GitHub, MIT licensed"
+    value: "Public repo"
+---
+
+import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import Callout from "../../components/mdx/Callout.astro";
+
+import hoodDashboard from "./images/hood-vent-dashboard.png";
+
+## Why this exists
+
+Gas stoves emit real pollutants: nitrogen dioxide, carbon monoxide, and
+particulates. Research from RMI and the Indoor Air journal has documented the
+health effects, particularly for children. The mitigation is simple: turn on
+your range hood when you cook.
+
+The problem is that most people forget. I have two small kids. I read too many
+air quality studies. So I did the obvious thing and automated my range hood.
+
+## The problem with existing solutions
+
+Most smart hood automations use temperature thresholds. The logic is
+straightforward: "when the kitchen reaches 26 degrees, turn on the hood."
+
+This approach has two problems.
+
+**It's slow.** By the time the kitchen heats up enough to cross the threshold,
+you've been cooking for 5 to 10 minutes, breathing exactly the pollutants the
+hood is supposed to remove. And when you stop cooking, residual heat keeps the
+hood running for another 10 to 15 minutes after the stove is off.
+
+**It false-triggers.** On a hot summer day, the kitchen might already be at 28
+degrees. A threshold-based system either triggers falsely or requires seasonal
+recalibration.
+
+## The insight: rate of change
+
+Instead of watching the temperature value, I watch how fast it's changing. This
+is the derivative of the temperature reading: degrees per minute over a rolling
+two-minute window.
+
+<Callout label="The core insight">
+  A threshold-based system asks "is it hot?" Rate-of-change detection asks "is it
+  getting hotter?" The second question catches cooking activity within 30 to 60
+  seconds. The first takes 5 to 10 minutes. Same sensor, same data, different
+  question.
+</Callout>
+
+When you turn on a burner, the temperature near the stove starts rising
+immediately. The rate of change spikes. The hood turns on within 30 to 60
+seconds. When you stop cooking, the rate flattens back to zero. The hood turns
+off within 2 to 3 minutes.
+
+Hot days don't cause false triggers because the temperature isn't changing fast;
+it's just high. And brief spikes (opening the oven door to check on something)
+get smoothed out by the two-minute rolling window.
+
+<FullBleedImage src={hoodDashboard} alt="Home Assistant dashboard during a cooking session. Top panel: hood state switching from off to on (yellow) and back to off. Middle panel: rate-of-change graph showing flat baseline then a sharp spike at cooking start. Bottom panel: raw temperature climbing from 20 to 35 degrees." caption="A real cooking session. The rate-of-change spike (middle) triggers the hood 10 minutes before the raw temperature (bottom) would cross any reasonable threshold." />
+
+## How it works
+
+The system runs entirely on Home Assistant with no cloud dependencies. Everything
+processes locally.
+
+**Dual-trigger detection.** The automation watches both temperature and humidity
+rate of change. Temperature catches most cooking activity, but boiling water
+produces steam before significant heat. The humidity trigger catches that case.
+
+**Sustained confirmation.** The rate of change must stay above the threshold for
+30 seconds before the hood activates. This prevents a single noisy sensor reading
+from triggering the hood.
+
+**Configurable thresholds via UI.** All sensitivity settings are adjustable through
+dashboard sliders: temperature rise threshold, humidity rise threshold, fall
+threshold, and off-delay duration. No YAML editing required after initial setup.
+
+**Manual override detection.** If someone manually toggles the hood, the
+automation detects it (by checking if the state change was user-initiated) and
+pauses for 30 minutes so it doesn't fight the person.
+
+**Safety shutoff.** The hood automatically turns off after 2 hours with a
+persistent notification, in case something goes wrong or someone forgets to turn
+off the stove.
+
+<FullBleedGif src="/videos/hood-vent-demo.gif" alt="Demo showing a stove knob being turned, triggering the hood vent automation" />
+
+## Hardware
+
+The total cost is about $85, all one-time purchases with no subscriptions. The
+setup takes about 15 minutes once the hardware is in hand.
+
+A Zigbee temperature and humidity sensor mounts near the stove (about $15). A
+SwitchBot Bot physically presses the hood's existing button, so I didn't need
+to rewire anything (about $70 with the hub). If you already have a Zigbee coordinator and a
+hardwired hood with a smart switch, the cost drops to about $15 for just the
+sensor.
+
+I wrote a hardware guide and a sensor placement guide in the documentation.
+Where you mount the sensor matters: it needs to catch the thermal plume rising
+from cooking, not direct burner heat or ambient room temperature. I documented
+good and bad placement with diagrams.
+
+## The documentation
+
+This project is open source (MIT license) and designed so someone with no Home
+Assistant experience could set it up. The documentation includes:
+
+- A step-by-step quick start (4 steps, 15 minutes)
+- A hardware shopping list with specific products and prices
+- A sensor placement guide with diagrams
+- A tuning guide for adjusting sensitivity thresholds
+- A dashboard setup guide with a pre-built Lovelace card
+- A troubleshooting FAQ
+
+The entire automation is a single 236-line YAML file that drops into Home
+Assistant's packages directory. Three entity IDs in a secrets file, one restart,
+and it runs.
+
+## How it's performed
+
+The system has been running in my kitchen for months. It consistently catches
+cooking activity within 30 to 60 seconds of turning on a burner, and shuts the
+hood off within 2 to 3 minutes of stopping. False triggers are near zero; the
+two-minute rolling window and 30-second sustained confirmation filter out noise
+from opening the oven or ambient temperature shifts. The manual override
+detection has worked as intended. When my partner manually turns the hood on or
+off, the automation stays out of the way.
+
+The repo is public on GitHub under an MIT license. I've gotten questions from
+other Home Assistant users about adapting it for different sensor types and hood
+configurations, which tells me the documentation is doing its job.
+
+## Why this matters for design work
+
+This isn't a product shipped to millions of users. It's a side project that
+automates a single appliance in my kitchen. But it demonstrates how I think
+about problems.
+
+**Starting with research, not solutions.** I started by reading the air quality
+research, understanding the health implications, and identifying why existing
+solutions didn't work. The rate-of-change insight came from understanding the
+physics, not from browsing Home Assistant forums for automation ideas.
+
+**Systems thinking.** The automation handles edge cases that most people wouldn't
+consider: hot days causing false triggers, manual overrides fighting the user,
+boiling water producing steam before heat, brief oven-door spikes, and the safety
+concern of a hood running indefinitely. Each of these is a design decision.
+
+**Designing for the person who comes after you.** The documentation is written
+for someone who has never used Home Assistant. Product images of every hardware
+component. Mermaid diagrams of the architecture. A tuning guide that walks
+through a real calibration session step by step. I treated the documentation as a
+product, not an afterthought.
+
+## Reflection
+
+The rate-of-change approach works well, but it's not perfect. Very slow cooking
+(a low simmer for an hour) produces such a gradual temperature rise that it can
+fall below the detection threshold. A hybrid approach, combining rate of change
+for fast detection with a long-window absolute change sensor for slow cooking,
+would cover both cases. I've started sketching this but haven't shipped it yet.
+
+I'd also like to add air quality sensor integration. A VOC or PM2.5 sensor near
+the stove would provide direct measurement of the thing I actually care about
+(pollutant levels), rather than using temperature as a proxy. The rate-of-change
+approach would apply to that signal too.
