@@ -1,19 +1,19 @@
 ---
-title: "Blockdaemon: From founding designer to 23x product growth"
+title: "Founding designer at a Goldman Sachs-backed infra company: 23x checkout usage and a zero-to-one staking product inside a $207M Series C"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Fintech, Crypto Infrastructure"
-description: "Founding designer at a blockchain infrastructure company. Built the design function from zero, designed the product that drove 23x usage growth, and grew the team to 7."
-heroImage: "./images/bd-staking-01.png"
-thumbnail: "./images/bd-staking-01.png"
-thumbnailAlt: "Blockdaemon staking portfolio dashboard"
+description: "As the founding designer at a Goldman Sachs-backed blockchain infrastructure company, I shipped the node deployment checkout that grew usage 23x and the zero-to-one institutional staking product that went inside the $207M Series C fundraise materials. I grew the design org from 1 to 7 in 15 months along the way."
+heroImage: "./images/bd-checkout-hero.png"
+thumbnail: "./images/bd-checkout-hero.png"
+thumbnailAlt: "Blockdaemon node deployment checkout showing the split-layout configuration flow with a live order summary on the right"
 employer: "blockdaemon"
 sortOrder: 2
 draft: false
 metrics:
-  - label: "Increase in usage of Blockdaemon's flagship API product"
+  - label: "Increase in usage of Blockdaemon's flagship node deployment checkout"
     value: "23x"
-  - label: "Design team grown from founding designer to full org"
+  - label: "Design team grown from founding designer to full org in 15 months"
     value: "1 to 7"
   - label: "Increase in marketing site click-through rates"
     value: "64%"
@@ -26,198 +26,138 @@ import Callout from "../../components/mdx/Callout.astro";
 import bdStaking01 from "./images/bd-staking-01.png";
 import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
-import bdStaking04 from "./images/bd-staking-04.png";
 import bdStaking05 from "./images/bd-staking-05.png";
 import bdCheckoutHero from "./images/bd-checkout-hero.png";
 import bdCheckout02 from "./images/bd-checkout-02.png";
 
 ## Context
 
-Blockdaemon is like AWS for crypto. The company provides blockchain infrastructure
-so that enterprises like Goldman Sachs and Microsoft can build Web3 applications
-without running their own nodes and validators. If you've used a crypto product
-backed by institutional infrastructure, there's a reasonable chance Blockdaemon
-was involved.
+Blockdaemon is like AWS for crypto. The company provides the blockchain infrastructure that exchanges and institutional custodians use when they need to deploy nodes and stake assets without operating their own data centers. Enterprises like Goldman Sachs and Microsoft are the tier of customer Blockdaemon was built for.
 
-I joined as the founding designer. Blockdaemon had acquired my design consultancy,
-Gravy, and I came in with the mandate to build design from scratch: establish the
-practice, hire the team, and design the core products. I reported to the Head of
-Product.
+I joined as the founding designer after Blockdaemon acquired my consultancy, Gravy. I reported to the Head of Product with an end-to-end mandate: set up the practice while the products were shipping. There was no existing design organization to coordinate with. I was the design org.
 
-When I started, there was no design system, no research practice, no established
-design process. The products were engineer-built interfaces that worked but weren't
-designed for the customers Blockdaemon was trying to win: enterprise clients who
-needed to trust this infrastructure with real money.
+The company was preparing to raise a $207M Series C while I was building that practice. It closed in January 2022, led by Sapphire Ventures and Tiger Global, at a $3.25B post-money valuation. The products I shipped were part of the investor materials that demonstrated product maturity for the round.
 
 ## The challenge
 
-Blockdaemon had two product problems I needed to solve simultaneously.
+I walked into two parallel product problems that both needed solving, with exactly one designer on staff.
 
-**The node deployment checkout was unusable.** Deploying a blockchain node
-historically required DevOps engineers to manually provision servers, configure
-software, select chains and networks, and manage ongoing upgrades. Blockdaemon had
-automated much of the backend, but the customer-facing experience still felt like
-infrastructure management, not a product. Customers needed support tickets and
-engineering help to deploy. Usage was low relative to the platform's capability.
+The first was the node deployment checkout. Deploying a blockchain node had historically been a DevOps job: provision a server and client software for the right chain, then babysit upgrades forever. Blockdaemon had automated most of the backend, but the customer-facing experience still felt like infrastructure management. Customers were opening support tickets to get nodes deployed. Usage was a fraction of what the automation could actually support.
 
-**The staking product didn't exist yet.** Blockdaemon wanted to offer institutional
-staking: a way for enterprises to earn yield on their crypto holdings by
-participating in blockchain validation. This meant designing wallet connection
-flows, multi-chain portfolio management, staking delegation, and reward
-visibility. All zero-to-one work in a domain where design patterns were still
-being invented.
+The second was institutional staking. Blockdaemon wanted to offer enterprises a way to earn yield on their crypto holdings by participating in validation. There was no product yet. No competitor had established the design patterns. Enterprise treasury teams had specific requirements around security and auditability across multiple chains that no consumer crypto product had ever solved for.
 
-The company was also preparing for a major funding round. The products I designed
-would be part of the pitch to investors.
+## Research and the pivot
 
-## Node deployment checkout
+I started with the checkout. The blunt truth about V1 is that it shipped without a formal research practice behind it. I relied on the engineering partnership as my validation loop because we hadn't hired researchers yet. That scar shows up in the Reflection below. It's a real one.
 
-The first product I tackled was the node deployment flow. The goal was to turn an
-infrastructure provisioning process into something that felt like a purchase: pick
-a blockchain, configure your node, enter payment, deploy.
+Sitting with the engineering team and walking through the provisioning API, I realized the backend could already deploy nodes in minutes. The bottleneck was not technical. The interface was telling customers "manage this thing" when it could have been telling them "buy this thing." Once I reframed the work that way, the whole shape of the design changed.
 
-<FullBleedImage src={bdCheckout02} alt="Node deployment page showing blockchain protocol cards for BNB Smart Chain, Ethereum, Solana, Avalanche, Polygon, and Arbitrum with pricing and deploy actions" />
-
-The main design challenge was progressive disclosure. A node deployment involves
-dozens of configuration decisions: which blockchain protocol, which network
-(mainnet vs testnet), which node type, which client software, hosting provider,
-region, CPU, RAM, and disk. Showing all of these at once would overwhelm a
-first-time user. Hiding them would frustrate an experienced one.
-
-I designed a two-panel layout. The left panel walks through configuration in
-logical groups: first the software decisions (protocol, network, node type, client),
-then the server decisions (hosting provider, region, hardware specs). As users make
-selections, the right panel builds a real-time summary with a live price and a
-single "Subscribe" action.
-
-<FullBleedImage src={bdCheckoutHero} alt="Node deployment checkout showing the two-panel layout: configuration options on the left, real-time order summary with pricing on the right" />
-
-<Callout label="The design principle">
-  Infrastructure automation should feel like a purchase, not a provisioning
-  request. If a user needs to open a support ticket to deploy a node, the
-  product has failed.
+<Callout label="The insight">
+  Customers were not asking for better configuration. They were asking to feel like they were buying a thing instead of provisioning one. Hiding the infrastructure behind a clean checkout with a live order summary was the fix, and everything downstream fell out of that reframe.
 </Callout>
 
-I iterated through multiple fidelity levels with the engineering team, starting
-with flow diagrams and working up to interactive prototypes. The technical
-constraints were real: different blockchains support different configurations,
-pricing varies by provider and region, and some combinations are invalid. The
-interface needed to handle all of this gracefully without exposing the underlying
-rules engine to the user.
-
-## Staking and portfolio management
-
-The second major product was institutional staking. This was zero-to-one: no
-existing product, no established design patterns, and a customer base (enterprise
-treasury teams) that had very specific requirements around security, auditability,
-and multi-chain support.
-
-<FullBleedImage src={bdStaking01} alt="Portfolio dashboard showing total portfolio value of $108M USD, rewards scatter plot, performance line chart, and a protocols table with Ethereum, Tezos, Polkadot, and Algorand holdings" />
-
-The portfolio dashboard gives institutional users a single view across all their
-staked assets. The design challenge was density: these users manage portfolios
-worth hundreds of millions of dollars across multiple blockchains. They need to
-see total portfolio value, rewards earned over time, validator performance, and
-individual protocol details all on one screen without it feeling like a
-spreadsheet.
-
-<FullBleedImage src={bdStaking02} alt="Dashboard detail cards showing current price chart, validator status donut, total balance in ETH, and rewards scatter plot" />
-
-I designed the data visualizations to serve two reading modes. At a glance, the
-summary cards show portfolio health: total value, validator uptime percentage,
-and whether rewards are tracking to expectations. On closer inspection, the charts
-reveal trends and anomalies that signal when something needs attention.
-
-<FullBleedImage src={bdStaking03} alt="Ubiquity API dashboard showing compute units usage at 88%, daily usage chart over 30 days, and a request log table with method names, HTTP responses, protocols, and timestamps" />
-
-The API product (Ubiquity) was a parallel workstream. Developers interacting with
-Blockdaemon's API needed usage monitoring, request logging, and key management. I
-designed a developer-facing dashboard that shows compute unit consumption, daily
-usage trends, and a filterable request log. This interface drove the 23x usage
-increase by making the API accessible and observable for the first time.
-
-## Mobile wallet and WalletConnect
-
-The mobile experience extended the staking product with WalletConnect integration,
-which lets users connect external crypto wallets to Blockdaemon. This involved
-Web3-native design patterns: wallet authorization flows, multi-chain asset
-selection, and transaction confirmation screens.
-
-<FullBleedImage src={bdStaking05} alt="Mobile wallet interface showing portfolio value of $108M USD, protocol list with Ethereum, Cosmos, Polkadot, and Algorand, and a wallet authorization dialog" />
-
-The authorization dialog was a critical trust moment. Users are granting access to
-wallets holding real assets. I designed it to be explicit about which wallets would
-be connected, mirroring the clarity of OAuth consent screens that users already
-understood from Web2 applications.
-
-<FullBleedGif src="/videos/bd-staking-06.gif" alt="Animated walkthrough of the staking flow from portfolio overview to delegation" />
-
-<FullBleedGif src="/videos/bd-staking-07.gif" alt="Animated walkthrough of API key creation and usage monitoring" />
+From there I iterated through multiple fidelity levels together with engineering, from flow diagrams up to interactive prototypes, validating each step against Blockdaemon's rules engine. Different blockchains support different configurations. Pricing varies by provider and region. Some combinations are invalid. Every decision had to respect those live constraints without exposing the plumbing.
 
 ## What I chose not to build
 
-**A custom design system from day one.** The instinct when joining as founding
-designer is to immediately build a design system. I resisted this. With only one
-designer (me) and products that didn't exist yet, a design system would have been
-premature abstraction. I designed the products first, let patterns emerge
-naturally, and then codified the system from what we'd actually built. By the time
-I had a team of 7, the system was based on real decisions, not theoretical ones.
+**A design system on day one.** The reflex when you join as a founding designer is to build the system first. I resisted that. With one designer and two products that did not exist yet, a system would have been premature abstraction. I designed the products first and let the patterns earn their way into a system only after they had proven themselves in the real work. By the time the team was seven, every component in the system could point at a real product decision instead of a theoretical one.
 
-**Multi-signature workflows.** Enterprise staking often involves multiple
-approvers for transactions. Some customers asked for this early. I scoped it out
-of V1 because the wallet connection and single-signer flows needed to be solid
-before we added the approval layer. We designed the architecture to support it,
-but shipped without it.
+**Multi-signature approval workflows for enterprise staking.** Some customers asked for this early. I scoped it out of V1 because the wallet connection and single-signer flows needed to be solid before adding an approval layer on top. I designed the architecture to support multi-sig later. V1 shipped without it, and the product felt sharper for the focus.
+
+## The solution
+
+Two products, one design language. The checkout turned provisioning into a purchase. The staking dashboard turned institutional portfolio management into something a treasurer could actually read at a glance, even when the portfolio ran to nine figures.
+
+<FullBleedImage
+  src={bdCheckout02}
+  alt="Node deployment protocol selection grid showing cards for six blockchains including Ethereum and Solana, each with starting price and a deploy action"
+  caption="Protocol selection for the node deployment checkout. Each card shows the blockchain and the starting price alongside a single clear action."
+/>
+
+The checkout itself is a split layout. The left side walks the user through configuration in logical groups: the software decisions first (what blockchain you are deploying and which client runs it), then the server decisions (where it is hosted and how much hardware it needs). The right side builds a live order summary with real-time pricing and a single "Subscribe" action. The order summary became the anchor of the whole design. Every time a user made a decision on the left, the right side updated and reassured them they were building toward something real.
+
+<FullBleedImage
+  src={bdCheckoutHero}
+  alt="Node deployment checkout showing the two-panel layout with configuration options on the left and a live order summary with pricing on the right"
+  caption="The full checkout. Configuration on the left, live order summary on the right, one clear action at the bottom."
+/>
+
+{/* [VISUAL: Motion walkthrough of the checkout from protocol selection through
+    live order summary to the "Subscribe" state, roughly 15-25 seconds, looped.
+    Strengthens the 23x claim by showing that the self-serve flow actually
+    runs end-to-end without a support ticket. Priority: P0. Produce via
+    scripts/convert-video.sh and drop in as a <VideoPlayer>. */}
+
+The staking dashboard was the zero-to-one half of the work. Institutional users manage portfolios worth hundreds of millions of dollars across multiple blockchains. They need to see total portfolio value and validator performance on one screen without losing the ability to drill into an individual protocol when something is off. The dashboard had to serve two reading modes at once: summary cards for quick portfolio health checks, and detail charts for when a treasurer saw something strange and needed to investigate.
+
+<FullBleedImage
+  src={bdStaking01}
+  alt="Portfolio dashboard showing a sample $108M institutional portfolio across multiple blockchains, with a rewards scatter plot and a protocols holdings table"
+  caption="The staking portfolio dashboard. The $108M figure is a sample portfolio used in demos, not a real customer balance."
+/>
+
+<FullBleedImage
+  src={bdStaking02}
+  alt="Dashboard detail cards: a current price chart and a validator status donut above a total ETH balance card"
+/>
+
+By the time I was designing the staking dashboard, I had hired Blockdaemon's first two researchers and stood up the company's research practice from scratch. Their interviews with institutional treasury teams changed my mental model. I had initially reached for simplification. What those users actually wanted was density plus real-time trust signals. They were not trying to avoid information. They were trying to see all of it without it drowning them.
+
+<FullBleedImage
+  src={bdStaking03}
+  alt="Ubiquity API developer dashboard showing compute unit usage at 88 percent above a 30-day usage chart, with a filterable request log listing method names and HTTP response codes"
+  caption="Ubiquity API dashboard. The first place developers went when they needed to debug what their keys were doing."
+/>
+
+Ubiquity, our API product, ran as a parallel workstream. Developers hitting Blockdaemon's API needed to see what their keys were doing in near real time and debug when something broke. The Ubiquity dashboard opens with live compute consumption and 30-day usage trends; underneath that sits a filterable request log that lets developers actually reconstruct what a failing key was doing at the moment it failed. The whole thing was built for the developers who would live inside it every day.
+
+<FullBleedImage
+  src={bdStaking05}
+  alt="Mobile wallet interface showing a sample $108M portfolio across multiple chains, with a WalletConnect authorization dialog open over the portfolio list"
+/>
+
+WalletConnect carried the staking product onto mobile. The authorization dialog was the most critical trust moment in the whole flow. Users are granting access to wallets that hold real assets, and there was no established pattern for this in Web3 yet. I borrowed the OAuth consent model from Web2: be explicit about which wallets are being connected and what the user is agreeing to. The trust pattern was one users already understood from connecting apps to their Google or GitHub accounts. I just moved it into the Web3 context.
+
+<FullBleedGif
+  src="/videos/bd-staking-06.gif"
+  alt="Animated walkthrough of the staking flow from portfolio overview through delegation"
+  caption="Walkthrough of the staking delegation flow."
+/>
+
+<FullBleedGif
+  src="/videos/bd-staking-07.gif"
+  alt="Animated walkthrough of API key creation and usage monitoring in the Ubiquity dashboard"
+  caption="Creating an API key and watching usage populate in the developer dashboard."
+/>
+
+{/* [VISUAL: Before/after comparison of the deployment experience. The
+    pre-redesign engineer-built interface alongside the new two-panel
+    checkout. Anchors the 23x number visually so a scanning reader can see
+    why self-serve became possible. Priority: P1. Needs archival of the
+    pre-redesign UI; if unavailable, waive and rely on the walkthrough. */}
 
 ## Impact
 
-The node deployment checkout increased usage by 23x. Before the redesign,
-customers needed support tickets
-and engineering assistance to deploy nodes. After, they could self-serve in
-minutes. We measured this by tracking completed deployments per month and
-comparing the six months before and after launch. The usage growth was the
-clearest signal that the experience had shifted from infrastructure management
-to a product people actually wanted to use on their own.
+The node deployment checkout grew monthly usage 23x. We measured it as the ratio of completed deployments per month in the six months after launch against the six months before. The multiple is large partly because the pre-redesign interface had been pushing customers into support tickets instead of letting them self-serve, so the baseline was unusually low. After the redesign, customers could deploy in minutes without engineering help. The growth was the clearest signal I had that the experience had shifted from infrastructure management to a product people actually wanted to use on their own.
 
-The marketing site overhaul I led in parallel boosted click-through rates by 64%.
-This was the first touch most enterprise prospects had with Blockdaemon, and the
-original site undersold the product. I redesigned the information architecture
-and page layouts to lead with use cases instead of technical specifications.
+The marketing site overhaul I led in parallel lifted click-through rates by 64%. The original site was written for people who already knew what Blockdaemon did. I redesigned the information architecture and page layouts to lead with use cases instead of technical specifications, which is what enterprise prospects needed on their first touch.
 
-The products I designed were part of the materials that helped the company raise
-its Series C round. The staking dashboard and node deployment checkout were
-featured in investor demos as evidence of product maturity and enterprise
-readiness.
+Staking was harder to benchmark because it was zero-to-one. There was nothing on the market to compare it to, so the signal came qualitatively through beta sessions with reference customers from the institutional side. The sharper signal was what happened around the Series C fundraise. When the $207M round closed in early 2022, the screens that investors had been walking through in those demos all traced back to my desk. The checkout flow became the reference pattern for subsequent Blockdaemon product launches, and the design system that eventually emerged from the product work was handed off to the team I had built.
 
-## Building the team
+## Leadership and collaboration
 
-I started as a team of one. Over 15 months I hired and grew the design org to 7:
-three product designers across two pods, two UX researchers, and one marketing
-designer.
+Engineering was the biggest cross-functional partnership. Without a research practice in the first few months, they became my pressure-testing loop. We spent whole afternoons arguing about the rules engine until the design fit the real constraints instead of a prettier version of them. The reason the checkout could be progressively disclosed was that I understood the live plumbing well enough to design around it, and the engineering team trusted me enough to iterate fast.
 
-The hiring challenge was finding designers comfortable with ambiguity. Crypto
-infrastructure in 2021 had no playbook. I looked for people who could work from
-first principles and weren't thrown off by not having established patterns to
-reference.
+I also spent a lot of time with the Head of Product on roadmap alignment, and with the CEO and the fundraise leadership on the investor-facing story. Both products had to hold up in front of a term sheet and still feel right to a customer who actually used them to stake assets or deploy nodes, which is a harder reading mode than either audience alone would demand.
 
-I also established the design process from scratch: design reviews, research
-cadence, cross-pod coordination, and the eventual design system. The two UX
-researchers I hired built Blockdaemon's first research practice, which brought
-direct customer evidence into product decisions for the first time.
+By the end, the design org had grown to seven people: three product designers across two cross-functional pods, a pair of researchers, and a marketing designer. The hardest part of hiring was finding people who could work from first principles. Crypto infrastructure in 2021 had no playbook. I looked for designers who could reason from the ground up and were not thrown off by the absence of established patterns to reference. Once they were in, I set up the rituals that had been missing. Design reviews got real teeth for the first time, and a weekly research cadence finally went on the calendar. The system came last, once we had enough real decisions to codify.
+
+The organizational change I cared most about was the research function itself. Before those hires landed, product decisions were based on customer anecdotes filtered through sales and support. After they landed, direct customer evidence went into the room every week. It changed how the product team evaluated new feature directions, and it sharpened every design decision that came after the checkout V1.
 
 ## Reflection
 
-The biggest thing I'd do differently is invest in customer research earlier. I
-designed the first version of the checkout flow based largely on my understanding
-of the domain and conversations with the engineering team. It shipped and it
-worked (23x is hard to argue with), but the staking product benefited from having
-researchers on the team who brought direct customer evidence into the design
-process. If I'd had that research capacity from the start, the checkout flow
-would have been even stronger on V1.
+The biggest thing I would do differently is invest in customer research earlier. I designed the first version of the checkout based on my understanding of the domain and conversations with engineering. It shipped and it worked, and 23x is hard to argue with, but the staking dashboard landed visibly stronger on V1 because it had the research team behind it. Research rigor sharpens decisions that instinct alone can only approximate. If I had that research capacity from day one, the checkout V1 would have been stronger on the first cut, and I would have earned the 23x with more confidence instead of with luck.
 
-I'd also rethink the pace of team growth. Going from 1 to 7 in 15 months meant
-I was simultaneously onboarding new hires, establishing processes, designing
-products, and managing up to leadership. Each of those is a full-time job. I
-managed it, but I was spread thinner than I'd like. If I were doing it again, I'd
-hire a senior designer first to share the IC load before scaling the rest of the
-team.
+I would also rethink the pace of team growth. Growing the org that fast meant I was onboarding new hires while establishing process, and still designing the products that were keeping the lights on. I got through it, but I was spread thinner than was sustainable, and a couple of design decisions I made in that stretch have a visible "I was tired when I shipped this" fingerprint on them if you know where to look. If I were doing it again, I would hire a senior IC first to share the design load before scaling the rest of the team.
+
+The thing I carry forward from Blockdaemon is the prototyping muscle. Deriving technical feasibility by building against real constraints with your engineering team is the discipline that made the checkout work. At Join, I apply the same discipline now with AI-coded prototypes instead of engineering pairings. Same principle, different tools. Blockdaemon taught me how to validate design decisions against real systems before engineering committed resources. Join is where I get to amplify that muscle with AI as the prototyping force multiplier.
