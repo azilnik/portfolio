@@ -4,11 +4,10 @@
  * case study.
  *
  * Senior case studies often hinge on a single decision where the product
- * direction changed. This component surfaces that moment as ONE
+ * direction changed. This component surfaces that moment as one
  * structured block with three short fields: the pivot itself, the cause,
  * and the result. The goal is to make the pivot unmissable to a
- * 10-second scanner and to remove the need to repeat the pivot narrative
- * across multiple paragraphs.
+ * 10-second scanner.
  *
  * Props are structured (no slot content) so the fields are
  * automation-friendly and always render in the same order.
@@ -33,114 +32,85 @@ interface Props {
 const { summary, cause, result } = Astro.props;
 ---
 
-<aside
-  class="pivot-card"
-  aria-labelledby="pivot-card-heading"
-  style="
-    margin-top: var(--theme-space-5);
-    margin-bottom: var(--theme-space-5);
-    padding: var(--theme-space-4);
-    background-color: var(--theme-accent-subtle);
-    border: 1px solid var(--theme-border-strong);
-    border-left: 4px solid var(--theme-accent);
-    border-radius: var(--theme-radius-lg);
-  "
->
-  {/* Heading — labelled so assistive tech announces this block as
-      "The pivot." The visible label is small uppercase for hierarchy. */}
-  <p
-    id="pivot-card-heading"
-    style="
-      margin: 0 0 var(--theme-space-2) 0;
-      font-size: var(--theme-text-xs);
-      font-weight: var(--theme-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: var(--theme-tracking-wider);
-      color: var(--theme-accent);
-    "
-  >
-    The pivot
-  </p>
+<aside class="pivot-card" aria-labelledby="pivot-heading">
+  <p id="pivot-heading" class="pivot-label">The pivot</p>
 
-  {/* Summary line — the headline of the pivot, uses the heading font for
-      visual weight so a scanner catches it first. */}
-  <p
-    class="pivot-summary font-heading"
-    style="
-      margin: 0 0 var(--theme-space-3) 0;
-      font-size: var(--theme-text-2xl);
-      font-weight: var(--theme-weight-heading);
-      line-height: var(--theme-leading-tight);
-      color: var(--theme-text-primary);
-    "
-  >
-    {summary}
-  </p>
+  {/* Summary — the headline of the pivot. Uses the heading font so a
+      scanner catches it before anything else in the card. */}
+  <p class="pivot-summary font-heading">{summary}</p>
 
-  {/* Cause row — labelled "Why" so readers know this is the insight
-      behind the pivot, not a restatement of it. */}
-  <div
-    class="pivot-row"
-    style="
-      display: grid;
-      grid-template-columns: minmax(4rem, 6rem) 1fr;
-      gap: var(--theme-space-2);
-      margin-bottom: var(--theme-space-2);
-    "
-  >
-    <span
-      style="
-        font-size: var(--theme-text-xs);
-        font-weight: var(--theme-weight-semibold);
-        text-transform: uppercase;
-        letter-spacing: var(--theme-tracking-wider);
-        color: var(--theme-text-tertiary);
-        padding-top: 0.35rem;
-      "
-    >
-      Why
-    </span>
-    <span
-      style="
-        font-size: var(--theme-text-lg);
-        line-height: var(--theme-leading-normal);
-        color: var(--theme-text-primary);
-      "
-    >
-      {cause}
-    </span>
-  </div>
-
-  {/* Result row — labelled "Result" with the same grid as Why so the
-      two rows align and read as a pair. */}
-  <div
-    class="pivot-row"
-    style="
-      display: grid;
-      grid-template-columns: minmax(4rem, 6rem) 1fr;
-      gap: var(--theme-space-2);
-    "
-  >
-    <span
-      style="
-        font-size: var(--theme-text-xs);
-        font-weight: var(--theme-weight-semibold);
-        text-transform: uppercase;
-        letter-spacing: var(--theme-tracking-wider);
-        color: var(--theme-text-tertiary);
-        padding-top: 0.35rem;
-      "
-    >
-      Result
-    </span>
-    <span
-      style="
-        font-size: var(--theme-text-lg);
-        line-height: var(--theme-leading-normal);
-        color: var(--theme-text-primary);
-      "
-    >
-      {result}
-    </span>
-  </div>
+  {/* Why / Result rows — a definition-list-style pair so the two fields
+      visually align and read as cause → effect. */}
+  <dl class="pivot-details">
+    <div class="pivot-row">
+      <dt>Why</dt>
+      <dd>{cause}</dd>
+    </div>
+    <div class="pivot-row">
+      <dt>Result</dt>
+      <dd>{result}</dd>
+    </div>
+  </dl>
 </aside>
+
+<style>
+  .pivot-card {
+    margin-top: var(--theme-space-6);
+    margin-bottom: var(--theme-space-6);
+    padding: var(--theme-space-5) 0;
+    border-top: 1px solid var(--theme-border);
+    border-bottom: 1px solid var(--theme-border);
+  }
+
+  .pivot-label {
+    margin: 0 0 var(--theme-space-2);
+    font-size: var(--theme-text-xs);
+    font-weight: var(--theme-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--theme-tracking-wider);
+    color: var(--theme-accent);
+  }
+
+  .pivot-summary {
+    margin: 0 0 var(--theme-space-3);
+    font-size: var(--theme-text-2xl);
+    font-weight: var(--theme-weight-heading);
+    line-height: var(--theme-leading-tight);
+    color: var(--theme-text-primary);
+  }
+
+  /* Strip browser defaults from the definition list so the rows control
+     all spacing. Using <dl>/<dt>/<dd> gives the Why/Result pairs semantic
+     meaning (term + definition) without extra divs. */
+  .pivot-details {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--theme-space-2);
+  }
+
+  .pivot-row {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: var(--theme-space-2);
+  }
+
+  .pivot-row dt {
+    font-size: var(--theme-text-xs);
+    font-weight: var(--theme-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--theme-tracking-wider);
+    color: var(--theme-text-tertiary);
+    /* Nudge the small label down so its x-height aligns with the larger
+       dd text beside it. */
+    padding-top: 0.3rem;
+  }
+
+  .pivot-row dd {
+    margin: 0;
+    font-size: var(--theme-text-lg);
+    line-height: var(--theme-leading-normal);
+    color: var(--theme-text-primary);
+  }
+</style>

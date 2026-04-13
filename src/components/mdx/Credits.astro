@@ -10,7 +10,7 @@
  *   <Credits
  *     credits={[
  *       { role: "Design", people: "Ari Zilnik" },
- *       { role: "Product", people: "Jane Doe" },
+ *       { role: "Product", people: "Jane Doe", url: "https://linkedin.com/in/janedoe" },
  *       { role: "Engineering", people: "Alice, Bob, Charlie" },
  *     ]}
  *     note="Made with ... at Join."
@@ -20,6 +20,8 @@
 interface CreditEntry {
   role: string;
   people: string;
+  /** Optional link — when provided, the people text becomes a hyperlink. */
+  url?: string;
 }
 
 interface Props {
@@ -57,7 +59,18 @@ const { credits, note } = Astro.props;
         <span class="font-semibold" style="color: var(--theme-text-primary);">
           {c.role}:
         </span>{" "}
-        {c.people}
+        {c.url ? (
+          <a
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="credit-link"
+          >
+            {c.people}
+          </a>
+        ) : (
+          c.people
+        )}
       </p>
     ))}
   </div>
@@ -74,3 +87,17 @@ const { credits, note } = Astro.props;
     </p>
   )}
 </div>
+
+<style>
+  /* Subtle link style that matches the secondary text color at rest
+     and shifts to the accent color on hover. No underline at rest
+     so links don't visually compete with the credit labels. */
+  .credit-link {
+    color: var(--theme-text-secondary);
+    text-decoration: none;
+  }
+  .credit-link:hover {
+    color: var(--theme-accent);
+    text-decoration: underline;
+  }
+</style>
