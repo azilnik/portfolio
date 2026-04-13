@@ -1,0 +1,68 @@
+---
+/**
+ * PressQuote — external validation callout for case studies.
+ *
+ * Inspired by Tyler Kotsopoulos' Capital One Travel case study,
+ * where CNBC, Forbes, and Fast Company quotes do all the credibility
+ * work. One press quote does more for trust than a paragraph of
+ * self-reported metrics.
+ *
+ * Usage in MDX:
+ *   <PressQuote
+ *     quote="Join secures new cash to build a decision-making platform for construction."
+ *     source="TechCrunch"
+ *     url="https://techcrunch.com/..."
+ *   />
+ */
+
+interface Props {
+  quote: string;
+  source: string;
+  url?: string;
+}
+
+const { quote, source, url } = Astro.props;
+---
+
+<figure
+  style="
+    margin: var(--theme-space-4) 0;
+    padding: var(--theme-space-3) var(--theme-space-4);
+    border-left: 3px solid var(--theme-accent);
+    background-color: var(--theme-bg-secondary);
+    border-radius: 0 var(--theme-radius-md) var(--theme-radius-md) 0;
+  "
+>
+  <blockquote
+    style="
+      color: var(--theme-text-primary);
+      font-size: var(--theme-text-base);
+      line-height: var(--theme-leading-relaxed);
+      font-style: italic;
+      margin: 0;
+    "
+  >
+    "{quote}"
+  </blockquote>
+  <figcaption
+    class="text-sm font-semibold"
+    style="
+      color: var(--theme-text-tertiary);
+      margin-top: var(--theme-space-1);
+    "
+  >
+    {url ? (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline decoration-1 underline-offset-2 transition-colors"
+        style="color: var(--theme-accent);"
+      >
+        {source}
+      </a>
+    ) : (
+      <span>{source}</span>
+    )}
+  </figcaption>
+</figure>

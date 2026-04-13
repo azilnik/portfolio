@@ -2,26 +2,19 @@
 /**
  * About page — /about
  *
- * Conveys Ari's design philosophy and working style, drawn from the
- * canonical interview-context.md. Targets hiring managers at premium
- * product companies who want to understand how Ari thinks and leads.
- *
- * The layout mirrors the case study header structure (eyebrow, title,
- * lede, body) so the site feels cohesive. Copy sits in a narrow reading
- * column matching the prose width used in case studies.
+ * The warmest surface in the portfolio. Personality-forward.
+ * A hiring manager comes here to find out if they want to work
+ * with this person, not to verify credentials.
  */
 import PageLayout from "../layouts/PageLayout.astro";
+import { Image } from "astro:assets";
+import avatarImage from "../assets/images/avatar.jpg";
 ---
 
 <PageLayout
   title="About"
-  description="About Ari Zilnik — design leader who builds teams, ships AI products, and stays close to the work."
+  description="About Ari Zilnik — design leader who builds products, teams, and the occasional over-engineered kitchen automation."
 >
-  {/* Same content shell as every other page for horizontal padding parity
-      with the site header. The inner wrapper caps content to the reading
-      measure and centers it inside the shell, matching the centered prose
-      axis used on case studies so the "About me" title sits under the
-      header's visual midpoint instead of hanging off the left edge. */}
   <section
     class="mx-auto px-6"
     style="
@@ -30,99 +23,84 @@ import PageLayout from "../layouts/PageLayout.astro";
       padding-bottom: var(--theme-space-7);
     "
   >
-  <div class="mx-auto" style="max-width: var(--theme-prose-width);">
-    {/* Eyebrow for rhythm consistency with work/[slug] and work/index */}
-    <p
-      class="text-xs font-semibold uppercase"
-      style="
-        color: var(--theme-text-tertiary);
-        letter-spacing: var(--theme-tracking-wider);
-        margin-bottom: var(--theme-space-2);
-      "
-    >
-      About
-    </p>
+    <div class="flex flex-col gap-8 md:flex-row md:gap-16 animate-in">
 
-    <h1
-      class="font-heading"
-      style="
-        color: var(--theme-text-primary);
-        font-weight: var(--theme-weight-heading);
-        letter-spacing: var(--theme-tracking-tight);
-        line-height: var(--theme-leading-tight);
-        font-size: var(--theme-text-5xl);
-      "
-    >
-      About me
-    </h1>
+      {/* Left: content */}
+      <div class="flex-1" style="max-width: var(--theme-prose-width);">
+        <h1
+          class="font-heading"
+          style="
+            color: var(--theme-text-primary);
+            font-weight: var(--theme-weight-heading);
+            letter-spacing: var(--theme-tracking-tight);
+            line-height: var(--theme-leading-tight);
+            font-size: var(--theme-text-5xl);
+          "
+        >
+          About
+        </h1>
 
-    <div
-      class="font-sans"
-      style="
-        color: var(--theme-text-secondary);
-        font-size: var(--theme-text-lg);
-        line-height: var(--theme-leading-relaxed);
-        margin-top: var(--theme-space-5);
-      "
-    >
-      <p>
-        I'm <span class="font-semibold" style="color: var(--theme-text-primary);">Ari Zilnik</span>.
-        I lead design teams and ship products. Currently
-        <span class="font-semibold" style="color: var(--theme-text-primary);">Head of Design at Join</span>,
-        a project management platform for construction.
-      </p>
+        <div
+          class="font-sans"
+          style="
+            color: var(--theme-text-secondary);
+            font-size: var(--theme-text-lg);
+            line-height: var(--theme-leading-relaxed);
+            margin-top: var(--theme-space-5);
+          "
+        >
+          <p>
+            I'm Ari. I lead design teams and ship products.
+          </p>
 
-      <p style="margin-top: var(--theme-space-3);">
-        I care more about making great things than about titles or lanes. If the
-        highest-impact thing I can do on a given day is run a research session, I
-        run it. If it's unblocking an engineer with a prototype, I build the
-        prototype. If it's presenting to the CEO to change a product direction, I
-        make the case. My job is to do whatever moves the work forward.
-      </p>
+          <p style="margin-top: var(--theme-space-3);">
+            Right now I'm <a href="https://join.build/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Head of Design at Join</a>,
+            a <a href="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">venture-backed</a> construction platform used by 1,000+ companies including
+            <a href="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">DPR and STO Building Group</a>.
+            Before that I was the
+            <a href="https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">founding designer at Blockdaemon</a>
+            (crypto infrastructure
+            <a href="https://www.coindesk.com/business/2021/09/21/blockchain-infrastructure-firm-blockdaemon-nabs-13b-valuation-in-155m-funding-round/" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">valued at $3.25B</a>, backed by Goldman Sachs and SoftBank),
+            <a href="https://gradle.com/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">design lead at Gradle</a>
+            (developer tools for Netflix and Salesforce), and
+            <a href="https://corporate.walmart.com/news/2016/09/19/walmart-completes-acquisition-of-jet-com-inc" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">design lead at Jet.com through Walmart's $3.3B acquisition</a>.
+            Most of my career has been zero-to-one: taking something undefined and giving it shape.
+          </p>
 
-      <p style="margin-top: var(--theme-space-3);">
-        I've spent most of my career in ambiguous, zero-to-one environments:
-        <span class="font-semibold" style="color: var(--theme-text-primary);">founding designer at Blockdaemon</span>
-        (crypto infrastructure for Goldman Sachs and Microsoft),
-        <span class="font-semibold" style="color: var(--theme-text-primary);">lead designer at Gradle</span>
-        (developer tools for Netflix and Salesforce), and now leading design at Join.
-        The common thread is taking something undefined and bringing structure
-        to it.
-      </p>
+          <p style="margin-top: var(--theme-space-3);">
+            At Blockdaemon I grew the design org from one person (me) to seven. At Join I inherited a junior team and now they run research and ship AI prototypes on their own. The throughline is the same: I stay close to the work, I build things alongside the people I lead, and I'd rather ship something real than present a deck about shipping something real.
+          </p>
 
-      <p style="margin-top: var(--theme-space-3);">
-        I lead by example. I stay close to the work, run crits, and tailor
-        mentorship to each person's level and career goals. At Join, I inherited
-        a junior team and upskilled them to run research projects and build AI
-        prototypes independently. At Blockdaemon, I grew the design org from one
-        person (me) to seven. I believe the best design leaders still ship.
-      </p>
+          <p style="margin-top: var(--theme-space-3);">
+            There are six record players in my house and only one record listener. My wife is very patient about this. I also
+            <a href="/work/ha-smart-hood-vent" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">over-automate everything</a>,
+            and we spend our weekends with our two kids.
+          </p>
+        </div>
 
-      <p style="margin-top: var(--theme-space-3);">
-        I've worked fully remote since 2017, long before the pandemic made it
-        normal. Async communication, written decisions, and timezone-aware
-        collaboration aren't skills I had to learn for remote work. It's how I
-        naturally operate.
-      </p>
+        <div style="margin-top: var(--theme-space-5);">
+          <a
+            href="mailto:ari@ari.design"
+            class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
+            style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
+            data-goatcounter-click="contact-about"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
 
-      <p style="margin-top: var(--theme-space-3);">
-        Outside of work, I automate things in my house, fix up vintage audio
-        equipment, and spend time with my two kids in Toronto.
-      </p>
+      {/* Right: avatar */}
+      <div class="hidden md:block flex-shrink-0" style="padding-top: var(--theme-space-5);">
+        <Image
+          src={avatarImage}
+          alt="Ari Zilnik"
+          width={280}
+          height={280}
+          class="rounded-2xl object-cover"
+          style="box-shadow: var(--theme-shadow-lg);"
+        />
+      </div>
     </div>
-
-    {/* CTA — sits in the same column as the prose, so the line of action
-        aligns visually with the text above it. */}
-    <div style="margin-top: var(--theme-space-6);">
-      <a
-        href="mailto:ari@ari.design"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
-        data-goatcounter-click="contact-about"
-      >
-        Get in touch
-      </a>
-    </div>
-  </div>
   </section>
 </PageLayout>

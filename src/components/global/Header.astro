@@ -5,42 +5,38 @@
  * On desktop (md+), shows horizontal nav links.
  * On mobile (<md), shows a hamburger button that toggles the MobileMenu.
  *
+ * Refined for the light-first theme: cleaner separator, tighter spacing.
  * Uses theme CSS variables for colors so the header adapts to the active theme.
  */
 import Navigation from "./Navigation.astro";
-import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <header
   class="sticky top-0 z-50 border-b backdrop-blur-md"
   style="border-color: var(--theme-header-border); background-color: var(--theme-header-bg);"
 >
-  {/* Container is pinned to --theme-content-width so the logo lines up with
-      every page's leftmost text (case study titles, work page, about page,
-      footer). Changing this token is the single point of control for the
-      whole site's horizontal alignment. */}
   <div
     class="mx-auto flex items-center justify-between px-6 py-4"
     style="max-width: var(--theme-content-width);"
   >
-    {/* Logo / home link */}
+    {/* Logo / home link — name only, bold, minimal. Matches the
+        competitive set: Danny uses "DW", Tyler uses "TK", Ainara uses
+        her full name. Full name signals confidence at the senior level. */}
     <a
       href="/"
-      class="font-heading text-lg font-bold tracking-tight"
-      style="color: var(--theme-text-primary);"
+      class="font-heading text-lg tracking-tight"
+      style="color: var(--theme-text-primary); font-weight: var(--theme-weight-heading);"
     >
       Ari Zilnik
     </a>
 
-    {/* Desktop nav + theme toggle — hidden on mobile */}
-    <div class="hidden items-center gap-4 md:flex">
+    {/* Desktop nav */}
+    <div class="hidden items-center md:flex">
       <Navigation />
-      <ThemeSwitcher />
     </div>
 
-    {/* Mobile: theme toggle + hamburger — visible on small screens only */}
-    <div class="flex items-center gap-2 md:hidden">
-      <ThemeSwitcher />
+    {/* Mobile hamburger */}
+    <div class="flex items-center md:hidden">
       <button
         id="mobile-menu-toggle"
         class="flex items-center justify-center"

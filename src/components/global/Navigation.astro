@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
               : "color: var(--theme-text-secondary);"}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             {...(link.href.startsWith("mailto:") ? { "data-goatcounter-click": "contact-nav" } : {})}
-            {...(link.label === "Resume" ? { "data-goatcounter-click": "resume-nav" } : {})}
+            {...(link.label === "LinkedIn" ? { "data-goatcounter-click": "linkedin-nav" } : {})}
           >
             {link.label}
           </a>

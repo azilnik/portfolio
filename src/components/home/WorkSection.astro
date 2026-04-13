@@ -2,20 +2,24 @@
 /**
  * WorkSection — featured case studies on the homepage.
  *
- * Shows the 3 featured case studies as cards, sorted by sortOrder.
- * With 3 focused case studies (including a side project), a flat list
- * of cards is cleaner than employer-grouped sub-sections and gives each
- * piece equal weight.
+ * Flat grid of case study cards. No employer grouping — each case study
+ * gets equal weight. Matches the competitive set (Ainara, Tyler): a
+ * clean grid where the thumbnails do the talking.
  *
- * Spacing sits on the baseline grid so this section shares the same
- * rhythm as the rest of the home page.
+ * The first card spans full-width for visual hierarchy, the rest are
+ * in a 2-column grid. This creates a natural focal point without
+ * adding any extra chrome.
  */
 import { getCollection } from "astro:content";
 import CaseStudyCard from "../work/CaseStudyCard.astro";
 
-// Fetch all non-draft case studies, sorted by sortOrder.
-const allWork = (await getCollection("work", ({ data }) => !data.draft))
+// Filter out side projects — they get their own section below.
+const allWork = (await getCollection("work", ({ data }) => !data.draft && data.employer !== "side-project"))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+// Split into featured (first) and the rest for the staggered layout.
+const featured = allWork[0];
+const rest = allWork.slice(1);
 ---
 
 <section
@@ -23,58 +27,55 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft))
   class="mx-auto px-6"
   style="
     max-width: var(--theme-content-width);
-    padding-top: var(--theme-space-7);
+    padding-top: var(--theme-space-6);
     padding-bottom: var(--theme-space-7);
   "
 >
-  {/* Section eyebrow — small uppercase label that anchors the section
-      without stealing weight from the case study cards. */}
-  <p
-    class="text-xs font-semibold uppercase"
-    style="
-      color: var(--theme-text-tertiary);
-      letter-spacing: var(--theme-tracking-wider);
-      margin-bottom: var(--theme-space-2);
-    "
-  >
-    Featured work
-  </p>
+  {/* Section header — left-aligned, minimal. No eyebrow needed because
+      the case studies speak for themselves. The heading is a quiet label,
+      not a billboard. */}
+  <div class="animate-in" style="margin-bottom: var(--theme-space-5);">
+    <h2
+      class="font-heading"
+      style="
+        color: var(--theme-text-primary);
+        font-weight: var(--theme-weight-heading);
+        letter-spacing: var(--theme-tracking-tight);
+        line-height: var(--theme-leading-tight);
+        font-size: var(--theme-text-3xl);
+      "
+    >
+      Selected work
+    </h2>
 
-  <h2
-    class="font-heading"
-    style="
-      color: var(--theme-text-primary);
-      font-weight: var(--theme-weight-heading);
-      letter-spacing: var(--theme-tracking-tight);
-      line-height: var(--theme-leading-tight);
-      font-size: var(--theme-text-4xl);
-      max-width: 22ch;
-    "
-  >
-    How I think, lead, and build.
-  </h2>
+  </div>
 
-  {/* Case study grid — 1 col mobile, 2 tablet, 3 desktop.
-      gap sized to the baseline grid so the cards feel related. */}
   {allWork.length > 0 ? (
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       style="
+        display: grid;
         gap: var(--theme-space-4);
-        margin-top: var(--theme-space-5);
       "
     >
-      {allWork.map((study) => (
-        <CaseStudyCard study={study} />
-      ))}
+      {/* Featured case study — full width for visual impact */}
+      {featured && (
+        <CaseStudyCard study={featured} featured />
+      )}
+
+      {/* Remaining case studies — 2-column grid on desktop */}
+      {rest.length > 0 && (
+        <div
+          class="grid grid-cols-1 md:grid-cols-2"
+          style="gap: var(--theme-space-4);"
+        >
+          {rest.map((study) => (
+            <CaseStudyCard study={study} />
+          ))}
+        </div>
+      )}
     </div>
   ) : (
-    <p
-      style="
-        color: var(--theme-text-tertiary);
-        margin-top: var(--theme-space-5);
-      "
-    >
+    <p style="color: var(--theme-text-tertiary);">
       Case studies coming soon.
     </p>
   )}

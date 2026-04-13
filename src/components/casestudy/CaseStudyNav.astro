@@ -1,0 +1,120 @@
+---
+/**
+ * CaseStudyNav — previous/next links at the bottom of a case study.
+ *
+ * Encourages continued browsing by linking to adjacent case studies.
+ * Every strong portfolio in our competitive set (Ainara Sainz, Tyler
+ * Kotsopoulos) has this pattern. Without it, readers hit the bottom
+ * of a case study and bounce.
+ *
+ * Accepts prev/next objects with { slug, title, company } from the
+ * parent page, which computes adjacency from the sorted collection.
+ */
+
+interface NavEntry {
+  slug: string;
+  title: string;
+  company: string;
+}
+
+interface Props {
+  prev?: NavEntry;
+  next?: NavEntry;
+}
+
+const { prev, next } = Astro.props;
+
+// Don't render if there's nothing to link to.
+if (!prev && !next) return;
+---
+
+<nav
+  aria-label="Case study navigation"
+  class="mx-auto px-6"
+  style="
+    max-width: var(--theme-content-width);
+    padding-top: var(--theme-space-6);
+    padding-bottom: var(--theme-space-6);
+    border-top: 1px solid var(--theme-border);
+  "
+>
+  <div
+    class:list={[
+      "grid gap-4",
+      prev && next ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1",
+    ]}
+  >
+    {/* Previous case study — left-aligned */}
+    {prev && (
+      <a
+        href={`/work/${prev.slug}`}
+        class="group flex flex-col rounded-xl p-5 transition-colors"
+        style="background-color: var(--theme-surface);"
+      >
+        <span
+          class="text-xs font-semibold uppercase"
+          style="
+            color: var(--theme-text-tertiary);
+            letter-spacing: var(--theme-tracking-wider);
+          "
+        >
+          &larr; Previous
+        </span>
+        <span
+          class="mt-1 font-heading font-semibold transition-colors group-hover:underline"
+          style="
+            color: var(--theme-text-primary);
+            font-size: var(--theme-text-base);
+            line-height: var(--theme-leading-snug);
+          "
+        >
+          {prev.title}
+        </span>
+        <span
+          class="mt-1 text-xs"
+          style="color: var(--theme-text-tertiary);"
+        >
+          {prev.company}
+        </span>
+      </a>
+    )}
+
+    {/* Next case study — right-aligned when both exist */}
+    {next && (
+      <a
+        href={`/work/${next.slug}`}
+        class:list={[
+          "group flex flex-col rounded-xl p-5 transition-colors",
+          prev ? "sm:text-right sm:items-end" : "",
+        ]}
+        style="background-color: var(--theme-surface);"
+      >
+        <span
+          class="text-xs font-semibold uppercase"
+          style="
+            color: var(--theme-text-tertiary);
+            letter-spacing: var(--theme-tracking-wider);
+          "
+        >
+          Next &rarr;
+        </span>
+        <span
+          class="mt-1 font-heading font-semibold transition-colors group-hover:underline"
+          style="
+            color: var(--theme-text-primary);
+            font-size: var(--theme-text-base);
+            line-height: var(--theme-leading-snug);
+          "
+        >
+          {next.title}
+        </span>
+        <span
+          class="mt-1 text-xs"
+          style="color: var(--theme-text-tertiary);"
+        >
+          {next.company}
+        </span>
+      </a>
+    )}
+  </div>
+</nav>

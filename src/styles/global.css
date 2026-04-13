@@ -391,3 +391,34 @@
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Page load animations
+
+   A gentle fade-up applied to homepage sections and page content.
+   Stagger with --delay custom property. Respects prefers-reduced-motion.
+   -------------------------------------------------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  opacity: 0;
+  animation: fade-up 0.5s ease-out forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    opacity: 1;
+    animation: none;
+  }
+}
