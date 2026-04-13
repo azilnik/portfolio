@@ -1,34 +1,226 @@
 ---
-title: "Blockdaemon Nodes eCommerce Checkout"
+title: "How reframing node deployment as a purchase flow drove 23x usage"
 company: "Blockdaemon"
-role: "Director of Design, Lead Designer and Researcher"
-industry: "Finance, Developer Tools, Crypto"
-description: "Turning complex blockchain node deployment into a self-service checkout — so enterprises can go from zero to running infrastructure in minutes."
+role: "Director of Design"
+industry: "Crypto Infrastructure"
+description: "Turned a multi-week sales-led deployment process into self-serve infrastructure by treating blockchain node provisioning like a shopping cart. Shipped in four months as the founding designer and drove 23x usage growth."
 heroImage: "./images/bd-checkout-hero.png"
 thumbnail: "./images/bd-checkout-hero.png"
-thumbnailAlt: "Blockdaemon Nodes eCommerce Checkout"
+thumbnailAlt: "Blockdaemon Nodes checkout flow, a self-serve blockchain node deployment experience"
 employer: "blockdaemon"
 sortOrder: 4
-draft: true
+draft: false
+metrics:
+  - label: "Increase in node deployment usage"
+    value: "23x"
+  - label: "From research kickoff to V1 ship, as the founding designer"
+    value: "4 months"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import MetaCards from "../../components/mdx/MetaCards.astro";
+import PivotCard from "../../components/mdx/PivotCard.astro";
+import Lessons from "../../components/mdx/Lessons.astro";
 
 import bdCheckout01 from "./images/bd-checkout-01.png";
 import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
-Blockdaemon is a blockchain infrastructure platform, enabling any company to connect to blockchains.
+<MetaCards
+  cards={[
+    {
+      label: "Role",
+      value: "Director of Design",
+      note: "Founding design hire, sole designer on the project",
+    },
+    {
+      label: "Company",
+      value: "Blockdaemon",
+      note: "Like AWS for crypto",
+    },
+    {
+      label: "Timeline",
+      value: "4 months",
+      note: "Research kickoff to V1 production ship",
+    },
+  ]}
+/>
 
-I joined Blockdaemon as the first designer, leading the design of their web and mobile apps. These apps allow users to access real-time data across all their different blockchain assets in one place.
+## The problem
 
-Deploying a blockchain node historically required complex technical and operational knowledge. The new node checkout workflow helps customers deploy servers on their own, and trust Blockdaemon to keep the servers reliable and stable in the face of a rapidly-changing technology landscape.
 
-<FullBleedImage src={bdCheckout01} alt="Blockdaemon nodes checkout overview" />
+Blockdaemon is like AWS for crypto. Companies that need to talk to
+blockchains use Blockdaemon instead of running the infrastructure
+themselves. Customers are financial institutions on the operational
+side of crypto, from banks to custody providers.
 
-<FullBleedImage src={bdCheckout02} alt="Blockdaemon nodes checkout flow" />
+Before this project existed, deploying a blockchain node at Blockdaemon
+meant filing a support ticket and waiting on a sales cycle. A
+Blockdaemon DevOps engineer would then manually provision the server.
+Each deployment took days to weeks and consumed internal engineering
+time per customer. Customers couldn't self-serve, and the sales motion
+was the gate on every new deployment.
 
-<FullBleedImage src={bdCheckout03} alt="Blockdaemon node configuration" />
+I joined Blockdaemon as the founding design hire after they acquired my
+consulting company, Gravy. My first real product was the checkout
+flow: a self-serve path that let customers deploy nodes in minutes
+instead of weeks.
 
-<FullBleedImage src={bdCheckout04} alt="Blockdaemon node deployment" />
+## The insight
+
+
+Early sketches leaned into a wizard pattern because that's what
+engineering assumed a "deployment flow" meant. Research made it clear
+wizards were the wrong metaphor. Customers associated wizards with
+forms they needed to fill out, not with decisions they needed to make.
+The wizard model kept the UX anxious.
+
+Switching to a purchase metaphor changed the tone of every interaction.
+The customer wasn't configuring something they didn't understand. They
+were committing to a deployment they had reviewed. A cart, a review
+step, a confirmation. The framing was familiar enough that users moved
+through it without instruction.
+
+<PivotCard
+  summary="From a configuration wizard to a purchase checkout"
+  cause="Customers associated wizards with forms to fill out, not decisions to make."
+  result="Self-serve pattern landed without instruction. Usage grew 23x."
+/>
+
+The pivot wasn't technical. The backend provisioning system didn't
+change. The mental model did, and everything downstream followed.
+
+## The solution
+
+
+<FullBleedImage
+  src={bdCheckout01}
+  alt="Blockdaemon Nodes checkout main screen with chain selection and configuration summary"
+/>
+
+**1. A purchase metaphor at every step.** Every screen reads like an
+e-commerce checkout step, not a configuration wizard. The cart analogy
+frames the action as a commitment, not a setup task. DevOps engineers
+were the primary audience, and they're used to procurement flows at
+their own companies. Mapping node deployment to the same mental model
+removed the instruction barrier.
+
+<FullBleedImage
+  src={bdCheckout02}
+  alt="Chain selection and network tier view inside the Blockdaemon checkout"
+/>
+
+**2. Chain-aware progressive disclosure.** Every supported blockchain
+has its own configuration shape: chain selection, network tier,
+resource sizing, regional defaults. The checkout only surfaces the
+fields relevant to the selected chain. Users don't need to learn the
+full chain matrix to get a sensible default; the form adapts to what
+they've picked.
+
+<FullBleedImage
+  src={bdCheckout03}
+  alt="Configuration detail view with resource sizing and regional settings"
+/>
+
+**3. A review step that earned the commit.** Before committing, the
+user sees a clear summary of what they're about to deploy: cost,
+configuration, and the SLA Blockdaemon stands behind. This is the
+moment where the purchase metaphor pays off. Procurement can sign off
+on a review screen in a way they can't sign off on a half-filled form.
+
+<FullBleedImage
+  src={bdCheckout04}
+  alt="Deployment confirmation with live status after commit"
+/>
+
+{/* [VISUAL: Motion artifact needed. A short screen recording (~20s) of
+    the checkout flow from chain selection through review step to
+    deployment confirmation. The purchase-vs-wizard argument is what the
+    case study hinges on and a static sequence can't communicate the
+    rhythm of the flow. Convert via scripts/convert-video.sh to MP4 +
+    GIF fallback, drop in as a <VideoPlayer> somewhere between the
+    configuration view and the confirmation screen. Priority: P0. */}
+
+### What I chose not to build
+
+**Custom chain / BYO chain support.** Enterprise customers asked for
+the ability to deploy arbitrary, unsupported chains through the same
+UX. Blockdaemon's reliability guarantees were chain-specific. The team
+could only promise uptime for chains that had been operationalized
+internally, and supporting arbitrary chains would have broken that
+contract.
+
+V1 stayed on supported chains only. We lost at least one enterprise
+deal over this decision. I still think it was the right call because
+the self-serve flow needed trust to work, and trust leaned on the
+reliability guarantee. A different V1 scope would have hurt the 23x
+story by delivering a shakier product.
+
+## The outcome
+
+
+Within the first year after launch, node deployment usage grew 23x
+against the pre-checkout baseline. Blockdaemon's DevOps team freed up
+from manual provisioning. Customers stopped asking sales when they
+could deploy and started deploying on their own.
+
+Qualitatively, the shift was visible in the sales motion itself.
+Enterprise conversations moved from "how do we get you a node" to "how
+many nodes and which chains." Blockdaemon's growth stopped being
+linear in the sales team's capacity.
+
+## How the project ran
+
+
+This was my first real product at Blockdaemon after the Gravy
+acquisition. I owned the work end-to-end, from research through
+interaction design into engineering collaboration. The project was
+also my introduction to the team I eventually grew to seven across
+product design and research.
+
+The leadership story here is the stakeholder alignment. The Head of
+Product sponsored the work. The DevOps lead owned the backend
+provisioning system and its reliability constraints; any self-serve UX
+had to fit what the pipeline could safely do. Sales had to let go of
+being the gate for every deployment, which was the hardest part. I
+spent more time making the case for giving up that control than I did
+on any screen.
+
+On validation: I wrote scripts to analyze usage patterns from beta
+customers during the rollout, rather than leaning on intuition about
+what the flow was doing. That scripted-analysis habit was the seed of
+the AI-coded prototyping workflow I run at Join today. In 2021 I was
+hand-rolling data scripts; now I'd do the same validation faster with
+AI-coded prototypes against real product data.
+
+<Lessons
+  lessons={[
+    "Mental-model reframes beat incremental polish. The right metaphor reshapes the whole product.",
+    "Self-serve trust lives in the guarantee, not the UI. V1 scope had to protect the reliability contract.",
+    "The hardest stakeholder conversation is the one where someone gives up control, not the one where you change a screen.",
+  ]}
+/>
+
+<details>
+  <summary><strong>What I'd do differently</strong></summary>
+
+  **Push harder on post-deployment monitoring.** The checkout nailed the
+  "commit to deploying" moment but customers still had to jump to a
+  separate dashboard to see node health after the fact. The hand-off
+  from "I just deployed" to "is it working?" was rougher than it needed
+  to be. In hindsight, the checkout should have ended with a live
+  status view of the deploying node rather than a generic confirmation
+  screen. The purchase metaphor would have held just fine. Think of the
+  live tracking page you get after placing an order. The post-purchase
+  experience would have felt like the same product rather than a
+  hand-off to a different one.
+
+  **Stakeholder pattern, captured.** The sales-relinquishing-control
+  conversation at Blockdaemon has since shown up on every team I've
+  worked on. A new self-serve motion almost always threatens a manual
+  motion that someone owns today. I now name that tension early in
+  any project that automates an existing human workflow, rather than
+  letting it surface as the thing that stalls the launch.
+
+</details>

@@ -1,26 +1,22 @@
 ---
-title: "Gradle Enterprise Filtering"
+title: "Replacing a dozen dropdowns with one input that served both experts and beginners"
 company: "Gradle"
 role: "Lead Designer"
 industry: "Developer Tools"
-description: "Developers need simple solutions to diagnose problems quickly and take action immediately."
+description: "Replaced a scattered set of filter dropdowns with a single typed-input omnibar, then drove adoption across every feature team at Gradle Enterprise. The pattern served beginners who discovered the filter taxonomy by typing and power users who stacked conditions in a single pass."
 heroImage: "./images/gradle-filter-01.png"
 thumbnail: "./images/gradle-filter-01.png"
-thumbnailAlt: "Gradle Enterprise Filtering"
+thumbnailAlt: "Gradle Enterprise omnibar filtering a large build dataset by typed suggestions"
 employer: "gradle"
 sortOrder: 6
-draft: true
-metrics:
-  - label: "Product"
-    value: "Revamped visual language, enabling Gradle to integrate seamlessly with other developer tools."
-  - label: "Customer"
-    value: "Enabled key diagnosis workflows for engineering managers."
-  - label: "Scale and growth"
-    value: "Directly supported $27MM Series-C funding."
+draft: false
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import MetaCards from "../../components/mdx/MetaCards.astro";
+import PivotCard from "../../components/mdx/PivotCard.astro";
+import Lessons from "../../components/mdx/Lessons.astro";
 
 import gradleFilter01 from "./images/gradle-filter-01.png";
 import gradleFilter02 from "./images/gradle-filter-02.png";
@@ -28,26 +24,211 @@ import gradleFilter03 from "./images/gradle-filter-03.png";
 import gradleFilter04 from "./images/gradle-filter-04.png";
 import gradleFilter05 from "./images/gradle-filter-05.png";
 
-The process is simple when a development team starts working on a project. Typically, a repository of code is hosted with a version control system. Developers then merge code into the central repository and experiment on branches.
+<MetaCards
+  cards={[
+    {
+      label: "Role",
+      value: "Lead Designer",
+      note: "IC, paired with research and cross-functional partners",
+    },
+    {
+      label: "Company",
+      value: "Gradle",
+      note: "Developer productivity tools for software teams",
+    },
+    {
+      label: "Scope",
+      value: "Every data view",
+      note: "Pattern change across the whole product",
+    },
+  ]}
+/>
 
-The operational management of development teams needs to grow and scale at the same pace as the team's growth, though this rarely happens.
+## The problem
 
-Countless development hours are wasted waiting for projects to be built and finding a needle in the haystack to address issues. Issues like slow build times can compound with flaky tests and unreliable code, ultimately leading to wasted development time. The solution I designed is the "omnibar." This single, dynamic input enables development managers to craft their filter criteria and quickly diagnose issues.
 
-<FullBleedImage src={gradleFilter01} alt="Gradle Enterprise filtering overview" />
+Gradle builds developer productivity tools for software teams. Large
+engineering orgs like Netflix and Salesforce use Gradle Enterprise to
+keep their CI/CD pipelines healthy. The day-to-day work is diagnosing
+slow tests and tracing flaky failures across thousands of daily builds.
 
-<FullBleedImage src={gradleFilter02} alt="Gradle omnibar filter component" />
+Engineering managers and platform leads were responsible for the
+health of these pipelines, but the tools to diagnose problems were
+scattered. Half a dozen to a dozen filter dropdowns on every screen,
+each with its own taxonomy, each requiring a user to already know
+what they were filtering by. Users couldn't ask open-ended questions
+like "show me all slow tests that failed in the last 24 hours in
+module X." They had to click through a sequence of unrelated
+dropdowns and hope they found the combination they needed.
 
-<FullBleedImage src={gradleFilter03} alt="Gradle build scan filtering" />
+The behavioral signal was loud. Users were abandoning the in-product
+filters and exporting data to CSV so they could slice it in
+spreadsheets. A product that pushes its customers into Excel to get
+answers has a filter problem, not a data problem.
 
-<FullBleedImage src={gradleFilter04} alt="Gradle diagnostic workflows" />
+## The insight
 
-<FullBleedImage src={gradleFilter05} alt="Gradle filter results view" />
 
-<FullBleedGif src="/videos/gradle-filter-06.gif" alt="Gradle omnibar filtering in action" />
+Early sketches leaned into a visual query builder: a pills UI with a
+structured "add filter" button. Feedback from power users was that the
+builder was too slow. Feedback from non-power users was that they
+still didn't know what the filter types were. Neither audience was
+being served.
 
-## Quotes
+Switching to a typed-input omnibar that surfaced the filter types as
+the user typed served both audiences. Beginners typed a keyword, saw
+a list of suggested filters, and picked one. Power users typed
+structured shortcuts and stacked conditions in a single pass. The
+single-input decision was what made the rest of the design possible.
 
-> "The ability to filter across subsets of slow tasks is very useful for our team."
+<PivotCard
+  summary="From a visual query builder to a typed-input omnibar"
+  cause="The builder was too slow for experts and still too opaque for beginners."
+  result="One input served both. Power users went fast. New users discovered the filter taxonomy without reading docs."
+/>
 
-> "We'd love to see the ability to add it to other filter selectors as well."
+## The solution
+
+
+<FullBleedImage
+  src={gradleFilter01}
+  alt="The Gradle Enterprise omnibar with typed filter suggestions surfacing as the user types"
+/>
+
+**Typed suggestions surface the taxonomy.** As a user types, the
+omnibar proposes filter types they could be building toward. A new
+user types "slow" and the omnibar offers "duration greater than" and
+"status: failed" as next steps. They learn the filter taxonomy by
+using it, not by reading documentation.
+
+<FullBleedImage
+  src={gradleFilter02}
+  alt="Stacked filter conditions visible as pills inside the omnibar input"
+/>
+
+**Implicit AND across stacked filters.** V1 defaulted stacked filters
+to AND logic and skipped the full boolean builder. Most diagnostic
+queries are AND chains anyway: "slow tests AND failed AND in module
+X." Keeping V1 to implicit AND got most of the analytical value for a
+fraction of the interaction complexity. Boolean operators were added
+later, one at a time, as the input discovery stabilized.
+
+<FullBleedImage
+  src={gradleFilter03}
+  alt="A filtered data view showing slow build tasks scoped to a specific module"
+/>
+
+**Prototyped against real build data.** The engineering team at
+Gradle was conservative about changing the input model. A "magic"
+text input that suggested filter types was a risk compared to
+deterministic dropdowns they could test exhaustively. I built working
+prototypes running on Gradle's actual build event data, not fake
+fixtures. Edge cases surfaced during prototyping: huge datasets and
+odd chains of conditions where the typed suggestions misfired.
+Engineering saw the failure modes in a prototype and moved.
+
+<FullBleedImage
+  src={gradleFilter04}
+  alt="The diagnostic view after filtering a large dataset by test name and duration"
+/>
+
+<FullBleedImage
+  src={gradleFilter05}
+  alt="A summary view of filter results with counts and trends"
+/>
+
+<FullBleedGif
+  src="/videos/gradle-filter-06.gif"
+  alt="The omnibar in use, showing typed suggestions and stacked filter conditions"
+  caption="The omnibar in use, showing typed suggestions and stacked filter conditions"
+/>
+
+### What I chose not to build
+
+**Saved and shared queries.** Enterprise customers explicitly asked
+for the ability to save filter queries and share them with their
+team. This was the right feature eventually, but shipping it alongside
+the omnibar would have diluted the core interaction change. I scoped
+it out of V1 so the input model could land clean on its own.
+
+Power users complained in the short term, and in retrospect that was
+predictable. Saved searches followed in a later milestone once the
+input pattern had stabilized. Sequencing it after the core pattern
+meant the saved-query feature inherited a shared mental model rather
+than having to teach one.
+
+## The outcome
+
+
+The clearest signal was behavioral: users stopped asking for CSV
+exports because they could get the slice they wanted in-product. When
+a customer who has been living in Excel goes back to a product's
+native filtering, you know the interaction is landing.
+
+Enterprise users were direct about it in feedback:
+
+> "The ability to filter across subsets of slow tasks is very useful
+> for our team."
+
+> "We'd love to see the ability to add it to other filter selectors
+> as well."
+
+The second quote mattered as much as the first. It was the moment the
+omnibar stopped being "the new filter on the tasks view" and started
+being "the filter pattern for the product." That pull from customers
+was what made the cross-team rollout possible.
+
+## How the project ran
+
+
+I was an IC Lead Designer at Gradle, no direct reports. The leadership
+signal on this project is influence, not org design. Existing filter
+behavior was deeply entrenched across dozens of screens, and every
+feature team owned their own version of it. Replacing the pattern
+meant coordinating with every team, not shipping a single component.
+
+The cross-functional motion looked like this: I paired with research
+on the user interviews, with engineering leadership on the prototype
+validation, and with each feature team's PM on rollout sequencing. The
+working prototypes against real data did the heavy lifting with
+engineering; the customer quotes did the heavy lifting with PMs whose
+surfaces were next in the rollout queue.
+
+The adjacent AI story at Gradle isn't this project. It's Predictive
+Test Selection, the ML feature I designed during the same tenure that
+analyzed code changes to selectively run relevant tests. This project
+was pre-AI in my own workflow. What I can honestly claim is the habit
+that matured into AI-coded prototyping: building working artifacts
+against real data before engineering committed, so that the argument
+for the pattern wasn't a deck but a thing that worked.
+
+<Lessons
+  lessons={[
+    "Beginners need discoverability. Experts need speed. A single input can serve both if you let the taxonomy surface itself.",
+    "Pattern changes are harder than feature ships. The real work is in the cross-team rollout, not the component.",
+    "Conservative engineering teams move on working prototypes against real data, not on sketches.",
+  ]}
+/>
+
+<details>
+  <summary><strong>What I'd do differently</strong></summary>
+
+  **Pull more individual developers into early research.** The
+  omnibar's design leaned heavily on engineering manager interviews
+  because the business case was their time. But developers were the
+  daily users. Their edge-case workflows around tracing specific
+  failures and diving from a single test into build history surfaced
+  later than they should have. Next time I'd balance the research
+  sample across both audiences from the start, even when the
+  economic case came from one of them.
+
+  **Contextual note on the Gradle era.** This project ran during
+  Gradle's push toward enterprise maturity, which eventually
+  supported a $27M Series C round. The omnibar was one part of a
+  broader design and visual-language effort across that period. I'm
+  deliberately not claiming the Series C as a personal metric. It
+  was a team outcome, and the causal link from a specific filter
+  redesign to a fundraising round is thinner than a personal
+  portfolio should claim.
+
+</details>

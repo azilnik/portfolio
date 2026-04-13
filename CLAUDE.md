@@ -23,28 +23,26 @@ leadership. The portfolio must signal:
 
 ## Content Strategy
 
-### The 3 Case Studies
+### The 7 Case Studies
 
-The portfolio features exactly 3 deep case studies. Quality over quantity. Each tells a
-different story about Ari's capabilities:
+The portfolio features 7 deep case studies across three employers plus a side project.
+Each tells a different story about Ari's capabilities:
 
 | # | Project | Story Arc | Key Signal |
 |---|---------|-----------|------------|
 | 1 | **Join Ideas** | Research pivot, AI feature, $500K savings in 30 days | AI product design, research rigor, business impact |
-| 2 | **Blockdaemon Staking & API** | Founding designer, 0-to-1 product, 23x usage, team of 7 | Zero-to-one leadership, fintech, scaling |
-| 3 | **ha-smart-hood-vent** | Air quality problem, rate-of-change insight, open source | Systems thinking, builder mindset, end-to-end execution |
+| 2 | **Join Scenarios** | Decisions-in-sets reframe, 50% cycle reduction, architect audience surprise | Decision-support UX, non-ranked comparison craft |
+| 3 | **Join Navigation** | Project-first mental-model rebuild, 32% support ticket drop | Research-driven mental-model work, AI-coded prototypes |
+| 4 | **Blockdaemon Staking & API** | Founding designer, 0-to-1 product, 23x usage, team of 7 | Zero-to-one leadership, fintech, scaling |
+| 5 | **Blockdaemon Nodes Checkout** | Purchase-metaphor reframe, 23x usage, sole designer in 4 months | Mental-model design, founding designer scope |
+| 6 | **Gradle Enterprise Filtering** | Replaced scattered dropdowns with a pattern-scale omnibar | Progressive complexity, cross-team pattern adoption |
+| 7 | **ha-smart-hood-vent** | Air quality problem, rate-of-change insight, open source | Systems thinking, builder mindset, end-to-end execution |
 
 ### Side Projects Section
 
 A lighter-format section showcasing builder projects (resume-builder AI pipeline, etc.)
 with brief descriptions, screenshots, tech stack tags, and GitHub links. Not full case
-studies — evidence of builder DNA.
-
-### Archived Case Studies
-
-The remaining case studies (Join Scenarios, Join Navigation, Blockdaemon Nodes Checkout,
-Gradle Filtering) are set to `draft: true` and not publicly visible. They can be
-reactivated if the content strategy changes.
+studies; evidence of builder DNA.
 
 ## Content Sources (Canonical Career Data)
 
