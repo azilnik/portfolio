@@ -1,51 +1,257 @@
 ---
-title: "Join Scenarios"
+title: "A side-by-side what-if comparison that cut construction decisions in half and surfaced a new audience"
 company: "Join"
-role: "Head of Design, Lead Designer and Researcher"
+role: "Head of Design"
 industry: "Construction"
-description: "Helping users collaborate on a set of what-if scenarios, leading to faster and more thoughtful decisions."
+description: "Construction owners decide in bundles, not one choice at a time. Scenarios reframed Join's decision workflow around sets of linked choices and cut the decision cycle by 50%. Architects showed up as a brand-new audience, making up one in five users of the feature."
 heroImage: "./images/join-scenarios-01.png"
 thumbnail: "./images/join-scenarios-01.png"
-thumbnailAlt: "Join Scenarios — what-if decision making"
+thumbnailAlt: "Join Scenarios comparing two construction project options side-by-side for owner sign-off"
 employer: "join"
 sortOrder: 2
-draft: true
+draft: false
 metrics:
-  - label: "User"
-    value: "20% of Scenarios users are architects — a brand new target audience."
-  - label: "Product"
-    value: "50% reduction in user decision-making time by leveraging Scenarios."
-  - label: "People and process"
-    value: "Built a user-centered research team and implemented research to get product feedback before starting development."
+  - label: "Reduction in scenario-decision cycle time"
+    value: "50%"
+  - label: "Share of Scenarios users who are architects, a new audience for Join"
+    value: "20%"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import MetaCards from "../../components/mdx/MetaCards.astro";
+import PivotCard from "../../components/mdx/PivotCard.astro";
+import Lessons from "../../components/mdx/Lessons.astro";
 
 import joinScenarios01 from "./images/join-scenarios-01.png";
 import joinScenarios02 from "./images/join-scenarios-02.png";
 import joinScenarios03 from "./images/join-scenarios-03.png";
 
-Join is a project management platform that helps construction companies, owners, and architects make better, more informed decisions.
+<MetaCards
+  cards={[
+    {
+      label: "Role",
+      value: "Head of Design",
+      note: "Led design on a team of 4, cross-functional across product and engineering",
+    },
+    {
+      label: "Company",
+      value: "Join",
+      note: "Like Jira for construction",
+    },
+    {
+      label: "Measurement",
+      value: "Product analytics",
+      note: "Scenario-decision cycle time, before and after",
+    },
+  ]}
+/>
 
-Scenarios enable multidisciplinary construction teams to present, price, and decide which ideas will be implemented. This feature also lets owners explore possible project pathways and associated cost implications. It groups and presents varied decision scenarios in a clear, easy-to-understand format.
+## The problem
 
-<FullBleedImage src={joinScenarios01} alt="Join Scenarios overview" />
 
-<FullBleedImage src={joinScenarios02} alt="Join Scenarios comparison view" />
+Join is like Jira for construction. Contractors and owners use it
+to collaborate on the decisions that move a project forward.
 
-<FullBleedImage src={joinScenarios03} alt="Join Scenarios decision workflow" />
+Construction projects live and die on bundles of decisions, not on
+individual choices. A contractor doesn't decide "which countertop"
+in isolation. They decide "which finish package for kitchen and
+bathrooms" against budget and schedule. Owners sign off on bundles
+of trade-offs, not single line items. Before Scenarios, Join's tools
+asked users to think about decisions one at a time, which didn't
+match how decisions actually got made on real jobs.
 
-<FullBleedGif src="/videos/join-scenarios-04.gif" alt="Join Scenarios interactive prototype" />
+The symptom was long decision cycles. A scenario that should have
+taken a week of back-and-forth between the contractor and the owner
+could stretch into two or three weeks because nobody had a clear way
+to compare options as a set. Customer success and sales were
+surfacing "we need a way to compare options for the owner" requests
+from every side of the customer base.
 
-<FullBleedGif src="/videos/join-scenarios-05.gif" alt="Join Scenarios pricing flow" />
+## The insight
 
-<FullBleedGif src="/videos/join-scenarios-06.gif" alt="Join Scenarios collaboration features" />
 
-## Quotes
+The shift happened during customer research. I ran interviews with
+the contractors and owners who make construction decisions together,
+plus a handful of architects who had used related Join features.
+Owners consistently described their decision-making process in
+bundles. They weren't asking "which material for this one spot."
+They were asking "do I want the premium-finishes package at $X or
+the standard-finishes package at $Y, and which timeline matches."
+The "package" framing came up again and again.
 
-> "This is like a happy meal for decision making — everything you need, all in one place."
+<PivotCard
+  summary="From one-decision-at-a-time to sets of linked choices"
+  cause="Owners don't decide line items. They decide packaged options with clear trade-offs."
+  result="Cut the scenario-decision cycle in half and surfaced architects as a new audience for Join."
+/>
 
-> "We used Scenarios on a $150M job and it cut our decision timeline in half."
+That reframe changed everything about what Scenarios had to be. If
+the unit of decision-making was a bundle, then the tool had to model
+bundled options and let the owner pick between packaged alternatives,
+not between individual line items.
 
-> "For the first time, our owners can actually see the cost impact of their choices before committing."
+## The solution
+
+
+<FullBleedImage
+  src={joinScenarios01}
+  alt="Join Scenarios overview listing two alternative versions of a construction project"
+/>
+
+**Sets of decisions as the unit.** Scenarios operates on bundled
+sets of linked choices, not on individual line items. A contractor
+can model a "premium finishes, compressed schedule" option alongside
+a "standard finishes, stretched schedule" option, and the math
+propagates across every connected line item automatically. The
+owner sees two packages, not forty decisions.
+
+<FullBleedImage
+  src={joinScenarios02}
+  alt="Scenarios comparison view showing two packaged project options side-by-side with their cost and schedule trade-offs"
+/>
+
+**Tabular comparison without ranking.** This was the hardest design
+call in the project. Two scenarios usually differed along several
+dimensions at once, most often a mix of cost and schedule trade-offs.
+Early iterations ranked options visually, surfacing winners and
+losers. Research killed that direction fast. Sophisticated owners on
+multi-million-dollar projects didn't want to be steered toward a
+"best" option. They wanted to weigh the dimensions that mattered to
+them on this specific project, and a ranked UI undermined that
+sense of authority.
+
+The final comparison view is deliberately flat. It surfaces every
+trade-off side-by-side without marking any option as preferred. The
+owner makes the call. The tool presents the options.
+
+<FullBleedGif
+  src="/videos/join-scenarios-04.gif"
+  alt="Interactive prototype of Scenarios comparing two bundled options with live trade-off calculations"
+  caption="Two bundled options compared side-by-side with their cost and schedule trade-offs visible at a glance."
+/>
+
+**Progressive disclosure of detail.** The default comparison view is
+lean on purpose. Users click into specific dimensions to expand into
+more detail when they need it. The owner-facing read stays calm
+during a sign-off meeting. The contractor-facing detail stays rich
+when they're doing the internal work.
+
+<FullBleedImage
+  src={joinScenarios03}
+  alt="Scenarios decision workflow showing a contractor preparing options for an owner sign-off meeting"
+/>
+
+<FullBleedGif
+  src="/videos/join-scenarios-05.gif"
+  alt="Pricing flow inside Scenarios showing cost propagation across linked line items"
+  caption="Cost propagation across linked line items when a contractor changes a bundle value."
+/>
+
+<FullBleedGif
+  src="/videos/join-scenarios-06.gif"
+  alt="Collaboration features inside Scenarios showing comments and sign-off rituals"
+  caption="Collaboration around scenario sign-off, with comments and ownership visible inline."
+/>
+
+### What I chose not to build
+
+**AI-generated scenario recommendations.** There was an obvious
+product question early on. Should Join Ideas, our LLM recommendation
+engine, auto-propose new Scenarios? Tempting, and it looked
+impressive on a roadmap slide. I pushed to keep Ideas and Scenarios
+as distinct V1 features with separate mental models.
+
+Scenarios is a human tool for comparing options. Ideas is an AI tool
+for surfacing options. Mashing them together in V1 would have
+blurred both products and forced users to learn two mental models at
+once. I scoped the crossover out so each feature could land clean.
+The AI-generated scenarios idea becomes a future extension once
+Scenarios itself is well understood, not a V1 requirement.
+
+## The outcome
+
+
+Product analytics tracked the full cycle from scenario creation
+through owner sign-off. The before/after instrumentation showed a
+50% reduction in cycle time for projects using Scenarios. The 50%
+measurement here is specific and separate from Join Ideas' 50%
+number; Ideas measured material-cost savings via the estimate tool,
+and Scenarios measures sign-off cycle time via product analytics.
+They're different metrics on different parts of the workflow, and
+it took disciplined instrumentation to disambiguate them.
+
+The surprise was the architect audience. Product analytics surfaced
+that 20% of Scenarios users were architects, a user segment Join
+hadn't been designing for. Architects weren't supposed to be in the
+target audience, but the comparison view matched how they presented
+design options to their clients, and they found the feature on their
+own. That discovery reshaped how Join thought about the product's
+reach going forward.
+
+Customer quotes captured the read from real projects:
+
+> "This is like a happy meal for decision making. Everything you
+> need, all in one place."
+
+> "We used Scenarios on a $150M job and it cut our decision timeline
+> in half."
+
+> "For the first time, our owners can actually see the cost impact
+> of their choices before committing."
+
+The $150M-project quote is the one that grounded the metric in
+reality. A 50% lift on a decision cycle at that scale moved real
+money and real schedule risk.
+
+## How the project ran
+
+
+I'm Head of Design at Join and led design on this project end-to-
+end. My team at the time was 2 full-time product designers, 1 part-
+time contractor, and 1 marketing designer, plus cross-functional
+partners in product and engineering. The two junior product
+designers contributed to research and interaction design and used
+Scenarios as a learning opportunity to run their own customer
+research cycles.
+
+The AI fluency angle on this project was visual density validation.
+Early iterations of the comparison grid packed every dimension into
+the view at once. Density overwhelmed owners, which testing made
+clear. I built AI-coded prototypes of the comparison grid running
+against real Join data to A/B-test density patterns in code before
+engineering committed to any version. The ability to pressure-test
+"how much information is too much" in a working prototype, against
+real project data, changed the conversation from "which mock looks
+best" to "which prototype works when you actually use it."
+
+<Lessons
+  lessons={[
+    "Ask what unit the user is deciding on. A product built around the wrong unit will feel slow no matter how polished each screen is.",
+    "Non-ranked comparisons are a specific craft skill. Ranked UIs are the default but they undermine sophisticated decision-makers.",
+    "Unexpected audiences are signals, not noise. Twenty percent architect usage reshaped product direction more than any planned feature did.",
+  ]}
+/>
+
+<details>
+  <summary><strong>What I'd do differently</strong></summary>
+
+  **Land on the right visual density earlier.** Early iterations
+  crammed every dimension into the comparison view at once. Testing
+  kept pointing toward a leaner layout, but the design work kept
+  trying to make the dense version work first. Getting to the final
+  lean comparison took more iteration than it should have. Next
+  time I'd start lean and add density only when testing showed it
+  was actively missed, rather than starting dense and stripping
+  away.
+
+  **The disambiguation from Join Ideas.** Scenarios and Ideas both
+  claim a 50% decision-time lift. The numbers are real and
+  measured, but they're on different parts of the workflow. Ideas'
+  50% is on material-cost decisions inside the estimate tool.
+  Scenarios' 50% is on the sign-off cycle between contractor and
+  owner. In hindsight I'd surface the different methodologies
+  earlier in internal conversations so the two features don't echo
+  in dashboards or investor updates.
+
+</details>
