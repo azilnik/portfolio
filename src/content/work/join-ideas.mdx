@@ -3,7 +3,7 @@ title: "An AI recommendation engine that saved a construction customer $500K in 
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Join Ideas is an LLM recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A customer saved $500K in the first month."
+description: "I pivoted a materials marketplace into an AI recommendation engine after customer research killed the original direction. One enterprise customer saved $500K in month one."
 heroImage: "./images/join-ideas-01.png"
 thumbnail: "./images/join-ideas-01.png"
 thumbnailAlt: "Join Ideas, an AI-powered material recommendation engine for construction estimates"
@@ -20,7 +20,7 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import PivotCard from "../../components/mdx/PivotCard.astro";
+import Callout from "../../components/mdx/Callout.astro";
 import PressQuote from "../../components/mdx/PressQuote.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
@@ -28,50 +28,50 @@ import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-Construction estimators lose money they don't know about. A less experienced estimator specs a finish at full cost when an alternate would work for half. The gap is institutional knowledge, and it compounds across every project.
+Join is like Jira for construction. Think project management, but for the people who build actual buildings. I'm Head of Design, leading a small team and shipping product across the platform.
 
-Leadership wanted to solve this with a materials marketplace. Customer research showed estimators don't browse catalogs. They don't have time, and they don't know what to search for. What they need is for the right alternatives to surface inside the workflow they already trust.
+Construction estimators lose money they don't know about. A less experienced estimator specs a finish at full cost when an alternate material would do the same job for half. That gap is experience, and it compounds across every line item in every project.
 
-<PivotCard
-  summary="From a materials marketplace to an LLM recommendation engine"
-  cause="Estimators don't browse. The real gap is institutional knowledge."
-  result="Shipped in 2 months. Customer saved $500K in month one."
-/>
+Leadership wanted to solve this with a materials marketplace. I ran 3-5 deep customer interviews to validate the direction before we committed engineering resources. Every single estimator told us some version of the same thing: they didn't know what alternatives existed. The gap wasn't time. It was knowledge. Nobody browses a catalog when they don't know what to search for.
 
-## The product
+I brought the findings to the CEO, VP of Partnerships, and Head of Product Development. The research pointed clearly toward a recommendation engine instead of a marketplace. I took on both the design and an acting PM role for the project and we shipped in two months.
 
-Join Ideas surfaces AI-generated suggestions as contextual carousels ranked by cost-saving potential. The design problem isn't the carousels. It's what to do when the LLM is wrong. These are decisions that shape real buildings.
+## Designing for trust when the AI is wrong
+
+The core design challenge here is trust. These are suggestions that affect real buildings and real budgets. I had to figure out what to do when the AI is wrong, because it would be wrong.
+
+I initially hoped the model could run with more autonomy. Customers pushed back hard. Estimators told me directly that they wouldn't trust any suggestion without human validation, and they were right to feel that way. The AI's biggest weakness was that it didn't understand the specifics of each project. It would suggest alternatives that made sense generically but not for the actual job at hand.
+
+So I designed the system around a simple principle: the AI proposes, but a human always decides.
 
 <FullBleedImage
   src={joinIdeas02}
   alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
 />
 
-**A human curation layer.** A materials researcher validates every LLM suggestion before it reaches an estimator. The LLM is a first-draft engine, not the source of truth. This made the system trustworthy on day one.
+The biggest call was adding a human review step. A materials researcher validates every AI suggestion before it reaches an estimator. The model is a first-draft engine, not a source of truth. I used AI-coded prototypes to test how the suggestion cards would look and behave with real estimate data before engineering built anything. That let me figure out how much information each card could hold before it got overwhelming.
 
-**Provenance by classification code.** Each card shows UniFormat and MasterFormat codes. Estimators told us the codes were non-negotiable for trust. Without them, they wouldn't take a suggestion seriously.
+Each card also shows UniFormat and MasterFormat classification codes. In interviews, the codes came up as non-negotiable for trust. Without them, they wouldn't take a suggestion seriously. It's a small detail that carries enormous weight in this industry.
 
 <FullBleedImage
   src={joinIdeas04}
   alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
 />
 
-**Forced side-by-side comparison.** Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The human decides. Nothing gets auto-applied.
+On top of that, every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The estimator decides. Nothing gets auto-applied.
 
 <FullBleedImage
   src={joinIdeas03}
   alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
 />
 
+## What I chose not to build
+
+Supplier integration and peer benchmarking both came up during research. Neither made the cut for V1. Supplier integration would have required partnerships and data feeds that didn't exist yet. Peer benchmarking needed enough customer data to be meaningful, and we weren't there. Both were good ideas for later. Neither was worth slowing down the launch.
+
 ## Results
 
-Within 30 days of launch, one enterprise customer saved $500K on their first project estimate. That wasn't a prediction. It was money the customer would have spent and didn't. Decision-making time dropped 50% across the product.
-
-<PressQuote
-  quote="Join secures new cash to build a decision-making platform for construction."
-  source="TechCrunch"
-  url="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/"
-/>
+Within 30 days of launch, one enterprise customer saved $500K on their first project estimate. That wasn't a projection. The customer would have spent that money and didn't, measured through before-and-after comparisons on accepted suggestions in the estimate tool. Decision-making time dropped 50% across the product.
 
 <PressQuote
   quote="Join secures growth investment from construction giants DPR Construction and STO Building Group."
@@ -79,11 +79,18 @@ Within 30 days of launch, one enterprise customer saved $500K on their first pro
   url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group"
 />
 
+## Reflection
+
+If I ran this again, I'd push harder for better data about real projects earlier in the process. The AI's generic suggestions were the biggest friction point after launch. The review step catches them, but that's a human solving a data problem. Better data would let the system carry more of its own weight.
+
+I'd also rethink how we measure accuracy over time. We built good tracking for cost savings but less for suggestion quality. Knowing which suggestions the review step consistently rejects would have given engineering a clearer signal for improving the AI.
+
 <Credits
   credits={[
-    { role: "Design", people: "Ari Zilnik" },
-    { role: "Product", people: "Travis Saxton" },
-    { role: "Engineering", people: "Join engineering team" },
+    { role: "Design + acting PM", people: "Ari Zilnik" },
+    { role: "Materials research", people: "Kyle Willis", url: "https://www.linkedin.com/in/kyle-willis-ra-7a813894/" },
+    { role: "Engineering", people: "Kevin Rakestraw", url: "https://www.linkedin.com/in/kevinrakestraw/" },
+    { role: "Engineering", people: "Nick Zukoski", url: "https://www.linkedin.com/in/nick-zukoski-54a97b49/" },
   ]}
   note="Shipped at Join, 2024."
 />
