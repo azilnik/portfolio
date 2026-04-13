@@ -16,6 +16,13 @@
 import PageLayout from "./PageLayout.astro";
 import CaseStudyHero from "../components/casestudy/CaseStudyHero.astro";
 import ImpactMetrics from "../components/casestudy/ImpactMetrics.astro";
+import CaseStudyNav from "../components/casestudy/CaseStudyNav.astro";
+
+interface NavEntry {
+  slug: string;
+  title: string;
+  company: string;
+}
 
 interface Props {
   title: string;
@@ -25,9 +32,11 @@ interface Props {
   description: string;
   heroImage: ImageMetadata;
   metrics?: Array<{ label: string; value: string }>;
+  prevStudy?: NavEntry;
+  nextStudy?: NavEntry;
 }
 
-const { title, company, role, industry, description, heroImage, metrics } = Astro.props;
+const { title, company, role, industry, description, heroImage, metrics, prevStudy, nextStudy } = Astro.props;
 ---
 
 <PageLayout title={`${title} — ${company}`} description={description}>
@@ -46,7 +55,7 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
         padding-bottom: var(--theme-space-5);
       "
     >
-      <div class="mx-auto" style="max-width: var(--theme-prose-width);">
+      <div class="mx-auto animate-in" style="max-width: var(--theme-prose-width);">
         {/* Metadata row — small uppercase eyebrow that sits above the title.
             Tufte-ish "margin note" feel without going full sidenote. The
             bottom margin matches the work/about page eyebrows (space-2)
@@ -138,5 +147,11 @@ const { title, company, role, industry, description, heroImage, metrics } = Astr
     {metrics && metrics.length > 0 && (
       <ImpactMetrics metrics={metrics} />
     )}
+
+    {/* Prev/next navigation — sits outside the prose column and metrics
+        block so it reads as page-level navigation, not content. Every
+        competitive portfolio (Ainara Sainz, Tyler Kotsopoulos) has this
+        pattern. Without it, readers hit the bottom and bounce. */}
+    <CaseStudyNav prev={prevStudy} next={nextStudy} />
   </article>
 </PageLayout>

@@ -26,7 +26,6 @@ function getInitials(name: string): string {
 
 <section
   style="
-    background-color: var(--theme-bg);
     padding-top: var(--theme-space-7);
     padding-bottom: var(--theme-space-7);
   "
@@ -38,7 +37,7 @@ function getInitials(name: string): string {
     {/* Section eyebrow — sits above the carousel without becoming a heavy h2.
         Testimonials are evidence, not a feature, so the label should be quiet. */}
     <p
-      class="text-center text-xs font-semibold uppercase"
+      class="text-center text-xs font-semibold uppercase animate-in"
       style="
         color: var(--theme-text-tertiary);
         letter-spacing: var(--theme-tracking-wider);
@@ -56,12 +55,12 @@ function getInitials(name: string): string {
         the row regardless of quote length. */}
     <div
       id="testimonial-track"
-      class="hide-scrollbar flex snap-x snap-proximity items-stretch gap-6 overflow-x-auto pb-4"
+      class="hide-scrollbar flex snap-x snap-proximity items-stretch gap-6 overflow-x-auto px-6 pb-4 -mx-6 animate-in"
+      style="--delay: 100ms;"
     >
       {testimonials.map((t) => (
         <blockquote
-          class="flex flex-none w-full snap-center flex-col rounded-2xl p-8 shadow-sm sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-          style="background-color: var(--theme-surface);"
+          class="flex flex-none w-full snap-center flex-col p-8 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
         >
           <p
             class="leading-relaxed"

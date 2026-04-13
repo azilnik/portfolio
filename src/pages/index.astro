@@ -1,17 +1,17 @@
 ---
 /**
- * Homepage — the main landing page at ari.design.
- *
- * Sections: Hero → Testimonials → My Work (employer blocks with case studies).
+ * Homepage — Hero → Testimonials → Work → Side Projects.
  */
 import PageLayout from "../layouts/PageLayout.astro";
 import Hero from "../components/home/Hero.astro";
 import TestimonialCarousel from "../components/home/TestimonialCarousel.astro";
 import WorkSection from "../components/home/WorkSection.astro";
+import SideProjects from "../components/home/SideProjects.astro";
 ---
 
-<PageLayout title="Ari Zilnik" description="Ari Zilnik — Design leader who ships products that move business metrics. From AI-powered construction tools to crypto infrastructure. Head of Design at Join.">
+<PageLayout title="Ari Zilnik" description="Ari Zilnik — Design leader who builds products, teams, and systems. Head of Design at Join. Previously Blockdaemon and Gradle.">
   <Hero />
   <TestimonialCarousel />
   <WorkSection />
+  <SideProjects />
 </PageLayout>

@@ -1,0 +1,76 @@
+---
+/**
+ * Credits — team attribution at the bottom of a case study.
+ *
+ * Inspired by Ainara Sainz, who credits the full team on every project.
+ * A Credits section signals leadership and collaboration more
+ * powerfully than any paragraph about org structure.
+ *
+ * Usage in MDX:
+ *   <Credits
+ *     credits={[
+ *       { role: "Design", people: "Ari Zilnik" },
+ *       { role: "Product", people: "Jane Doe" },
+ *       { role: "Engineering", people: "Alice, Bob, Charlie" },
+ *     ]}
+ *     note="Made with ... at Join."
+ *   />
+ */
+
+interface CreditEntry {
+  role: string;
+  people: string;
+}
+
+interface Props {
+  credits: CreditEntry[];
+  note?: string;
+}
+
+const { credits, note } = Astro.props;
+---
+
+<div
+  style="
+    margin-top: var(--theme-space-6);
+    padding-top: var(--theme-space-4);
+    border-top: 1px solid var(--theme-border);
+  "
+>
+  <p
+    class="text-xs font-semibold uppercase"
+    style="
+      color: var(--theme-text-tertiary);
+      letter-spacing: var(--theme-tracking-wider);
+      margin-bottom: var(--theme-space-3);
+    "
+  >
+    Credits
+  </p>
+
+  <div class="space-y-1">
+    {credits.map((c) => (
+      <p
+        class="text-sm"
+        style="color: var(--theme-text-secondary);"
+      >
+        <span class="font-semibold" style="color: var(--theme-text-primary);">
+          {c.role}:
+        </span>{" "}
+        {c.people}
+      </p>
+    ))}
+  </div>
+
+  {note && (
+    <p
+      class="text-sm"
+      style="
+        color: var(--theme-text-tertiary);
+        margin-top: var(--theme-space-3);
+      "
+    >
+      {note}
+    </p>
+  )}
+</div>

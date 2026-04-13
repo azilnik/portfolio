@@ -3,7 +3,7 @@ title: "Rebuilding Join's navigation around how users actually think, dropping s
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Join's navigation had drifted feature-by-feature until users couldn't find the things they used every day. A project-first rebuild dropped support tickets by 32% and made the org-level views people actually reach for."
+description: "Join's navigation had drifted feature-by-feature until users couldn't find things they used every day. A project-first rebuild dropped support tickets 32%."
 heroImage: "./images/join-nav-hero.png"
 thumbnail: "./images/join-nav-hero.png"
 thumbnailAlt: "Join's redesigned project-first navigation with zoom-in and zoom-out rhythm"
@@ -18,229 +18,66 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import MetaCards from "../../components/mdx/MetaCards.astro";
 import PivotCard from "../../components/mdx/PivotCard.astro";
-import Lessons from "../../components/mdx/Lessons.astro";
+import Credits from "../../components/mdx/Credits.astro";
 
 import joinNav02 from "./images/join-nav-02.png";
 import joinNav03 from "./images/join-nav-03.png";
 import joinNav04 from "./images/join-nav-04.png";
 import joinNav05 from "./images/join-nav-05.png";
 
-<MetaCards
-  cards={[
-    {
-      label: "Role",
-      value: "Head of Design",
-      note: "Led a team of 4 across product and marketing design",
-    },
-    {
-      label: "Company",
-      value: "Join",
-      note: "Like Jira for construction",
-    },
-    {
-      label: "Surface",
-      value: "Every page",
-      note: "Architecture change across the whole product",
-    },
-  ]}
-/>
+Join is like Jira for construction. The product surface had grown feature-by-feature, and over time the labeling drifted away from what users actually thought about. Features were buried behind non-obvious labels. The app had no clear rhythm between "I'm working inside a specific project" and "show me my whole portfolio at once." Users got lost between the two views.
 
-## The problem
-
-
-Join is like Jira for construction. Think Jira, but for the people
-who build actual buildings. Construction teams use it to collaborate
-around building plans and manage the decisions that move a project
-forward.
-
-Join's product surface had grown feature-by-feature as the company
-shipped. Each new capability claimed its spot in the navigation, and
-over time the labeling drifted away from what users actually thought
-about. Two symptoms stacked on each other. Features were buried
-behind non-obvious labels, so users couldn't find them even when they
-used them every day. And the app had no clear rhythm between
-"I'm working inside a specific project" and "show me my whole
-portfolio at once." Users got lost between the two views without
-knowing how to get back.
-
-The signal came from both sides. Customer success was absorbing
-support tickets clustered around "how do I get to X," and usability
-sessions confirmed users couldn't describe Join's structure in the
-product's own terms. They described it in terms of projects.
-
-## The insight
-
-
-Early explorations leaned toward a flatter feature-first nav with
-better labels. Research showed relabeling wasn't enough. The problem
-was that features were top-level at all. The mental-model shift
-happened in the third or fourth round of usability testing, when
-users kept describing Join in terms of projects no matter what the
-nav labels said.
+Customer success was absorbing support tickets clustered around "how do I get to X." Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
 
 <PivotCard
   summary="From feature-first nav to project-first nav"
-  cause="Users kept describing their work in terms of projects, not in terms of Join's features."
-  result="Rebuilt the nav around projects with a two-click zoom rhythm. Support tickets dropped 32%."
+  cause="Users described their work in terms of projects, not features."
+  result="Rebuilt around projects with a two-click zoom rhythm. Support tickets dropped 32%."
 />
 
-The second half of the story was the rhythm between project-level
-work and portfolio-level oversight. Users needed to move fluidly
-between "I'm working inside project X" and "show me all my projects
-at once" without losing their place. The redesign built a two-click
-path in each direction: two clicks from any deep view out to the
-full portfolio, two clicks back in to any specific view inside a
-project.
-
-## The solution
-
+## The product
 
 <FullBleedImage
   src={joinNav02}
   alt="Project-first navigation showing a single project's context with features nested as sub-navigation"
 />
 
-**Projects as the top-level unit.** The nav's top level isn't a list
-of features anymore. It's the portfolio, then the specific project
-you're working in. Features show up as sub-navigation inside the
-project's context, sequenced to match the phase of work the project
-is in.
+**Projects as the top-level unit.** The nav isn't a list of features anymore. It's the portfolio, then the specific project you're in. Features show up as sub-navigation inside the project's context, sequenced to match the phase of work.
 
 <FullBleedImage
   src={joinNav03}
   alt="The two-click rhythm from portfolio overview into a specific project"
 />
 
-**A two-click zoom rhythm.** From the portfolio overview, two clicks
-take you into any view inside a specific project. From deep inside a
-project, two clicks take you back out to the portfolio. Symmetric.
-The rhythm is the part users feel, even if they couldn't articulate
-why the new nav is easier.
+**A two-click zoom rhythm.** From the portfolio overview, two clicks take you into any view inside a project. From deep inside a project, two clicks take you back out. Symmetric. The rhythm is the part users feel, even if they can't articulate why it's easier.
 
 <FullBleedImage
   src={joinNav04}
-  alt="Feature discovery happening as a side effect of project context rather than through active teaching"
+  alt="Feature discovery happening as a side effect of project context"
 />
 
-**Feature discovery as a side effect of project context.** When users
-land on a project, the nav surfaces the features relevant to that
-project's current phase. An estimating project surfaces estimation
-features. A pre-construction project surfaces Ideas and Scenarios.
-Feature discovery becomes a natural consequence of being in a
-project, not a thing the product has to actively teach.
+**Feature discovery as a side effect.** When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery becomes natural, not something the product has to teach.
 
 <FullBleedImage
   src={joinNav05}
   alt="Final navigation design in a real Join project view"
 />
 
-{/* [VISUAL: Motion artifact needed. A short screen recording (~15s)
-    showing the two-click zoom-in / zoom-out rhythm between a deep
-    project view and the portfolio overview, and back. The rhythm is
-    the design's thesis and static screens can't communicate it.
-    Convert via scripts/convert-video.sh to MP4 + GIF fallback, drop
-    in as a <VideoPlayer> near the "two-click zoom rhythm" section.
-    Priority: P0. */}
+## Results
 
-### What I chose not to build
-
-**A universal search or command-k jump-anywhere layer.** Power users
-had asked for it, and several Join competitors were starting to ship
-it. I deferred it for two reasons.
-
-First, it required indexing infrastructure Join didn't have yet.
-Building the infra alongside the nav redesign would have doubled the
-scope of the project and pushed the rollout by quarters.
-
-Second and more important: the underlying problem was mental-model,
-not findability. A command-k layer would have treated the symptom
-without addressing the cause. The symptom was that users couldn't
-find things. The cause was that users didn't know what to look for
-because the hierarchy was wrong. Shipping the project-first nav
-first meant an eventual search layer could inherit a clean mental
-model rather than papering over a broken one.
-
-## The outcome
-
-
-Support tickets on navigation-related questions dropped by 32% after
-launch, measured against the customer success team's existing ticket
-taxonomy. The ticket signal was the most useful number because it
-connected the design change directly to a business outcome: less
-time customer success spent pointing users to features they couldn't
-find.
-
-Qualitatively, users started reaching for the org-level portfolio
-views in ways they hadn't before. The zoom-out had been there in the
-old nav, technically, but nobody used it because there wasn't a
-clear path back in. Customer quotes captured the reaction:
+Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had existed in the old nav, technically, but nobody used it because there wasn't a clear path back in.
 
 > "The team at Join is very brave for tackling this kind of UX issue."
 
-> "So valuable for end users and their organizations as they will
-> discover and use more of Join's capabilities."
+> "So valuable for end users and their organizations as they will discover and use more of Join's capabilities."
 
-> "Nice. Nav is one of the hardest parts to change in an app. Usually
-> there are lots of different opinions from users."
-
-## How the project ran
-
-
-I'm Head of Design at Join and led this work end-to-end. My team at
-the time was 2 full-time product designers, 1 part-time contractor,
-and 1 marketing designer. The two junior product designers
-contributed to the nav work and used the project as a learning
-opportunity to run their own usability research cycles, building on
-the research habit we established during Join Ideas.
-
-The nav redesign was the first project at Join where I leaned on
-AI-coded prototypes and AI-assisted research synthesis as the
-primary communication artifacts. AI-coded prototypes let leadership
-click through a real project in the new model and feel the rhythm,
-not just look at static mocks. AI-assisted research synthesis let me
-cluster usability findings across dozens of sessions faster than
-manual synthesis would have, then verify the clusters by re-reading
-source material. The combined workflow compressed the communication
-timeline without shortening the research.
-
-The hardest part of the project was cross-functional, not craft.
-Every feature team at Join owned a surface in the old nav and had
-opinions about where their feature should live. Getting alignment
-on a project-first model meant asking every team to give up their
-top-level spot and trust that project context would surface their
-feature when it mattered. Customer success was the advocate that
-made the case easier; they were absorbing the support tickets
-directly and had the strongest motivation to ship the change.
-
-<Lessons
-  lessons={[
-    "Relabeling is a symptom fix. Mental-model work is the real design problem in a mature product.",
-    "When users describe your product in terms the product doesn't use, the product is wrong, not the users.",
-    "AI-coded prototypes are the right communication artifact for interaction-model arguments. Static mocks lose the rhythm.",
+<Credits
+  credits={[
+    { role: "Design lead", people: "Ari Zilnik" },
+    { role: "Design", people: "Join design team" },
+    { role: "Product", people: "Travis Saxton" },
+    { role: "Engineering", people: "Join engineering team" },
   ]}
+  note="Shipped at Join, 2024."
 />
-
-<details>
-  <summary><strong>What I'd do differently</strong></summary>
-
-  **Ship a progressive rollout, not a single switch.** The new nav
-  went to all users at the same time, and a few edge-case workflows
-  broke in ways that didn't surface until users hit them in the wild.
-  Nothing catastrophic, but enough friction that a phased rollout
-  would have caught the long tail before it hit support tickets. Next
-  time I'd A/B test the new nav on a subset of customers first, let
-  the edge cases surface, and then expand.
-
-  **A note on the old "10x feature use" claim.** An earlier version
-  of this case study claimed a "10x increase in organizational
-  feature use." That figure was directional, not measured with
-  rigorous instrumentation, and I'm not comfortable defending the
-  multiplier. What I can say honestly: use of the org-level views
-  rose sharply after the redesign, and the two-click rhythm was the
-  reason. Rigorous instrumentation is something I'd set up earlier in
-  the project lifecycle next time so post-launch claims have a clean
-  measurement to sit on.
-
-</details>

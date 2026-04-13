@@ -13,10 +13,10 @@ export interface NavLink {
 }
 
 export const navLinks: NavLink[] = [
-  { label: "Work", href: "/work" },
+  { label: "Work", href: "/#work" },
   { label: "About", href: "/about" },
-  // Resume link — TODO: replace with generated PDF URL from resume-builder
-  { label: "Resume", href: "https://www.linkedin.com/in/arizilnik/", external: true },
-  // Opens the user's email client.
-  { label: "Get in touch", href: "mailto:ari@ari.design", external: true },
+  // "Get in touch" lives in the hero and footer, not the nav — keeps the
+  // nav clean like the competitive set (Ainara: Work + Mentorship, Tyler:
+  // Work + About, Danny: Home + Playground + Journal).
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/azilnik/", external: true },
 ];

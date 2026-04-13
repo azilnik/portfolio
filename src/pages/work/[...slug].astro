@@ -5,19 +5,37 @@
  * Generates one page per case study in the `work` content collection.
  * Uses `getStaticPaths()` so Astro knows all the URLs at build time.
  * The MDX body is rendered inside the CaseStudyLayout.
+ *
+ * Computes prev/next adjacency from the sorted collection so the
+ * CaseStudyNav component can link readers to adjacent case studies.
  */
 import { getCollection, render } from "astro:content";
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 
 export async function getStaticPaths() {
-  const work = await getCollection("work", ({ data }) => !data.draft);
-  return work.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  const work = (await getCollection("work", ({ data }) => !data.draft))
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+  return work.map((entry, index) => {
+    const prev = index > 0 ? work[index - 1] : undefined;
+    const next = index < work.length - 1 ? work[index + 1] : undefined;
+
+    return {
+      params: { slug: entry.id },
+      props: {
+        entry,
+        prevStudy: prev
+          ? { slug: prev.id, title: prev.data.title, company: prev.data.company }
+          : undefined,
+        nextStudy: next
+          ? { slug: next.id, title: next.data.title, company: next.data.company }
+          : undefined,
+      },
+    };
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, prevStudy, nextStudy } = Astro.props;
 const { Content } = await render(entry);
 ---
 
@@ -29,6 +47,8 @@ const { Content } = await render(entry);
   description={entry.data.description}
   heroImage={entry.data.heroImage}
   metrics={entry.data.metrics}
+  prevStudy={prevStudy}
+  nextStudy={nextStudy}
 >
   <Content />
 </CaseStudyLayout>

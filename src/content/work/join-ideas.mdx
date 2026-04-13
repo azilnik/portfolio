@@ -3,7 +3,7 @@ title: "An AI recommendation engine that saved a construction customer $500K in 
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Join Ideas is an LLM recommendation engine inside Join, a construction project management tool. As sole designer and acting PM, I shipped it in two months after customer research pivoted the product."
+description: "Join Ideas is an LLM recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A customer saved $500K in the first month."
 heroImage: "./images/join-ideas-01.png"
 thumbnail: "./images/join-ideas-01.png"
 thumbnailAlt: "Join Ideas, an AI-powered material recommendation engine for construction estimates"
@@ -11,70 +11,26 @@ employer: "join"
 sortOrder: 1
 draft: false
 metrics:
-  - label: "Construction savings for one enterprise customer in the first 30 days"
+  - label: "Construction savings for one enterprise customer in 30 days"
     value: "$500K"
-  - label: "Reduction in customer decision-making time"
+  - label: "Reduction in decision-making time"
     value: "50%"
-  - label: "From research kickoff to production launch, sole designer + acting PM"
+  - label: "From research kickoff to launch"
     value: "2 months"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import MetaCards from "../../components/mdx/MetaCards.astro";
 import PivotCard from "../../components/mdx/PivotCard.astro";
-import Impact from "../../components/mdx/Impact.astro";
-import Lessons from "../../components/mdx/Lessons.astro";
+import PressQuote from "../../components/mdx/PressQuote.astro";
+import Credits from "../../components/mdx/Credits.astro";
 
 import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-<MetaCards
-  cards={[
-    {
-      label: "Role",
-      value: "Head of Design",
-      note: "Sole designer and acting PM for the full arc",
-    },
-    {
-      label: "Company",
-      value: "Join",
-      note: "Project management for construction teams",
-    },
-    {
-      label: "Timeline",
-      value: "2 months",
-      note: "Research kickoff to production launch",
-    },
-  ]}
-/>
+Construction estimators lose money they don't know about. A less experienced estimator specs a finish at full cost when an alternate would work for half. The gap is institutional knowledge, and it compounds across every project.
 
-## The problem
-
-<Impact>
-  Estimators were losing six figures per project to material substitutions
-  they didn't know existed.
-</Impact>
-
-Construction estimators lose money they don't know about. A less
-experienced estimator specs a finish at full cost. An alternate would
-work for half. The gap is institutional knowledge, and it compounds
-across every project and every estimator.
-
-Leadership wanted to solve this with a materials marketplace. My job was
-to pressure-test the concept before we built anything.
-
-## The insight
-
-<Impact>
-  Customer research showed estimators didn't need a marketplace. They
-  needed the knowledge gap closed from inside their current workflow.
-</Impact>
-
-Estimators don't have time to browse catalogs. They don't know what to
-search for in the first place. What they need is a tool that surfaces
-the options they'd never thought to look for, directly inside the
-workflow they already trust.
+Leadership wanted to solve this with a materials marketplace. Customer research showed estimators don't browse catalogs. They don't have time, and they don't know what to search for. What they need is for the right alternatives to surface inside the workflow they already trust.
 
 <PivotCard
   summary="From a materials marketplace to an LLM recommendation engine"
@@ -82,135 +38,52 @@ workflow they already trust.
   result="Shipped in 2 months. Customer saved $500K in month one."
 />
 
-Three leaders had bought into the marketplace direction, and engineering
-was already scoped against it. I made the case to the VP of Partnerships
-first because her scope was most affected. Once she moved, the CEO and
-Head of Product Development followed. The evidence carried the move, not
-the argument.
+## The product
 
-## The solution
-
-<Impact>
-  Three design decisions kept the human as final decision-maker while the
-  LLM did the research.
-</Impact>
-
-Join Ideas surfaces AI-generated suggestions as contextual carousels,
-ranked by cost-saving potential. The interesting design problem isn't
-the carousels. It's what to do when the LLM is wrong. These are
-decisions that shape real buildings where real people live and work.
+Join Ideas surfaces AI-generated suggestions as contextual carousels ranked by cost-saving potential. The design problem isn't the carousels. It's what to do when the LLM is wrong. These are decisions that shape real buildings.
 
 <FullBleedImage
   src={joinIdeas02}
   alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
 />
 
-{/* [VISUAL: Motion artifact needed. 15-30 second screen recording of the
-    core Join Ideas flow: carousel scroll, card click, detail view with
-    cost comparison, then "Add Idea to Project." Convert via
-    scripts/convert-video.sh to MP4 + GIF fallback. Drop as a
-    <VideoPlayer> here. Priority: P0. Awaits Ari's screen recording. */}
+**A human curation layer.** A materials researcher validates every LLM suggestion before it reaches an estimator. The LLM is a first-draft engine, not the source of truth. This made the system trustworthy on day one.
 
-### Three decisions, ranked by impact
-
-**1. A human curation layer.** A materials researcher at Join validates
-every LLM suggestion before it surfaces to estimators. The LLM is a
-first-draft engine, not the source of truth. This was the single most
-important decision. It made the system trustworthy on day one, even
-while the LLM was imperfect.
-
-**2. Provenance by classification code.** Each card shows UniFormat and
-MasterFormat codes, the industry's standard taxonomy. Estimators told
-us the codes were non-negotiable for trust. Without them, they wouldn't
-take a suggestion seriously.
+**Provenance by classification code.** Each card shows UniFormat and MasterFormat codes. Estimators told us the codes were non-negotiable for trust. Without them, they wouldn't take a suggestion seriously.
 
 <FullBleedImage
   src={joinIdeas04}
   alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
 />
 
-**3. Forced side-by-side cost comparison.** Clicking a suggestion opens
-a required comparison view. Every recommendation has to be weighed
-against alternatives before an estimator can accept it. The model
-suggests. The human decides.
+**Forced side-by-side comparison.** Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The human decides. Nothing gets auto-applied.
 
 <FullBleedImage
   src={joinIdeas03}
-  alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart against alternatives"
+  alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
 />
 
-Nothing gets auto-applied. The "Add Idea to Project" action sends a
-suggestion into the estimate only on explicit approval, and from there
-it flows to the owner and into the actual building drawings.
+## Results
 
-### What I chose not to build
+Within 30 days of launch, one enterprise customer saved $500K on their first project estimate. That wasn't a prediction. It was money the customer would have spent and didn't. Decision-making time dropped 50% across the product.
 
-**Supplier integration.** Real-time pricing would have tripled the
-engineering timeline. The recommendation engine delivered value without
-it. The architecture supports pricing later.
+<PressQuote
+  quote="Join secures new cash to build a decision-making platform for construction."
+  source="TechCrunch"
+  url="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/"
+/>
 
-**Peer benchmarking.** Cross-company comparisons raised confidentiality
-concerns we weren't ready to solve. I flagged it as a fast-follow once
-data governance was in place.
+<PressQuote
+  quote="Join secures growth investment from construction giants DPR Construction and STO Building Group."
+  source="EIN Presswire, 2025"
+  url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group"
+/>
 
-## The outcome
-
-<Impact>
-  $500K saved for one customer in month one. Decisions 50% faster across
-  the product. Two months from kickoff to launch.
-</Impact>
-
-Within 30 days of rollout, one enterprise customer saved $500K on their
-first project estimate. Join measured the delta by comparing original
-line items against the ones swapped via accepted Ideas suggestions. That
-wasn't a prediction. It was money the customer would have spent and
-didn't.
-
-Across the product, decision-making time dropped by 50%. Estimators who
-previously spent hours researching alternates could now get relevant,
-project-specific suggestions in seconds.
-
-## How the project ran
-
-<Impact>
-  AI-coded prototypes carried the pivot conversation. Two junior
-  designers left the project running research independently.
-</Impact>
-
-I built AI-coded prototypes against real LLM responses before engineering
-committed resources. Not a mockup. A working thing leadership could try.
-That artifact did more for the pivot conversation than any deck.
-
-I also used the project to level up the team. Two junior designers at
-Join sat in on interviews and watched findings become design decisions.
-By the end, both were running their own research independently.
-
-<Lessons
-  lessons={[
-    "Lead pivots with user evidence, not personal conviction.",
-    "In AI products, the human curation loop is the real product.",
-    "Descope V1 aggressively to ship fast.",
+<Credits
+  credits={[
+    { role: "Design", people: "Ari Zilnik" },
+    { role: "Product", people: "Travis Saxton" },
+    { role: "Engineering", people: "Join engineering team" },
   ]}
+  note="Shipped at Join, 2024."
 />
-
-<details>
-  <summary><strong>Research details and longer reflection</strong></summary>
-
-**Methodology.** Intensive interviews with a small cohort of three to
-five key customers over two weeks, followed by a beta release to
-reference customers to validate the direction before general
-availability.
-
-**The curation bottleneck.** The materials researcher who validates
-suggestions is a real bottleneck. At 10x the current volume, that role
-won't keep up. I sketched an admin interface for curation but
-deprioritized it for launch. That was the right call for shipping fast.
-The operational cost of curation is the thing that will determine
-whether Join Ideas scales.
-
-**The pilot I'd run next time.** The initial rollout gave us strong
-adoption signals, but watching the same estimators use Join Ideas
-across multiple projects over weeks and months would have sharpened
-the view of how the tool affects estimator judgment over time.
-
-</details>
