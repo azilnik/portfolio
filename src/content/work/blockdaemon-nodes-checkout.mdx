@@ -3,7 +3,7 @@ title: "How reframing node deployment as a purchase flow drove 23x usage"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Crypto Infrastructure"
-description: "Turned a multi-week sales-led deployment process into self-serve infrastructure by treating blockchain node provisioning like a shopping cart. 23x usage growth."
+description: "Treated blockchain node provisioning like a shopping cart. Self-serve replaced a multi-week sales process."
 heroImage: "./images/bd-checkout-hero.png"
 thumbnail: "./images/bd-checkout-hero.png"
 thumbnailAlt: "Blockdaemon Nodes checkout flow, a self-serve blockchain node deployment experience"
@@ -18,7 +18,6 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import PivotCard from "../../components/mdx/PivotCard.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import bdCheckout01 from "./images/bd-checkout-01.png";
@@ -26,38 +25,38 @@ import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
-Blockdaemon is like AWS for crypto. Before this project, deploying a blockchain node meant filing a support ticket and waiting on a sales cycle. Each deployment took days to weeks and consumed engineering time per customer.
+Blockdaemon is like AWS for crypto. I joined as the founding designer after Blockdaemon acquired my consultancy. The checkout was my first real product.
 
-I joined as the founding designer after Blockdaemon acquired my consultancy. The checkout was my first real product.
+Nodes Checkout is a self-serve purchase flow for blockchain node deployment. Before it, deploying a node meant filing a support ticket and waiting on a sales cycle that ran days to weeks and burned engineering time per customer. The checkout collapses that into minutes.
 
-<PivotCard
-  summary="From a configuration wizard to a purchase checkout"
-  cause="Customers associated wizards with forms to fill out, not decisions to make."
-  result="Self-serve pattern landed without instruction. Usage grew 23x."
-/>
+The original concept was a configuration wizard. Customers associated wizards with forms to fill out, not decisions to make. Reframing the flow as a purchase let the self-serve pattern land without instruction. The shape was simple: chain selection, configuration, review, commit.
 
-## The product
+## Purchase metaphor at every step
+
+Every screen reads like e-commerce, not a configuration wizard. DevOps engineers are used to procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier.
 
 <FullBleedImage
   src={bdCheckout01}
   alt="Blockdaemon Nodes checkout main screen with chain selection and configuration summary"
 />
 
-**A purchase metaphor at every step.** Every screen reads like e-commerce, not a configuration wizard. DevOps engineers are used to procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier.
+## Chain-aware progressive disclosure
+
+Every blockchain has its own configuration shape. The checkout only surfaces the fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default.
 
 <FullBleedImage
   src={bdCheckout02}
   alt="Chain selection and network tier view inside the Blockdaemon checkout"
 />
 
-**Chain-aware progressive disclosure.** Every blockchain has its own configuration shape. The checkout only surfaces the fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default.
+## A review step that earned the commit
+
+Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. Procurement can sign off on a review screen in a way they can't sign off on a half-filled form.
 
 <FullBleedImage
   src={bdCheckout03}
   alt="Configuration detail view with resource sizing and regional settings"
 />
-
-**A review step that earned the commit.** Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. Procurement can sign off on a review screen in a way they can't sign off on a half-filled form.
 
 <FullBleedImage
   src={bdCheckout04}

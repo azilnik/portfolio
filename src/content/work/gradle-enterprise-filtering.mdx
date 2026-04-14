@@ -3,7 +3,7 @@ title: "Replacing a dozen dropdowns with one input that served both experts and 
 company: "Gradle"
 role: "Lead Designer"
 industry: "Developer Tools"
-description: "Replaced scattered filter dropdowns with a single typed-input omnibar, then drove adoption across every feature team at Gradle Enterprise. Users stopped exporting to Excel."
+description: "One typed-input omnibar replaced a dozen scattered dropdowns. Users stopped exporting to Excel."
 heroImage: "./images/gradle-filter-01.png"
 thumbnail: "./images/gradle-filter-01.png"
 thumbnailAlt: "Gradle Enterprise omnibar filtering a large build dataset by typed suggestions"
@@ -14,7 +14,6 @@ draft: false
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
-import PivotCard from "../../components/mdx/PivotCard.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import gradleFilter01 from "./images/gradle-filter-01.png";
@@ -23,38 +22,40 @@ import gradleFilter03 from "./images/gradle-filter-03.png";
 import gradleFilter04 from "./images/gradle-filter-04.png";
 import gradleFilter05 from "./images/gradle-filter-05.png";
 
-Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. The work is diagnosing slow tests and tracing flaky failures across thousands of daily builds.
+Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
-Every screen had half a dozen to a dozen filter dropdowns, each with its own taxonomy, each requiring a user to already know what they were filtering by. The behavioral signal was loud: users were exporting to CSV and slicing data in spreadsheets. A product that pushes customers into Excel has a filter problem, not a data problem.
+The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar surfaces filter conditions they can stack. The behavioral signal that triggered the project was loud: customers were exporting to CSV and slicing data in spreadsheets. A product that pushes users into Excel has a filter problem, not a data problem.
 
-<PivotCard
-  summary="From a visual query builder to a typed-input omnibar"
-  cause="The builder was too slow for experts and still too opaque for beginners."
-  result="One input served both. Power users went fast. New users discovered the filter taxonomy without docs."
-/>
+The original concept was a visual query builder with a clickable canvas. It was too slow for experts and still too opaque for beginners. A typed input made one interface serve both audiences.
 
-## The product
+## Typed suggestions surface the taxonomy
+
+A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. They learn the filter types by using them, not by reading documentation.
 
 <FullBleedImage
   src={gradleFilter01}
   alt="The Gradle Enterprise omnibar with typed filter suggestions"
 />
 
-**Typed suggestions surface the taxonomy.** A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. They learn the filter types by using them, not by reading documentation.
+## Implicit AND across stacked filters
+
+Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost.
+
+We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping: huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in a prototype and moved.
 
 <FullBleedImage
   src={gradleFilter02}
   alt="Stacked filter conditions visible as pills inside the omnibar input"
 />
 
-**Implicit AND across stacked filters.** Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost.
+## A pattern that fed every diagnostic view
+
+The omnibar wasn't just a filter for one screen. The same filter chain drove every downstream view: the scoped task list, the diagnostic detail, and the summary aggregations. One pattern, learned once, applied everywhere.
 
 <FullBleedImage
   src={gradleFilter03}
   alt="A filtered data view showing slow build tasks scoped to a specific module"
 />
-
-We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping: huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in a prototype and moved.
 
 <FullBleedImage
   src={gradleFilter04}
@@ -66,15 +67,15 @@ We prototyped against Gradle's actual build event data, not fixtures. Edge cases
   alt="A summary view of filter results with counts and trends"
 />
 
+## Results
+
+Users stopped asking for CSV exports. When a customer who has been living in Excel goes back to a product's native filtering, the interaction is landing.
+
 <FullBleedGif
   src="/videos/gradle-filter-06.gif"
   alt="The omnibar in use, showing typed suggestions and stacked conditions"
   caption="Typed suggestions and stacked filter conditions."
 />
-
-## Results
-
-Users stopped asking for CSV exports. When a customer who has been living in Excel goes back to a product's native filtering, the interaction is landing.
 
 > "We'd love to see the ability to add it to other filter selectors as well."
 

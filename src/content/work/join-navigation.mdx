@@ -3,7 +3,7 @@ title: "Rebuilding Join's navigation around how users actually think, dropping s
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Join's navigation had drifted feature-by-feature until users couldn't find things they used every day. A project-first rebuild dropped support tickets 32%."
+description: "Navigation had drifted feature-by-feature. A project-first mental-model rebuild dropped support tickets 32%."
 heroImage: "./images/join-nav-hero.png"
 thumbnail: "./images/join-nav-hero.png"
 thumbnailAlt: "Join's redesigned project-first navigation with zoom-in and zoom-out rhythm"
@@ -18,7 +18,6 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import PivotCard from "../../components/mdx/PivotCard.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import joinNav02 from "./images/join-nav-02.png";
@@ -26,38 +25,38 @@ import joinNav03 from "./images/join-nav-03.png";
 import joinNav04 from "./images/join-nav-04.png";
 import joinNav05 from "./images/join-nav-05.png";
 
-Join is like Jira for construction. The product surface had grown feature-by-feature, and over time the labeling drifted away from what users actually thought about. Features were buried behind non-obvious labels. The app had no clear rhythm between "I'm working inside a specific project" and "show me my whole portfolio at once." Users got lost between the two views.
+Join is like Jira for construction. As Head of Design, I lead a small team and ship product across the platform.
 
-Customer success was absorbing support tickets clustered around "how do I get to X." Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
+The new navigation rebuilds Join's structure around projects. The old surface had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was absorbing tickets clustered around "how do I get to X." Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
 
-<PivotCard
-  summary="From feature-first nav to project-first nav"
-  cause="Users described their work in terms of projects, not features."
-  result="Rebuilt around projects with a two-click zoom rhythm. Support tickets dropped 32%."
-/>
+Rebuilding around projects gave the app a clear rhythm: zoom in to one project, zoom out across the portfolio, two clicks in either direction.
 
-## The product
+## Projects as the top-level unit
+
+The nav isn't a list of features anymore. It's the portfolio, then the specific project you're in. Features show up as sub-navigation inside the project's context, sequenced to match the phase of work.
 
 <FullBleedImage
   src={joinNav02}
   alt="Project-first navigation showing a single project's context with features nested as sub-navigation"
 />
 
-**Projects as the top-level unit.** The nav isn't a list of features anymore. It's the portfolio, then the specific project you're in. Features show up as sub-navigation inside the project's context, sequenced to match the phase of work.
+## A two-click zoom rhythm
+
+From the portfolio overview, two clicks take you into any view inside a project. From deep inside a project, two clicks take you back out. Symmetric. The rhythm is the part users feel, even if they can't articulate why it's easier.
 
 <FullBleedImage
   src={joinNav03}
   alt="The two-click rhythm from portfolio overview into a specific project"
 />
 
-**A two-click zoom rhythm.** From the portfolio overview, two clicks take you into any view inside a project. From deep inside a project, two clicks take you back out. Symmetric. The rhythm is the part users feel, even if they can't articulate why it's easier.
+## Feature discovery as a side effect
+
+When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery becomes natural, not something the product has to teach.
 
 <FullBleedImage
   src={joinNav04}
   alt="Feature discovery happening as a side effect of project context"
 />
-
-**Feature discovery as a side effect.** When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery becomes natural, not something the product has to teach.
 
 <FullBleedImage
   src={joinNav05}
