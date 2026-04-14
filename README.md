@@ -182,11 +182,12 @@ The site auto-deploys via GitHub Actions on every push to `main`.
 
 ### Custom domain
 
-To point `ari.design` at GitHub Pages:
+The site is served at [ari.design](https://ari.design). If you fork this repo and want to use a different apex domain:
 
-1. Add a `CNAME` record for `ari.design` pointing to `azilnik.github.io`
-2. Create `public/CNAME` containing `ari.design`
-3. Push — GitHub will pick up the custom domain automatically
+1. At your DNS provider, add four A records on the apex pointing at GitHub Pages: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`. Apex domains can't use a `CNAME` record, so A records are required. Optional: add the matching AAAA records for IPv6 (`2606:50c0:8000-8003::153`) and a `www` CNAME pointing at `<user>.github.io`.
+2. Update `public/CNAME` to contain your domain (one line, no protocol).
+3. Update `astro.config.mjs` so `site:` matches your domain.
+4. Push. GitHub Pages reads the `CNAME` file from the deployed artifact and binds the repo to that domain, then provisions a Let's Encrypt cert.
 
 ## License
 
