@@ -21,6 +21,7 @@ const { study, featured = false } = Astro.props;
 
 <a
   href={`/work/${study.id}`}
+  data-goatcounter-click={`casestudy-click-${study.id}`}
   class:list={[
     "group block animate-in",
     featured ? "grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6" : "",

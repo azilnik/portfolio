@@ -25,7 +25,19 @@ const work = defineCollection({
       company: z.string(),
       role: z.string(),
       industry: z.string(),
-      description: z.string(), // Used for SEO <meta> description
+      // Short tagline. Shown as the lede paragraph on the case study page
+      // and as the card subtitle in the /work grid. Keep it punchy — 8-12 words.
+      description: z.string(),
+      // Optional SEO-optimized <title>. Keeps the <h1> editorial (long,
+      // narrative) while the browser tab / SERP gets a short, keyword-tuned
+      // title. Falls back to `${company} case study` in CaseStudyLayout.
+      // Pattern: "{feature} at {company}" (e.g. "Scenarios at Join").
+      seoTitle: z.string().max(60).optional(),
+      // Optional longer meta description (140-160 chars). Taglines in
+      // `description` are too short to work as meta descriptions — this
+      // field carries the keyword density for SEO. Falls back to
+      // `description` if not set.
+      seoDescription: z.string().max(200).optional(),
 
       // --- Images (processed by Astro's image pipeline) ---
       heroImage: image(),

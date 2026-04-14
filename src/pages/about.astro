@@ -9,11 +9,48 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import { Image } from "astro:assets";
 import avatarImage from "../assets/images/avatar.jpg";
+
+// Person JSON-LD on /about mirrors the homepage's so either page works as a
+// structured-data entry point for crawlers. Duplication is expected for
+// Person schema — Google resolves both to the same entity via sameAs.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ari Zilnik",
+  url: "https://ari.design",
+  image: "https://ari.design/og-default.png",
+  jobTitle: "Head of Design",
+  worksFor: {
+    "@type": "Organization",
+    name: "Join",
+    url: "https://join.build",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Toronto",
+    addressRegion: "Ontario",
+    addressCountry: "Canada",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/azilnik/",
+    "https://github.com/azilnik",
+  ],
+  knowsAbout: [
+    "Design leadership",
+    "Product design",
+    "Design systems",
+    "Construction technology",
+    "Developer tools",
+    "Fintech",
+    "Crypto infrastructure",
+  ],
+};
 ---
 
 <PageLayout
-  title="About"
-  description="About Ari Zilnik — design leader who builds products, teams, and the occasional over-engineered kitchen automation."
+  title="About Ari Zilnik — design leader in Toronto"
+  description="About Ari Zilnik — design leader who builds products, teams, and the occasional over-engineered home automation."
+  jsonLd={[personJsonLd]}
 >
   <section
     class="mx-auto px-6"
@@ -54,16 +91,16 @@ import avatarImage from "../assets/images/avatar.jpg";
           </p>
 
           <p style="margin-top: var(--theme-space-3);">
-            Right now I'm <a href="https://join.build/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Head of Design at Join</a>,
-            a <a href="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">venture-backed</a> construction platform used by 1,000+ companies including
-            <a href="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">DPR and STO Building Group</a>.
+            Right now I'm <a href="https://join.build/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-join" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Head of Design at Join</a>,
+            a <a href="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-techcrunch-join" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">venture-backed</a> construction platform used by 1,000+ companies including
+            <a href="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-einpresswire-dpr-sto" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">DPR and STO Building Group</a>.
             Before that I was the
-            <a href="https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">founding designer at Blockdaemon</a>
+            <a href="https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-blockdaemon-acquisition" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">founding designer at Blockdaemon</a>
             (crypto infrastructure
-            <a href="https://www.coindesk.com/business/2021/09/21/blockchain-infrastructure-firm-blockdaemon-nabs-13b-valuation-in-155m-funding-round/" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">valued at $3.25B</a>, backed by Goldman Sachs and SoftBank),
-            <a href="https://gradle.com/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">design lead at Gradle</a>
+            <a href="https://www.coindesk.com/business/2021/09/21/blockchain-infrastructure-firm-blockdaemon-nabs-13b-valuation-in-155m-funding-round/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-coindesk-blockdaemon" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">valued at $3.25B</a>, backed by Goldman Sachs and SoftBank),
+            <a href="https://gradle.com/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-gradle" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">design lead at Gradle</a>
             (developer tools for Netflix and Salesforce), and
-            <a href="https://corporate.walmart.com/news/2016/09/19/walmart-completes-acquisition-of-jet-com-inc" target="_blank" rel="noopener noreferrer" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">design lead at Jet.com through Walmart's $3.3B acquisition</a>.
+            <a href="https://corporate.walmart.com/news/2016/09/19/walmart-completes-acquisition-of-jet-com-inc" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-walmart-jet" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">design lead at Jet.com through Walmart's $3.3B acquisition</a>.
             Most of my career has been zero-to-one: taking something undefined and giving it shape.
           </p>
 

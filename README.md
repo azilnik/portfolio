@@ -72,6 +72,8 @@ scripts/
 
 Case studies are MDX files in `src/content/work/`. Each file's frontmatter is validated against a Zod schema at build time — missing or invalid fields will throw a clear error.
 
+> Before adding a new case study, skim the SEO/voice rules in [`docs/SEO.md`](./docs/SEO.md) — they prevent the title/description set from drifting over time and include a checklist for what each new study needs to set.
+
 ### 1. Create the file
 
 ```bash
@@ -86,7 +88,9 @@ title: "Project Title"
 company: "Company Name"
 role: "Your Role"
 industry: "Industry"
-description: "One-line description for SEO and card previews."
+description: "One-line tagline shown on the card and as the lede."
+seoTitle: "Feature at Company"
+seoDescription: "Longer 120-160 char meta description with keyword coverage."
 heroImage: "./images/my-project-hero.jpg"
 thumbnail: "./images/my-project-thumb.jpg"
 thumbnailAlt: "Alt text for the thumbnail"

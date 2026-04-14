@@ -17,6 +17,7 @@ import PageLayout from "./PageLayout.astro";
 import CaseStudyHero from "../components/casestudy/CaseStudyHero.astro";
 import ImpactMetrics from "../components/casestudy/ImpactMetrics.astro";
 import CaseStudyNav from "../components/casestudy/CaseStudyNav.astro";
+import { getImage } from "astro:assets";
 
 interface NavEntry {
   slug: string;
@@ -30,16 +31,100 @@ interface Props {
   role: string;
   industry: string;
   description: string;
+  /** Optional SEO-tuned title. Falls back to `${company} case study`. */
+  seoTitle?: string;
+  /** Optional SEO-length meta description. Falls back to `description`. */
+  seoDescription?: string;
   heroImage: ImageMetadata;
   metrics?: Array<{ label: string; value: string }>;
   prevStudy?: NavEntry;
   nextStudy?: NavEntry;
 }
 
-const { title, company, role, industry, description, heroImage, metrics, prevStudy, nextStudy } = Astro.props;
+const {
+  title,
+  company,
+  role,
+  industry,
+  description,
+  seoTitle,
+  seoDescription,
+  heroImage,
+  metrics,
+  prevStudy,
+  nextStudy,
+} = Astro.props;
+
+// Title for <title> / OG / Twitter — short and SERP-friendly. BaseLayout
+// appends " — Ari Zilnik" if absent. Fallback handles future drafts that
+// forget to set seoTitle in frontmatter.
+const pageTitle = seoTitle ?? `${company} case study`;
+
+// Meta description — prefer the longer seoDescription, fall back to the
+// short lede tagline for studies that haven't added one yet.
+const metaDescription = seoDescription ?? description;
+
+// OG card — derive a 1200×630 JPEG from the hero image. Sharp center-crops
+// by default, which works well for most screenshots (primary content tends
+// to be centered). Crawlers (Slack, iMessage, Twitter, LinkedIn) fetch the
+// absolute URL, so we resolve against Astro.site.
+const ogCard = await getImage({
+  src: heroImage,
+  width: 1200,
+  height: 630,
+  format: "jpeg",
+  quality: 85,
+});
+const ogImage = new URL(ogCard.src, Astro.site).href;
+
+// JSON-LD structured data:
+// 1. CreativeWork for the case study itself (headline, creator, image, about).
+// 2. BreadcrumbList (Home → Case Studies → this study) — helps SERP breadcrumbs.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const heroAbsolute = new URL(heroImage.src, Astro.site).href;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    headline: title,
+    name: seoTitle ?? title,
+    description: metaDescription,
+    url: canonical,
+    image: heroAbsolute,
+    about: industry,
+    creator: {
+      "@type": "Person",
+      name: "Ari Zilnik",
+      jobTitle: role,
+      url: "https://ari.design",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Ari Zilnik",
+      url: "https://ari.design",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://ari.design" },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://ari.design/work" },
+      { "@type": "ListItem", position: 3, name: seoTitle ?? title, item: canonical },
+    ],
+  },
+];
 ---
 
-<PageLayout title={`${title} — ${company}`} description={description}>
+<PageLayout
+  title={pageTitle}
+  description={metaDescription}
+  ogImage={ogImage}
+  ogImageAlt={`${title} — case study by Ari Zilnik`}
+  ogType="article"
+  jsonLd={jsonLd}
+>
   <article>
     {/* Header block — metadata, title, lede. The outer container matches
         --theme-content-width so horizontal padding lines up with the site
