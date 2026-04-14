@@ -19,4 +19,5 @@ export const navLinks: NavLink[] = [
   // nav clean like the competitive set (Ainara: Work + Mentorship, Tyler:
   // Work + About, Danny: Home + Playground + Journal).
   { label: "LinkedIn", href: "https://www.linkedin.com/in/azilnik/", external: true },
+  { label: "GitHub", href: "https://github.com/azilnik", external: true },
 ];
