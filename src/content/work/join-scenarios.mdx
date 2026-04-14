@@ -3,7 +3,7 @@ title: "A side-by-side what-if comparison that cut construction decisions in hal
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Construction owners decide in bundles, not one choice at a time. Scenarios reframed Join's decision workflow around sets of linked choices and cut the decision cycle by 50%."
+description: "Owners decide in bundles, not one choice at a time. A decisions-in-sets reframe cut the cycle by 50%."
 heroImage: "./images/join-scenarios-01.png"
 thumbnail: "./images/join-scenarios-01.png"
 thumbnailAlt: "Join Scenarios comparing two construction project options side-by-side for owner sign-off"
@@ -19,38 +19,41 @@ metrics:
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
-import PivotCard from "../../components/mdx/PivotCard.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import joinScenarios01 from "./images/join-scenarios-01.png";
 import joinScenarios02 from "./images/join-scenarios-02.png";
 import joinScenarios03 from "./images/join-scenarios-03.png";
 
-Join is like Jira for construction. Contractors and owners use it to collaborate on the decisions that move a project forward.
+Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-Construction projects live and die on bundles of decisions, not individual choices. A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchen and bathrooms" against budget and schedule. Before Scenarios, Join asked users to think about decisions one at a time. That didn't match how real decisions got made.
+Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to think one decision at a time, which didn't match how real decisions got made.
 
-<PivotCard
-  summary="From one-decision-at-a-time to sets of linked choices"
-  cause="Owners don't decide line items. They decide packaged options with clear trade-offs."
-  result="Cut the decision cycle in half. Architects showed up as a surprise 20% of users."
-/>
+The reframe was simple: model decisions as sets of linked choices, not as individual line items. Owners weigh whole packages against each other, not forty separate trade-offs.
 
-## The product
+## Sets of decisions as the unit
+
+A contractor models a "premium finishes, compressed schedule" option alongside a "standard finishes, stretched schedule" option, and the math propagates across every connected line item automatically. The owner sees two packages, not forty decisions.
 
 <FullBleedImage
   src={joinScenarios01}
   alt="Join Scenarios overview listing two alternative versions of a construction project"
 />
 
-**Sets of decisions as the unit.** A contractor models a "premium finishes, compressed schedule" option alongside a "standard finishes, stretched schedule" option, and the math propagates across every connected line item automatically. The owner sees two packages, not forty decisions.
+<FullBleedGif
+  src="/videos/join-scenarios-05.gif"
+  alt="Pricing flow inside Scenarios showing cost propagation across linked line items"
+  caption="Cost propagation across linked line items."
+/>
+
+## Tabular comparison without ranking
+
+This was the hardest design call. Sophisticated owners on multi-million-dollar projects don't want to be steered toward a "best" option. They want to weigh the dimensions that matter to them. The comparison is deliberately flat. It surfaces every trade-off without marking any option as preferred.
 
 <FullBleedImage
   src={joinScenarios02}
   alt="Scenarios comparison view showing two packaged project options side-by-side with their cost and schedule trade-offs"
 />
-
-**Tabular comparison without ranking.** This was the hardest design call. Sophisticated owners on multi-million-dollar projects don't want to be steered toward a "best" option. They want to weigh the dimensions that matter to them. The comparison is deliberately flat. It surfaces every trade-off without marking any option as preferred.
 
 <FullBleedGif
   src="/videos/join-scenarios-04.gif"
@@ -58,17 +61,13 @@ Construction projects live and die on bundles of decisions, not individual choic
   caption="Two bundled options compared side-by-side with cost and schedule trade-offs visible at a glance."
 />
 
-**Progressive disclosure.** The default comparison view is lean on purpose. Users click into specific dimensions for detail. The owner-facing read stays calm during a sign-off meeting. The contractor-facing detail stays rich for internal work.
+## Progressive disclosure
+
+The default comparison view is lean on purpose. Users click into specific dimensions for detail. The owner-facing read stays calm during a sign-off meeting. The contractor-facing detail stays rich for internal work.
 
 <FullBleedImage
   src={joinScenarios03}
   alt="Scenarios decision workflow showing a contractor preparing options for an owner sign-off meeting"
-/>
-
-<FullBleedGif
-  src="/videos/join-scenarios-05.gif"
-  alt="Pricing flow inside Scenarios showing cost propagation across linked line items"
-  caption="Cost propagation across linked line items."
 />
 
 <FullBleedGif

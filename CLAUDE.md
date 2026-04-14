@@ -140,6 +140,12 @@ for automation-friendly content.
 | `Impact` | Concise per-section impact statement. Drop one under each major heading so impact is interleaved throughout the body | `label?` (defaults to "Impact"), children via slot |
 | `Lessons` | Numbered list of 3 actionable lessons. Sits near the end of the body | `lessons` (array of 3 strings), `heading?` |
 
+**Preferred components for the product-narrative style:** `FullBleedImage`,
+`FullBleedGif`, `VideoPlayer`, `ImageGrid`, `PressQuote`, `Credits`. These
+keep the focus on the product. Use `Callout` sparingly for a single
+pivotal insight. Avoid `PivotCard`, `Impact`, `Lessons`, and `MetaCards`
+in new case studies — they pull the reader into process narration.
+
 ## Converting Screen Recordings to Video
 
 ```bash
@@ -235,16 +241,18 @@ still, about page warmest.
 
 ### Lead with impact
 
-Every case study title, description (lede), and opening sentence leads
-with the business outcome. Pyramid principle — conclusion first.
+Every case study title leads with the business outcome. The description
+adds context the title doesn't already carry — never retells the same
+story. Pyramid principle throughout.
 
-- GOOD: "How research turned a materials marketplace into an AI tool that
-  delivered $500K in construction savings in 30 days"
-- BAD: "Join Ideas: A Case Study in AI-Powered Design"
-
-The frontmatter `description` field renders as a pull paragraph under the
-title — it is the visible TL;DR. Treat it as the case study's thesis
-statement, not an SEO meta description.
+- GOOD title: "An AI recommendation engine that saved a construction
+  customer $500K in 30 days"
+- BAD title: "Join Ideas: A Case Study in AI-Powered Design"
+- GOOD description: "Customer research killed the marketplace direction.
+  Shipped in 2 months."
+- BAD description: "I pivoted a materials marketplace into an AI
+  recommendation engine after customer research killed the original
+  direction. One enterprise customer saved $500K in month one."
 
 ### Code contribution framing (critical — never drift)
 
@@ -283,6 +291,11 @@ self-starter, team player, passionate, thought leader.
 5. **Executive-ready storytelling** — Scannable, pyramid principle, key
    metrics visually prominent.
 
+These signals are woven into the product narrative, not isolated into
+their own sections. "What I chose not to build" is one sentence in the
+intro, not its own heading. Leadership shows through the Credits
+component and how collaborators are named, not a "Leadership" section.
+
 ### Design philosophy (weave in, don't list)
 
 1. Business-first mindset — cares about making great things, not titles.
@@ -293,52 +306,103 @@ self-starter, team player, passionate, thought leader.
 
 ---
 
-## Case Study Template
+## Case Study Structure: Product Narrative (not Process Narrative)
 
-Each of the 3 featured case studies follows this structure. Not every section needs
-equal weight — adapt to the project. But every case study must have sections 1, 2, 3,
-5, and 6 at minimum.
+Case studies read like **product tours with judgment**, not design-process
+documentaries. The reader should understand the product and its impact first;
+process details earn their place only when they reveal a decision that shaped
+the product.
 
-### 1. Hero + TL;DR
-- Title that leads with business outcome
-- 1-2 sentence executive summary
-- Key metrics displayed prominently (use the frontmatter `metrics` array)
-- Metadata bar: Company, Role, Industry, Timeline
+This pattern is modeled on the portfolios Ari benchmarks against: Ainara Sainz,
+Danny Williams, Sophie Qi, Jason Au, Tyler Kotsopoulos, and others in his
+competitive set (listed in `.claude/pov/portfolio-pov-2026.md`). The shared
+trait: sections named after product features, not process steps.
 
-### 2. Context & Challenge
-- What the company does (one plain-language sentence, like the resume style)
-- What business problem existed and why it mattered
-- Your specific role and who you worked with
-- Constraints and strategic tensions you navigated
+### The anti-pattern (do NOT write this way)
 
-### 3. Process & Key Decisions
-- Research methodology and what you learned
-- The pivotal insight or decision point
-- What you chose NOT to do and why (shows mature judgment)
-- Artifacts: research synthesis, sketches, iterations, workshop outputs
-- Use `Callout` components for key insights and pivot moments
+- Sections called "Research", "Ideation", "Design exploration", "What I chose
+  not to build", "Reflection"
+- Multi-paragraph narratives about running interviews, bringing findings to
+  stakeholders, and pivoting
+- Introspective paragraphs about what you'd do differently
+- PivotCard components that dramatize the research-to-pivot arc
+- "Designing for X" section headers that frame the story around the designer's
+  internal challenge rather than the product
 
-### 4. Solution
-- The design work itself — full-bleed images, prototypes, before/after
-- Explain the "why" behind key design decisions
-- Use `FullBleedImage`, `ImageGrid`, and `VideoPlayer` components
+### The pattern (write this way)
 
-### 5. Impact & Outcomes
-- Quantified results with context (not just numbers — what do they mean?)
-- How you measured success
-- Post-launch iterations and learnings
-- Use the frontmatter `metrics` for the visual impact row
+**Intro (3 short paragraphs max, no heading):**
+1. What the company is — one plain-language sentence
+2. What the product/feature does and what user problem it solves
+3. Origin compressed to one sentence if there was a pivot or unusual backstory
 
-### 6. Leadership & Collaboration
-- Stakeholders you influenced and how
-- Team development (mentoring, upskilling, culture-building)
-- Organizational change you drove
-- This section is what separates senior portfolios from mid-level ones
+**Body (sections named after product features or capabilities):**
+- Each `##` heading names a concrete product element: "Suggestion carousels",
+  "Human review layer", "Forced comparison", "Staking 2.0", "Marketplace"
+- Each section: 1-2 short paragraphs of explanation, then a `FullBleedImage`
+- The ratio should feel ~60% visual, ~40% text
+- Process details (research, prototyping, stakeholder alignment) are woven
+  into feature sections as 1-2 sentences, not broken into their own sections
+- Judgment shows through what the product *is*, not through narrating the
+  journey to get there
 
-### 7. Reflection (Optional but Recommended)
-- What you'd do differently
-- What you learned that changed how you work
-- Signals maturity and self-awareness
+**Results (short):**
+- Hard metrics as direct statements: "One customer saved $500K in 30 days."
+- No reflective framing ("That wasn't a projection..."). Just the facts.
+- Press quotes if available
+
+**Credits:**
+- Named collaborators with LinkedIn links via `<Credits>` component
+
+### What's NOT in a case study
+
+- No "Reflection" section. None of the competitive-set portfolios have one.
+- No "What I chose not to build" section. Compress to one sentence in the
+  intro if it shaped the product direction.
+- No research-journey narratives. The pivot or insight gets one sentence.
+- No PivotCard component. The pivot lives in the intro paragraph.
+- No Lessons component. The product speaks for itself.
+
+### Frontmatter description
+
+The `description` field renders as a pull paragraph on the case study page
+AND as card text on the homepage. Keep it to one punchy sentence, two max.
+It should add information the title doesn't already carry. Never retell the
+same story the title tells.
+
+- GOOD: "Customer research killed the marketplace direction. Shipped in 2 months."
+- BAD: "I pivoted a materials marketplace into an AI recommendation engine
+  after customer research killed the original direction. One enterprise
+  customer saved $500K in month one."
+
+### Homepage copy principles
+
+The homepage follows the same "less is more" rule. Confidence subtracts.
+
+- **Hero bio:** One sentence of positioning, no personality line. The work
+  below it carries the weight. No employer name-dropping, no credibility
+  stacking (valuation numbers, investor names, press links). Those details
+  belong in case studies.
+- **Case study cards:** Title leads with outcome. Description is ≤2 short
+  sentences that add context the title doesn't cover. Never repeat the
+  metric from the title in the description.
+- **Meta description:** Matches the tightened tone. Not a keyword dump.
+
+### Reference portfolios (competitive set)
+
+When in doubt about tone, density, or structure, check these:
+
+| Name | URL | Why they're a reference |
+|------|-----|----------------------|
+| Ainara Sainz | ainarasainz.com | Feature-named sections, short prose, big images, credits with real names |
+| Danny Williams | dannyjpwilliams.com | Minimal homepage, experience list, no over-explanation |
+| Sophie Qi | sophieqi.com | Card descriptions that earn the click without retelling the title |
+| Jason Au | aujason.com | Product-framed case study descriptions at every level |
+| Tyler Kotsopoulos | tylerkotsopoulos.ca | Clean homepage, company name + image, nothing else needed |
+| Alex Taylor Smith | alextaylorsmith.com | One paragraph bio, "case studies available on request" confidence |
+
+The pattern across all of them: **senior designers let the work talk.
+Junior designers narrate over it.**
 
 ---
 
