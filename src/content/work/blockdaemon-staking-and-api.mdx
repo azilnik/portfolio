@@ -1,27 +1,24 @@
 ---
-title: "Founding designer at a $3.25B crypto infrastructure company: 23x checkout usage and a zero-to-one staking product"
+title: "Founding designer at a $3.25B crypto company: a zero-to-one institutional staking product and a design org scaled 1 to 7"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Fintech, Crypto Infrastructure"
-description: "Founding designer. Shipped the node checkout (23x usage), the staking product ($207M Series C), and grew the design team from 1 to 7."
-heroImage: "./images/bd-checkout-hero.png"
-thumbnail: "./images/bd-checkout-hero.png"
-thumbnailAlt: "Blockdaemon node deployment checkout with a live order summary"
+description: "Institutional crypto staking had no established UX patterns. Research with treasury teams pointed toward density-first dashboards, not simplification."
+heroImage: "./images/bd-staking-01.png"
+thumbnail: "./images/bd-staking-01.png"
+thumbnailAlt: "Blockdaemon's institutional staking portfolio dashboard showing a multi-chain treasury"
 employer: "blockdaemon"
 sortOrder: 2
 draft: false
 metrics:
-  - label: "Node deployment usage growth"
-    value: "23x"
   - label: "Design team grown in 15 months"
     value: "1 to 7"
-  - label: "Marketing site click-through lift"
-    value: "64%"
+  - label: "Zero-to-one products shipped"
+    value: "2"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
-import Callout from "../../components/mdx/Callout.astro";
 import PressQuote from "../../components/mdx/PressQuote.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
@@ -29,40 +26,16 @@ import bdStaking01 from "./images/bd-staking-01.png";
 import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
 import bdStaking05 from "./images/bd-staking-05.png";
-import bdCheckoutHero from "./images/bd-checkout-hero.png";
-import bdCheckout02 from "./images/bd-checkout-02.png";
 
-Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy nodes and stake assets without operating their own data centers. Enterprises like Goldman Sachs and Microsoft are the customer tier. The company raised $207M at a $3.25B valuation during my tenure.
+Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy nodes and stake assets without operating their own data centers. Enterprises like Goldman Sachs and Microsoft are the customer tier.
 
-I joined as the founding designer after Blockdaemon acquired my consultancy. There was no design organization. I was the design org.
+I joined as the founding designer after Blockdaemon acquired my consultancy. The company raised $207M at a $3.25B valuation during my tenure. There was no design organization. I was the design org.
 
-## Node deployment checkout
-
-Deploying a blockchain node used to mean filing a support ticket and waiting on a sales cycle. The backend could already deploy nodes in minutes. The interface was the bottleneck.
-
-<Callout label="The insight">
-  Customers weren't asking for better configuration. They were asking to buy a thing instead of provisioning one.
-</Callout>
-
-We replaced the infrastructure-management flow with a purchase checkout. The left side walks through configuration in logical groups. The right side builds a live order summary with real-time pricing and a single "Subscribe" action.
-
-<FullBleedImage
-  src={bdCheckout02}
-  alt="Node deployment protocol selection grid showing cards for six blockchains with starting prices"
-  caption="Protocol selection. Each card shows the blockchain and starting price alongside a clear action."
-/>
-
-<FullBleedImage
-  src={bdCheckoutHero}
-  alt="Node deployment checkout showing configuration on the left and a live order summary on the right"
-  caption="Configuration on the left, live order summary on the right, one clear action."
-/>
-
-Monthly usage grew 23x. Customers deployed in minutes without engineering help. Enterprise conversations shifted from "how do we get you a node" to "how many nodes and which chains."
+Over 15 months I shipped two zero-to-one products: the institutional staking dashboard and the Ubiquity developer API. Neither had established UX patterns in crypto. I stood up the research practice from scratch to inform both.
 
 ## Institutional staking
 
-The staking dashboard was zero-to-one. No competitor had established the design patterns. Institutional users manage portfolios worth hundreds of millions across multiple blockchains and need to see total value and validator performance on one screen.
+The staking dashboard was zero-to-one. No competitor had established the design patterns. The users were institutional treasury teams managing portfolios worth hundreds of millions across multiple blockchains. They needed to see total value and validator performance on one screen.
 
 <FullBleedImage
   src={bdStaking01}
@@ -70,17 +43,11 @@ The staking dashboard was zero-to-one. No competitor had established the design 
   caption="The staking portfolio dashboard. The $108M figure is a sample used in demos."
 />
 
+We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams changed the design direction. What those users wanted was density plus real-time trust signals. They weren't trying to avoid information. They were trying to see all of it without drowning in it.
+
 <FullBleedImage
   src={bdStaking02}
   alt="Dashboard detail cards: price chart and validator status above a total ETH balance card"
-/>
-
-We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with institutional treasury teams changed the design direction. What those users wanted was density plus real-time trust signals. They weren't trying to avoid information. They were trying to see all of it without drowning in it.
-
-<FullBleedImage
-  src={bdStaking03}
-  alt="Ubiquity API developer dashboard showing compute unit usage and a filterable request log"
-  caption="Ubiquity API dashboard. The first place developers went to debug what their keys were doing."
 />
 
 <FullBleedImage
@@ -94,6 +61,16 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
   caption="Staking delegation flow."
 />
 
+## Ubiquity API
+
+Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. The dashboard was the first place developers went to debug what their API keys were doing. The highest-value views turned out to be usage against rate limits and request-log auditing, both surfaced in developer interviews.
+
+<FullBleedImage
+  src={bdStaking03}
+  alt="Ubiquity API developer dashboard showing compute unit usage and a filterable request log"
+  caption="Ubiquity API dashboard. The first place developers went to debug what their keys were doing."
+/>
+
 <FullBleedGif
   src="/videos/bd-staking-07.gif"
   alt="Walkthrough of API key creation and usage monitoring"
@@ -102,7 +79,9 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
 
 ## Results
 
-Node deployment usage grew 23x. The marketing site overhaul lifted click-through rates 64%. When the $207M Series C closed, the screens investors walked through in those demos all traced back to my team. The checkout became the reference pattern for subsequent product launches.
+The staking product shipped into the $207M Series C materials. When the round closed, the screens investors walked through in those demos traced back to my team.
+
+I grew the design org to seven people. We set up design reviews with real teeth and a weekly research cadence for the first time.
 
 <PressQuote
   quote="Blockdaemon nabs $1.3B valuation in $155M funding round. SoftBank Vision Fund 2 led the funding."
@@ -115,8 +94,6 @@ Node deployment usage grew 23x. The marketing site overhaul lifted click-through
   source="BusinessWire"
   url="https://www.businesswire.com/news/home/20210608005782/en/Blockdaemon-Raises-28-Million-In-Series-A-Funding-To-Help-Institutions-Quickly-and-Securely-Scale-Blockchain-Infrastructure"
 />
-
-I grew the design org to seven people. We set up design reviews with real teeth and a weekly research cadence for the first time.
 
 <Credits
   credits={[
