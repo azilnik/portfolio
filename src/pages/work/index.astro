@@ -11,11 +11,23 @@ import { getCollection } from "astro:content";
 
 const allWork = (await getCollection("work", ({ data }) => !data.draft))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+// BreadcrumbList for /work — a two-level breadcrumb that Google can render
+// in the SERP, replacing the URL with the breadcrumb path on mobile.
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ari.design" },
+    { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://ari.design/work" },
+  ],
+};
 ---
 
 <PageLayout
-  title="Work"
-  description="Selected case studies from Ari Zilnik's career as a design leader."
+  title="Work by Ari Zilnik — case studies"
+  description="How Ari thinks, leads, and builds. Case studies from Join, Blockdaemon, Gradle, and side projects across construction tech, fintech, and developer tools."
+  jsonLd={[breadcrumbJsonLd]}
 >
   <section
     class="mx-auto px-6"

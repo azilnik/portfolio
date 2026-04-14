@@ -1,4 +1,32 @@
+# Explicit allow-list for the major AI crawlers. A portfolio benefits from
+# LLM citations — case studies show up when someone asks an LLM about
+# construction design, developer tools, crypto infra, etc. If this ever
+# flips (e.g. a shift in how AI products attribute sources), remove the
+# individual User-agent entries and replace Allow: / with Disallow: /.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Default — everything else is welcome.
 User-agent: *
 Allow: /
 
-Sitemap: https://ari.design/sitemap.xml
+Sitemap: https://ari.design/sitemap-index.xml

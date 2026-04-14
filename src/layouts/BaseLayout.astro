@@ -7,29 +7,59 @@
  * - Self-hosted font preloads
  * - Global CSS import
  * - GoatCounter analytics (production only)
+ * - Optional JSON-LD structured data block
+ *
+ * Title behavior: the `title` prop is the specific page title. BaseLayout
+ * appends " — Ari Zilnik" ONLY if the passed title doesn't already carry
+ * the brand segment. This lets pages that want a non-standard title layout
+ * (e.g. homepage, about with geo signal) pass the full string, while keeping
+ * the convention for everything else.
+ *
+ * See CLAUDE.md at the repo root for the full SEO/voice rules.
  *
  * Other layouts (PageLayout, CaseStudyLayout) nest inside this one.
  */
 import GoatCounter from "../components/global/GoatCounter.astro";
+import JsonLd from "../components/global/JsonLd.astro";
 import "../styles/global.css";
 
 interface Props {
-  /** The page <title>. Gets " — Ari Zilnik" appended automatically. */
+  /** The page <title>. " — Ari Zilnik" is appended unless already present. */
   title: string;
   /** Meta description for search engines and social previews. */
   description?: string;
-  /** URL to an Open Graph image for social sharing. */
+  /** URL to an Open Graph image for social sharing. Defaults to /og-default.png. */
   ogImage?: string;
+  /** Alt text for the OG image. Improves accessibility and Twitter card rendering. */
+  ogImageAlt?: string;
+  /** Override the default og:type (defaults to "website"; case studies use "article"). */
+  ogType?: "website" | "article";
+  /** Optional JSON-LD structured data objects. Each renders as a <script type="application/ld+json">. */
+  jsonLd?: Array<Record<string, unknown>>;
 }
 
 const {
   title,
-  description = "Ari Zilnik — Design leader crafting thoughtful digital experiences.",
-  ogImage,
+  description = "Ari Zilnik — Head of Design at Join. Products, teams, and systems in construction, fintech, and developer tools.",
+  ogImage = "/og-default.png",
+  ogImageAlt = "Ari Zilnik — Head of Design at Join.",
+  ogType = "website",
+  jsonLd,
 } = Astro.props;
 
-const fullTitle = title === "Ari Zilnik" ? title : `${title} — Ari Zilnik`;
+// Append the brand segment unless the caller already included it. This keeps
+// full titles intact (e.g. "About Ari Zilnik — design leader in Toronto")
+// while still appending for pages that pass only a page-specific prefix
+// (e.g. "Scenarios at Join" → "Scenarios at Join — Ari Zilnik"). `includes`
+// is deliberately broad — any page whose title mentions Ari's name owns it.
+const fullTitle = title.includes("Ari Zilnik") ? title : `${title} — Ari Zilnik`;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Resolve OG image to an absolute URL so crawlers (including Slack/iMessage)
+// can fetch it without a base-URL guess. Passing a URL-like string or a
+// relative path both work here.
+const ogImageURL = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
@@ -40,9 +70,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Ari Zilnik" />
+    {/* Explicit robots directive: index + follow + allow large image previews
+        in SERPs (important for a visual portfolio). */}
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {/* Mobile browser chrome color — matches the warm off-white body bg. */}
+    <meta name="theme-color" content="#faf8f5" />
 
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0059ff" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     {/* Preload self-hosted fonts */}
     <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
@@ -57,17 +98,30 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
 
     {/* Open Graph */}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Ari Zilnik" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL.href} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     {/* Twitter card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    {/* Sitemap discovery — @astrojs/sitemap emits sitemap-index.xml. Hinting
+        it in the <head> helps crawlers that don't parse robots.txt first. */}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    {/* JSON-LD structured data — emitted by individual pages via the jsonLd prop */}
+    {jsonLd && jsonLd.length > 0 && jsonLd.map((data) => <JsonLd data={data} />)}
 
     <GoatCounter />
   </head>

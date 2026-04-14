@@ -19,12 +19,22 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: "website" | "article";
+  jsonLd?: Array<Record<string, unknown>>;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, ogImageAlt, ogType, jsonLd } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+  ogType={ogType}
+  jsonLd={jsonLd}
+>
   <Header />
   <MobileMenu />
 
