@@ -21,6 +21,7 @@ metrics:
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import Callout from "../../components/mdx/Callout.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import joinScenarios01 from "./images/join-scenarios-01.png";
@@ -76,13 +77,17 @@ I reframed the unit of decision from individual line items to linked packages. O
   caption="Collaboration around scenario sign-off."
 />
 
+<Callout label="From customer interviews">
+  One estimator on a $150M job told us they'd been doing this comparison in PowerPoint. Another called the comparison view "a happy meal for decision making" — everything the owner needs, packaged to go.
+</Callout>
+
 ## The numbers
 
 Scenario-decision cycle dropped 50%, measured from creation through owner sign-off. 20% of Scenarios users were architects — a segment Join hadn't been designing for. The comparison view matched how they presented options to their own clients, and they found it on their own.
 
 ## The takeaway
 
-When an enterprise product simplifies away complexity, users route around it — into spreadsheets, into meetings, into workarounds. When a product organizes complexity so users can move fast, they stay. The design job isn't reduction. It's compression.
+The architects showing up surprised us. We'd designed for contractors doing owner sign-off, and 20% of the users turned out to be architects presenting options to their own clients. They found Scenarios because the comparison shape matched how they already worked. That's the thing about organizing complexity instead of hiding it — you find audiences you weren't aiming at.
 
 <Credits
   credits={[

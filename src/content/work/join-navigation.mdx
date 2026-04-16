@@ -20,6 +20,7 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import Callout from "../../components/mdx/Callout.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import joinNav02 from "./images/join-nav-02.png";
@@ -61,13 +62,17 @@ So we rebuilt around projects. Portfolio at the top. Project as the primary cont
   alt="Final navigation design in a real Join project view"
 />
 
+<Callout label="From customer feedback">
+  One customer called the redesign "very brave" — code for risky. Another told us the new structure helped their team "discover more capabilities they didn't know they had." Both reactions were right. We broke habits to fix the map.
+</Callout>
+
 ## The numbers
 
 Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had existed in the old nav, technically, but nobody used it because there wasn't a clear path back in.
 
 ## The takeaway
 
-When users struggle with navigation, the instinct is to add labels, tooltips, onboarding flows. Those are patches on a structural problem. The fix is making the nav match the mental model the user already has. If construction teams think in projects, the nav is projects. Everything else follows.
+The honest version of this project: we broke the nav to fix it. Rearranging where everything lived meant every power user had to relearn their muscle memory for a few weeks. A customer told us it was "very brave." That was probably not entirely a compliment. But the support ticket drop held, and users started finding features they'd had for months without knowing. That's the trade — short-term disruption for a structure that actually teaches.
 
 <Credits
   credits={[

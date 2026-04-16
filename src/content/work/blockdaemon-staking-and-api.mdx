@@ -29,7 +29,7 @@ import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
 import bdStaking05 from "./images/bd-staking-05.png";
 
-Every dashboard redesign starts with the same instinct: strip it down, add whitespace, show less. That instinct is wrong for expert users. An institutional treasury team managing hundreds of millions across multiple blockchains needs to see total value and validator performance on one screen — not behind three clicks. Density, designed well, is how you show respect for expertise. Simplification is how you show you didn't talk to the user.
+I believe density is a form of respect. Every dashboard redesign starts with the same instinct: strip it down and add whitespace. That instinct is wrong for expert users, and I've watched it go wrong enough times to hold this as a design position, not just a preference. An institutional treasury team managing hundreds of millions across multiple blockchains needs total value and validator performance on one screen — not behind three clicks. When you simplify away what an expert needs to see, you're telling them you know their job better than they do. You don't.
 
 ## The evidence
 
@@ -45,7 +45,7 @@ I joined as the founding designer after Blockdaemon acquired my consultancy. The
 
 ## The craft
 
-**Density plus real-time trust signals.** We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams changed the design direction. What those users wanted was everything visible — total value, validator performance, chain distribution — with real-time health indicators they could trust at a glance. Not less data. Better-organized data.
+**The portfolio view that stayed dense on purpose.** Early mocks had a "simplified" dashboard with cards you'd click into. Treasury teams rejected it in research — they wanted total value, validator performance, and chain distribution visible without clicking anything. We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews confirmed the position: density wasn't the problem to solve. Trust was. So we added real-time health indicators that let users scan the dense view and know instantly if something needed attention. The density earned its keep because every number on screen was one fewer click to the answer.
 
 <FullBleedImage
   src={bdStaking02}
@@ -63,7 +63,7 @@ I joined as the founding designer after Blockdaemon acquired my consultancy. The
   caption="Staking delegation flow."
 />
 
-**Developer dashboard as a debugging surface.** Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. The dashboard was the first place developers went to debug what their API keys were doing. The highest-value views turned out to be usage against rate limits and request-log auditing — both surfaced in developer interviews. Developers don't want a clean dashboard. They want a useful one.
+**The API dashboard that chose utility over polish.** Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. Same density principle, different user. The dashboard was the first place developers went to debug what their API keys were doing. We could have built a clean overview with sparklines. Instead, we put usage against rate limits and a raw request log front and center — both identified in developer interviews as the things they'd otherwise grep for in terminal. The dashboard looked busy. It was also the page developers bookmarked.
 
 <FullBleedImage
   src={bdStaking03}
