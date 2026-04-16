@@ -28,7 +28,7 @@ import gradleFilter05 from "./images/gradle-filter-05.png";
 
 Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
-The behavioral signal that kicked off this project was loud: customers were exporting to CSV and slicing data in spreadsheets. When a product pushes its users into Excel, you have a filter problem, not a data problem. The data was all there. The tools to explore it were scattered across a dozen dropdowns, each scoped to a single dimension, none of them composable. A developer trying to answer "show me slow, failing tests in module X" had to click through three different filter widgets, hope they combined correctly, and then give up and export anyway.
+In one of our first customer sessions, a platform engineer shared their screen and I counted fifteen browser tabs -- all Excel. They'd exported build data out of our product to filter it. That scene repeated across nearly every session we ran. The data was all there inside Gradle Enterprise. The tools to explore it were scattered across a dozen dropdowns, each scoped to a single dimension, none of them composable. A developer trying to answer "show me slow, failing tests in module X" had to click through three different filter widgets, hope they combined correctly, and then give up and export anyway.
 
 The question was whether one input could replace all of them.
 
