@@ -49,7 +49,7 @@ if (!prev && !next) return;
       <a
         href={`/work/${prev.slug}`}
         data-goatcounter-click={`casestudy-prev-${prev.slug}`}
-        class="group flex flex-col rounded-xl p-5 transition-colors"
+        class="group flex flex-col p-5 transition-colors"
         style="background-color: var(--theme-surface);"
       >
         <span
@@ -86,7 +86,7 @@ if (!prev && !next) return;
         href={`/work/${next.slug}`}
         data-goatcounter-click={`casestudy-next-${next.slug}`}
         class:list={[
-          "group flex flex-col rounded-xl p-5 transition-colors",
+          "group flex flex-col p-5 transition-colors",
           prev ? "sm:text-right sm:items-end" : "",
         ]}
         style="background-color: var(--theme-surface);"

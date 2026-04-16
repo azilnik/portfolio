@@ -2,8 +2,8 @@
 /**
  * Work listing page — /work
  *
- * Warm Signal: Fraunces heading, subheading, 2-col grid with green/terracotta
- * card treatment.
+ * Shows all non-draft case studies. Left-aligned header with a clean
+ * grid below. Matches the homepage's visual language.
  */
 import PageLayout from "../../layouts/PageLayout.astro";
 import CaseStudyCard from "../../components/work/CaseStudyCard.astro";
@@ -12,6 +12,8 @@ import { getCollection } from "astro:content";
 const allWork = (await getCollection("work", ({ data }) => !data.draft))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 
+// BreadcrumbList for /work — a two-level breadcrumb that Google can render
+// in the SERP, replacing the URL with the breadcrumb path on mobile.
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -24,7 +26,7 @@ const breadcrumbJsonLd = {
 
 <PageLayout
   title="Work by Ari Zilnik — case studies"
-  description="How Ari thinks about products, research, and shipping. Case studies from Join, Blockdaemon, Gradle, and side projects."
+  description="How Ari thinks, leads, and builds. Case studies from Join, Blockdaemon, Gradle, and side projects across construction tech, fintech, and developer tools."
   jsonLd={[breadcrumbJsonLd]}
 >
   <section
@@ -35,12 +37,13 @@ const breadcrumbJsonLd = {
       padding-bottom: var(--theme-space-7);
     "
   >
+    {/* Page header — left-aligned, no eyebrow. Clean. */}
     <div style="margin-bottom: var(--theme-space-5);">
       <h1
         class="font-heading"
         style="
           color: var(--theme-text-primary);
-          font-weight: 700;
+          font-weight: var(--theme-weight-heading);
           letter-spacing: var(--theme-tracking-tight);
           line-height: var(--theme-leading-tight);
           font-size: var(--theme-text-5xl);
@@ -58,14 +61,17 @@ const breadcrumbJsonLd = {
           max-width: 48ch;
         "
       >
-        How I think about products, research, and shipping.
+        Case studies from Join, Blockdaemon, Gradle, and side projects.
       </p>
     </div>
 
+    {/* Case study grid — 2 columns on desktop, 1 on mobile */}
     {allWork.length > 0 ? (
       <div
         class="grid grid-cols-1 md:grid-cols-2"
-        style="gap: var(--theme-space-4);"
+        style="
+          gap: var(--theme-space-4);
+        "
       >
         {allWork.map((study) => (
           <CaseStudyCard study={study} />
