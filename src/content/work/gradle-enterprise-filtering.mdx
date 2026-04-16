@@ -1,9 +1,9 @@
 ---
-title: "One input. Twelve dropdowns eliminated."
+title: "One input beats twelve"
 company: "Gradle"
 role: "Lead Designer"
 industry: "Developer Tools"
-description: "An omnibar for enterprise build data that served both power users and newcomers."
+description: "Scattered controls fragment attention. A single typed input replaced a dozen dropdowns and became the filter pattern for the entire product."
 seoTitle: "Filtering at Gradle"
 seoDescription: "A typed-input omnibar that replaced a dozen scattered dropdowns in Gradle Enterprise and served both novices and power users without a mode switch."
 heroImage: "./images/gradle-filter-01.png"
@@ -24,40 +24,36 @@ import gradleFilter03 from "./images/gradle-filter-03.png";
 import gradleFilter04 from "./images/gradle-filter-04.png";
 import gradleFilter05 from "./images/gradle-filter-05.png";
 
+Twelve dropdowns spread across a page aren't twelve choices. They're twelve interruptions. Every dropdown forces the user to stop, locate, parse options, decide, then reorient. One input with intelligent suggestions compresses that entire sequence into a single interaction point. The user types what they're thinking and the system meets them there. Fewer controls, not fewer capabilities.
+
+## The evidence
+
 Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
-The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar surfaces filter conditions they can stack. The behavioral signal that triggered the project was loud: customers were exporting to CSV and slicing data in spreadsheets. A product that pushes users into Excel has a filter problem, not a data problem.
-
-The original concept was a visual query builder with a clickable canvas. It was too slow for experts and still too opaque for beginners. A typed input made one interface serve both audiences.
-
-## Typed suggestions surface the taxonomy
-
-A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. They learn the filter types by using them, not by reading documentation.
+The behavioral signal was loud: customers were exporting to CSV and slicing data in spreadsheets. A product that pushes users into Excel has a filter problem, not a data problem. The original concept was a visual query builder with a clickable canvas. Too slow for experts and still too opaque for beginners. A typed input made one interface serve both audiences.
 
 <FullBleedImage
   src={gradleFilter01}
   alt="The Gradle Enterprise omnibar with typed filter suggestions"
 />
 
-## Implicit AND across stacked filters
+## The craft
 
-Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost.
-
-We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping: huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in a prototype and moved.
+**Typed suggestions surface the taxonomy.** A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. They learn the filter types by using them, not by reading documentation. The input teaches while it works. Experts skip the suggestions and type structured queries directly. Same input, two speeds.
 
 <FullBleedImage
   src={gradleFilter02}
   alt="Stacked filter conditions visible as pills inside the omnibar input"
 />
 
-## A pattern that fed every diagnostic view
-
-The omnibar wasn't just a filter for one screen. The same filter chain drove every downstream view: the scoped task list, the diagnostic detail, and the summary aggregations. One pattern, learned once, applied everywhere.
+**Implicit AND across stacked filters.** Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost. We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping — huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in a prototype and moved.
 
 <FullBleedImage
   src={gradleFilter03}
   alt="A filtered data view showing slow build tasks scoped to a specific module"
 />
+
+**One pattern, learned once, applied everywhere.** The omnibar wasn't just a filter for one screen. The same filter chain drove every downstream view: the scoped task list, the diagnostic detail, and the summary aggregations. A pattern that feeds every view means users learn the interaction once and carry it across the product.
 
 <FullBleedImage
   src={gradleFilter04}
@@ -69,9 +65,9 @@ The omnibar wasn't just a filter for one screen. The same filter chain drove eve
   alt="A summary view of filter results with counts and trends"
 />
 
-## Results
+## The numbers
 
-Users stopped asking for CSV exports. When a customer who has been living in Excel goes back to a product's native filtering, the interaction is landing.
+Users stopped asking for CSV exports. Customer pull is what made the cross-team rollout possible. Every feature team eventually adopted the omnibar as their filter pattern.
 
 <FullBleedGif
   src="/videos/gradle-filter-06.gif"
@@ -79,9 +75,9 @@ Users stopped asking for CSV exports. When a customer who has been living in Exc
   caption="Typed suggestions and stacked filter conditions."
 />
 
-> "We'd love to see the ability to add it to other filter selectors as well."
+## The takeaway
 
-That quote mattered most. It was the moment the omnibar stopped being "the new filter on one view" and started being "the filter pattern for the product." Customer pull is what made the cross-team rollout possible. Every feature team eventually adopted it.
+When a product scatters its controls, it scatters the user's attention. A single interaction point isn't simpler — it's more organized. The omnibar replaced twelve dropdowns not by removing capabilities but by giving them a shared home. The best filter is one the user can think into, not one they have to hunt for.
 
 <Credits
   credits={[

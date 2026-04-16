@@ -1,9 +1,9 @@
 ---
-title: "$500K saved in 30 days"
+title: "Defaults are the product"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Research killed the marketplace hypothesis. The pivot to AI recommendations shipped in two months and saved one customer half a million dollars."
+description: "The default state is the opinion your software has about how work should happen. An AI recommendation engine that shipped defaults worth half a million dollars."
 seoTitle: "Ideas at Join"
 seoDescription: "An AI recommendation engine for construction estimates that surfaced $500K in savings for one Join customer in 30 days."
 heroImage: "./images/join-ideas-01.png"
@@ -30,42 +30,38 @@ import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+Most software ships empty states and calls them neutral. A blank canvas isn't neutral. It's a decision to make the user do all the work. The best products have opinions baked into the first thing a user sees — defaults that encode expertise, reduce cognitive load, and make the right path the easy path. When a default is good enough to act on, you've compressed judgment into interface. That's the product.
 
-Ideas is an AI recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A less experienced estimator might spec a finish at full cost when a substitute would do the same job for half. That knowledge gap compounds across every line item in every project. Ideas closes it automatically.
+## The evidence
 
-The original plan was a materials marketplace. Customer interviews killed that direction. Estimators didn't know what alternatives existed, so they'd never browse a catalog. I took on both design and an acting PM role, pivoted the concept to a recommendation engine, and we shipped in two months.
+Join is project management for the people who build actual buildings. A less experienced estimator might spec a finish at full cost when a substitute would do the same job for half. That knowledge gap compounds across every line item in every project.
 
-## Suggestion carousels
-
-AI-generated suggestions appear as contextual carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase, so estimators see relevant options without searching.
+The original plan was a materials marketplace. Customer interviews killed it. Estimators didn't know what alternatives existed, so they'd never browse a catalog. I took on both design and an acting PM role, pivoted the concept to an AI recommendation engine, and we shipped in two months. The key reframe: don't ask users to search. Show them what a senior estimator would already know.
 
 <FullBleedImage
   src={joinIdeas02}
   alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
 />
 
-## Human review layer
+## The craft
 
-These suggestions affect real buildings and real budgets. The AI will be wrong sometimes, so a materials researcher validates every suggestion before it reaches an estimator. The model is a first-draft engine, not a source of truth.
-
-I used AI-coded prototypes to test card density with real estimate data before engineering built anything. Each card shows UniFormat and MasterFormat classification codes. Estimators told us in interviews these were non-negotiable for trust.
+**Suggestion carousels as opinionated defaults.** AI-generated alternatives appear ranked by cost-saving potential, grouped by where they sit in the estimate and by construction phase. The ordering is the opinion. A carousel that leads with the highest-value swap is doing the estimator's prioritization work for them. The layout says: start here.
 
 <FullBleedImage
   src={joinIdeas04}
   alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
 />
 
-## Forced comparison
+**Trust through classification codes.** Each card shows UniFormat and MasterFormat codes. Estimators told us in interviews these were non-negotiable. Without them, a suggestion is just noise. With them, it's a peer recommendation. I used AI-coded prototypes to test card density with real estimate data before engineering built anything — the codes earned their screen real estate.
 
-Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The estimator decides. Nothing gets auto-applied.
+**Forced comparison, not auto-apply.** Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The estimator decides. Nothing gets auto-applied. A good default respects the user's authority. It does the thinking; it doesn't make the call.
 
 <FullBleedImage
   src={joinIdeas03}
   alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
 />
 
-## Results
+## The numbers
 
 One enterprise customer saved $500K on their first project estimate within 30 days of launch. Decision-making time dropped 50% across the product.
 
@@ -74,6 +70,10 @@ One enterprise customer saved $500K on their first project estimate within 30 da
   source="EIN Presswire, 2025"
   url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group"
 />
+
+## The takeaway
+
+Defaults aren't a shortcut. They're the product's point of view made tangible. A blank screen says "figure it out." A well-chosen default says "here's where to start, based on everything we know." The best AI features don't add complexity — they compress expertise into the starting state.
 
 <Credits
   credits={[
