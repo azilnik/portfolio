@@ -1,31 +1,23 @@
 ---
 /**
  * Header — sticky site header with logo and navigation.
- *
- * On desktop (md+), shows horizontal nav links.
- * On mobile (<md), shows a hamburger button that toggles the MobileMenu.
- *
- * Refined for the light-first theme: cleaner separator, tighter spacing.
- * Uses theme CSS variables for colors so the header adapts to the active theme.
+ * Weight 500 for the logo. Subtle 1px border.
  */
 import Navigation from "./Navigation.astro";
 ---
 
 <header
-  class="sticky top-0 z-50 border-b backdrop-blur-md"
-  style="border-color: var(--theme-header-border); background-color: var(--theme-header-bg);"
+  class="sticky top-0 z-50 backdrop-blur-md"
+  style="border-bottom: 1px solid var(--theme-header-border); background-color: var(--theme-header-bg);"
 >
   <div
     class="mx-auto flex items-center justify-between px-6 py-4"
     style="max-width: var(--theme-content-width);"
   >
-    {/* Logo / home link — name only, bold, minimal. Matches the
-        competitive set: Danny uses "DW", Tyler uses "TK", Ainara uses
-        her full name. Full name signals confidence at the senior level. */}
     <a
       href="/"
       class="font-heading text-lg tracking-tight"
-      style="color: var(--theme-text-primary); font-weight: var(--theme-weight-heading);"
+      style="color: var(--theme-text-primary); font-weight: 500;"
     >
       Ari Zilnik
     </a>

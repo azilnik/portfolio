@@ -51,26 +51,15 @@ const breadcrumbJsonLd = {
       >
         Work
       </h1>
-
-      <p
-        style="
-          color: var(--theme-text-secondary);
-          font-size: var(--theme-text-xl);
-          line-height: var(--theme-leading-normal);
-          margin-top: var(--theme-space-2);
-          max-width: 48ch;
-        "
-      >
-        How I think, lead, and build. Each case study tells the story of a specific design decision and its business impact.
-      </p>
     </div>
 
-    {/* Case study grid — 2 columns on desktop, 1 on mobile */}
+    {/* Case study grid — single column, gallery feel with generous spacing */}
     {allWork.length > 0 ? (
       <div
-        class="grid grid-cols-1 md:grid-cols-2"
         style="
-          gap: var(--theme-space-4);
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 4rem;
         "
       >
         {allWork.map((study) => (

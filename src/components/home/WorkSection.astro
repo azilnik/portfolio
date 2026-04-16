@@ -1,25 +1,13 @@
 ---
 /**
- * WorkSection — featured case studies on the homepage.
- *
- * Flat grid of case study cards. No employer grouping — each case study
- * gets equal weight. Matches the competitive set (Ainara, Tyler): a
- * clean grid where the thumbnails do the talking.
- *
- * The first card spans full-width for visual hierarchy, the rest are
- * in a 2-column grid. This creates a natural focal point without
- * adding any extra chrome.
+ * WorkSection — single-column, full-width case studies on the homepage.
+ * No featured/rest split. All cards equal. Gallery feel.
  */
 import { getCollection } from "astro:content";
 import CaseStudyCard from "../work/CaseStudyCard.astro";
 
-// Filter out side projects — they get their own section below.
 const allWork = (await getCollection("work", ({ data }) => !data.draft && data.employer !== "side-project"))
   .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
-
-// Split into featured (first) and the rest for the staggered layout.
-const featured = allWork[0];
-const rest = allWork.slice(1);
 ---
 
 <section
@@ -31,48 +19,32 @@ const rest = allWork.slice(1);
     padding-bottom: var(--theme-space-7);
   "
 >
-  {/* Section header — left-aligned, minimal. No eyebrow needed because
-      the case studies speak for themselves. The heading is a quiet label,
-      not a billboard. */}
   <div class="animate-in" style="margin-bottom: var(--theme-space-5);">
     <h2
       class="font-heading"
       style="
         color: var(--theme-text-primary);
-        font-weight: var(--theme-weight-heading);
+        font-weight: 500;
         letter-spacing: var(--theme-tracking-tight);
         line-height: var(--theme-leading-tight);
         font-size: var(--theme-text-3xl);
       "
     >
-      Selected work
+      Work
     </h2>
-
   </div>
 
   {allWork.length > 0 ? (
     <div
       style="
         display: grid;
-        gap: var(--theme-space-4);
+        grid-template-columns: 1fr;
+        gap: 4rem;
       "
     >
-      {/* Featured case study — full width for visual impact */}
-      {featured && (
-        <CaseStudyCard study={featured} featured />
-      )}
-
-      {/* Remaining case studies — 2-column grid on desktop */}
-      {rest.length > 0 && (
-        <div
-          class="grid grid-cols-1 md:grid-cols-2"
-          style="gap: var(--theme-space-4);"
-        >
-          {rest.map((study) => (
-            <CaseStudyCard study={study} />
-          ))}
-        </div>
-      )}
+      {allWork.map((study) => (
+        <CaseStudyCard study={study} />
+      ))}
     </div>
   ) : (
     <p style="color: var(--theme-text-tertiary);">

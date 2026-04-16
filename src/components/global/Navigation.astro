@@ -42,7 +42,7 @@ const currentPath = Astro.url.pathname;
             href={link.href}
             class="transition-colors"
             style={isActive
-              ? "font-weight: 600; color: var(--theme-accent);"
+              ? "font-weight: 600; color: var(--theme-text-primary);"
               : "color: var(--theme-text-secondary);"}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             {...(link.href.startsWith("mailto:") ? { "data-goatcounter-click": "contact-nav" } : {})}

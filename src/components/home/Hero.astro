@@ -1,108 +1,55 @@
 ---
 /**
- * Hero — the top section of the homepage.
- *
- * Avatar + name + bio. The face matters — it's a human greeting you,
- * not a resume. Personality is woven through the bio, not isolated
- * in a closing sentence.
+ * Hero — business-card format. Name, title, email. Nothing else.
+ * Quiet Authority: reduction IS the design choice.
  */
-import { Image } from "astro:assets";
-import avatarImage from "../../assets/images/avatar.jpg";
 ---
 
-<div style="background-image: var(--theme-bg-gradient, none);">
-  <section
-    class="mx-auto px-6"
+<section
+  class="mx-auto px-6"
+  style="
+    max-width: var(--theme-content-width);
+    padding-top: 10rem;
+    padding-bottom: 8rem;
+  "
+>
+  <h1
+    class="font-heading animate-in"
     style="
-      max-width: var(--theme-content-width);
-      padding-top: var(--theme-space-8);
-      padding-bottom: var(--theme-space-7);
+      font-size: var(--theme-text-6xl);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--theme-text-primary);
     "
   >
-    {/* Avatar + text side by side on desktop, stacked on mobile.
-        The face makes the portfolio feel like a conversation, not a
-        document. Danny Williams and Ainara Sainz both lead with a
-        human presence. */}
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8 animate-in" style="max-width: 48rem; --delay: 0ms;">
+    Ari Zilnik
+  </h1>
 
-      {/* Avatar — visible on all screens */}
-      <div class="flex-shrink-0">
-        <Image
-          src={avatarImage}
-          alt="Ari Zilnik"
-          width={120}
-          height={120}
-          class="rounded-2xl object-cover"
-        />
-      </div>
+  <div
+    class="animate-in"
+    style="
+      margin-top: 1.5rem;
+      font-size: var(--theme-text-xl);
+      color: var(--theme-text-secondary);
+      line-height: 1.6;
+    "
+  >
+    <p>Head of Design, Join</p>
+    <p style="margin-top: 0.25rem;">Previously Blockdaemon, Gradle, Jet.com</p>
+  </div>
 
-      <div>
-        {/* Name */}
-        <h1
-          class="font-heading"
-          style="
-            color: var(--theme-text-primary);
-            font-weight: var(--theme-weight-heading);
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            font-size: var(--theme-text-5xl);
-          "
-        >
-          Ari Zilnik
-        </h1>
-
-        {/* Positioning line */}
-        <p
-          class="font-heading"
-          style="
-            color: var(--theme-text-tertiary);
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            line-height: 1.2;
-            font-size: var(--theme-text-2xl);
-            margin-top: var(--theme-space-1);
-          "
-        >
-          Design leader.
-        </p>
-      </div>
-    </div>
-
-    {/* Bio — one sentence of positioning, one of personality. The work
-        section below shows employer names and metrics. The hero's job is
-        to place the person, not recite the resume. */}
-    <div
-      class="font-sans animate-in"
+  <div class="animate-in" style="margin-top: 2rem;">
+    <a
+      href="mailto:ari@zilnik.com"
       style="
-        color: var(--theme-text-secondary);
-        font-size: var(--theme-text-xl);
-        line-height: var(--theme-leading-relaxed);
-        margin-top: var(--theme-space-5);
-        max-width: 40rem;
-        --delay: 80ms;
+        color: var(--theme-text-primary);
+        text-decoration: underline;
+        text-underline-offset: 4px;
       "
+      data-goatcounter-click="contact-hero"
     >
-      <p>
-        Head of Design at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>. I build products, teams, and systems in construction, fintech, and developer tools.
-      </p>
-    </div>
-
-    <div class="flex gap-3 animate-in" style="margin-top: var(--theme-space-5); --delay: 160ms;">
-      <a
-        href="mailto:ari@zilnik.com"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
-        data-goatcounter-click="contact-hero"
-      >
-        Get in touch
-      </a>
-      <a
-        href="#work"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-secondary);"
-      >
-        See my work
-      </a>
-    </div>
-  </section>
-</div>
+      ari@zilnik.com
+    </a>
+  </div>
+</section>

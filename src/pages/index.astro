@@ -1,17 +1,13 @@
 ---
 /**
- * Homepage — Hero → Testimonials → Work → Side Projects.
+ * Homepage — Hero → Work → Side Projects.
+ * Testimonials removed. AI always adds sections; this approach subtracts.
  */
 import PageLayout from "../layouts/PageLayout.astro";
 import Hero from "../components/home/Hero.astro";
-import TestimonialCarousel from "../components/home/TestimonialCarousel.astro";
 import WorkSection from "../components/home/WorkSection.astro";
 import SideProjects from "../components/home/SideProjects.astro";
 
-// Person JSON-LD anchors the personal brand for knowledge-panel surfaces.
-// Google, Bing, and LLM crawlers use this to build a structured representation
-// of who the site is about. `sameAs` cross-references the public social
-// identities so the entity disambiguates cleanly.
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -52,7 +48,6 @@ const personJsonLd = {
   jsonLd={[personJsonLd]}
 >
   <Hero />
-  <TestimonialCarousel />
   <WorkSection />
   <SideProjects />
 </PageLayout>

@@ -123,7 +123,7 @@
   :focus-visible {
     outline: 2px solid var(--theme-accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 0;
   }
 
   /* Remove default focus for mouse users, keep it for keyboard. */
@@ -260,6 +260,8 @@
 
 .prose :where(a) {
   color: var(--theme-prose-link-color);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .prose :where(strong) {
@@ -399,21 +401,18 @@
    Stagger with --delay custom property. Respects prefers-reduced-motion.
    -------------------------------------------------------------------------- */
 
-@keyframes fade-up {
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .animate-in {
   opacity: 0;
-  animation: fade-up 0.5s ease-out forwards;
-  animation-delay: var(--delay, 0ms);
+  animation: fade-in 0.4s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

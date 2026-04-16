@@ -1,9 +1,7 @@
 ---
 /**
- * SideProjects — builder-DNA section below the main work grid.
- *
- * Uses the same CaseStudyCard component as the work section. Pulls
- * from the content collection filtered to side-project employer.
+ * SideProjects — single column, matching the work section.
+ * Section heading: "Side projects" (lowercase "projects").
  */
 import { getCollection } from "astro:content";
 import CaseStudyCard from "../work/CaseStudyCard.astro";
@@ -26,19 +24,22 @@ const sideProjects = (await getCollection("work", ({ data }) => !data.draft && d
         class="font-heading"
         style="
           color: var(--theme-text-primary);
-          font-weight: var(--theme-weight-heading);
+          font-weight: 500;
           letter-spacing: var(--theme-tracking-tight);
           line-height: var(--theme-leading-tight);
           font-size: var(--theme-text-3xl);
         "
       >
-        Building
+        Side projects
       </h2>
     </div>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-2"
-      style="gap: var(--theme-space-4);"
+      style="
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      "
     >
       {sideProjects.map((study) => (
         <CaseStudyCard study={study} />

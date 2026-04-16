@@ -1,34 +1,33 @@
 /* ==========================================================================
    Design Tokens — ari.design
 
-   One theme. Warm Tufte-inspired palette: cream backgrounds, warm gray
-   text, Gravy purple accents, Space Grotesk headings. No pure white,
-   no pure black.
+   Quiet Authority. Monochromatic, brutally restrained, confident through
+   reduction. Pure white, pure black, no decorative color. Dieter Rams
+   disciple — less is not lazy, it's decisive.
    ========================================================================== */
 
 :root {
-  /* Page backgrounds — warm cream, not white */
-  --theme-bg: #faf8f5;
-  --theme-bg-secondary: #f5f2ee;
-  --theme-bg-tertiary: #edeae5;
+  /* Page backgrounds — pure white */
+  --theme-bg: #FFFFFF;
+  --theme-bg-secondary: #F8F8F8;
+  --theme-bg-tertiary: #F0F0F0;
 
-  /* Text — warm grays, not blue-gray, never black.
-     Contrast on #faf8f5: primary ~14:1, secondary ~7.5:1, tertiary ~5:1. */
-  --theme-text-primary: #2d2b28;
-  --theme-text-secondary: #55524d;
-  --theme-text-tertiary: #78746d;
-  --theme-text-quaternary: #a09b94;
+  /* Text — black, grays, no blue tint */
+  --theme-text-primary: #111111;
+  --theme-text-secondary: #555555;
+  --theme-text-tertiary: #888888;
+  --theme-text-quaternary: #AAAAAA;
 
-  /* Accent — Gravy purple, darkened for WCAG AA on cream */
-  --theme-accent: #7c5e9e;
-  --theme-accent-hover: #6b4f8b;
-  --theme-accent-subtle: #f0ebe6;
+  /* Accent — no decorative color. Links are underlined black. */
+  --theme-accent: #111111;
+  --theme-accent-hover: #333333;
+  --theme-accent-subtle: #F8F8F8;
 
-  /* Surfaces — warm, not white */
-  --theme-surface: #f7f5f1;
-  --theme-surface-hover: #f2efea;
-  --theme-border: #eae7e1;
-  --theme-border-strong: #ddd9d2;
+  /* Surfaces */
+  --theme-surface: #F8F8F8;
+  --theme-surface-hover: #F0F0F0;
+  --theme-border: #E0E0E0;
+  --theme-border-strong: #CCCCCC;
 
   /* Typography — Space Grotesk headings, Inter body */
   --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -48,12 +47,12 @@
   --theme-text-5xl: clamp(2.5rem, 1.9rem + 2.6vw, 3.25rem);
   --theme-text-6xl: clamp(3rem, 2.2rem + 3.6vw, 4rem);
 
-  /* Weights */
+  /* Weights — heading weight is 500, not 700. Restraint, not shouting. */
   --theme-weight-normal: 400;
   --theme-weight-medium: 500;
   --theme-weight-semibold: 600;
   --theme-weight-bold: 700;
-  --theme-weight-heading: 700;
+  --theme-weight-heading: 500;
 
   /* Leading */
   --theme-leading-tight: 1.08;
@@ -85,52 +84,41 @@
   --theme-figure-wide: 58rem;
   --theme-figure-full: 69rem;
 
-  /* Radius */
-  --theme-radius-sm: 0.375rem;
-  --theme-radius-md: 0.5rem;
-  --theme-radius-lg: 0.75rem;
-  --theme-radius-xl: 1rem;
-  --theme-radius-2xl: 1.25rem;
-  --theme-radius-full: 9999px;
+  /* Radius — zero everywhere. Sharp edges. */
+  --theme-radius-sm: 0;
+  --theme-radius-md: 0;
+  --theme-radius-lg: 0;
+  --theme-radius-xl: 0;
+  --theme-radius-2xl: 0;
+  --theme-radius-full: 0;
 
-  /* Shadows — warm tint, not blue-black */
-  --theme-shadow-sm: 0 1px 2px rgba(45, 43, 40, 0.05);
-  --theme-shadow-md: 0 4px 12px rgba(45, 43, 40, 0.07);
-  --theme-shadow-lg: 0 12px 32px rgba(45, 43, 40, 0.09);
+  /* Shadows — none */
+  --theme-shadow-sm: none;
+  --theme-shadow-md: none;
+  --theme-shadow-lg: none;
 
-  /* Footer — warm dark */
-  --theme-footer-bg: #2d2b28;
-  --theme-footer-text: #f5f2ee;
-  --theme-footer-muted: #a09b94;
+  /* Footer — black */
+  --theme-footer-bg: #111111;
+  --theme-footer-text: #FFFFFF;
+  --theme-footer-muted: #888888;
 
   /* Header */
-  --theme-header-bg: rgba(250, 248, 245, 0.92);
-  --theme-header-border: #eae7e1;
+  --theme-header-bg: rgba(255, 255, 255, 0.95);
+  --theme-header-border: #E0E0E0;
 
-  /* Images */
-  --theme-image-radius: 0.75rem;
-  --theme-image-shadow: 0 2px 8px rgba(45, 43, 40, 0.07);
+  /* Images — no radius, no shadow */
+  --theme-image-radius: 0;
+  --theme-image-shadow: none;
   --theme-image-border: none;
 
   /* Prose */
   --theme-prose-heading-color: var(--theme-text-primary);
   --theme-prose-body-color: var(--theme-text-secondary);
-  --theme-prose-link-color: var(--theme-accent);
-  --theme-prose-quote-border: #7c5e9e;
-  --theme-prose-quote-text: #55524d;
+  --theme-prose-link-color: var(--theme-text-primary);
+  --theme-prose-quote-border: #111111;
+  --theme-prose-quote-text: #555555;
   --theme-prose-hr-color: var(--theme-border);
 
-  /* Mesh gradient for the hero */
-  --theme-gradient-1: rgba(230, 215, 200, 0.18);
-  --theme-gradient-2: rgba(210, 220, 235, 0.15);
-  --theme-gradient-3: rgba(225, 218, 210, 0.10);
-  --theme-gradient-4: rgba(235, 218, 210, 0.12);
-  --theme-gradient-5: rgba(215, 225, 230, 0.12);
-
-  --theme-bg-gradient:
-    radial-gradient(ellipse 80% 50% at 10% 0%,   var(--theme-gradient-1) 0%, transparent 100%),
-    radial-gradient(ellipse 60% 70% at 90% 5%,   var(--theme-gradient-2) 0%, transparent 100%),
-    radial-gradient(ellipse 70% 50% at 50% 45%,  var(--theme-gradient-3) 0%, transparent 100%),
-    radial-gradient(ellipse 80% 60% at 85% 85%,  var(--theme-gradient-4) 0%, transparent 100%),
-    radial-gradient(ellipse 60% 60% at 5% 80%,   var(--theme-gradient-5) 0%, transparent 100%);
+  /* No mesh gradient */
+  --theme-bg-gradient: none;
 }
