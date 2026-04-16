@@ -22,7 +22,6 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import Callout from "../../components/mdx/Callout.astro";
 import PressQuote from "../../components/mdx/PressQuote.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
@@ -36,7 +35,7 @@ AI engine that surfaces cost-saving material alternatives inside construction es
 
 ## Suggestion carousels
 
-AI-generated suggestions ranked by savings potential. Grouped by estimate location and construction phase.
+AI-generated suggestions ranked by savings potential. Grouped by estimate location and construction phase. Each carousel scopes to a single section of the estimate so reviewers process decisions in context, not as a disconnected feed.
 
 <FullBleedImage
   src={joinIdeas02}
@@ -45,9 +44,9 @@ AI-generated suggestions ranked by savings potential. Grouped by estimate locati
 
 ## Human review layer
 
-Suggestions affect real buildings. A materials researcher validates every recommendation before it reaches an estimator. The model drafts. Humans approve.
+Suggestions affect real buildings. A materials researcher validates every recommendation before it reaches an estimator. The model drafts. Humans approve. Rejection reasons feed back into the model so the same bad suggestion doesn't recur.
 
-Each card shows UniFormat and MasterFormat codes. Non-negotiable for trust.
+Each card shows UniFormat and MasterFormat codes. Non-negotiable for trust in construction. Estimators verify specs against these codes daily; omitting them would have killed adoption.
 
 <FullBleedImage
   src={joinIdeas04}

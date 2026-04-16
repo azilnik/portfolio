@@ -29,6 +29,8 @@ import hoodDashboard from "./images/hood-vent-dashboard.png";
 
 Automated range hood that detects cooking in 30-60 seconds. Gas stoves emit real pollutants. The fix is simple: turn on your hood. The problem: most people forget.
 
+(First attempt: fixed temperature threshold. Problem: seasonal drift, slow detection, constant recalibration. Switched to rate-of-change.)
+
 Most smart hood automations use a temperature threshold. Two problems. Slow: by the time the kitchen heats up, you've been breathing pollutants for 5-10 minutes. Unreliable: hot summer days false-trigger or need seasonal recalibration.
 
 <Callout label="The core insight">
@@ -47,11 +49,17 @@ Burner on, temperature derivative spikes within a rolling two-minute window. Coo
 
 Watches both temperature and humidity rate of change. Temperature catches most cooking. Humidity catches boiling water, where steam arrives before heat.
 
-**UI-adjustable thresholds.** Every sensitivity setting exposed as a dashboard slider. Tune without editing YAML.
+## UI-adjustable thresholds
 
-**Manual override.** Toggle the hood by hand, automation steps back for 30 minutes.
+Every sensitivity setting exposed as a dashboard slider. Tune without editing YAML.
 
-**Safety shutoff.** Two hours continuous: forces off, posts notification.
+## Manual override
+
+Toggle the hood by hand, automation steps back for 30 minutes.
+
+## Safety shutoff
+
+Two hours continuous: forces off, posts notification.
 
 <FullBleedGif
   src="/videos/hood-vent-demo.gif"
