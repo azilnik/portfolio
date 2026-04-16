@@ -1,40 +1,17 @@
 ---
 /**
  * BaseLayout — the outermost HTML shell used by every page.
- *
- * Handles the <html>, <head>, and <body> tags along with:
- * - Meta tags for SEO and social sharing (Open Graph / Twitter)
- * - Self-hosted font preloads
- * - Global CSS import
- * - GoatCounter analytics (production only)
- * - Optional JSON-LD structured data block
- *
- * Title behavior: the `title` prop is the specific page title. BaseLayout
- * appends " — Ari Zilnik" ONLY if the passed title doesn't already carry
- * the brand segment. This lets pages that want a non-standard title layout
- * (e.g. homepage, about with geo signal) pass the full string, while keeping
- * the convention for everything else.
- *
- * See CLAUDE.md at the repo root for the full SEO/voice rules.
- *
- * Other layouts (PageLayout, CaseStudyLayout) nest inside this one.
  */
 import GoatCounter from "../components/global/GoatCounter.astro";
 import JsonLd from "../components/global/JsonLd.astro";
 import "../styles/global.css";
 
 interface Props {
-  /** The page <title>. " — Ari Zilnik" is appended unless already present. */
   title: string;
-  /** Meta description for search engines and social previews. */
   description?: string;
-  /** URL to an Open Graph image for social sharing. Defaults to /og-default.png. */
   ogImage?: string;
-  /** Alt text for the OG image. Improves accessibility and Twitter card rendering. */
   ogImageAlt?: string;
-  /** Override the default og:type (defaults to "website"; case studies use "article"). */
   ogType?: "website" | "article";
-  /** Optional JSON-LD structured data objects. Each renders as a <script type="application/ld+json">. */
   jsonLd?: Array<Record<string, unknown>>;
 }
 
@@ -47,57 +24,41 @@ const {
   jsonLd,
 } = Astro.props;
 
-// Append the brand segment unless the caller already included it. This keeps
-// full titles intact (e.g. "About Ari Zilnik — design leader in Toronto")
-// while still appending for pages that pass only a page-specific prefix
-// (e.g. "Scenarios at Join" → "Scenarios at Join — Ari Zilnik"). `includes`
-// is deliberately broad — any page whose title mentions Ari's name owns it.
 const fullTitle = title.includes("Ari Zilnik") ? title : `${title} — Ari Zilnik`;
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-// Resolve OG image to an absolute URL so crawlers (including Slack/iMessage)
-// can fetch it without a base-URL guess. Passing a URL-like string or a
-// relative path both work here.
 const ogImageURL = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en" style="background:#faf8f5">
+<html lang="en" style="background:#F2EDE6">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Ari Zilnik" />
-    {/* Explicit robots directive: index + follow + allow large image previews
-        in SERPs (important for a visual portfolio). */}
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    {/* Mobile browser chrome color — matches the warm off-white body bg. */}
-    <meta name="theme-color" content="#faf8f5" />
+    <meta name="theme-color" content="#F2EDE6" />
 
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0059ff" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2A5F4F" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    {/* Preload self-hosted fonts */}
     <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    {/* Google Fonts — Space Grotesk for headings */}
+    {/* Google Fonts — Fraunces variable serif for headings */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    {/* Open Graph */}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Ari Zilnik" />
     <meta property="og:locale" content="en_US" />
@@ -109,20 +70,14 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
 
-    {/* Twitter card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    {/* Sitemap discovery — @astrojs/sitemap emits sitemap-index.xml. Hinting
-        it in the <head> helps crawlers that don't parse robots.txt first. */}
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-
-    {/* JSON-LD structured data — emitted by individual pages via the jsonLd prop */}
     {jsonLd && jsonLd.length > 0 && jsonLd.map((data) => <JsonLd data={data} />)}
-
     <GoatCounter />
   </head>
 

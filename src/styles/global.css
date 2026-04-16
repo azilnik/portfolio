@@ -12,9 +12,10 @@
 /* --------------------------------------------------------------------------
    Self-hosted variable fonts
 
-   We load DM Sans (headings) and Inter (body) as variable fonts so a single
+   We load DM Sans (body) and Inter (fallback) as variable fonts so a single
    file covers all weights. The `font-weight` range tells the browser which
-   weights are available in the file.
+   weights are available in the file. Fraunces (headings) is loaded via
+   Google Fonts in BaseLayout.astro.
    -------------------------------------------------------------------------- */
 
 @font-face {
@@ -66,9 +67,9 @@
   --font-heading: var(--theme-font-heading);
   --font-display: var(--theme-font-display);
 
-  /* Brand accent color — the signature blue used for links and CTAs */
-  --color-accent: rgb(0, 89, 255);
-  --color-accent-hover: rgb(0, 70, 210);
+  /* Brand accent color — forest green */
+  --color-accent: var(--theme-accent);
+  --color-accent-hover: var(--theme-accent-hover);
 
   /* Expose the baseline-grid spacing scale as Tailwind utilities so we can
      write `py-section` / `py-section-lg` / `gap-baseline` etc. everywhere
@@ -389,6 +390,10 @@
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .small-caps {
+    font-variant-caps: small-caps;
   }
 }
 

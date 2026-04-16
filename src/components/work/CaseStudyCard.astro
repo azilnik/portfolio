@@ -2,11 +2,8 @@
 /**
  * CaseStudyCard — thumbnail + text for homepage and /work listing.
  *
- * No card container, no border, no shadow, no background. The image
- * IS the card. Text sits directly below. Ainara and Tyler both do
- * this: image, then text, nothing wrapping them. The Tufte-warm
- * background is the surface. Adding a container on top of it is
- * a layer that doesn't earn its keep.
+ * Warm Signal: small-caps company name in Fraunces, green title with
+ * terracotta hover, 4px radius images with 1px border.
  */
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -22,32 +19,24 @@ const { study, featured = false } = Astro.props;
 <a
   href={`/work/${study.id}`}
   data-goatcounter-click={`casestudy-click-${study.id}`}
-  class:list={[
-    "group block animate-in",
-    featured ? "grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6" : "",
-  ]}
+  class="group block animate-in"
 >
   {/* Thumbnail */}
-  <div class="overflow-hidden" style="border-radius: var(--theme-radius-lg);">
+  <div class="overflow-hidden" style="border-radius: 4px;">
     <Image
       src={study.data.thumbnail}
       alt={study.data.thumbnailAlt}
-      widths={featured ? [600, 900, 1200] : [400, 600, 800]}
-      sizes={featured
-        ? "(min-width: 1024px) 50vw, 100vw"
-        : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-      }
-      class:list={[
-        "w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]",
-        featured ? "aspect-[16/10]" : "aspect-[16/10]",
-      ]}
+      widths={[400, 600, 800]}
+      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      class="w-full object-cover aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.02]"
+      style="border: 1px solid var(--theme-border);"
     />
   </div>
 
-  {/* Text — sits directly below the image, no container */}
-  <div style={`padding-top: ${featured ? "0" : "var(--theme-space-2)"};`}>
+  {/* Text */}
+  <div style="padding-top: var(--theme-space-2);">
     <p
-      class="text-xs font-semibold uppercase"
+      class="text-xs font-semibold uppercase small-caps font-heading"
       style="
         color: var(--theme-text-tertiary);
         letter-spacing: var(--theme-tracking-wider);
@@ -57,33 +46,35 @@ const { study, featured = false } = Astro.props;
     </p>
 
     <h3
-      class="font-heading"
-      style={`
-        color: var(--theme-text-primary);
-        font-weight: var(--theme-weight-heading);
-        letter-spacing: var(--theme-tracking-tight);
-        line-height: var(--theme-leading-snug);
-        font-size: ${featured ? "var(--theme-text-2xl)" : "var(--theme-text-lg)"};
+      class="font-heading case-study-title"
+      style="
+        color: #2A5F4F;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.3;
+        font-size: var(--theme-text-lg);
         margin-top: 0.25rem;
-      `}
+        transition: color 0.3s ease;
+      "
     >
       {study.data.title}
     </h3>
 
     <p
-      class:list={[
-        "leading-relaxed",
-        featured ? "" : "line-clamp-2",
-      ]}
-      style={`
+      class="leading-relaxed line-clamp-2"
+      style="
         color: var(--theme-text-secondary);
         font-size: var(--theme-text-sm);
         margin-top: var(--theme-space-1);
-      `}
+      "
     >
       {study.data.description}
     </p>
-
-
   </div>
 </a>
+
+<style>
+  .group:hover .case-study-title {
+    color: #C65D3E !important;
+  }
+</style>

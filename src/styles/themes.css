@@ -1,39 +1,41 @@
 /* ==========================================================================
    Design Tokens — ari.design
 
-   One theme. Warm Tufte-inspired palette: cream backgrounds, warm gray
-   text, Gravy purple accents, Space Grotesk headings. No pure white,
-   no pure black.
+   Warm Signal palette: warm sand backgrounds, forest green + terracotta
+   accents, Fraunces serif headings, DM Sans body. Handcrafted feel with
+   intentional imperfections.
    ========================================================================== */
 
 :root {
-  /* Page backgrounds — warm cream, not white */
-  --theme-bg: #faf8f5;
-  --theme-bg-secondary: #f5f2ee;
-  --theme-bg-tertiary: #edeae5;
+  /* Page backgrounds — warm sand */
+  --theme-bg: #F2EDE6;
+  --theme-bg-secondary: #EBE5DD;
+  --theme-bg-tertiary: #E3DDD4;
 
-  /* Text — warm grays, not blue-gray, never black.
-     Contrast on #faf8f5: primary ~14:1, secondary ~7.5:1, tertiary ~5:1. */
-  --theme-text-primary: #2d2b28;
-  --theme-text-secondary: #55524d;
-  --theme-text-tertiary: #78746d;
-  --theme-text-quaternary: #a09b94;
+  /* Text — warm neutrals, not blue-gray */
+  --theme-text-primary: #1E1E1E;
+  --theme-text-secondary: #5A5550;
+  --theme-text-tertiary: #807B75;
+  --theme-text-quaternary: #A5A09A;
 
-  /* Accent — Gravy purple, darkened for WCAG AA on cream */
-  --theme-accent: #7c5e9e;
-  --theme-accent-hover: #6b4f8b;
-  --theme-accent-subtle: #f0ebe6;
+  /* Primary accent — deep forest green */
+  --theme-accent: #2A5F4F;
+  --theme-accent-hover: #1E4A3B;
+  --theme-accent-subtle: #EDE8E0;
+
+  /* Secondary accent — terracotta (used sparingly) */
+  --theme-accent-secondary: #C65D3E;
 
   /* Surfaces — warm, not white */
-  --theme-surface: #f7f5f1;
-  --theme-surface-hover: #f2efea;
-  --theme-border: #eae7e1;
-  --theme-border-strong: #ddd9d2;
+  --theme-surface: #EDE8E0;
+  --theme-surface-hover: #E5E0D8;
+  --theme-border: #DDD8D0;
+  --theme-border-strong: #CCC7BF;
 
-  /* Typography — Space Grotesk headings, Inter body */
-  --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --theme-font-display: var(--theme-font-heading);
+  /* Typography — Fraunces headings, DM Sans body */
+  --theme-font-heading: "Fraunces", Georgia, serif;
+  --theme-font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --theme-font-display: "Fraunces", Georgia, serif;
   --theme-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
   /* Type scale */
@@ -85,47 +87,47 @@
   --theme-figure-wide: 58rem;
   --theme-figure-full: 69rem;
 
-  /* Radius */
-  --theme-radius-sm: 0.375rem;
-  --theme-radius-md: 0.5rem;
-  --theme-radius-lg: 0.75rem;
-  --theme-radius-xl: 1rem;
-  --theme-radius-2xl: 1.25rem;
+  /* Radius — small, refined */
+  --theme-radius-sm: 4px;
+  --theme-radius-md: 4px;
+  --theme-radius-lg: 4px;
+  --theme-radius-xl: 4px;
+  --theme-radius-2xl: 4px;
   --theme-radius-full: 9999px;
 
-  /* Shadows — warm tint, not blue-black */
-  --theme-shadow-sm: 0 1px 2px rgba(45, 43, 40, 0.05);
-  --theme-shadow-md: 0 4px 12px rgba(45, 43, 40, 0.07);
-  --theme-shadow-lg: 0 12px 32px rgba(45, 43, 40, 0.09);
+  /* Shadows — warm brown tint */
+  --theme-shadow-sm: 0 1px 2px rgba(30, 30, 30, 0.05);
+  --theme-shadow-md: 0 4px 12px rgba(30, 30, 30, 0.07);
+  --theme-shadow-lg: 0 12px 32px rgba(30, 30, 30, 0.09);
 
-  /* Footer — warm dark */
-  --theme-footer-bg: #2d2b28;
-  --theme-footer-text: #f5f2ee;
-  --theme-footer-muted: #a09b94;
+  /* Footer — warm dark brown */
+  --theme-footer-bg: #2A2520;
+  --theme-footer-text: #EDE8E0;
+  --theme-footer-muted: #8A8580;
 
   /* Header */
-  --theme-header-bg: rgba(250, 248, 245, 0.92);
-  --theme-header-border: #eae7e1;
+  --theme-header-bg: rgba(242, 237, 230, 0.92);
+  --theme-header-border: #DDD8D0;
 
-  /* Images */
-  --theme-image-radius: 0.75rem;
-  --theme-image-shadow: 0 2px 8px rgba(45, 43, 40, 0.07);
-  --theme-image-border: none;
+  /* Images — refined borders */
+  --theme-image-radius: 4px;
+  --theme-image-shadow: none;
+  --theme-image-border: 1px solid #DDD8D0;
 
   /* Prose */
   --theme-prose-heading-color: var(--theme-text-primary);
   --theme-prose-body-color: var(--theme-text-secondary);
-  --theme-prose-link-color: var(--theme-accent);
-  --theme-prose-quote-border: #7c5e9e;
-  --theme-prose-quote-text: #55524d;
+  --theme-prose-link-color: #2A5F4F;
+  --theme-prose-quote-border: #2A5F4F;
+  --theme-prose-quote-text: #5A5550;
   --theme-prose-hr-color: var(--theme-border);
 
-  /* Mesh gradient for the hero */
-  --theme-gradient-1: rgba(230, 215, 200, 0.18);
-  --theme-gradient-2: rgba(210, 220, 235, 0.15);
-  --theme-gradient-3: rgba(225, 218, 210, 0.10);
-  --theme-gradient-4: rgba(235, 218, 210, 0.12);
-  --theme-gradient-5: rgba(215, 225, 230, 0.12);
+  /* Mesh gradient for the hero — warm sand tones */
+  --theme-gradient-1: rgba(221, 210, 196, 0.18);
+  --theme-gradient-2: rgba(198, 93, 62, 0.06);
+  --theme-gradient-3: rgba(42, 95, 79, 0.04);
+  --theme-gradient-4: rgba(221, 210, 196, 0.12);
+  --theme-gradient-5: rgba(237, 232, 224, 0.12);
 
   --theme-bg-gradient:
     radial-gradient(ellipse 80% 50% at 10% 0%,   var(--theme-gradient-1) 0%, transparent 100%),

@@ -2,16 +2,15 @@
 /**
  * Footer — CTA section and social links at the bottom of every page.
  *
- * Redesigned: cleaner, more confident, with visible social links.
- * Inspired by Ainara Sainz's "Let's work together" and Danny Williams'
- * sidebar footer with location + social links.
+ * Warm Signal: two-column layout with Fraunces heading, green accent
+ * CTA button, warm dark brown background.
  */
 ---
 
 <footer
   style="
-    background-color: var(--theme-footer-bg);
-    color: var(--theme-footer-text);
+    background-color: #2A2520;
+    color: #EDE8E0;
     margin-top: var(--theme-space-7);
   "
 >
@@ -28,32 +27,23 @@
 
       {/* Left: CTA block */}
       <div>
-        <p
-          class="text-xs font-semibold uppercase"
-          style="
-            color: var(--theme-footer-muted);
-            letter-spacing: var(--theme-tracking-wider);
-            margin-bottom: var(--theme-space-2);
-          "
-        >
-          Interested in working together?
-        </p>
         <h2
           class="font-heading"
           style="
-            font-weight: var(--theme-weight-heading);
-            letter-spacing: var(--theme-tracking-tight);
-            line-height: var(--theme-leading-tight);
-            font-size: var(--theme-text-4xl);
+            font-family: var(--theme-font-heading);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.08;
+            font-size: clamp(2rem, 1.6rem + 1.8vw, 2.5rem);
           "
         >
-          Let's talk.
+          Let's work together.
         </h2>
-        <div style="margin-top: var(--theme-space-4);">
+        <div style="margin-top: 2rem;">
           <a
             href="mailto:ari@zilnik.com"
-            class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-            style="background-color: var(--theme-accent); color: #ffffff;"
+            class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
+            style="background-color: #2A5F4F; color: #ffffff; border-radius: 4px;"
             data-goatcounter-click="contact-footer"
           >
             ari@zilnik.com
@@ -63,14 +53,13 @@
 
       {/* Right: Links and location */}
       <div class="flex flex-col gap-4 text-sm md:items-end md:text-right">
-        {/* Social links */}
         <div class="flex gap-5">
           <a
             href="https://www.linkedin.com/in/azilnik/"
             target="_blank"
             rel="noopener noreferrer"
             class="transition-colors hover:underline"
-            style="color: var(--theme-footer-text);"
+            style="color: #EDE8E0;"
             data-goatcounter-click="linkedin-footer"
           >
             LinkedIn
@@ -80,16 +69,14 @@
             target="_blank"
             rel="noopener noreferrer"
             class="transition-colors hover:underline"
-            style="color: var(--theme-footer-text);"
+            style="color: #EDE8E0;"
             data-goatcounter-click="github-footer"
           >
             GitHub
           </a>
-
         </div>
 
-        {/* Location — inspired by Danny Williams' "MADE IN HALIFAX, CANADA" */}
-        <p style="color: var(--theme-footer-muted);">
+        <p style="color: #8A8580;">
           Toronto, Canada
         </p>
       </div>
@@ -99,9 +86,9 @@
     <p
       class="text-xs"
       style="
-        color: var(--theme-footer-muted);
-        margin-top: var(--theme-space-6);
-        padding-top: var(--theme-space-4);
+        color: #8A8580;
+        margin-top: 4rem;
+        padding-top: 2rem;
         border-top: 1px solid rgba(255,255,255,0.08);
       "
     >
