@@ -28,7 +28,7 @@ const { study, featured = false } = Astro.props;
   ]}
 >
   {/* Thumbnail */}
-  <div class="overflow-hidden" style="border-radius: var(--theme-radius-lg);">
+  <div class="overflow-hidden">
     <Image
       src={study.data.thumbnail}
       alt={study.data.thumbnailAlt}
@@ -38,7 +38,7 @@ const { study, featured = false } = Astro.props;
         : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
       }
       class:list={[
-        "w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]",
+        "w-full object-cover transition-transform duration-500 group-hover:scale-[1.01]",
         featured ? "aspect-[16/10]" : "aspect-[16/10]",
       ]}
     />

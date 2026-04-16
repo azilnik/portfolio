@@ -1,10 +1,9 @@
 ---
 /**
- * Footer — CTA section and social links at the bottom of every page.
+ * Footer — centered CTA and social links at the bottom of every page.
  *
- * Redesigned: cleaner, more confident, with visible social links.
- * Inspired by Ainara Sainz's "Let's work together" and Danny Williams'
- * sidebar footer with location + social links.
+ * Editorial tension: centered, confident, no filler. The dark background
+ * provides contrast and signals the end of the page.
  */
 ---
 
@@ -12,91 +11,68 @@
   style="
     background-color: var(--theme-footer-bg);
     color: var(--theme-footer-text);
-    margin-top: var(--theme-space-7);
+    margin-top: var(--theme-space-8);
   "
 >
   <div
-    class="mx-auto px-6"
+    class="mx-auto px-6 text-center"
     style="
       max-width: var(--theme-content-width);
       padding-top: var(--theme-space-7);
       padding-bottom: var(--theme-space-6);
     "
   >
-    {/* Two-column layout: CTA left, links right */}
-    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    {/* Large heading */}
+    <h2
+      class="font-heading"
+      style="
+        font-weight: var(--theme-weight-heading);
+        letter-spacing: var(--theme-tracking-tight);
+        line-height: var(--theme-leading-tight);
+        font-size: var(--theme-text-4xl);
+      "
+    >
+      Get in touch.
+    </h2>
 
-      {/* Left: CTA block */}
-      <div>
-        <p
-          class="text-xs font-semibold uppercase"
-          style="
-            color: var(--theme-footer-muted);
-            letter-spacing: var(--theme-tracking-wider);
-            margin-bottom: var(--theme-space-2);
-          "
-        >
-          Interested in working together?
-        </p>
-        <h2
-          class="font-heading"
-          style="
-            font-weight: var(--theme-weight-heading);
-            letter-spacing: var(--theme-tracking-tight);
-            line-height: var(--theme-leading-tight);
-            font-size: var(--theme-text-4xl);
-          "
-        >
-          Let's talk.
-        </h2>
-        <div style="margin-top: var(--theme-space-4);">
-          <a
-            href="mailto:ari@zilnik.com"
-            class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-            style="background-color: var(--theme-accent); color: #ffffff;"
-            data-goatcounter-click="contact-footer"
-          >
-            ari@zilnik.com
-          </a>
-        </div>
-      </div>
-
-      {/* Right: Links and location */}
-      <div class="flex flex-col gap-4 text-sm md:items-end md:text-right">
-        {/* Social links */}
-        <div class="flex gap-5">
-          <a
-            href="https://www.linkedin.com/in/azilnik/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="transition-colors hover:underline"
-            style="color: var(--theme-footer-text);"
-            data-goatcounter-click="linkedin-footer"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/azilnik"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="transition-colors hover:underline"
-            style="color: var(--theme-footer-text);"
-            data-goatcounter-click="github-footer"
-          >
-            GitHub
-          </a>
-
-        </div>
-
-        {/* Location — inspired by Danny Williams' "MADE IN HALIFAX, CANADA" */}
-        <p style="color: var(--theme-footer-muted);">
-          Toronto, Canada
-        </p>
-      </div>
+    {/* Email button */}
+    <div style="margin-top: var(--theme-space-4);">
+      <a
+        href="mailto:ari@zilnik.com"
+        class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
+        style="background-color: var(--theme-accent); color: #ffffff;"
+        data-goatcounter-click="contact-footer"
+      >
+        ari@zilnik.com
+      </a>
     </div>
 
-    {/* Copyright line */}
-    <p
+    {/* Social links */}
+    <div class="flex justify-center gap-6 text-sm" style="margin-top: var(--theme-space-4);">
+      <a
+        href="https://www.linkedin.com/in/azilnik/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:underline"
+        style="color: var(--theme-footer-text);"
+        data-goatcounter-click="linkedin-footer"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="https://github.com/azilnik"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:underline"
+        style="color: var(--theme-footer-text);"
+        data-goatcounter-click="github-footer"
+      >
+        GitHub
+      </a>
+    </div>
+
+    {/* Location + copyright */}
+    <div
       class="text-xs"
       style="
         color: var(--theme-footer-muted);
@@ -105,7 +81,10 @@
         border-top: 1px solid rgba(255,255,255,0.08);
       "
     >
-      &copy; {new Date().getFullYear()} Ari Zilnik
-    </p>
+      <p>Toronto, Canada</p>
+      <p style="margin-top: var(--theme-space-1);">
+        &copy; {new Date().getFullYear()} Ari Zilnik
+      </p>
+    </div>
   </div>
 </footer>

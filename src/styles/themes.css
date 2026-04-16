@@ -1,37 +1,35 @@
 /* ==========================================================================
    Design Tokens — ari.design
 
-   One theme. Warm Tufte-inspired palette: cream backgrounds, warm gray
-   text, Gravy purple accents, Space Grotesk headings. No pure white,
-   no pure black.
+   Editorial Tension theme. Parchment backgrounds, Instrument Serif headings,
+   burnt orange accents, sharp corners. Magazine art director meets portfolio.
    ========================================================================== */
 
 :root {
-  /* Page backgrounds — warm cream, not white */
-  --theme-bg: #faf8f5;
-  --theme-bg-secondary: #f5f2ee;
-  --theme-bg-tertiary: #edeae5;
+  /* Page backgrounds — warm parchment */
+  --theme-bg: #F6F1EB;
+  --theme-bg-secondary: #F0EBE3;
+  --theme-bg-tertiary: #E5DFD6;
 
-  /* Text — warm grays, not blue-gray, never black.
-     Contrast on #faf8f5: primary ~14:1, secondary ~7.5:1, tertiary ~5:1. */
-  --theme-text-primary: #2d2b28;
-  --theme-text-secondary: #55524d;
-  --theme-text-tertiary: #78746d;
-  --theme-text-quaternary: #a09b94;
+  /* Text — warm, never pure black */
+  --theme-text-primary: #1A1A1A;
+  --theme-text-secondary: #4A4A4A;
+  --theme-text-tertiary: #7A7570;
+  --theme-text-quaternary: #A09890;
 
-  /* Accent — Gravy purple, darkened for WCAG AA on cream */
-  --theme-accent: #7c5e9e;
-  --theme-accent-hover: #6b4f8b;
-  --theme-accent-subtle: #f0ebe6;
+  /* Accent — burnt orange */
+  --theme-accent: #C4410A;
+  --theme-accent-hover: #A33508;
+  --theme-accent-subtle: #F0EBE3;
 
-  /* Surfaces — warm, not white */
-  --theme-surface: #f7f5f1;
-  --theme-surface-hover: #f2efea;
-  --theme-border: #eae7e1;
-  --theme-border-strong: #ddd9d2;
+  /* Surfaces */
+  --theme-surface: #F0EBE3;
+  --theme-surface-hover: #E5DFD6;
+  --theme-border: #E5DFD6;
+  --theme-border-strong: #D5CFC5;
 
-  /* Typography — Space Grotesk headings, Inter body */
-  --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  /* Typography — Instrument Serif headings, Inter body */
+  --theme-font-heading: "Instrument Serif", Georgia, "Times New Roman", serif;
   --theme-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
   --theme-font-display: var(--theme-font-heading);
   --theme-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
@@ -47,13 +45,14 @@
   --theme-text-4xl: clamp(2rem, 1.6rem + 1.8vw, 2.5rem);
   --theme-text-5xl: clamp(2.5rem, 1.9rem + 2.6vw, 3.25rem);
   --theme-text-6xl: clamp(3rem, 2.2rem + 3.6vw, 4rem);
+  --theme-text-hero: clamp(3.5rem, 2.5rem + 4.5vw, 5rem);
 
   /* Weights */
   --theme-weight-normal: 400;
   --theme-weight-medium: 500;
   --theme-weight-semibold: 600;
   --theme-weight-bold: 700;
-  --theme-weight-heading: 700;
+  --theme-weight-heading: 400;
 
   /* Leading */
   --theme-leading-tight: 1.08;
@@ -79,53 +78,53 @@
   --theme-space-8: 8rem;
 
   /* Layout */
-  --theme-section-gap: var(--theme-space-7);
+  --theme-section-gap: var(--theme-space-8);
   --theme-content-width: 72rem;
   --theme-prose-width: 45rem;
   --theme-figure-wide: 58rem;
   --theme-figure-full: 69rem;
 
-  /* Radius */
-  --theme-radius-sm: 0.375rem;
-  --theme-radius-md: 0.5rem;
-  --theme-radius-lg: 0.75rem;
-  --theme-radius-xl: 1rem;
-  --theme-radius-2xl: 1.25rem;
-  --theme-radius-full: 9999px;
+  /* Radius — all zero for sharp editorial corners */
+  --theme-radius-sm: 0;
+  --theme-radius-md: 0;
+  --theme-radius-lg: 0;
+  --theme-radius-xl: 0;
+  --theme-radius-2xl: 0;
+  --theme-radius-full: 0;
 
-  /* Shadows — warm tint, not blue-black */
-  --theme-shadow-sm: 0 1px 2px rgba(45, 43, 40, 0.05);
-  --theme-shadow-md: 0 4px 12px rgba(45, 43, 40, 0.07);
-  --theme-shadow-lg: 0 12px 32px rgba(45, 43, 40, 0.09);
+  /* Shadows — warm brown tint */
+  --theme-shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.05);
+  --theme-shadow-md: 0 4px 12px rgba(26, 26, 26, 0.07);
+  --theme-shadow-lg: 0 12px 32px rgba(26, 26, 26, 0.09);
 
-  /* Footer — warm dark */
-  --theme-footer-bg: #2d2b28;
-  --theme-footer-text: #f5f2ee;
-  --theme-footer-muted: #a09b94;
+  /* Footer — dark editorial */
+  --theme-footer-bg: #1A1A1A;
+  --theme-footer-text: #F0EBE3;
+  --theme-footer-muted: #8A8580;
 
   /* Header */
-  --theme-header-bg: rgba(250, 248, 245, 0.92);
-  --theme-header-border: #eae7e1;
+  --theme-header-bg: rgba(246, 241, 235, 0.92);
+  --theme-header-border: #E5DFD6;
 
-  /* Images */
-  --theme-image-radius: 0.75rem;
-  --theme-image-shadow: 0 2px 8px rgba(45, 43, 40, 0.07);
+  /* Images — sharp corners, no shadow */
+  --theme-image-radius: 0;
+  --theme-image-shadow: none;
   --theme-image-border: none;
 
   /* Prose */
   --theme-prose-heading-color: var(--theme-text-primary);
   --theme-prose-body-color: var(--theme-text-secondary);
   --theme-prose-link-color: var(--theme-accent);
-  --theme-prose-quote-border: #7c5e9e;
-  --theme-prose-quote-text: #55524d;
+  --theme-prose-quote-border: var(--theme-accent);
+  --theme-prose-quote-text: var(--theme-text-secondary);
   --theme-prose-hr-color: var(--theme-border);
 
-  /* Mesh gradient for the hero */
-  --theme-gradient-1: rgba(230, 215, 200, 0.18);
-  --theme-gradient-2: rgba(210, 220, 235, 0.15);
-  --theme-gradient-3: rgba(225, 218, 210, 0.10);
-  --theme-gradient-4: rgba(235, 218, 210, 0.12);
-  --theme-gradient-5: rgba(215, 225, 230, 0.12);
+  /* Mesh gradient for the hero — muted warm tones */
+  --theme-gradient-1: rgba(210, 195, 175, 0.12);
+  --theme-gradient-2: rgba(196, 65, 10, 0.04);
+  --theme-gradient-3: rgba(225, 218, 210, 0.08);
+  --theme-gradient-4: rgba(210, 195, 175, 0.08);
+  --theme-gradient-5: rgba(196, 65, 10, 0.03);
 
   --theme-bg-gradient:
     radial-gradient(ellipse 80% 50% at 10% 0%,   var(--theme-gradient-1) 0%, transparent 100%),

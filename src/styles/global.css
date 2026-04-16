@@ -66,9 +66,9 @@
   --font-heading: var(--theme-font-heading);
   --font-display: var(--theme-font-display);
 
-  /* Brand accent color — the signature blue used for links and CTAs */
-  --color-accent: rgb(0, 89, 255);
-  --color-accent-hover: rgb(0, 70, 210);
+  /* Brand accent color — burnt orange */
+  --color-accent: var(--theme-accent);
+  --color-accent-hover: var(--theme-accent-hover);
 
   /* Expose the baseline-grid spacing scale as Tailwind utilities so we can
      write `py-section` / `py-section-lg` / `gap-baseline` etc. everywhere
