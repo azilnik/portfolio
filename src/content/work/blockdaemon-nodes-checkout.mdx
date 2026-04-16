@@ -1,9 +1,9 @@
 ---
-title: "23x deployment growth"
+title: "Node Deployment Flow"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Crypto Infrastructure"
-description: "Blockchain node provisioning reframed as a purchase flow. Self-serve replaced a multi-week sales process."
+description: "Self-serve node deployment reframed as e-commerce checkout. Minutes instead of weeks. 23x usage growth."
 seoTitle: "Nodes Checkout at Blockdaemon"
 seoDescription: "Reframing blockchain node deployment as an e-commerce checkout at Blockdaemon. Self-serve replaced a multi-week sales cycle and drove 23x usage."
 heroImage: "./images/bd-checkout-hero.png"
@@ -27,15 +27,13 @@ import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
-Blockdaemon is like AWS for crypto. I joined as the founding designer after Blockdaemon acquired my consultancy. The checkout was my first real product.
+Self-serve purchase flow for blockchain node deployment. Before: support ticket, days-to-weeks sales cycle, engineering time burned per customer. After: minutes.
 
-Nodes Checkout is a self-serve purchase flow for blockchain node deployment. Before it, deploying a node meant filing a support ticket and waiting on a sales cycle that ran days to weeks and burned engineering time per customer. The checkout collapses that into minutes.
-
-The original concept was a configuration wizard. Customers associated wizards with forms to fill out, not decisions to make. Reframing the flow as a purchase let the self-serve pattern land without instruction. The shape was simple: chain selection, configuration, review, commit.
+(First concept was a configuration wizard. Customers associated wizards with forms, not decisions. Reframed as a purchase. Self-serve pattern landed without instruction.)
 
 ## Purchase metaphor at every step
 
-Every screen reads like e-commerce, not a configuration wizard. DevOps engineers are used to procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier.
+Every screen reads like e-commerce. DevOps engineers already know procurement flows. Mapping node deployment to that model removed the instruction barrier.
 
 <FullBleedImage
   src={bdCheckout01}
@@ -44,16 +42,16 @@ Every screen reads like e-commerce, not a configuration wizard. DevOps engineers
 
 ## Chain-aware progressive disclosure
 
-Every blockchain has its own configuration shape. The checkout only surfaces the fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default.
+Every blockchain has its own configuration shape. The checkout surfaces only the fields relevant to the selected chain. Sensible defaults. No full-matrix learning curve.
 
 <FullBleedImage
   src={bdCheckout02}
   alt="Chain selection and network tier view inside the Blockdaemon checkout"
 />
 
-## A review step that earned the commit
+## Review step that earned the commit
 
-Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. Procurement can sign off on a review screen in a way they can't sign off on a half-filled form.
+Cost, configuration, SLA. Procurement signs off on a review screen. Can't sign off on a half-filled form.
 
 <FullBleedImage
   src={bdCheckout03}
@@ -65,9 +63,9 @@ Before committing, the user sees cost, configuration, and the SLA Blockdaemon st
   alt="Deployment confirmation with live status after commit"
 />
 
-## Results
+## What moved
 
-Usage grew 23x in the first year. DevOps teams went from opening support tickets to deploying in minutes. Enterprise conversations shifted from "how do we get you a node" to "how many nodes and which chains." Blockdaemon's growth stopped being linear in the sales team's capacity.
+23x usage growth in year one. Enterprise conversations shifted from "how do we get you a node" to "how many nodes and which chains." Growth decoupled from sales capacity.
 
 <Credits
   credits={[
