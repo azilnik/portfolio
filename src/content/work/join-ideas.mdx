@@ -1,9 +1,9 @@
 ---
-title: "$500K saved in 30 days: how killing the marketplace saved the product"
+title: "Construction estimators don't browse catalogs"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Spotting the cost savings estimators would miss."
+description: "Customer research killed the marketplace. The pivot to AI recommendations saved one customer $500K in month one."
 seoTitle: "Ideas at Join"
 seoDescription: "An AI recommendation engine for construction estimates that surfaced $500K in savings for one Join customer in 30 days."
 heroImage: "./images/join-ideas-01.png"
@@ -30,24 +30,32 @@ import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+The knowledge gap in construction estimation isn't effort. It's exposure. A less experienced estimator specs a finish at full cost because they've never seen the substitute that does the same job at half. That gap compounds across every line item in every project. Join needed to close it.
 
-Ideas is an AI recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A less experienced estimator might spec a finish at full cost when a substitute would do the same job for half. That knowledge gap compounds across every line item in every project. Ideas closes it automatically.
+## The situation
 
-The original plan was a materials marketplace. Customer interviews killed that direction. Estimators didn't know what alternatives existed, so they'd never browse a catalog. I took on both design and an acting PM role, pivoted the concept to a recommendation engine, and we shipped in two months.
+Join is project management for the people who build actual buildings. I lead a small design team and ship product across the platform.
 
-## Suggestion carousels
+The company wanted a materials marketplace. The thesis was straightforward: give estimators a catalog, let them shop for alternatives, capture the transaction. It's a reasonable business model. It's also wrong.
 
-AI-generated suggestions appear as contextual carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase, so estimators see relevant options without searching.
+## The wrong direction
+
+I ran customer interviews before anything got built. Estimators told us the same thing in different words: they don't know what they don't know. You can't browse a catalog of alternatives when you don't know alternatives exist. A marketplace assumes the user already has intent. These users had a knowledge gap, not a shopping list.
+
+The marketplace concept died in research. I took on both design and an acting PM role to pivot the direction.
+
+## The bet
+
+The pivot was an AI recommendation engine that surfaces cost-saving alternatives inside estimates. The model scans an estimate, identifies line items where cheaper substitutes exist, and presents them as contextual suggestions. A first-draft engine, not a source of truth.
 
 <FullBleedImage
   src={joinIdeas02}
   alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
 />
 
-## Human review layer
+AI-generated suggestions appear as carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase. Estimators see relevant options without searching — because the whole point is that they wouldn't have searched.
 
-These suggestions affect real buildings and real budgets. The AI will be wrong sometimes, so a materials researcher validates every suggestion before it reaches an estimator. The model is a first-draft engine, not a source of truth.
+Every suggestion passes through a human review layer. These recommendations affect real buildings and real budgets. The AI will be wrong sometimes, so a materials researcher validates every suggestion before it reaches an estimator.
 
 I used AI-coded prototypes to test card density with real estimate data before engineering built anything. Each card shows UniFormat and MasterFormat classification codes. Estimators told us in interviews these were non-negotiable for trust.
 
@@ -56,24 +64,26 @@ I used AI-coded prototypes to test card density with real estimate data before e
   alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
 />
 
-## Forced comparison
-
-Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The estimator decides. Nothing gets auto-applied.
+Every recommendation forces a comparison against alternatives before an estimator can accept it. The model suggests. The estimator decides. Nothing gets auto-applied.
 
 <FullBleedImage
   src={joinIdeas03}
   alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
 />
 
-## Results
+## What happened
 
-One enterprise customer saved $500K on their first project estimate within 30 days of launch. Decision-making time dropped 50% across the product.
+One enterprise customer saved $500K on their first project estimate within 30 days of launch. Decision-making time dropped 50% across the product. Two months from research kickoff to ship.
 
 <PressQuote
   quote="Join secures growth investment from construction giants DPR Construction and STO Building Group."
   source="EIN Presswire, 2025"
   url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group"
 />
+
+## The remaining argument
+
+The recommendation engine works. The open question is whether it scales beyond materials to labor and equipment alternatives — domains where substitution logic is messier and the validation layer needs domain experts who are harder to hire. I'd also push harder on the feedback loop: right now the model learns from the researcher's edits, but it doesn't learn from what estimators accept or reject. That signal is sitting on the table.
 
 <Credits
   credits={[

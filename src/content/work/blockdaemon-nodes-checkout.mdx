@@ -1,9 +1,9 @@
 ---
-title: "23x node deployment growth after reframing infrastructure as a purchase flow"
+title: "The best onboarding is a shopping cart"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Crypto Infrastructure"
-description: "Replacing a multi-week sales cycle."
+description: "Self-serve replaced a multi-week sales process. Treated blockchain node provisioning like a purchase, not a configuration."
 seoTitle: "Nodes Checkout at Blockdaemon"
 seoDescription: "Reframing blockchain node deployment as an e-commerce checkout at Blockdaemon. Self-serve replaced a multi-week sales cycle and drove 23x usage."
 heroImage: "./images/bd-checkout-hero.png"
@@ -27,31 +27,33 @@ import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
+Infrastructure products default to configuration wizards. Step one, step two, step three, submit. The assumption is that technical users want control over every parameter. The counterargument: DevOps engineers already know how to buy things. They do procurement at their own companies every week. A purchase flow lands without instruction. A configuration wizard needs a tutorial.
+
+## The situation
+
 Blockdaemon is like AWS for crypto. I joined as the founding designer after Blockdaemon acquired my consultancy. The checkout was my first real product.
 
-Nodes Checkout is a self-serve purchase flow for blockchain node deployment. Before it, deploying a node meant filing a support ticket and waiting on a sales cycle that ran days to weeks and burned engineering time per customer. The checkout collapses that into minutes.
+Deploying a blockchain node meant filing a support ticket and waiting on a sales cycle that ran days to weeks. Every customer burned engineering time. Growth was linear in the sales team's capacity. The company needed self-serve.
 
-The original concept was a configuration wizard. Customers associated wizards with forms to fill out, not decisions to make. Reframing the flow as a purchase let the self-serve pattern land without instruction. The shape was simple: chain selection, configuration, review, commit.
+## The wrong direction
 
-## Purchase metaphor at every step
+The original concept was a configuration wizard. Walk the user through chain selection, network parameters, resource sizing, and region — step by step. It tested poorly. Customers associated wizards with forms to fill out, not decisions to make. The wizard framing turned a confident DevOps engineer into a student trying to get the right answer. It added friction where the goal was to remove it.
 
-Every screen reads like e-commerce, not a configuration wizard. DevOps engineers are used to procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier.
+## The bet
+
+Reframe the entire flow as a purchase. Chain selection, configuration, review, commit. Every screen reads like e-commerce, not a technical form. DevOps engineers are used to procurement flows. Mapping node deployment to that mental model removed the instruction barrier entirely.
 
 <FullBleedImage
   src={bdCheckout01}
   alt="Blockdaemon Nodes checkout main screen with chain selection and configuration summary"
 />
 
-## Chain-aware progressive disclosure
-
-Every blockchain has its own configuration shape. The checkout only surfaces the fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default.
+Every blockchain has its own configuration shape. The checkout only surfaces fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default. Chain-aware progressive disclosure does the work.
 
 <FullBleedImage
   src={bdCheckout02}
   alt="Chain selection and network tier view inside the Blockdaemon checkout"
 />
-
-## A review step that earned the commit
 
 Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. Procurement can sign off on a review screen in a way they can't sign off on a half-filled form.
 
@@ -65,9 +67,13 @@ Before committing, the user sees cost, configuration, and the SLA Blockdaemon st
   alt="Deployment confirmation with live status after commit"
 />
 
-## Results
+## What happened
 
 Usage grew 23x in the first year. DevOps teams went from opening support tickets to deploying in minutes. Enterprise conversations shifted from "how do we get you a node" to "how many nodes and which chains." Blockdaemon's growth stopped being linear in the sales team's capacity.
+
+## The remaining argument
+
+The purchase metaphor works for single-node deployment. The gap is multi-node orchestration — customers deploying fleets of nodes across chains and regions. That use case needs something closer to a cart with bulk configuration, not a single checkout. I'd also push harder on post-purchase: the deployment confirmation drops the user into a status page, but the real value is in the operational dashboard that follows. The handoff between "I just bought this" and "now I'm managing this" was rougher than it should have been in V1.
 
 <Credits
   credits={[

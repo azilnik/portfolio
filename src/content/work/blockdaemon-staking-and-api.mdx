@@ -1,9 +1,9 @@
 ---
-title: "First designer, seven when I left: building crypto infrastructure from zero"
+title: "Infrastructure is a design problem"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Fintech, Crypto Infrastructure"
-description: "Staking made accessible to non-technical users."
+description: "No established UX patterns for institutional crypto staking. Research with treasury teams pointed toward density, not simplification."
 seoTitle: "Staking & API at Blockdaemon"
 seoDescription: "Zero-to-one institutional crypto staking at Blockdaemon. Research with treasury teams drove a density-first dashboard design; the design org scaled 1 to 7."
 heroImage: "./images/bd-staking-01.png"
@@ -29,15 +29,23 @@ import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
 import bdStaking05 from "./images/bd-staking-05.png";
 
-Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy nodes and stake assets without operating their own data centers. Enterprises like Goldman Sachs and Microsoft are the customer tier.
+Crypto infrastructure companies treat design as a downstream concern — styling the API docs, polishing the marketing site. The argument here is that infrastructure products have design problems at their core. The decisions about what to show, what to hide, and how to build trust with institutional money are design decisions. They just don't look like design decisions until someone does the research.
+
+## The situation
+
+Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy nodes and stake assets without operating their own data centers. Goldman Sachs and Microsoft are the customer tier.
 
 I joined as the founding designer after Blockdaemon acquired my consultancy. The company raised $207M at a $3.25B valuation during my tenure. There was no design organization. I was the design org.
 
-Over 15 months I shipped two zero-to-one products: the institutional staking dashboard and the Ubiquity developer API. Neither had established UX patterns in crypto. I stood up the research practice from scratch to inform both.
+Neither the institutional staking dashboard nor the Ubiquity developer API had established UX patterns in crypto. No competitor had solved these. No one had tried to solve them with research.
 
-## Institutional staking
+## The wrong direction
 
-The staking dashboard was zero-to-one. No competitor had established the design patterns. The users were institutional treasury teams managing portfolios worth hundreds of millions across multiple blockchains. They needed to see total value and validator performance on one screen.
+The default for crypto dashboards in 2021 was retail: clean, minimal, lots of whitespace. That's what the industry knew. But our users weren't retail investors checking their portfolio on a phone. They were institutional treasury teams managing hundreds of millions across multiple blockchains. Simplification wasn't a virtue for them — it was a liability. Hiding information meant hiding risk.
+
+## The bet
+
+We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams changed the design direction entirely. What those users wanted was density plus real-time trust signals. They weren't trying to avoid information. They were trying to see all of it without drowning in it.
 
 <FullBleedImage
   src={bdStaking01}
@@ -45,7 +53,7 @@ The staking dashboard was zero-to-one. No competitor had established the design 
   caption="The staking portfolio dashboard. The $108M figure is a sample used in demos."
 />
 
-We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams changed the design direction. What those users wanted was density plus real-time trust signals. They weren't trying to avoid information. They were trying to see all of it without drowning in it.
+The staking dashboard surfaces total value and validator performance on one screen. Every number updates in real time. The density is the feature, not a compromise.
 
 <FullBleedImage
   src={bdStaking02}
@@ -63,9 +71,7 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
   caption="Staking delegation flow."
 />
 
-## Ubiquity API
-
-Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. The dashboard was the first place developers went to debug what their API keys were doing. The highest-value views turned out to be usage against rate limits and request-log auditing, both surfaced in developer interviews.
+Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. The dashboard was the first place developers went to debug what their API keys were doing. Developer interviews surfaced the highest-value views: usage against rate limits and request-log auditing. Not feature discovery. Not onboarding. Debugging.
 
 <FullBleedImage
   src={bdStaking03}
@@ -79,11 +85,9 @@ Ubiquity was Blockdaemon's developer-facing API for querying crypto data across 
   caption="API key creation and usage monitoring."
 />
 
-## Results
+## What happened
 
-The staking product shipped into the $207M Series C materials. When the round closed, the screens investors walked through in those demos traced back to my team.
-
-I grew the design org to seven people. We set up design reviews with real teeth and a weekly research cadence for the first time.
+The staking product shipped into the $207M Series C materials. When the round closed, the screens investors walked through in those demos traced back to my team. I grew the design org from one to seven people. We set up design reviews with real teeth and a weekly research cadence for the first time.
 
 <PressQuote
   quote="Blockdaemon nabs $1.3B valuation in $155M funding round. SoftBank Vision Fund 2 led the funding."
@@ -96,6 +100,10 @@ I grew the design org to seven people. We set up design reviews with real teeth 
   source="BusinessWire"
   url="https://www.businesswire.com/news/home/20210608005782/en/Blockdaemon-Raises-28-Million-In-Series-A-Funding-To-Help-Institutions-Quickly-and-Securely-Scale-Blockchain-Infrastructure"
 />
+
+## The remaining argument
+
+Density-first worked for institutional treasury teams. The open question is whether that approach holds as staking products move downstream to smaller funds and individual high-net-worth clients. Those users may actually want the simplified retail patterns I rejected. The bet was context-specific, not universal — and the next version of this product will need to serve both tiers without a mode switch. I'd also invest earlier in the design system. Scaling from one to seven designers without shared components cost us speed in the second year that we'd built in the first.
 
 <Credits
   credits={[

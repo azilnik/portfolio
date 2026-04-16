@@ -1,9 +1,9 @@
 ---
-title: "Owners decide in bundles. We designed for that and cut the cycle in half."
+title: "Decisions happen in bundles, not line items"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "Surfacing trade-offs for confident decisions."
+description: "A side-by-side comparison tool that reframed construction decisions as sets, not sequences. Cut the decision cycle in half."
 seoTitle: "Scenarios at Join"
 seoDescription: "A side-by-side what-if comparison that cut construction decision cycle time 50% and surfaced architects as a new audience for Join."
 heroImage: "./images/join-scenarios-01.png"
@@ -27,15 +27,21 @@ import joinScenarios01 from "./images/join-scenarios-01.png";
 import joinScenarios02 from "./images/join-scenarios-02.png";
 import joinScenarios03 from "./images/join-scenarios-03.png";
 
-Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchens and bathrooms" against budget and schedule. Forty decisions, weighed together. Join was asking users to think one decision at a time. That's not how the work gets done.
 
-Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to think one decision at a time, which didn't match how real decisions got made.
+## The situation
 
-The reframe was simple: model decisions as sets of linked choices, not as individual line items. Owners weigh whole packages against each other, not forty separate trade-offs.
+Join is project management for the people who build actual buildings. I lead a small design team and ship product across the platform.
 
-## Sets of decisions as the unit
+Before Scenarios, every decision in Join lived as an individual line item. Change the countertop here, adjust the flooring there, update the schedule somewhere else. But owners don't sign off on forty separate trade-offs. They sign off on packages: "premium finishes with compressed schedule" versus "standard finishes with more time." The product's unit of decision didn't match the user's unit of decision.
 
-A contractor models a "premium finishes, compressed schedule" option alongside a "standard finishes, stretched schedule" option, and the math propagates across every connected line item automatically. The owner sees two packages, not forty decisions.
+## The wrong direction
+
+The initial instinct was to add comparison columns to the existing item-level views. Stack the options side by side within each line item. It's the obvious move, and it misses the point entirely. The problem isn't that users can't compare items. The problem is that items aren't the right unit. An owner looking at a $150M job doesn't care which countertop is cheaper. They care which package lands their budget and timeline where they need it.
+
+## The bet
+
+Model decisions as sets of linked choices, not individual line items. A contractor builds a "premium finishes, compressed schedule" option alongside a "standard finishes, stretched schedule" option. The math propagates across every connected line item automatically. The owner sees two packages. Not forty decisions.
 
 <FullBleedImage
   src={joinScenarios01}
@@ -48,9 +54,7 @@ A contractor models a "premium finishes, compressed schedule" option alongside a
   caption="Cost propagation across linked line items."
 />
 
-## Tabular comparison without ranking
-
-This was the hardest design call. Sophisticated owners on multi-million-dollar projects don't want to be steered toward a "best" option. They want to weigh the dimensions that matter to them. The comparison is deliberately flat. It surfaces every trade-off without marking any option as preferred.
+The hardest design call was the comparison view. Sophisticated owners on multi-million-dollar projects don't want to be steered toward a "best" option. They want to weigh the dimensions that matter to them. The comparison is deliberately flat — it surfaces every trade-off without marking any option as preferred. No ranking, no recommendation. Just the numbers.
 
 <FullBleedImage
   src={joinScenarios02}
@@ -63,9 +67,7 @@ This was the hardest design call. Sophisticated owners on multi-million-dollar p
   caption="Two bundled options compared side-by-side with cost and schedule trade-offs visible at a glance."
 />
 
-## Progressive disclosure
-
-The default comparison view is lean on purpose. Users click into specific dimensions for detail. The owner-facing read stays calm during a sign-off meeting. The contractor-facing detail stays rich for internal work.
+The default comparison view is lean on purpose. Progressive disclosure keeps the owner-facing read calm during a sign-off meeting. The contractor-facing detail stays rich for internal work. Users click into specific dimensions only when they need depth.
 
 <FullBleedImage
   src={joinScenarios03}
@@ -78,13 +80,17 @@ The default comparison view is lean on purpose. Users click into specific dimens
   caption="Collaboration around scenario sign-off."
 />
 
-## Results
+## What happened
 
-The scenario-decision cycle dropped 50%, measured from creation through owner sign-off. The surprise was the architect audience. 20% of Scenarios users were architects, a segment Join hadn't been designing for. The comparison view matched how they presented design options to their own clients, and they found the feature on their own. That discovery reshaped how Join thought about the product's reach.
+The scenario-decision cycle dropped 50%, measured from creation through owner sign-off. The surprise was the architect audience. 20% of Scenarios users were architects — a segment Join hadn't been designing for. The comparison view matched how they present design options to their own clients. They found the feature on their own. That discovery reshaped how Join thought about the product's reach.
 
 > "This is like a happy meal for decision making. Everything you need, all in one place."
 
 > "We used Scenarios on a $150M job and it cut our decision timeline in half."
+
+## The remaining argument
+
+Scenarios models decisions as bundles but doesn't yet model dependencies between bundles. On a complex job, choosing package A for finishes constrains your options for mechanical. That dependency logic is where the tool needs to go next. I'd also push the comparison view into earlier phases — right now it's anchored to the sign-off moment, but contractors told us they'd use it during internal estimation to pressure-test their own assumptions.
 
 <Credits
   credits={[

@@ -1,9 +1,9 @@
 ---
-title: "32% fewer support tickets after rebuilding navigation around how users actually think"
+title: "Users described the product in terms we didn't use"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "From feature-drift to focused navigation."
+description: "Navigation had drifted feature-by-feature. A project-first rebuild dropped support tickets 32%."
 seoTitle: "Navigation at Join"
 seoDescription: "Rebuilding Join's navigation around how construction teams actually think — dropped support tickets 32% and cut deep-view round-trips to two clicks."
 heroImage: "./images/join-nav-hero.png"
@@ -27,33 +27,35 @@ import joinNav03 from "./images/join-nav-03.png";
 import joinNav04 from "./images/join-nav-04.png";
 import joinNav05 from "./images/join-nav-05.png";
 
-Join is like Jira for construction. As Head of Design, I lead a small team and ship product across the platform.
+When users can't describe your product in your product's own terms, the information architecture is wrong. Not the users. Join's navigation had drifted feature-by-feature until the labels on screen didn't match the words customers used to describe their work. They described it in terms of projects.
 
-The new navigation rebuilds Join's structure around projects. The old surface had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was absorbing tickets clustered around "how do I get to X." Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
+## The situation
 
-Rebuilding around projects gave the app a clear rhythm: zoom in to one project, zoom out across the portfolio, two clicks in either direction.
+Join is like Jira for construction. I lead a small design team and ship product across the platform.
 
-## Projects as the top-level unit
+The nav had grown organically. Every shipped feature got its own top-level entry. The result was a flat list of capabilities that made sense to the team that built them and confused everyone else. Customer success was absorbing support tickets clustered around "how do I get to X." Usability sessions confirmed the gap: users couldn't map Join's structure to their mental model. They thought in projects. The nav thought in features.
 
-The nav isn't a list of features anymore. It's the portfolio, then the specific project you're in. Features show up as sub-navigation inside the project's context, sequenced to match the phase of work.
+## The wrong direction
+
+The first instinct was to clean up labels and reorder the existing structure. Better names, fewer items, maybe a collapsible section or two. It's the lowest-risk move. It's also cosmetic surgery on a structural problem. Renaming items in a feature-centric nav doesn't change the fact that the nav is feature-centric. Users would still land on a list of tools when they were looking for a project.
+
+## The bet
+
+Rebuild the entire navigation around projects. The portfolio is the top level. A project is the second level. Features show up as sub-navigation inside the project context, sequenced to match the phase of work. The app gets a clear rhythm: zoom in to one project, zoom out across the portfolio. Two clicks in either direction.
 
 <FullBleedImage
   src={joinNav02}
   alt="Project-first navigation showing a single project's context with features nested as sub-navigation"
 />
 
-## A two-click zoom rhythm
-
-From the portfolio overview, two clicks take you into any view inside a project. From deep inside a project, two clicks take you back out. Symmetric. The rhythm is the part users feel, even if they can't articulate why it's easier.
+The zoom rhythm is the part users feel, even if they can't articulate why it's easier. From the portfolio overview, two clicks into any view inside a project. From deep inside a project, two clicks back out. Symmetric.
 
 <FullBleedImage
   src={joinNav03}
   alt="The two-click rhythm from portfolio overview into a specific project"
 />
 
-## Feature discovery as a side effect
-
-When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery becomes natural, not something the product has to teach.
+Feature discovery becomes a side effect. When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery happens naturally, not through something the product has to teach.
 
 <FullBleedImage
   src={joinNav04}
@@ -65,13 +67,17 @@ When users land on a project, the nav surfaces features relevant to that project
   alt="Final navigation design in a real Join project view"
 />
 
-## Results
+## What happened
 
 Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had existed in the old nav, technically, but nobody used it because there wasn't a clear path back in.
 
 > "The team at Join is very brave for tackling this kind of UX issue."
 
 > "So valuable for end users and their organizations as they will discover and use more of Join's capabilities."
+
+## The remaining argument
+
+The project-first model works for users who manage a handful of projects. Power users managing dozens still want a cross-project view that cuts across the hierarchy — something like "show me all budgets across my portfolio" without zooming into each one. That cross-cutting view is the next structural challenge. I'd also revisit the sub-navigation sequencing. Right now it follows a generic phase model, but different project types have different phase sequences, and the nav doesn't adapt to that yet.
 
 <Credits
   credits={[
