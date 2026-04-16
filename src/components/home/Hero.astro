@@ -1,108 +1,20 @@
 ---
 /**
- * Hero — the top section of the homepage.
- *
- * Avatar + name + bio. The face matters — it's a human greeting you,
- * not a resume. Personality is woven through the bio, not isolated
- * in a closing sentence.
+ * Hero — cinematic centered hero for Dark Gravity theme.
+ * No avatar, no gradient background. Centered name + gold line + tagline.
  */
-import { Image } from "astro:assets";
-import avatarImage from "../../assets/images/avatar.jpg";
 ---
 
-<div style="background-image: var(--theme-bg-gradient, none);">
-  <section
-    class="mx-auto px-6"
-    style="
-      max-width: var(--theme-content-width);
-      padding-top: var(--theme-space-8);
-      padding-bottom: var(--theme-space-7);
-    "
-  >
-    {/* Avatar + text side by side on desktop, stacked on mobile.
-        The face makes the portfolio feel like a conversation, not a
-        document. Danny Williams and Ainara Sainz both lead with a
-        human presence. */}
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8 animate-in" style="max-width: 48rem; --delay: 0ms;">
-
-      {/* Avatar — visible on all screens */}
-      <div class="flex-shrink-0">
-        <Image
-          src={avatarImage}
-          alt="Ari Zilnik"
-          width={120}
-          height={120}
-          class="rounded-2xl object-cover"
-        />
-      </div>
-
-      <div>
-        {/* Name */}
-        <h1
-          class="font-heading"
-          style="
-            color: var(--theme-text-primary);
-            font-weight: var(--theme-weight-heading);
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            font-size: var(--theme-text-5xl);
-          "
-        >
-          Ari Zilnik
-        </h1>
-
-        {/* Positioning line */}
-        <p
-          class="font-heading"
-          style="
-            color: var(--theme-text-tertiary);
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            line-height: 1.2;
-            font-size: var(--theme-text-2xl);
-            margin-top: var(--theme-space-1);
-          "
-        >
-          Design leader.
-        </p>
-      </div>
+<section style="padding-top: 10rem; padding-bottom: 8rem;">
+  <div style="max-width: 64rem;" class="mx-auto px-6 text-center">
+    <h1 class="font-heading animate-in" style="font-size: var(--theme-text-6xl); font-weight: 700; color: #E8E4DF; letter-spacing: -0.03em; line-height: 1.05;">Ari Zilnik</h1>
+    <div class="animate-in" style="--delay: 150ms; margin: 1.5rem auto; height: 2px; width: 80px; background: #D4A853;"></div>
+    <p class="animate-in" style="--delay: 250ms; font-size: var(--theme-text-xl); color: #9B9590; line-height: 1.6; max-width: 36rem; margin: 0 auto;">
+      Design leader building products for industries that run on expertise, not aesthetics. Construction. Crypto infrastructure. Developer tools.
+    </p>
+    <div class="flex justify-center gap-4 animate-in" style="--delay: 350ms; margin-top: 2.5rem;">
+      <a href="mailto:ari@zilnik.com" class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold" style="background: #D4A853; color: #0D0D0D; border-radius: 4px;" data-goatcounter-click="contact-hero">Get in touch</a>
+      <a href="#work" class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold" style="border: 1px solid #2A2825; color: #9B9590; border-radius: 4px;">See my work</a>
     </div>
-
-    {/* Bio — one sentence of positioning, one of personality. The work
-        section below shows employer names and metrics. The hero's job is
-        to place the person, not recite the resume. */}
-    <div
-      class="font-sans animate-in"
-      style="
-        color: var(--theme-text-secondary);
-        font-size: var(--theme-text-xl);
-        line-height: var(--theme-leading-relaxed);
-        margin-top: var(--theme-space-5);
-        max-width: 40rem;
-        --delay: 80ms;
-      "
-    >
-      <p>
-        Head of Design at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>. I build products, teams, and systems in construction, fintech, and developer tools.
-      </p>
-    </div>
-
-    <div class="flex gap-3 animate-in" style="margin-top: var(--theme-space-5); --delay: 160ms;">
-      <a
-        href="mailto:ari@zilnik.com"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
-        data-goatcounter-click="contact-hero"
-      >
-        Get in touch
-      </a>
-      <a
-        href="#work"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-secondary);"
-      >
-        See my work
-      </a>
-    </div>
-  </section>
-</div>
+  </div>
+</section>

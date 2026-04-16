@@ -63,7 +63,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en" style="background:#faf8f5">
+<html lang="en" style="background:#0D0D0D">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,8 +74,8 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     {/* Explicit robots directive: index + follow + allow large image previews
         in SERPs (important for a visual portfolio). */}
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    {/* Mobile browser chrome color — matches the warm off-white body bg. */}
-    <meta name="theme-color" content="#faf8f5" />
+    {/* Mobile browser chrome color — matches the dark body bg. */}
+    <meta name="theme-color" content="#0D0D0D" />
 
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -89,11 +89,11 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <link rel="preload" href="/fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    {/* Google Fonts — Space Grotesk for headings */}
+    {/* Google Fonts — Syne for headings */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&display=swap"
       rel="stylesheet"
     />
 

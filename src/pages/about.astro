@@ -1,18 +1,12 @@
 ---
 /**
  * About page — /about
- *
- * The warmest surface in the portfolio. Personality-forward.
- * A hiring manager comes here to find out if they want to work
- * with this person, not to verify credentials.
+ * Dark Gravity theme. Confident, declarative copy.
  */
 import PageLayout from "../layouts/PageLayout.astro";
 import { Image } from "astro:assets";
 import avatarImage from "../assets/images/avatar.jpg";
 
-// Person JSON-LD on /about mirrors the homepage's so either page works as a
-// structured-data entry point for crawlers. Duplication is expected for
-// Person schema — Google resolves both to the same entity via sameAs.
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -55,7 +49,7 @@ const personJsonLd = {
   <section
     class="mx-auto px-6"
     style="
-      max-width: var(--theme-content-width);
+      max-width: 64rem;
       padding-top: var(--theme-space-7);
       padding-bottom: var(--theme-space-7);
     "
@@ -67,7 +61,7 @@ const personJsonLd = {
         <h1
           class="font-heading"
           style="
-            color: var(--theme-text-primary);
+            color: #E8E4DF;
             font-weight: var(--theme-weight-heading);
             letter-spacing: var(--theme-tracking-tight);
             line-height: var(--theme-leading-tight);
@@ -80,46 +74,34 @@ const personJsonLd = {
         <div
           class="font-sans"
           style="
-            color: var(--theme-text-secondary);
+            color: #9B9590;
             font-size: var(--theme-text-lg);
             line-height: var(--theme-leading-relaxed);
             margin-top: var(--theme-space-5);
           "
         >
-          <p>
-            I'm Ari. I lead design teams and ship products.
+          <p style="color: #E8E4DF;">
+            I was the first designer at Blockdaemon. When I left, there were seven. The company hit a $3.25B valuation.
+          </p>
+
+          <p style="margin-top: var(--theme-space-3); color: #E8E4DF;">
+            Now I run design at Join, a construction platform used by 1,000+ companies. My team ships AI-powered tools. Last year our navigation rebuild dropped support tickets 32%.
           </p>
 
           <p style="margin-top: var(--theme-space-3);">
-            Right now I'm <a href="https://join.build/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-join" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Head of Design at Join</a>,
-            a <a href="https://techcrunch.com/2022/06/21/join-secures-new-cash-to-build-a-decision-making-platform-for-construction/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-techcrunch-join" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">venture-backed</a> construction platform used by 1,000+ companies including
-            <a href="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-einpresswire-dpr-sto" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">DPR and STO Building Group</a>.
-            Before that I was the
-            <a href="https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-blockdaemon-acquisition" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">founding designer at Blockdaemon</a>
-            (crypto infrastructure
-            <a href="https://www.coindesk.com/business/2021/09/21/blockchain-infrastructure-firm-blockdaemon-nabs-13b-valuation-in-155m-funding-round/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-coindesk-blockdaemon" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">valued at $3.25B</a>, backed by Goldman Sachs and SoftBank),
-            <a href="https://gradle.com/" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-gradle" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">design lead at Gradle</a>
-            (developer tools for Netflix and Salesforce), and
-            <a href="https://corporate.walmart.com/news/2016/09/19/walmart-completes-acquisition-of-jet-com-inc" target="_blank" rel="noopener noreferrer" data-goatcounter-click="about-outbound-walmart-jet" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">design lead at Jet.com through Walmart's $3.3B acquisition</a>.
-            Most of my career has been zero-to-one: taking something undefined and giving it shape.
+            Before Blockdaemon: Gradle (developer tools for Netflix and Salesforce) and Jet.com (through Walmart's $3.3B acquisition).
           </p>
 
           <p style="margin-top: var(--theme-space-3);">
-            At Blockdaemon I grew the design org from one person (me) to seven. At Join I inherited a junior team and now they run research and ship AI prototypes on their own. The throughline is the same: I stay close to the work, I build things alongside the people I lead, and I'd rather ship something real than present a deck about shipping something real.
-          </p>
-
-          <p style="margin-top: var(--theme-space-3);">
-            I own six record players. My wife is very patient about this. I also
-            <a href="/work/ha-smart-hood-vent" class="underline decoration-1 underline-offset-2" style="text-decoration-color: var(--theme-border-strong);">over-automate everything</a>,
-            and we spend our downtime chasing our two girls across Toronto.
+            I collect record players. I over-automate my house. I chase two daughters across Toronto.
           </p>
         </div>
 
         <div style="margin-top: var(--theme-space-5);">
           <a
             href="mailto:ari@zilnik.com"
-            class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-            style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
+            class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold"
+            style="background: #D4A853; color: #0D0D0D; border-radius: 4px;"
             data-goatcounter-click="contact-about"
           >
             Get in touch
@@ -135,7 +117,7 @@ const personJsonLd = {
           width={280}
           height={280}
           class="rounded-2xl object-cover"
-          style="box-shadow: var(--theme-shadow-lg);"
+          style="border: 2px solid #2A2825;"
         />
       </div>
     </div>
