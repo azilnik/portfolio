@@ -35,11 +35,21 @@ const { title, description, ogImage, ogImageAlt, ogType, jsonLd } = Astro.props;
   ogType={ogType}
   jsonLd={jsonLd}
 >
+  {/* Skip-to-main-content — hidden above viewport, revealed on keyboard focus.
+      WCAG 2.4.1: lets keyboard/screen-reader users bypass the sticky header. */}
+  <a
+    href="#main-content"
+    class="absolute left-0 top-0 z-[200] -translate-y-full rounded-br-md px-4 py-2 text-sm font-semibold transition-transform focus:translate-y-0"
+    style="background-color: var(--theme-accent); color: #ffffff;"
+  >
+    Skip to main content
+  </a>
+
   <Header />
   <MobileMenu />
 
   {/* Main content area — `flex-1` ensures it fills the space between header and footer */}
-  <main class="flex-1">
+  <main id="main-content" class="flex-1">
     <slot />
   </main>
 
