@@ -26,7 +26,7 @@ import gradleFilter05 from "./images/gradle-filter-05.png";
 
 Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
-The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar surfaces filter conditions they can stack. The behavioral signal that triggered the project was loud: customers were exporting to CSV and slicing data in spreadsheets. A product that pushes users into Excel has a filter problem, not a data problem.
+The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar offers filter conditions they can stack. The signal that started the project was simple: customers were exporting to CSV and slicing the data in spreadsheets. A product that pushes users into Excel has a filter problem, not a data problem.
 
 The original concept was a visual query builder with a clickable canvas. It was too slow for experts and still too opaque for beginners. A typed input made one interface serve both audiences.
 
@@ -43,7 +43,7 @@ A new user types "slow" and the omnibar offers "duration greater than" and "stat
 
 Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost.
 
-We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping: huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in a prototype and moved.
+We prototyped against Gradle's actual build event data, not fixtures. The edge cases showed up fast — huge datasets, odd chains where suggestions misfired. Engineering saw the failure modes in the prototype and moved.
 
 <FullBleedImage
   src={gradleFilter02}
@@ -52,7 +52,7 @@ We prototyped against Gradle's actual build event data, not fixtures. Edge cases
 
 ## A pattern that fed every diagnostic view
 
-The omnibar wasn't just a filter for one screen. The same filter chain drove every downstream view: the scoped task list, the diagnostic detail, and the summary aggregations. One pattern, learned once, applied everywhere.
+The same filter chain drove every other view — the scoped task list, the diagnostic detail, the summary roll-ups. Learn the omnibar on the build list and you've learned it for the rest of the product.
 
 <FullBleedImage
   src={gradleFilter03}
@@ -81,7 +81,7 @@ Users stopped asking for CSV exports. When a customer who has been living in Exc
 
 > "We'd love to see the ability to add it to other filter selectors as well."
 
-That quote mattered most. It was the moment the omnibar stopped being "the new filter on one view" and started being "the filter pattern for the product." Customer pull is what made the cross-team rollout possible. Every feature team eventually adopted it.
+That quote mattered most. It was the moment the omnibar stopped being "the new filter on one view" and started being "the filter pattern for the product." That request is why other teams adopted it. Every feature team eventually picked it up.
 
 <Credits
   credits={[

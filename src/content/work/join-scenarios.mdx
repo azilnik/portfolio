@@ -31,11 +31,11 @@ Join is project management for the people who build actual buildings. As Head of
 
 Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to think one decision at a time, which didn't match how real decisions got made.
 
-The reframe was simple: model decisions as sets of linked choices, not as individual line items. Owners weigh whole packages against each other, not forty separate trade-offs.
+Owners don't decide one line item at a time. They weigh whole packages — finishes, schedule, scope — against each other.
 
 ## Sets of decisions as the unit
 
-A contractor models a "premium finishes, compressed schedule" option alongside a "standard finishes, stretched schedule" option, and the math propagates across every connected line item automatically. The owner sees two packages, not forty decisions.
+A contractor builds two options — say, premium finishes on a compressed schedule against a value-engineered version that stretches the timeline. Join recalculates every linked line item underneath. The owner gets two packages to compare instead of forty decisions to make.
 
 <FullBleedImage
   src={joinScenarios01}
@@ -50,7 +50,7 @@ A contractor models a "premium finishes, compressed schedule" option alongside a
 
 ## Tabular comparison without ranking
 
-This was the hardest design call. Sophisticated owners on multi-million-dollar projects don't want to be steered toward a "best" option. They want to weigh the dimensions that matter to them. The comparison is deliberately flat. It surfaces every trade-off without marking any option as preferred.
+This was the hardest design call. Owners on multi-million-dollar projects don't want to be steered toward a "best" option — they want to weigh the trade-offs themselves. So the comparison is deliberately flat. Every dimension is visible, no option is marked as preferred.
 
 <FullBleedImage
   src={joinScenarios02}
@@ -65,7 +65,7 @@ This was the hardest design call. Sophisticated owners on multi-million-dollar p
 
 ## Progressive disclosure
 
-The default comparison view is lean on purpose. Users click into specific dimensions for detail. The owner-facing read stays calm during a sign-off meeting. The contractor-facing detail stays rich for internal work.
+The default view is lean on purpose — users click into specific dimensions when they need detail. The owner-facing read stays calm for sign-off meetings; the contractor side stays rich for internal work.
 
 <FullBleedImage
   src={joinScenarios03}

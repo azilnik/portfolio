@@ -29,13 +29,13 @@ import joinNav05 from "./images/join-nav-05.png";
 
 Join is like Jira for construction. As Head of Design, I lead a small team and ship product across the platform.
 
-The new navigation rebuilds Join's structure around projects. The old surface had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was absorbing tickets clustered around "how do I get to X." Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
+The new navigation rebuilds Join's structure around projects. The old nav had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was fielding "how do I get to X" tickets. Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
 
-Rebuilding around projects gave the app a clear rhythm: zoom in to one project, zoom out across the portfolio, two clicks in either direction.
+Rebuilding around projects collapsed the path between any feature and the portfolio overview to two clicks.
 
 ## Projects as the top-level unit
 
-The nav isn't a list of features anymore. It's the portfolio, then the specific project you're in. Features show up as sub-navigation inside the project's context, sequenced to match the phase of work.
+The nav is the portfolio, then the project you're working in. Features sit under the project, sequenced by phase — preconstruction features when the project's preconstruction, change-management features when it's in build.
 
 <FullBleedImage
   src={joinNav02}
@@ -44,7 +44,7 @@ The nav isn't a list of features anymore. It's the portfolio, then the specific 
 
 ## A two-click zoom rhythm
 
-From the portfolio overview, two clicks take you into any view inside a project. From deep inside a project, two clicks take you back out. Symmetric. The rhythm is the part users feel, even if they can't articulate why it's easier.
+Two clicks down from the portfolio to any view inside a project, two clicks back out. The path is the same length in both directions, which is the part users notice.
 
 <FullBleedImage
   src={joinNav03}
@@ -53,7 +53,7 @@ From the portfolio overview, two clicks take you into any view inside a project.
 
 ## Feature discovery as a side effect
 
-When users land on a project, the nav surfaces features relevant to that project's current phase. Discovery becomes natural, not something the product has to teach.
+When a project manager opens a project mid-build, the nav puts change orders and RFIs at the top, not buried under preconstruction tools they used six months ago. People find features by being in the work that uses them, not by hunting through a menu.
 
 <FullBleedImage
   src={joinNav04}
