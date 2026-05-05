@@ -24,31 +24,41 @@ import gradleFilter03 from "./images/gradle-filter-03.png";
 import gradleFilter04 from "./images/gradle-filter-04.png";
 import gradleFilter05 from "./images/gradle-filter-05.png";
 
-A single typed input that replaced twelve scattered dropdowns across Gradle Enterprise's build diagnostic views. Experts type exact filters. Beginners discover the taxonomy through suggestions. Same surface, no mode switch.
+## The setup
 
-(First concept: visual query builder with a clickable canvas. Too slow for experts, too opaque for beginners. Typed input served both.)
+Gradle builds developer productivity tools. Large engineering orgs like Netflix and Salesforce use Gradle Enterprise to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
-## Typed suggestions surface the taxonomy
+In one of our first customer sessions, a platform engineer shared their screen and I counted fifteen browser tabs -- all Excel. They'd exported build data out of our product to filter it. That scene repeated across nearly every session we ran. The data was all there inside Gradle Enterprise. The tools to explore it were scattered across a dozen dropdowns, each scoped to a single dimension, none of them composable. A developer trying to answer "show me slow, failing tests in module X" had to click through three different filter widgets, hope they combined correctly, and then give up and export anyway.
 
-User types "slow." The omnibar offers "duration greater than" and "status: failed." Filter types learned by using, not reading docs.
+The question was whether one input could replace all of them.
+
+## What we tried
+
+The first concept was a visual query builder with a clickable canvas. Boxes for conditions, arrows for logic, drag to reorder. It looked great in a deck. In testing, it was too slow for power users who could type their query faster than they could click through a canvas, and still too opaque for beginners who didn't know the filter vocabulary yet.
+
+The canvas made the same mistake the dropdowns made: it forced users to know the taxonomy before they could search. Just with nicer visuals.
+
+## What actually worked
+
+I replaced everything with a single typed input. An omnibar. You type what you're thinking and the system meets you halfway with suggestions.
+
+A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. They learn the filter types by using them, not by reading documentation. A power user types "project:core status:failed duration>30s" and it all just works. One surface, two audiences, no mode switch.
 
 <FullBleedImage
   src={gradleFilter01}
   alt="The Gradle Enterprise omnibar with typed filter suggestions"
 />
 
-## Implicit AND across stacked filters
-
-Most diagnostic queries are AND chains. V1 defaulted to implicit AND. Skipped the boolean builder. Most of the analytical value for a fraction of the interaction cost.
+Most diagnostic queries are AND chains: slow tests AND failed AND in module X. V1 defaulted to implicit AND and skipped the full boolean builder. Most of the analytical value for a fraction of the interaction cost. We prototyped against Gradle's actual build event data, not fixtures. Edge cases surfaced during prototyping -- huge datasets, odd filter chains where suggestions misfired. Rob, our engineer, saw the failure modes in a prototype and moved.
 
 <FullBleedImage
   src={gradleFilter02}
   alt="Stacked filter conditions visible as pills inside the omnibar input"
 />
 
-## One pattern, every diagnostic view
+## The details that mattered
 
-Same filter chain drives every downstream view: scoped task list, diagnostic detail, summary aggregations. Learned once, applied everywhere.
+**One pattern for every diagnostic view.** The omnibar wasn't just a filter for one screen. The same filter chain drove every downstream view: the scoped task list, the diagnostic detail, and the summary aggregations. Learned once, applied everywhere. That architectural decision is what made the feature sticky. A clever filter on one page is a nice-to-have. A consistent filter language across the product is an expectation.
 
 <FullBleedImage
   src={gradleFilter03}
@@ -65,15 +75,17 @@ Same filter chain drives every downstream view: scoped task list, diagnostic det
   alt="A summary view of filter results with counts and trends"
 />
 
-## What moved
+## Where it landed
 
-Users stopped asking for CSV exports. Customer pull turned the omnibar from "the new filter on one view" into the filter pattern for the product. Every feature team adopted it.
+Users stopped asking for CSV exports. When a customer who's been living in Excel goes back to a product's native filtering, you know the interaction is landing.
 
 <FullBleedGif
   src="/videos/gradle-filter-06.gif"
   alt="The omnibar in use, showing typed suggestions and stacked conditions"
   caption="Typed suggestions and stacked filter conditions."
 />
+
+The quote that mattered most came from a customer who asked to see the omnibar on other views. That was the moment it stopped being "the new filter on one screen" and started being "the filter pattern for the product." Customer pull is what made the cross-team rollout possible. Every feature team eventually adopted it. Not because we mandated it. Because their users asked for it.
 
 <Credits
   credits={[

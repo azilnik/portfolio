@@ -30,17 +30,14 @@ const allWork = (await getCollection("work", ({ data }) => !data.draft && data.e
         font-size: var(--theme-text-3xl);
       "
     >
-      Ships
+      Work
     </h2>
   </div>
 
   {allWork.length > 0 ? (
     <div
-      style="
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      "
+      class="grid grid-cols-1 md:grid-cols-2"
+      style="gap: 3rem 2rem;"
     >
       {allWork.map((study) => (
         <CaseStudyCard study={study} />

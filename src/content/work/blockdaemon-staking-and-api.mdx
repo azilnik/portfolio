@@ -1,9 +1,9 @@
 ---
-title: "Institutional Staking Dashboard"
+title: "Institutional Crypto Staking Dashboard"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Fintech, Crypto Infrastructure"
-description: "Zero-to-one staking dashboard and API marketplace for institutional crypto. No existing patterns. Design org scaled 1 to 7."
+description: "Zero-to-one institutional staking dashboard and API marketplace. Designed and shipped while scaling the design org from 1 to 7."
 seoTitle: "Staking & API at Blockdaemon"
 seoDescription: "Zero-to-one institutional crypto staking at Blockdaemon. Research with treasury teams drove a density-first dashboard design; the design org scaled 1 to 7."
 heroImage: "./images/bd-staking-01.png"
@@ -29,13 +29,21 @@ import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
 import bdStaking05 from "./images/bd-staking-05.png";
 
-Two zero-to-one products shipped in 15 months: institutional staking dashboard and the Ubiquity developer API. No established UX patterns in crypto for either. Joined as founding designer after Blockdaemon acquired my consultancy. Company raised $207M at $3.25B valuation during tenure.
+## The setup
 
-(Initial instinct: simplify by hiding chain complexity. Research killed it. Treasury teams needed all the data visible, not abstracted away. Density became the design principle.)
+Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy blockchain nodes and stake assets without operating their own data centers. The customer tier is Goldman Sachs, Microsoft, that caliber.
 
-## Institutional staking
+I joined as the founding designer after Blockdaemon acquired my consultancy. There was no design organization. I was the design organization. The company raised $207M at a $3.25B valuation during my time there, and the product screens that showed up in investor demos traced back to my team.
 
-Treasury teams managing hundreds of millions across chains. They needed total value and validator performance on one screen. Density plus real-time trust signals.
+The challenge was building two zero-to-one products in a space where no UX patterns existed yet — an institutional staking dashboard and a developer API console. No competitor to crib from, no conventions to lean on, just a blank Figma file and a handful of treasury managers who'd agreed to talk to us. My first instinct was to simplify. That instinct was wrong, and the rest of this case study is about how the research told us why.
+
+## What we tried
+
+The "approachable dashboard" playbook is the obvious move for a new product in a complex domain — strip it down to the essential metrics, spacious typography, generous whitespace, make the tool feel inviting. We built that prototype and put it in front of treasury teams managing hundreds of millions across multiple blockchains, and it landed as too sparse. They'd spent years living in spreadsheets and Bloomberg terminals; the clean-and-simple version felt like the tool was hiding something from them.
+
+## What actually worked
+
+I hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams reframed the brief: the users didn't want less information, they wanted more of it visible at once, with the trust signals built in — total portfolio value, validator performance, and chain health surfaced together rather than buried behind a drilldown. The job wasn't simplification. It was making density legible.
 
 <FullBleedImage
   src={bdStaking01}
@@ -43,7 +51,7 @@ Treasury teams managing hundreds of millions across chains. They needed total va
   caption="The staking portfolio dashboard. The $108M figure is a sample used in demos."
 />
 
-Hired Blockdaemon's first two researchers. Interviews with treasury teams changed the design direction. Not less information. All of it, without drowning.
+The dashboard ended up closer to a trading terminal than a consumer fintech app. Dense data, real-time updates, chain-by-chain breakdowns. But with a clear hierarchy that let users scan the portfolio in seconds and drill into validator-level detail when something looked off.
 
 <FullBleedImage
   src={bdStaking02}
@@ -61,9 +69,9 @@ Hired Blockdaemon's first two researchers. Interviews with treasury teams change
   caption="Staking delegation flow."
 />
 
-## Ubiquity API
+## The details that mattered
 
-Developer-facing API for querying crypto data across chains. The dashboard was where developers debugged what their API keys were doing. Highest-value views: usage against rate limits and request-log auditing.
+**Ubiquity, the developer API.** The second product was Blockdaemon's developer-facing API for querying crypto data across chains. I built the dashboard as the first place developers go to debug what their API keys are doing. Developer interviews revealed the highest-value views: usage against rate limits and request-log auditing. Not fancy visualizations. Just the two things developers actually need when something breaks at 2am.
 
 <FullBleedImage
   src={bdStaking03}
@@ -77,9 +85,13 @@ Developer-facing API for querying crypto data across chains. The dashboard was w
   caption="API key creation and usage monitoring."
 />
 
-## What moved
+**Building the org while shipping the product.** The harder meta-problem was doing all of this while scaling from 1 designer to 7 — hiring, standing up design reviews with real teeth, and establishing a weekly research cadence, all while two zero-to-one products needed to ship. You don't wait for the team to be built before you start shipping. You ship with what you have and build the org around the momentum the work generates.
 
-Staking product shipped into $207M Series C materials. The screens investors walked through in demos traced back to my team. Grew the design org from 1 to 7.
+## Where it landed
+
+The staking product shipped in time to anchor Blockdaemon's $207M Series C deck — when the round closed at a $3.25B valuation, the dashboards investors walked through traced back to my team. By that point we'd also built the research practice, the design review cadence, and the hiring pipeline from scratch.
+
+Two zero-to-one products, a design org scaled from one to seven, and a Series C. Not bad for 15 months.
 
 <PressQuote
   quote="Blockdaemon nabs $1.3B valuation in $155M funding round. SoftBank Vision Fund 2 led the funding."

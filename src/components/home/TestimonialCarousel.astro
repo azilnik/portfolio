@@ -1,235 +1,279 @@
 ---
 /**
- * TestimonialCarousel — horizontal scroll carousel of quotes.
+ * TestimonialCarousel — Quiet Warm.
  *
- * Uses CSS scroll-snap for smooth, snappy scrolling and vanilla JS for
- * dot indicators and optional auto-rotation. No library dependencies.
+ * Big bold quote, one at a time, scroll-snap horizontal carousel with dot
+ * indicators and auto-advance. Monochrome — no green, no serif. Avatar
+ * shown beneath the quote. Big-and-bold framing borrowed from Editorial
+ * Tension; carousel mechanic carried over from the Warm Signal prototype.
  */
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
 const testimonials = await getCollection("testimonials");
-
-/**
- * Extract initials from a full name (e.g. "Kevin Scott" → "KS").
- * Used as a fallback when no avatar image is provided.
- */
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
 ---
 
-<section
-  style="
-    padding-top: var(--theme-space-7);
-    padding-bottom: var(--theme-space-7);
-  "
->
-  <div
-    class="mx-auto px-6"
-    style="max-width: var(--theme-content-width);"
+{testimonials.length > 0 && (
+  <section
+    style="
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    "
   >
-    {/* Section eyebrow — sits above the carousel without becoming a heavy h2.
-        Testimonials are evidence, not a feature, so the label should be quiet. */}
-    <p
-      class="text-center text-xs font-semibold uppercase animate-in"
-      style="
-        color: var(--theme-text-tertiary);
-        letter-spacing: var(--theme-tracking-wider);
-        margin-bottom: var(--theme-space-5);
-      "
-    >
-      What people say
-    </p>
-
-    {/* Scrollable container — snap to each testimonial card.
-        Each card is a flex column (see blockquote below) and cards share the
-        track's cross-axis sizing, so every card in a row grows to match the
-        tallest quote. `mt-auto` on the footer then pushes the author block
-        to the bottom of every card, so names line up horizontally across
-        the row regardless of quote length. */}
     <div
-      id="testimonial-track"
-      class="hide-scrollbar flex snap-x snap-proximity items-stretch gap-6 overflow-x-auto px-6 pb-4 -mx-6 animate-in"
-      style="--delay: 100ms;"
+      class="mx-auto px-6"
+      style="max-width: var(--theme-content-width);"
     >
-      {testimonials.map((t) => (
-        <blockquote
-          class="flex flex-none w-full snap-center flex-col p-8 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-        >
-          <p
-            class="leading-relaxed"
-            style="
-              color: var(--theme-text-secondary);
-              font-size: var(--theme-text-lg);
-            "
-          >"{t.data.quote}"</p>
-          {/* Wrap the entire footer (avatar + name + title) in one link when LinkedIn is available */}
-          {t.data.linkedinUrl ? (
-            <a href={t.data.linkedinUrl} target="_blank" rel="noopener noreferrer" class="mt-auto pt-6 flex items-center gap-3 group"
-              data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}>
-              {t.data.avatar ? (
-                <Image
-                  src={t.data.avatar}
-                  alt={t.data.authorName}
-                  width={48}
-                  height={48}
-                  class="h-12 w-12 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <div
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                  style="background-color: var(--theme-accent);"
-                >
-                  {getInitials(t.data.authorName)}
-                </div>
-              )}
-              <div>
-                <p class="font-semibold transition-colors" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-                <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
-              </div>
-            </a>
-          ) : (
-            <footer class="mt-auto pt-6 flex items-center gap-3">
-              {t.data.avatar ? (
-                <Image
-                  src={t.data.avatar}
-                  alt={t.data.authorName}
-                  width={48}
-                  height={48}
-                  class="h-12 w-12 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <div
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                  style="background-color: var(--theme-accent);"
-                >
-                  {getInitials(t.data.authorName)}
-                </div>
-              )}
-              <div>
-                <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-                <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
-              </div>
-            </footer>
-          )}
-        </blockquote>
-      ))}
-    </div>
+      <p
+        class="font-heading"
+        style="
+          color: var(--theme-text-tertiary);
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 2rem;
+        "
+      >
+        What colleagues say
+      </p>
 
-    {/* Dot indicators — use inline styles so JS can swap colors via CSS variables */}
-    <div
-      id="testimonial-dots"
-      class="flex justify-center gap-2"
-      style="margin-top: var(--theme-space-4);"
-    >
-      {testimonials.map((_, i) => (
-        <button
-          class="testimonial-dot h-2 w-2 rounded-full transition-colors"
-          style="background-color: var(--theme-border-strong);"
-          data-index={i}
-          aria-label={`Go to testimonial ${i + 1}`}
-        />
-      ))}
+      <div
+        class="qw-testimonial-track"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Colleague testimonials"
+      >
+        <div class="qw-testimonial-rail" data-qw-rail>
+          {testimonials.map((t, i) => (
+            <article
+              class="qw-testimonial-slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${testimonials.length}`}
+              data-index={i}
+              tabindex="0"
+            >
+              <blockquote class="qw-testimonial-quote">
+                <p class="qw-testimonial-text">
+                  &ldquo;{t.data.quote}&rdquo;
+                </p>
+                <footer class="qw-testimonial-footer">
+                  {t.data.avatar && (
+                    <Image
+                      src={t.data.avatar}
+                      alt={t.data.authorName}
+                      width={44}
+                      height={44}
+                      class="qw-testimonial-avatar"
+                    />
+                  )}
+                  <div>
+                    {t.data.linkedinUrl ? (
+                      <a
+                        href={t.data.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="qw-testimonial-author"
+                        data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        {t.data.authorName}
+                      </a>
+                    ) : (
+                      <p class="qw-testimonial-author">{t.data.authorName}</p>
+                    )}
+                    <p class="qw-testimonial-title">{t.data.authorTitle}</p>
+                  </div>
+                </footer>
+              </blockquote>
+            </article>
+          ))}
+        </div>
+
+        <div class="qw-testimonial-dots" role="tablist" aria-label="Choose a testimonial">
+          {testimonials.map((_, i) => (
+            <button
+              type="button"
+              class="qw-testimonial-dot"
+              data-qw-dot
+              data-target={i}
+              role="tab"
+              aria-label={`Show testimonial ${i + 1}`}
+              aria-selected={i === 0}
+            />
+          ))}
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+)}
+
+<style>
+  .qw-testimonial-track {
+    position: relative;
+  }
+
+  .qw-testimonial-rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .qw-testimonial-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .qw-testimonial-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    outline: none;
+  }
+
+  .qw-testimonial-quote {
+    max-width: 52rem;
+    padding: 0;
+  }
+
+  .qw-testimonial-text {
+    color: var(--theme-text-primary);
+    font-size: clamp(1.25rem, 1rem + 1.4vw, 1.875rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+  }
+
+  .qw-testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--theme-border);
+  }
+
+  .qw-testimonial-avatar {
+    height: 44px;
+    width: 44px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 9999px;
+  }
+
+  .qw-testimonial-author {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--theme-text-primary);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+  a.qw-testimonial-author:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .qw-testimonial-title {
+    font-size: 0.8125rem;
+    color: var(--theme-text-tertiary);
+    margin-top: 0.125rem;
+  }
+
+  .qw-testimonial-dots {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    margin-top: 2rem;
+  }
+
+  .qw-testimonial-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--theme-border);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .qw-testimonial-dot[aria-selected="true"] {
+    background: var(--theme-text-primary);
+    transform: scale(1.4);
+  }
+  .qw-testimonial-dot:focus-visible {
+    outline: 2px solid var(--theme-text-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qw-testimonial-rail { scroll-behavior: auto; }
+  }
+</style>
 
 <script>
-  /**
-   * Testimonial carousel logic — dot indicators + auto-rotation.
-   *
-   * Uses IntersectionObserver to detect which card is currently visible,
-   * then updates the active dot. Auto-advances every 5 seconds, but only
-   * when the carousel is visible on screen (to avoid hijacking page scroll).
-   *
-   * IMPORTANT: We use track.scrollTo() instead of scrollIntoView() so that
-   * scrolling stays inside the carousel container and never moves the page.
-   */
-  function initCarousel() {
-    const track = document.getElementById("testimonial-track");
-    const dots = document.querySelectorAll(".testimonial-dot");
-    if (!track || dots.length === 0) return;
+  const rail = document.querySelector<HTMLElement>("[data-qw-rail]");
+  const dots = document.querySelectorAll<HTMLButtonElement>("[data-qw-dot]");
+  if (rail && dots.length) {
+    const slides = rail.querySelectorAll<HTMLElement>(".qw-testimonial-slide");
+    const total = slides.length;
+    let active = 0;
+    let timer: number | null = null;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const cards = track.querySelectorAll("blockquote");
-    let currentIndex = 0;
-    let autoplayInterval: ReturnType<typeof setInterval>;
-    let isVisible = false;
+    const setActive = (index: number) => {
+      active = ((index % total) + total) % total;
+      dots.forEach((d, i) => d.setAttribute("aria-selected", i === active ? "true" : "false"));
+    };
 
-    // Scroll to a specific card by index — only moves the carousel, not the page.
-    function scrollToCard(index: number) {
-      const card = cards[index] as HTMLElement;
-      if (!card) return;
-      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
-    }
+    const goTo = (index: number) => {
+      const target = slides[((index % total) + total) % total];
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      setActive(index);
+    };
 
-    /**
-     * Update which dot is "active" (highlighted).
-     * Uses inline style manipulation instead of Tailwind classes so that
-     * the dot color adapts to the active theme's CSS variables.
-     */
-    function setActiveDot(index: number) {
-      const accentColor = getComputedStyle(document.documentElement).getPropertyValue("--theme-accent").trim();
-      const inactiveColor = getComputedStyle(document.documentElement).getPropertyValue("--theme-border-strong").trim();
-      dots.forEach((dot, i) => {
-        (dot as HTMLElement).style.backgroundColor = i === index ? accentColor : inactiveColor;
-      });
-      currentIndex = index;
-    }
-
-    // Watch which card scrolls into view within the track.
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Array.from(cards).indexOf(entry.target as HTMLElement);
-            if (index >= 0) setActiveDot(index);
-          }
-        });
-      },
-      { root: track, threshold: 0.6 }
-    );
-
-    cards.forEach((card) => cardObserver.observe(card));
-
-    // Track whether the carousel section is visible on the page.
-    // Auto-rotation only runs when the user can actually see it.
-    const sectionObserver = new IntersectionObserver(
-      ([entry]) => { isVisible = entry.isIntersecting; },
-      { threshold: 0.3 }
-    );
-    sectionObserver.observe(track.closest("section")!);
-
-    // Click a dot to scroll to that card.
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const index = Number((dot as HTMLElement).dataset.index);
-        scrollToCard(index);
+    dots.forEach((d) => {
+      d.addEventListener("click", () => {
+        const i = Number(d.dataset.target ?? "0");
+        goTo(i);
+        restart();
       });
     });
 
-    // Auto-rotate every 5 seconds, pause on hover or when off-screen.
-    function startAutoplay() {
-      autoplayInterval = setInterval(() => {
-        if (!isVisible) return;
-        const next = (currentIndex + 1) % cards.length;
-        scrollToCard(next);
-      }, 5000);
-    }
+    rail.addEventListener("scroll", () => {
+      const railRect = rail.getBoundingClientRect();
+      let closest = 0;
+      let closestDelta = Infinity;
+      slides.forEach((s, i) => {
+        const delta = Math.abs(s.getBoundingClientRect().left - railRect.left);
+        if (delta < closestDelta) {
+          closestDelta = delta;
+          closest = i;
+        }
+      });
+      setActive(closest);
+    });
 
-    track.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
-    track.addEventListener("mouseleave", startAutoplay);
-    startAutoplay();
+    const start = () => {
+      if (reduced || total < 2) return;
+      timer = window.setInterval(() => goTo(active + 1), 7000);
+    };
+    const stop = () => {
+      if (timer !== null) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+    const restart = () => { stop(); start(); };
 
-    // Set the first dot as active initially.
-    setActiveDot(0);
+    rail.addEventListener("mouseenter", stop);
+    rail.addEventListener("mouseleave", start);
+    rail.addEventListener("focusin", stop);
+    rail.addEventListener("focusout", start);
+
+    start();
   }
-
-  initCarousel();
-  document.addEventListener("astro:after-swap", initCarousel);
 </script>

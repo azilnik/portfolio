@@ -3,7 +3,7 @@ title: "AI Recommendation Engine"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "AI engine that surfaces cost-saving material alternatives inside construction estimates. Marketplace hypothesis died in research. Pivot shipped in two months."
+description: "AI engine that surfaces cost-saving material alternatives inside construction estimates. Started as a marketplace; the pivot shipped in two months."
 seoTitle: "Ideas at Join"
 seoDescription: "An AI recommendation engine for construction estimates that surfaced $500K in savings for one Join customer in 30 days."
 heroImage: "./images/join-ideas-01.png"
@@ -29,42 +29,58 @@ import joinIdeas02 from "./images/join-ideas-02.png";
 import joinIdeas03 from "./images/join-ideas-03.png";
 import joinIdeas04 from "./images/join-ideas-04.png";
 
-AI engine that surfaces cost-saving material alternatives inside construction estimates. An estimator specs a finish at full cost when a cheaper substitute exists. That gap compounds across every line item. Ideas closes it automatically.
+## The setup
 
-(Original plan: materials marketplace. Customer interviews killed it. Estimators didn't know what to search for. Pivoted to recommendations. Led design + acting PM. Shipped in two months.)
+Join is project management for the people who build actual buildings. I'm Head of Design, leading a small team that ships across the platform.
 
-## Suggestion carousels
+The brief was a materials marketplace. Think Amazon for construction materials, but inside the estimating tool. The logic sounded airtight in the pitch deck: estimators spec materials every day, so give them a place to shop for alternatives and take a transaction cut. Clean business model.
 
-AI-generated suggestions ranked by savings potential. Grouped by estimate location and construction phase. Each carousel scopes to a single section of the estimate so reviewers process decisions in context, not as a disconnected feed.
+Two weeks in, we started interviewing estimators. The marketplace was dead on arrival.
+
+The problem wasn't that estimators didn't want cheaper materials. The problem was they didn't know what alternatives existed. An estimator with fifteen years of experience specs the same finish they've always specced because it works, it's in their muscle memory, and nobody's told them there's a substitute that costs half as much. They weren't going to browse a catalog for something they didn't know to look for. The question the project had to answer changed: how do you surface knowledge that experienced professionals don't know they're missing?
+
+## What we tried
+
+The marketplace had wireframes, a product brief, and a CEO excited about a new revenue line — but customer interviews kept returning the same signal. Estimators don't comparison-shop for construction materials the way you'd shop for headphones; they spec what they know. When a less experienced estimator specs a premium finish where a standard grade would meet the structural requirements, that gap compounds across every line item in every project. A catalog wouldn't fix an awareness problem; the product had to find the savings on the estimator's behalf.
+
+I took on both design and an acting PM role at this point. The pivot happened fast because the research was unambiguous.
+
+## What actually worked
+
+We killed the marketplace and built a recommendation engine instead. The AI scans an estimate and surfaces cheaper alternatives the estimator wouldn't otherwise have considered — the system does the searching and brings answers to the estimator's existing workflow, instead of waiting for them to go shopping for it.
+
+The shape of the product is three layers: the AI generates suggestions, a materials researcher validates them, and the estimator makes the final call. Nothing gets auto-applied.
 
 <FullBleedImage
   src={joinIdeas02}
   alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
 />
 
-## Human review layer
+Suggestions show up as contextual carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase. An estimator working on the structural package sees structural alternatives, not interior finishes. The grouping was deliberate -- it matches how they already think about the work.
 
-Suggestions affect real buildings. A materials researcher validates every recommendation before it reaches an estimator. The model drafts. Humans approve. Rejection reasons feed back into the model so the same bad suggestion doesn't recur.
+## The details that mattered
 
-Each card shows UniFormat and MasterFormat codes. Non-negotiable for trust in construction. Estimators verify specs against these codes daily; omitting them would have killed adoption.
+**The human review layer.** These suggestions affect real buildings and real budgets. The AI will be wrong sometimes, so Kyle, our materials researcher, validates every suggestion before it reaches an estimator. The model is a first-draft engine, not a source of truth. I used AI-coded prototypes to test card density with real estimate data before engineering built anything.
+
+Each card surfaces the UniFormat and MasterFormat classification codes for the suggested material. In interviews, estimators flagged this directly: without those codes the card is a stranger's opinion, but with them attached the card reads as a peer recommendation with receipts. Skipping the codes would have meant losing the audience before the suggestion got read.
 
 <FullBleedImage
   src={joinIdeas04}
   alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
 />
 
-## Forced comparison
-
-Every recommendation weighed against alternatives before acceptance. The model suggests. The estimator decides. Nothing auto-applies.
+**Forced comparison.** Every recommendation has to be weighed against alternatives before an estimator can accept it. The model suggests. The estimator decides. I was deliberate about this friction. In construction, the person who signs off on a material choice is putting their professional reputation on the line. Removing friction here would have felt like the tool was making decisions for them, and they would have stopped trusting it immediately.
 
 <FullBleedImage
   src={joinIdeas03}
   alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
 />
 
-## What moved
+## Where it landed
 
-One enterprise customer: $500K saved on their first estimate within 30 days. Decision time down 50% across the product.
+One enterprise customer saved $500K on their first project estimate within 30 days of launch. Decision-making time dropped 50% across the product. The marketplace would have been a feature nobody used. The recommendation engine became a reason to buy Join.
+
+The pivot took two weeks of research and two months from kickoff to ship. Sometimes the most valuable product decision is killing the one you started with.
 
 <PressQuote
   quote="Join secures growth investment from construction giants DPR Construction and STO Building Group."

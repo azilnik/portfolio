@@ -1,55 +1,105 @@
 ---
 /**
- * Hero — business-card format. Name, title, email. Nothing else.
- * Quiet Authority: reduction IS the design choice.
+ * Hero — Quiet Authority + a single warm accent.
+ *
+ * Brings the face back. Name uses Fraunces (the only place the serif appears).
+ * Wavy line under the name nods to the warm-signal aesthetic without taking over.
+ * Primary CTA = See my work; Get in touch is secondary.
  */
+import { Image } from "astro:assets";
+import avatarImage from "../../assets/images/avatar.jpg";
 ---
 
 <section
   class="mx-auto px-6"
   style="
     max-width: var(--theme-content-width);
-    padding-top: 10rem;
-    padding-bottom: 8rem;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
   "
 >
-  <h1
-    class="font-heading animate-in"
-    style="
-      font-size: var(--theme-text-6xl);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--theme-text-primary);
-    "
-  >
-    Ari Zilnik
-  </h1>
+  <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-12 animate-in" style="max-width: 56rem;">
+    <div class="flex-shrink-0">
+      <Image
+        src={avatarImage}
+        alt="Ari Zilnik"
+        width={140}
+        height={140}
+        class="object-cover"
+        style="border-radius: 8px;"
+      />
+    </div>
 
-  <div
-    class="animate-in"
-    style="
-      margin-top: 1.5rem;
-      font-size: var(--theme-text-xl);
-      color: var(--theme-text-secondary);
-      line-height: 1.6;
-    "
-  >
-    <p>Head of Design, Join</p>
-    <p style="margin-top: 0.25rem;">Previously Blockdaemon, Gradle, Jet.com</p>
-  </div>
+    <div>
+      <h1
+        class="quiet-warm-wordmark"
+        style="
+          color: var(--theme-text-primary);
+          font-weight: 500;
+          letter-spacing: -0.025em;
+          line-height: 1.05;
+          font-size: var(--theme-text-5xl);
+        "
+      >
+        Ari Zilnik
+      </h1>
 
-  <div class="animate-in" style="margin-top: 2rem;">
-    <a
-      href="mailto:ari@zilnik.com"
-      style="
-        color: var(--theme-text-primary);
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      "
-      data-goatcounter-click="contact-hero"
-    >
-      ari@zilnik.com
-    </a>
+      {/* Subtle wavy underline — the one warm accent in this prototype */}
+      <svg width="96" height="6" viewBox="0 0 96 6" fill="none" style="margin-top: 0.5rem; margin-bottom: 0.25rem;">
+        <path d="M0 3C8 1 16 5 24 3C32 1 40 5 48 3C56 1 64 5 72 3C80 1 88 5 96 3" stroke="#C65D3E" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.85"/>
+      </svg>
+
+      <p
+        style="
+          color: var(--theme-text-primary);
+          font-size: var(--theme-text-2xl);
+          font-weight: 500;
+          line-height: 1.25;
+          letter-spacing: -0.015em;
+          margin-top: 1.25rem;
+          max-width: 36rem;
+        "
+      >
+        I design software for work that's already hard.
+      </p>
+
+      <p
+        style="
+          color: var(--theme-text-secondary);
+          font-size: var(--theme-text-lg);
+          line-height: 1.6;
+          margin-top: 0.75rem;
+          max-width: 36rem;
+        "
+      >
+        Head of Design at Join, building construction project management tools that fit the way the work happens. Previously founding designer at Blockdaemon, design lead at Gradle, and Jet.com through Walmart's $3.3B acquisition.
+      </p>
+
+      <div class="flex flex-wrap gap-3" style="margin-top: 1.5rem;">
+        <a
+          href="#work"
+          class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
+          style="background-color: var(--theme-text-primary); color: var(--theme-bg-primary); border-radius: 4px;"
+          data-goatcounter-click="see-work-hero"
+        >
+          See my work
+        </a>
+        <a
+          href="mailto:ari@zilnik.com"
+          class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
+          style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-primary); border-radius: 4px;"
+          data-goatcounter-click="contact-hero"
+        >
+          Get in touch
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  .quiet-warm-wordmark {
+    font-family: "Fraunces", Georgia, serif;
+    font-feature-settings: "ss01" 1;
+  }
+</style>
