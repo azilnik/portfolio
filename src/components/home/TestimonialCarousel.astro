@@ -1,9 +1,10 @@
 ---
 /**
- * TestimonialCarousel — replaced with a 2-column blockquote grid.
+ * TestimonialCarousel — refined Warm Signal.
  *
- * Warm Signal: green left border, no background, no JS. Simple grid
- * of pull-quotes with avatar images.
+ * Big bold quote, one at a time, scroll-snap horizontal carousel with dot
+ * indicators and auto-advance. Avatar shown beneath the quote so the face
+ * is anchored to the speaker, not lost in the layout.
  */
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
@@ -14,7 +15,7 @@ const testimonials = await getCollection("testimonials");
 {testimonials.length > 0 && (
   <section
     style="
-      padding-top: var(--theme-space-6);
+      padding-top: var(--theme-space-7);
       padding-bottom: var(--theme-space-7);
     "
   >
@@ -33,54 +34,240 @@ const testimonials = await getCollection("testimonials");
         What colleagues say
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2" style="gap: var(--theme-space-4);">
-        {testimonials.map((t) => (
-          <blockquote
-            class="animate-in"
-            style="border-left: 3px solid #2A5F4F; padding: 1.5rem 0 1.5rem 1.5rem;"
-          >
-            <p
-              style="
-                color: var(--theme-text-secondary);
-                font-size: var(--theme-text-base);
-                line-height: var(--theme-leading-relaxed);
-              "
+      <div
+        class="testimonial-track"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Colleague testimonials"
+      >
+        <div class="testimonial-rail" data-testimonial-rail>
+          {testimonials.map((t, i) => (
+            <article
+              class="testimonial-slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${testimonials.length}`}
+              data-index={i}
+              tabindex="0"
             >
-              "{t.data.quote}"
-            </p>
+              <blockquote class="testimonial-quote">
+                <p class="testimonial-text font-heading">
+                  &ldquo;{t.data.quote}&rdquo;
+                </p>
+                <footer class="testimonial-footer">
+                  {t.data.avatar && (
+                    <Image
+                      src={t.data.avatar}
+                      alt={t.data.authorName}
+                      width={48}
+                      height={48}
+                      class="testimonial-avatar"
+                    />
+                  )}
+                  <div>
+                    {t.data.linkedinUrl ? (
+                      <a
+                        href={t.data.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="testimonial-author"
+                        data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        {t.data.authorName}
+                      </a>
+                    ) : (
+                      <p class="testimonial-author">{t.data.authorName}</p>
+                    )}
+                    <p class="testimonial-title">{t.data.authorTitle}</p>
+                  </div>
+                </footer>
+              </blockquote>
+            </article>
+          ))}
+        </div>
 
-            <footer class="flex items-center gap-3" style="margin-top: 1rem;">
-              {t.data.avatar && (
-                <Image
-                  src={t.data.avatar}
-                  alt={t.data.authorName}
-                  width={40}
-                  height={40}
-                  class="h-10 w-10 shrink-0 object-cover"
-                  style="border-radius: 9999px;"
-                />
-              )}
-              <div>
-                {t.data.linkedinUrl ? (
-                  <a
-                    href={t.data.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-semibold text-sm transition-colors"
-                    style="color: var(--theme-text-primary);"
-                    data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {t.data.authorName}
-                  </a>
-                ) : (
-                  <p class="font-semibold text-sm" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-                )}
-                <p class="text-xs" style="color: var(--theme-text-tertiary);">{t.data.authorTitle}</p>
-              </div>
-            </footer>
-          </blockquote>
-        ))}
+        <div class="testimonial-dots" role="tablist" aria-label="Choose a testimonial">
+          {testimonials.map((_, i) => (
+            <button
+              type="button"
+              class="testimonial-dot"
+              data-dot
+              data-target={i}
+              role="tab"
+              aria-label={`Show testimonial ${i + 1}`}
+              aria-selected={i === 0}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </section>
 )}
+
+<style>
+  .testimonial-track {
+    position: relative;
+  }
+
+  .testimonial-rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .testimonial-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    outline: none;
+  }
+
+  .testimonial-quote {
+    border-left: 3px solid #2A5F4F;
+    padding: 0.5rem 0 0.5rem 2rem;
+    max-width: 56rem;
+  }
+
+  .testimonial-text {
+    color: var(--theme-text-primary);
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 1.5rem;
+  }
+
+  .testimonial-avatar {
+    height: 48px;
+    width: 48px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 9999px;
+  }
+
+  .testimonial-author {
+    font-family: var(--theme-font-sans);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--theme-text-primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  a.testimonial-author:hover {
+    color: #2A5F4F;
+  }
+
+  .testimonial-title {
+    font-size: 0.8125rem;
+    color: var(--theme-text-tertiary);
+    margin-top: 0.125rem;
+  }
+
+  .testimonial-dots {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .testimonial-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--theme-border);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .testimonial-dot[aria-selected="true"] {
+    background: #2A5F4F;
+    transform: scale(1.2);
+  }
+  .testimonial-dot:focus-visible {
+    outline: 2px solid #2A5F4F;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-rail { scroll-behavior: auto; }
+  }
+</style>
+
+<script>
+  const rail = document.querySelector<HTMLElement>("[data-testimonial-rail]");
+  const dots = document.querySelectorAll<HTMLButtonElement>("[data-dot]");
+  if (rail && dots.length) {
+    const slides = rail.querySelectorAll<HTMLElement>(".testimonial-slide");
+    const total = slides.length;
+    let active = 0;
+    let timer: number | null = null;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const setActive = (index: number) => {
+      active = ((index % total) + total) % total;
+      dots.forEach((d, i) => d.setAttribute("aria-selected", i === active ? "true" : "false"));
+    };
+
+    const goTo = (index: number) => {
+      const target = slides[((index % total) + total) % total];
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      setActive(index);
+    };
+
+    dots.forEach((d) => {
+      d.addEventListener("click", () => {
+        const i = Number(d.dataset.target ?? "0");
+        goTo(i);
+        restart();
+      });
+    });
+
+    rail.addEventListener("scroll", () => {
+      const railRect = rail.getBoundingClientRect();
+      let closest = 0;
+      let closestDelta = Infinity;
+      slides.forEach((s, i) => {
+        const delta = Math.abs(s.getBoundingClientRect().left - railRect.left);
+        if (delta < closestDelta) {
+          closestDelta = delta;
+          closest = i;
+        }
+      });
+      setActive(closest);
+    });
+
+    const start = () => {
+      if (reduced || total < 2) return;
+      timer = window.setInterval(() => goTo(active + 1), 7000);
+    };
+    const stop = () => {
+      if (timer !== null) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+    const restart = () => { stop(); start(); };
+
+    rail.addEventListener("mouseenter", stop);
+    rail.addEventListener("mouseleave", start);
+    rail.addEventListener("focusin", stop);
+    rail.addEventListener("focusout", start);
+
+    start();
+  }
+</script>

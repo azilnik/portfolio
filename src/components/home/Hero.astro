@@ -2,8 +2,9 @@
 /**
  * Hero — the top section of the homepage.
  *
- * Avatar at 160px + name + wavy terracotta SVG underline + bio.
- * Warm Signal design: Fraunces serif name, handcrafted feel.
+ * Avatar at 160px + name + wavy terracotta SVG underline + tagline + bio.
+ * Refined Warm Signal: keeps Fraunces serif name and handcrafted feel.
+ * Primary CTA = See my work; Get in touch is secondary.
  */
 import { Image } from "astro:assets";
 import avatarImage from "../../assets/images/avatar.jpg";
@@ -38,25 +39,33 @@ import avatarImage from "../../assets/images/avatar.jpg";
         <path d="M0 4C10 1 20 7 30 4C40 1 50 7 60 4C70 1 80 7 90 4C100 1 110 7 120 4" stroke="#C65D3E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
       </svg>
 
-      <p style="color: var(--theme-text-secondary); font-size: var(--theme-text-xl); line-height: var(--theme-leading-relaxed); margin-top: var(--theme-space-3); max-width: 38rem;">
-        I lead a small design team at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>, making construction project management actually usable. Before that I was the founding designer at Blockdaemon and design lead at Gradle and Jet.com.
+      <p
+        class="font-heading"
+        style="color: var(--theme-text-primary); font-size: var(--theme-text-2xl); font-weight: 500; line-height: 1.25; letter-spacing: -0.015em; margin-top: var(--theme-space-3); max-width: 38rem;"
+      >
+        I design software for work that's already hard.
       </p>
 
-      <div class="flex gap-3" style="margin-top: var(--theme-space-4);">
-        <a
-          href="mailto:ari@zilnik.com"
-          class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
-          style="background-color: #2A5F4F; color: #ffffff; border-radius: 4px;"
-          data-goatcounter-click="contact-hero"
-        >
-          Get in touch
-        </a>
+      <p style="color: var(--theme-text-secondary); font-size: var(--theme-text-lg); line-height: var(--theme-leading-relaxed); margin-top: var(--theme-space-2); max-width: 38rem;">
+        I lead a small design team at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>, making construction project management actually usable. Before that, founding designer at <a href="https://www.blockdaemon.com/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Blockdaemon</a>, and design lead at <a href="https://gradle.com/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Gradle</a> and Jet.com.
+      </p>
+
+      <div class="flex flex-wrap gap-3" style="margin-top: var(--theme-space-4);">
         <a
           href="#work"
           class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
-          style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-secondary); border-radius: 4px;"
+          style="background-color: #2A5F4F; color: #ffffff; border-radius: 4px;"
+          data-goatcounter-click="see-work-hero"
         >
           See my work
+        </a>
+        <a
+          href="mailto:ari@zilnik.com"
+          class="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold transition-colors"
+          style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-primary); border-radius: 4px;"
+          data-goatcounter-click="contact-hero"
+        >
+          Get in touch
         </a>
       </div>
     </div>

@@ -1,9 +1,9 @@
 ---
-title: "Making blockchain infrastructure feel like a utility"
+title: "Node Deployment Flow"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Crypto Infrastructure"
-description: "Self-serve replaced a multi-week sales process. Treated blockchain node provisioning like a shopping cart."
+description: "Self-serve node deployment reframed as e-commerce checkout. Minutes instead of weeks. 23x usage growth."
 seoTitle: "Nodes Checkout at Blockdaemon"
 seoDescription: "Reframing blockchain node deployment as an e-commerce checkout at Blockdaemon. Self-serve replaced a multi-week sales cycle and drove 23x usage."
 heroImage: "./images/bd-checkout-hero.png"
@@ -43,14 +43,14 @@ We built a prototype and tested it. The wizard felt like a form to fill out, not
 
 ## What actually worked
 
-I reframed the flow as a purchase, not a configuration. Every screen reads like e-commerce. Pick your chain. Pick your tier. Review your order. Commit. DevOps engineers already live in procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier entirely.
+The reframe was about the metaphor. We replaced the wizard with a checkout — the same shape DevOps engineers already use to buy AWS or DigitalOcean instances every week. Each screen looks like e-commerce: a chain, a tier, an order summary, a commit button. None of it teaches the user how nodes work; it assumes they already know, and gets out of the way.
 
 <FullBleedImage
   src={bdCheckout01}
   alt="Blockdaemon Nodes checkout main screen with chain selection and configuration summary"
 />
 
-The shape is simple: chain selection, configuration, review, commit. Four steps, no branching, no "advanced options" drawer. Every blockchain has its own configuration shape, so the checkout only surfaces the fields relevant to the selected chain. Pick Ethereum and you see Ethereum options. Pick Solana and the form reshapes. Users don't need to learn the full matrix to get a sensible default.
+Underneath, the shape is four steps — chain, configuration, review, commit — without branching paths or an "advanced options" drawer to hide complexity in. Each chain has its own configuration shape, so the form reshapes itself to the chain you picked: choose Ethereum and you see only Ethereum options, choose Solana and the relevant fields slide in. New customers don't need to learn the full matrix before they can deploy something sensible.
 
 <FullBleedImage
   src={bdCheckout02}
@@ -59,7 +59,7 @@ The shape is simple: chain selection, configuration, review, commit. Four steps,
 
 ## The details that mattered
 
-**The review step.** Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. This was deliberate. In enterprise infrastructure, the person clicking "deploy" is often not the person paying the bill. Procurement needs a review screen they can screenshot and attach to an approval. A half-filled wizard form doesn't do that. A clean order summary does.
+**The review step.** In enterprise infrastructure, the person clicking "deploy" is rarely the person paying the bill — procurement needs something they can screenshot and attach to an approval ticket. Before committing, the user sees the cost, the full configuration, and the SLA Blockdaemon will stand behind. A half-filled wizard form doesn't survive that handoff; a clean order summary does.
 
 <FullBleedImage
   src={bdCheckout03}
@@ -73,7 +73,7 @@ The shape is simple: chain selection, configuration, review, commit. Four steps,
 
 ## Where it landed
 
-Usage grew 23x in the first year. DevOps teams went from opening support tickets to deploying in minutes. The enterprise conversation shifted from "how do we get you a node" to "how many nodes and which chains." Blockdaemon's growth stopped being linear in the sales team's capacity.
+Usage grew 23x in the first year. DevOps teams that used to file support tickets were deploying in minutes, and the enterprise conversation shifted away from "how do we get you a node" toward "how many, and which chains." Blockdaemon's growth was no longer bottlenecked by how fast a sales team could provision.
 
 The thing about the purchase metaphor: it made blockchain infrastructure boring. In the best possible way. You don't think about the complexity of spinning up an EC2 instance. You just buy one. That's what we did for nodes.
 

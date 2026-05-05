@@ -1,9 +1,9 @@
 ---
-title: "How killing the marketplace saved a customer half a million dollars"
+title: "AI Recommendation Engine"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
-description: "An AI recommendation engine for construction materials, born from a research pivot that happened two weeks into the project."
+description: "AI engine that surfaces cost-saving material alternatives inside construction estimates. Started as a marketplace; the pivot shipped in two months."
 seoTitle: "Ideas at Join"
 seoDescription: "An AI recommendation engine for construction estimates that surfaced $500K in savings for one Join customer in 30 days."
 heroImage: "./images/join-ideas-01.png"
@@ -41,13 +41,13 @@ The problem wasn't that estimators didn't want cheaper materials. The problem wa
 
 ## What we tried
 
-The marketplace. We had wireframes, we had a product brief, we had a CEO excited about a new revenue line. But customer interviews kept returning the same signal. Estimators don't comparison shop for construction materials the way you'd shop for headphones. They spec what they know. If a less experienced estimator specs a premium finish when a standard grade would meet the structural requirements, that knowledge gap compounds across every line item in every project. A catalog doesn't fix an awareness problem.
+The marketplace had wireframes, a product brief, and a CEO excited about a new revenue line — but customer interviews kept returning the same signal. Estimators don't comparison-shop for construction materials the way you'd shop for headphones; they spec what they know. When a less experienced estimator specs a premium finish where a standard grade would meet the structural requirements, that gap compounds across every line item in every project. A catalog wouldn't fix an awareness problem; the product had to find the savings on the estimator's behalf.
 
 I took on both design and an acting PM role at this point. The pivot happened fast because the research was unambiguous.
 
 ## What actually worked
 
-We killed the marketplace and built a recommendation engine instead. The AI scans an estimate and surfaces cheaper alternatives the estimator might not have considered. Not a catalog you browse. A system that finds you.
+We killed the marketplace and built a recommendation engine instead. The AI scans an estimate and surfaces cheaper alternatives the estimator wouldn't otherwise have considered — the system does the searching and brings answers to the estimator's existing workflow, instead of waiting for them to go shopping for it.
 
 The shape of the product is three layers: the AI generates suggestions, a materials researcher validates them, and the estimator makes the final call. Nothing gets auto-applied.
 
@@ -62,7 +62,7 @@ Suggestions show up as contextual carousels ranked by cost-saving potential. Eac
 
 **The human review layer.** These suggestions affect real buildings and real budgets. The AI will be wrong sometimes, so Kyle, our materials researcher, validates every suggestion before it reaches an estimator. The model is a first-draft engine, not a source of truth. I used AI-coded prototypes to test card density with real estimate data before engineering built anything.
 
-Each card shows UniFormat and MasterFormat classification codes. In our interviews, estimators told us these were non-negotiable for trust. Without them, the card is just a stranger's opinion. With them, it's a peer recommendation with receipts.
+Each card surfaces the UniFormat and MasterFormat classification codes for the suggested material. In interviews, estimators flagged this directly: without those codes the card is a stranger's opinion, but with them attached the card reads as a peer recommendation with receipts. Skipping the codes would have meant losing the audience before the suggestion got read.
 
 <FullBleedImage
   src={joinIdeas04}

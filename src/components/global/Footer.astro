@@ -2,16 +2,18 @@
 /**
  * Footer — CTA section and social links at the bottom of every page.
  *
- * Warm Signal: two-column layout with Fraunces heading, green accent
- * CTA button, warm dark brown background.
+ * Refined Warm Signal: shares the warm-sand body background instead of the
+ * heavy brown that was reading as a different surface entirely. Subtle
+ * divider line keeps it visually distinct from the work grid above.
  */
 ---
 
 <footer
   style="
-    background-color: #2A2520;
-    color: #EDE8E0;
+    background-color: var(--theme-bg-primary);
+    color: var(--theme-text-primary);
     margin-top: var(--theme-space-7);
+    border-top: 1px solid var(--theme-border);
   "
 >
   <div
@@ -59,7 +61,7 @@
             target="_blank"
             rel="noopener noreferrer"
             class="transition-colors hover:underline"
-            style="color: #EDE8E0;"
+            style="color: var(--theme-text-secondary);"
             data-goatcounter-click="linkedin-footer"
           >
             LinkedIn
@@ -69,14 +71,14 @@
             target="_blank"
             rel="noopener noreferrer"
             class="transition-colors hover:underline"
-            style="color: #EDE8E0;"
+            style="color: var(--theme-text-secondary);"
             data-goatcounter-click="github-footer"
           >
             GitHub
           </a>
         </div>
 
-        <p style="color: #8A8580;">
+        <p style="color: var(--theme-text-tertiary);">
           Toronto, Canada
         </p>
       </div>
@@ -86,10 +88,10 @@
     <p
       class="text-xs"
       style="
-        color: #8A8580;
+        color: var(--theme-text-tertiary);
         margin-top: 4rem;
         padding-top: 2rem;
-        border-top: 1px solid rgba(255,255,255,0.08);
+        border-top: 1px solid var(--theme-border);
       "
     >
       &copy; {new Date().getFullYear()} Ari Zilnik
