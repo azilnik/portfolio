@@ -28,3 +28,6 @@ pnpm-debug.log*
 .opencode/
 .mcp.json
 CLAUDE.md
+
+# Pangram AI-detection script output (local only)
+scripts/.ai-detect-output/
