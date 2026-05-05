@@ -31,3 +31,6 @@ CLAUDE.md
 
 # Pangram AI-detection script output (local only)
 scripts/.ai-detect-output/
+
+# agent-generated reports (raw Pangram output, audit reports)
+analysis/

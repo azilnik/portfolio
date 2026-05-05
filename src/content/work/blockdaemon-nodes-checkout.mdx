@@ -31,7 +31,7 @@ Blockdaemon is like AWS for crypto. I joined as the founding designer after Bloc
 
 Nodes Checkout is a self-serve purchase flow for blockchain node deployment. Before it, deploying a node meant filing a support ticket and waiting on a sales cycle that ran days to weeks and burned engineering time per customer. The checkout collapses that into minutes.
 
-The original concept was a configuration wizard. Customers associated wizards with forms to fill out, not decisions to make. Reframing the flow as a purchase let the self-serve pattern land without instruction. The shape was simple: chain selection, configuration, review, commit.
+The original concept was a configuration wizard. The problem: customers read "wizard" as "more forms," not "make a decision." Reframing the flow as a checkout fixed that — DevOps engineers already know how to check out. Same four steps as any cart: pick a chain, configure, review, deploy.
 
 ## Purchase metaphor at every step
 
@@ -44,7 +44,7 @@ Every screen reads like e-commerce, not a configuration wizard. DevOps engineers
 
 ## Chain-aware progressive disclosure
 
-Every blockchain has its own configuration shape. The checkout only surfaces the fields relevant to the selected chain. Users don't need to learn the full matrix to get a sensible default.
+Solana, Ethereum, and Polkadot don't share a config schema. The checkout hides everything except what the selected chain actually needs, with smart defaults pre-filled. A user never sees the full matrix — they see the form for the chain they picked.
 
 <FullBleedImage
   src={bdCheckout02}
