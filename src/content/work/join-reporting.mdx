@@ -1,0 +1,91 @@
+---
+title: "Rebuilding Join's reporting platform: reports as primitives every feature plugs into"
+company: "Join"
+role: "Head of Design"
+industry: "Construction"
+description: "Customers spent 5–10 hrs/week stitching Join PDFs into owner packets. The reframe: exports as a first-class surface, not a downstream artifact."
+heroImage: "./images/join-reporting-hero.png"
+thumbnail: "./images/join-reporting-hero.png"
+thumbnailAlt: "Join Items Report prototype: AG Grid working view with four donut summary widgets and the items list below"
+employer: "join"
+sortOrder: 0
+draft: false
+metrics:
+  - label: "Hours per week customer teams spent stitching PDF packets before"
+    value: "5–10"
+  - label: "Validated customer requests addressed in the prototype"
+    value: "Top 20"
+  - label: "PRs landed in roughly two months, AI-coded against real data"
+    value: "~25"
+---
+
+import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
+import Credits from "../../components/mdx/Credits.astro";
+
+import joinReportingHero from "./images/join-reporting-hero.png";
+import joinReportingGrouped from "./images/join-reporting-grouped.png";
+import joinReportingPdfGrid from "./images/join-reporting-pdf-grid.png";
+import joinReportingPdfCover from "./images/join-reporting-pdf-cover.png";
+import joinReportingMilestone from "./images/join-reporting-milestone.png";
+
+Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+
+Reports are how precon teams earn an owner's trust. The Items Report is the working surface where decisions, costs, and status get filtered into the packet that lands in front of an owner on a Friday. Webcor, Leopardo, and McCarthy were spending 5 to 10 hours a week exporting from Join, then stitching PDFs together in Bluebeam to build one coherent submission. Skilled Preconstruction Managers were reverting to Excel macros. Customers told us the Report Builder was too limited for complex projects and too complicated for non-technical ones.
+
+The reframe was sharp: reports are not a downstream artifact, they're a primitive every Join feature has to plug into.
+
+<FullBleedImage
+  src={joinReportingHero}
+  alt="Items Report working view with four donut summary widgets (Items, Past Due, Assignees, Companies) over the items list with status, assignee, due date, cost and schedule impact columns"
+  caption="The Items Report working surface — summary widgets up top, AG Grid below."
+/>
+
+## Two libraries, two jobs
+
+AG Grid Enterprise drives the on-screen working view — filter, sort, group, pin, resize before anyone exports anything. For the export side I picked @react-pdf/renderer (a React component model with real typographic control) so a designer-built primitive could live in both places without a translation layer. Both consume the same data shape, so what you arrange in the grid is what comes out the other side. The reason this lives in code and not Figma is mundane: Figma can't run AG Grid, and the prototype had to feel like a live product to be worth showing customers.
+
+<FullBleedImage
+  src={joinReportingGrouped}
+  alt="Items Report grouped by Status — Pending (6 items, $1,490,000), Accepted (1 item, $400,000), Rejected (2 items, -$65,000) — with subtotals on the group rows and the same four donut summary widgets above"
+  caption="Group by Status: subtotals roll up, summary widgets stay live, and this exact arrangement carries straight to the PDF."
+/>
+
+## Parity across interfaces
+
+The harder design problem was making the PDF feel like Join, not like a generic export. I rebuilt our Scales primitives inside react-pdf — PDFTable, PDFScalesDonutChart, a thin set of pdfTokens — so the PDF could inherit the same type ramp and chart language as the web. The first time I saw a 14-page PDF render with the right donut colors and a filter bar locked to every header, I knew the design-system bet was real. Whatever you arranged in the grid (group-bys, filters, sort order) carried through to the export, which is the moment the PDF stopped being a degraded snapshot of the screen and started feeling as considered as the screen itself.
+
+<FullBleedImage
+  src={joinReportingPdfGrid}
+  alt="Page 3 of the exported PDF showing the items list grouped by Status — Pending, Accepted, Rejected — with the same subtotals, columns, and Scales chart language as the working view, plus a header reading 'Grouping: Status, Sort: Item'"
+  caption="The PDF page that follows the cover. Same grouping, same subtotals, same chart language as the screen."
+/>
+
+## The viewing-medium reframe
+
+I started this thinking PDFs would be printed. Letter, A4, 11x17 — I designed page layouts accordingly. Garrett flipped it in a customer call: PDFs are never printed. They're viewed on desktop, often inside 500-page submission packets. Dynamic page sizing emerged as the number one customer ask. The "Generated by Join" footer got cut the same week — customers have strict branding rules and this is their packet, not ours. One conversation reshaped the entire page-size question.
+
+<FullBleedImage
+  src={joinReportingPdfCover}
+  alt="The PDF cover page showing the customer's three logos (Meridian Construction, Atlas Engineering, Greenfield Partners), the project hero photo, and 'Items Report' as the title — with Join's export dialog still visible on the right"
+  caption="The cover page belongs to the customer, not to Join. Their logos, their project, no Join footer."
+/>
+
+## Results
+
+About 25 PRs over two months, AI-coded against real anonymized customer data. The top 20 validated customer requests landed in the prototype, and we put a fresh build on Drew's desk every Monday — that cadence is what got the cross-functional team aligned on reports as primitives. Risks and Buyout reports now plug into the same standard, and that's the part I'm proudest of: the next person designing a report at Join doesn't start from zero.
+
+<FullBleedImage
+  src={joinReportingMilestone}
+  alt="Milestone Report screen using the same grid pattern as Items — Category, Description, Status, Quantity, Unit columns, with rows grouped under A Substructure → A10 Foundations and a running Total at the bottom"
+  caption="Milestone Report — same primitives, different data type."
+/>
+
+<Credits
+  credits={[
+    { role: "Design", people: "Ari Zilnik" },
+    { role: "Product", people: "Drew DeWalt", url: "https://www.linkedin.com/in/drewdewalt/" },
+    { role: "Design", people: "Connie Chen" },
+    { role: "Design", people: "Shea Williams" },
+  ]}
+  note="In flight at Join, 2026."
+/>
