@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "ai-detect": "tsx scripts/ai-detect.ts",
+    "seo-check": "tsx scripts/seo-check.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -15,5 +17,10 @@
     "astro": "^5.17.1",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
   }
 }
