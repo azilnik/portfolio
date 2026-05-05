@@ -225,7 +225,12 @@ const testimonials = await getCollection("testimonials");
     const goTo = (index: number) => {
       const target = slides[((index % total) + total) % total];
       if (!target) return;
-      target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      // Scroll the rail horizontally only — never the document. Computing
+      // the slide's left offset relative to the rail avoids scrollIntoView,
+      // which would jump the page vertically when the carousel is partway
+      // off-screen.
+      const left = target.offsetLeft - rail.offsetLeft;
+      rail.scrollTo({ left, behavior: reduced ? "auto" : "smooth" });
       setActive(index);
     };
 
