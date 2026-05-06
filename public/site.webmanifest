@@ -4,8 +4,8 @@
   "description": "Ari Zilnik — Head of Design at Join. Products, teams, and systems in construction, fintech, and developer tools.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#faf8f5",
-  "theme_color": "#faf8f5",
+  "background_color": "#F2EDE6",
+  "theme_color": "#F2EDE6",
   "icons": [
     {
       "src": "/favicon.svg",

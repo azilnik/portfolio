@@ -16,7 +16,7 @@ import sharp from 'sharp';
 
 const W = 1200;
 const H = 630;
-const BG = { r: 250, g: 248, b: 245, alpha: 1 }; // #faf8f5 — site bg
+const BG = { r: 242, g: 237, b: 230, alpha: 1 }; // #F2EDE6 — site bg (--theme-bg)
 
 // Avatar block — rounded square, left-aligned.
 const AVATAR_SIZE = 320;
