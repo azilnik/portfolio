@@ -50,23 +50,26 @@ const { label = "Impact" } = Astro.props;
     padding: var(--theme-space-2) 0 var(--theme-space-2) var(--theme-space-3);
     border-left: 3px solid var(--theme-accent);
     font-size: var(--theme-text-lg);
-    line-height: var(--theme-leading-snug);
+    line-height: var(--theme-lh-lg);
     color: var(--theme-text-primary);
     font-weight: var(--theme-weight-medium);
   "
 >
   {/* Small uppercase label — signals this is a standout impact line,
-      not body prose. Colored to match the accent border. */}
+      not body prose. Colored to match the accent border. The 8px
+      padding-top centers the 16px label leading inside the 32px body
+      leading so both rest on the same baseline. */}
   <span
     aria-hidden="true"
     style="
       flex-shrink: 0;
       font-size: var(--theme-text-xs);
+      line-height: var(--theme-lh-xs);
       font-weight: var(--theme-weight-semibold);
       text-transform: uppercase;
       letter-spacing: var(--theme-tracking-wider);
       color: var(--theme-accent);
-      padding-top: 0.25rem;
+      padding-top: var(--theme-space-1);
     "
   >
     {label}

@@ -24,10 +24,15 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav class={className}>
-  <ul class:list={[
-    "flex gap-6",
-    vertical ? "flex-col gap-8 text-2xl" : "flex-row items-center text-sm",
-  ]}>
+  <ul
+    class:list={[
+      "flex gap-6",
+      vertical ? "flex-col gap-8 text-2xl" : "flex-row items-center text-sm",
+    ]}
+    style={vertical
+      ? "line-height: var(--theme-lh-2xl);"
+      : "line-height: var(--theme-lh-sm);"}
+  >
     {navLinks.map((link) => {
       // A link is "active" if the current path starts with the link's href.
       // Exception: "/" would match everything, so we only mark it active on exact match.

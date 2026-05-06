@@ -24,7 +24,7 @@ import PageLayout from "../layouts/PageLayout.astro";
         color: var(--theme-border-strong);
         font-size: var(--theme-text-6xl);
         font-weight: var(--theme-weight-heading);
-        line-height: 1;
+        line-height: var(--theme-lh-6xl);
       "
     >
       404
@@ -35,6 +35,7 @@ import PageLayout from "../layouts/PageLayout.astro";
         color: var(--theme-text-primary);
         font-weight: var(--theme-weight-heading);
         font-size: var(--theme-text-2xl);
+        line-height: var(--theme-lh-2xl);
         margin-top: var(--theme-space-3);
       "
     >
@@ -44,6 +45,7 @@ import PageLayout from "../layouts/PageLayout.astro";
       style="
         color: var(--theme-text-secondary);
         font-size: var(--theme-text-lg);
+        line-height: var(--theme-lh-lg);
         margin-top: var(--theme-space-2);
       "
     >
@@ -51,7 +53,7 @@ import PageLayout from "../layouts/PageLayout.astro";
     </p>
     <a
       href="/"
-      class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
+      class="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold transition-colors"
       style="
         background-color: var(--theme-text-primary);
         color: var(--theme-bg);

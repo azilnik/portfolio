@@ -146,10 +146,11 @@ const jsonLd = [
             bottom margin matches the work/about page eyebrows (space-2)
             so the h1 lands at the same y-position across pages. */}
         <div
-          class="flex flex-wrap items-center gap-x-6 gap-y-1 text-xs font-medium uppercase"
+          class="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium uppercase"
           style="
             color: var(--theme-text-tertiary);
             letter-spacing: var(--theme-tracking-wider);
+            line-height: var(--theme-lh-xs);
             margin-bottom: var(--theme-space-2);
           "
         >
@@ -160,16 +161,17 @@ const jsonLd = [
           <span>{role}</span>
         </div>
 
-        {/* Editorial title — sized from --theme-text-5xl which is a clamp()
-            so it scales fluidly from ~40px on mobile to ~52px on desktop.
-            No separate md:text-6xl override needed. */}
+        {/* Editorial title — sized from --theme-text-5xl, which steps from
+            40 → 48 ≥ 768 → 56 ≥ 1024 so the rendered px stays on the 8px
+            grid at every viewport. Line-height stays paired so the title
+            never breaks rhythm. */}
         <h1
           class="font-heading"
           style="
             color: var(--theme-text-primary);
             font-weight: var(--theme-weight-heading);
             letter-spacing: var(--theme-tracking-tight);
-            line-height: var(--theme-leading-tight);
+            line-height: var(--theme-lh-5xl);
             font-size: var(--theme-text-5xl);
             max-width: 18ch;
           "
