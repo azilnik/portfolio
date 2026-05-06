@@ -84,7 +84,9 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0059ff" />
+    {/* Safari pinned-tab tint — match the forest-green --theme-accent so a
+        pinned tab renders in brand color, not the leftover scaffold blue. */}
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2A5F4F" />
     <link rel="manifest" href="/site.webmanifest" />
 
     {/* Preload self-hosted fonts */}
@@ -128,7 +130,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     <GoatCounter />
   </head>
 
-  <body class="min-h-screen antialiased">
+  <body class="min-h-dvh antialiased">
     <slot />
   </body>
 </html>
