@@ -27,13 +27,11 @@ import Callout from "../../components/mdx/Callout.astro";
 
 import hoodDashboard from "./images/hood-vent-dashboard.png";
 
-Gas stoves emit real pollutants, and the mitigation is simple: turn on your hood when you cook. The problem is that most people forget. I have two small kids and have read too many air quality studies, so I automated my range hood.
+Gas stoves are bad for you. Turn the hood on when you cook and you're mostly fine. Nobody remembers. I have two kids and have read too many air quality studies, so I automated my range hood.
 
-Most smart hood automations watch for a temperature threshold — "when the kitchen reaches 26 degrees, turn on the hood." That approach has two problems. It's slow: by the time the kitchen heats up, you've already been cooking for 5 to 10 minutes and breathing the pollutants the hood was supposed to remove. And on a hot summer day the kitchen is already at 28 degrees, so the system either fires without a stove or needs seasonal recalibration.
+The usual approach is a temperature threshold — "kitchen hits 26°C, run the hood." It doesn't work for me. By the time the room actually warms up you've already cooked through ten minutes of fumes, and in summer my kitchen sits at 28°C before I've even opened the fridge. So the thing fires when nobody's cooking, or it needs me to come back twice a year and rejig the number.
 
-Rate-of-change detection asks a different question. Instead of "is it hot?" it asks "is it getting hotter?" — and that catches cooking within 30 to 60 seconds without false triggers on warm days.
-
-When you turn on a burner, the air near the stove starts rising in temperature immediately. The derivative of the reading over a rolling two-minute window spikes almost as soon as the pan heats. When you stop cooking, the rate flattens and the hood shuts off. Hot days don't cause false triggers because the temperature is high but not changing fast.
+I went with rate of change instead. Not "is it hot?" but "is it getting hotter, fast?" Turn on a burner and the air over the stove climbs hard within seconds. The derivative over a two-minute window spikes well before any threshold would. Stop cooking and the curve flattens out, the hood shuts down. A warm afternoon doesn't trip it because hot ≠ getting hotter.
 
 <FullBleedImage
   src={hoodDashboard}
@@ -43,9 +41,9 @@ When you turn on a burner, the air near the stove starts rising in temperature i
 
 ## The product
 
-The automation watches both temperature and humidity rate of change. Temperature catches most cooking, and humidity catches the boiling-water case where steam arrives before heat.
+The automation watches temperature and humidity rate of change. Temperature handles most cooking. Humidity is for the pasta-water case, where steam shows up before heat.
 
-Every sensitivity setting is a slider on the dashboard, so anyone using this can tune it without editing YAML. That's the difference between a project that works for me and one that works in someone else's kitchen. Toggle the hood by hand and the automation backs off for 30 minutes — the system supports the cook, it doesn't fight them. After two hours of continuous run, the hood forces off and posts a notification, in case I left a pot on the stove and walked out the door.
+Every threshold is a slider on the dashboard, so a partner or friend can tune it without touching YAML. That's the line between something that works for me and something that works in someone else's kitchen. If you flip the hood by hand, the automation backs off for half an hour — it should help me cook, not fight me. After two hours of continuous run it shuts itself off and pings my phone, in case I left a pot on and walked the kids to the park.
 
 <FullBleedGif
   src="/videos/hood-vent-demo.gif"
@@ -53,8 +51,8 @@ Every sensitivity setting is a slider on the dashboard, so anyone using this can
   caption="Cooking starts. The hood is on before I've finished adjusting the flame."
 />
 
-Total cost is about $85: a Zigbee sensor (~$15) and a SwitchBot Bot plus Hub Mini (~$70). No cloud, no subscriptions, no rewiring. Everything runs on the local Home Assistant instance.
+About $85 in parts: a $15 Zigbee sensor, a SwitchBot Bot and Hub Mini for around $70. No cloud account, no subscription, no rewiring the range hood. Everything runs on my local Home Assistant box.
 
-I described the rate-of-change idea to Claude Code and it generated the YAML scaffold. I read every line, pushed back on the over-engineered parts, and deployed. The thresholds needed a human and a stove — I ran real cooking sessions and tuned until false triggers hit near zero.
+I handed the rate-of-change idea to Claude Code and got back a YAML scaffold. I read every line, ripped out the over-engineered bits, and shipped it. Thresholds need a stove and a person — I cooked dinner a few dozen times and nudged the numbers until false positives were basically gone.
 
-The automation has held up through more than a year of daily cooking. The repo is public under MIT.
+It's been running for over a year. The repo is public under MIT.

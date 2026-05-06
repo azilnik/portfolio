@@ -29,11 +29,11 @@ import joinNav05 from "./images/join-nav-05.png";
 
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-The new navigation rebuilds Join's structure around projects. The old nav had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was fielding "how do I get to X" tickets, and usability sessions confirmed that users couldn't describe Join's structure in the product's own terms — they described it in terms of projects. We rebuilt around that mental model and collapsed the path between any feature and the portfolio overview to two clicks.
+After four years of growing a feature at a time, our nav had labels in it that no customer ever used out loud. CS would forward me yet another "how do I get to X" ticket on the regular. I spent a few weeks in usability sessions asking customers to describe Join back to us in their own words. Not one of them used our labels. Everyone talked about a project, what phase it was in, who they were chasing for an answer. So we threw out the IA and rebuilt the whole nav around the words they were using. The portfolio sits up top. A project is the unit underneath. Any deep view is two clicks away from the portfolio in either direction.
 
 ## Projects as the top-level unit
 
-The nav is the portfolio, then the project you're working in. Features sit under the project, sequenced by phase — preconstruction features when the project's preconstruction, change-management features when it's in build.
+The portfolio is the entry point. Click into it and you're inside a project. Features hang off the project and reorder themselves based on the phase of work — precon stuff comes up first while the project is in precon, RFIs and change orders come up first once the project moves into build. We pull the phase signal off the project itself, so a PM doesn't have to find a setting to flip when the work shifts under them.
 
 <FullBleedImage
   src={joinNav02}
@@ -42,7 +42,7 @@ The nav is the portfolio, then the project you're working in. Features sit under
 
 ## A two-click zoom
 
-Two clicks down from the portfolio to any view inside a project, two clicks back out. The path is the same length in both directions, which made the zoom-out predictable for users who'd previously gotten lost coming back up.
+From the portfolio, you're two clicks away from any view inside a project, and the same two clicks back. Zooming in had always worked fine. The trip back up the hierarchy was where people got stuck — it used to mean hunting through a nav that had grown by accretion. Once both directions took the same number of clicks, the complaint mostly stopped showing up.
 
 <FullBleedImage
   src={joinNav03}
@@ -51,7 +51,7 @@ Two clicks down from the portfolio to any view inside a project, two clicks back
 
 ## Features in their work context
 
-When a project manager opens a project mid-build, the nav surfaces change orders and RFIs at the top rather than burying them under preconstruction tools used six months ago. Features appear in the context of the work that uses them.
+When a PM opens a project that's already in build, the nav shows them change orders and RFIs at the top, and the estimating tools they last touched six months ago aren't anywhere they have to scroll past. The right feature surfaces wherever the work is happening, not in the order we happened to ship things over the past four years.
 
 <FullBleedImage
   src={joinNav04}
@@ -65,7 +65,7 @@ When a project manager opens a project mid-build, the nav surfaces change orders
 
 ## Results
 
-Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had been in the old nav technically, but the path back in wasn't clear, so it sat unused.
+Navigation tickets dropped 32% after we launched. As an unexpected bonus, customers started using the org-level portfolio views for the first time, even though those views had been in the product the whole time. The way back into a specific project from up there had been a guessing game in the old nav, so most people had just stopped going up to the org level.
 
 > "The team at Join is very brave for tackling this kind of UX issue."
 

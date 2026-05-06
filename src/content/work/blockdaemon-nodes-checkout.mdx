@@ -27,13 +27,13 @@ import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
-Blockdaemon is like AWS for crypto. I joined the Blockdaemon team as the founding designer after [Blockdaemon acquired my consultancy, Gravy](https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy).
+Blockdaemon is like AWS for crypto. I joined as the founding designer after [Blockdaemon acquired my consultancy, Gravy](https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy).
 
-Nodes Checkout is a self-serve purchase flow. Our goal was to enable teams to deploy blockchain nodes as easily as spinning up an AWS server. Before this, deploying a node meant filing a support ticket and waiting through a sales cycle that ran from days to weeks, burning engineering time per customer. This checkout works in minutes.
+Nodes Checkout is a self-serve purchase flow. The goal: deploy a blockchain node as easily as you'd spin up an AWS server. Before this, customers filed a support ticket and waited days or weeks while sales handled it. The new flow works in minutes.
 
 ## Purchase metaphor at every step
 
-Every screen reads like a Shopify e-commerce experience, not a server configuration wizard. We made sure we mapped node deployment to procurement flows to align with our users' mental model.
+Every screen reads like Shopify, not a server config wizard. Node deployment maps to a procurement flow because that's how our users were already buying infrastructure.
 
 <FullBleedImage
   src={bdCheckout01}
@@ -42,7 +42,7 @@ Every screen reads like a Shopify e-commerce experience, not a server configurat
 
 ## Chain-aware progressive disclosure
 
-Bitcoin, Ethereum, and Solana don't share a config schema. The checkout hides everything except what the selected chain actually needs, with smart defaults pre-filled. A user never sees the full matrix; they are guided through a tailored experience for the specific chain they picked.
+Bitcoin, Ethereum, and Solana don't share a config schema. The checkout hides everything except what your chain actually needs and pre-fills smart defaults. You only see what matters for the chain you picked.
 
 <FullBleedImage
   src={bdCheckout02}
@@ -51,7 +51,7 @@ Bitcoin, Ethereum, and Solana don't share a config schema. The checkout hides ev
 
 ## Confirming user intent
 
-Before committing to a purchase, the user sees the cost, configuration, and the SLA that Blockdaemon stands behind. This little detail gave teams the confidence they were purchasing the right product for themselves, resulting in fewer support tickets after nodes were deployed.
+Before checkout, you see the cost, configuration, and the SLA Blockdaemon stands behind. That detail gave teams confidence they were buying the right thing — and meant fewer support tickets once nodes were live.
 
 <FullBleedImage
   src={bdCheckout03}
@@ -65,7 +65,7 @@ Before committing to a purchase, the user sees the cost, configuration, and the 
 
 ## Results
 
-Usage grew 23x within the first year of this redesign. DevOps teams went from opening support tickets weekly to deploying in minutes.
+Usage grew 23x in the first year. DevOps teams went from weekly support tickets to deploying nodes in minutes.
 
 <Credits
   credits={[

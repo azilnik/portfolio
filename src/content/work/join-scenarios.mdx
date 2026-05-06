@@ -29,11 +29,11 @@ import joinScenarios03 from "./images/join-scenarios-03.png";
 
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation; they decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to evaluate one decision at a time, which didn't match how owners actually weighed options. Real decisions are made on bundled packages — finishes, schedule, scope — against each other.
+Scenarios is a side-by-side comparison view for big project calls inside Join. The thing that pushed me to design it was sitting in on an actual owner sign-off meeting last spring. A contractor stood at the front of the room walking an owner through forty individual line-item decisions back-to-back, and somewhere around item fifteen the owner had visibly checked out. Nobody on a real construction project picks a countertop in a vacuum. They pick a finish package, kitchens and baths bundled, and weigh it against the schedule and the GMP. Owners decide on bundles, and Join's old flow was making them do it one line at a time.
 
 ## Decisions as packages
 
-A contractor builds two options — say, premium finishes on a compressed schedule against a value-engineered version that stretches the timeline. Join recalculates every linked line item underneath, and the owner reviews two packages instead of forty individual decisions.
+A contractor builds two versions of the project. Maybe one of them is premium finishes on a compressed schedule, and the other is value-engineered and runs a few extra weeks. Join recalculates every linked line item underneath both, so what's actually in front of the owner in the meeting is two coherent packages and not forty stacked-up decisions.
 
 <FullBleedImage
   src={joinScenarios01}
@@ -48,7 +48,7 @@ A contractor builds two options — say, premium finishes on a compressed schedu
 
 ## A flat comparison, no ranking
 
-The hardest design decision was about hierarchy. Owners on multi-million-dollar projects didn't want to be steered toward a "best" option; they wanted to weigh trade-offs themselves. We made the comparison deliberately flat — every dimension visible, no option marked as preferred.
+Hierarchy was the hardest call in the design. My first comp had a "recommended" pill next to one of the two options. It seemed fine to me at the time, but every customer we showed it to bristled at it. Owners running multi-hundred-million-dollar jobs aren't looking for a product to nudge them toward an answer. They want to be the ones doing the weighing. So I yanked the ranking out. Both options sit at the same level on the screen now, every dimension is visible alongside, and no option ever carries a star or a badge.
 
 <FullBleedImage
   src={joinScenarios02}
@@ -63,7 +63,7 @@ The hardest design decision was about hierarchy. Owners on multi-million-dollar 
 
 ## Progressive disclosure
 
-The default view is intentionally lean — users click into specific dimensions when they need detail. The owner-facing read stays calm for sign-off meetings while the contractor side keeps the richer working data for internal use.
+The default view is intentionally light, since an owner needs to be able to read it across a conference room screen during a sign-off. Click into any specific dimension and you get the detail behind it. The contractor view, the one a team actually uses internally to build the scenarios in the first place, keeps the richer working data underneath. Same comparison, just two different reads of it.
 
 <FullBleedImage
   src={joinScenarios03}
@@ -78,7 +78,7 @@ The default view is intentionally lean — users click into specific dimensions 
 
 ## Results
 
-The scenario-decision cycle dropped 50%, measured from creation through owner sign-off. Architects accounted for 20% of Scenarios users — a segment Join hadn't been designing for. The comparison view matched how they presented design options to their own clients, and they found the feature on their own.
+Cycle time on a scenario decision fell 50%, measured from the moment a contractor builds a scenario in Join to the moment an owner signs off on one of them. The unexpected thing was that architects ended up making up 20% of Scenarios users — not a segment we'd designed for, and not one we'd been watching. The side-by-side just happened to match how an architect already pitches design options to their own clients, and they ended up using the feature way earlier in the project than we'd ever planned for.
 
 > "This is like a happy meal for decision making. Everything you need, all in one place."
 

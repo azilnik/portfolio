@@ -32,13 +32,13 @@ import joinIdeas04 from "./images/join-ideas-04.png";
 
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-Ideas is an AI recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A less experienced estimator might spec a finish at full cost when a substitute would do the same job for half, and that knowledge gap compounds across every line item in every project. Ideas surfaces those substitutions automatically.
+Ideas is an AI recommendation engine for construction estimates. It surfaces cost-saving material alternatives — a junior estimator might spec a finish at full cost when a substitute does the same job for half, and that gap compounds across every line item in every project. Ideas catches the substitutions automatically.
 
-The original plan was a materials marketplace. Customer interviews moved us off that direction — estimators didn't know what alternatives existed, so they wouldn't browse a catalog on their own. I took on both design and an acting PM role, pivoted the concept to a recommendation engine, and we shipped in two months.
+The original plan was a materials marketplace. Customer interviews killed it: estimators didn't know what alternatives existed, so they'd never think to browse a catalog. I took design and acting PM, pivoted to a recommendation engine, and we shipped in two months.
 
 ## Suggestion carousels
 
-AI-generated suggestions appear as contextual carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase, so estimators see relevant options without searching.
+AI suggestions appear as carousels ranked by cost savings. Each one groups alternatives by where they show up in the estimate and by construction phase, so relevant options surface without anyone searching.
 
 <FullBleedImage
   src={joinIdeas02}
@@ -47,9 +47,9 @@ AI-generated suggestions appear as contextual carousels ranked by cost-saving po
 
 ## Human review layer
 
-These suggestions affect real buildings and real budgets, so a materials researcher validates every suggestion before it reaches an estimator. The model is advisory, not authoritative.
+These affect real buildings and real budgets, so a materials researcher validates every suggestion before it reaches an estimator. The model is advisory, not authoritative.
 
-We used AI-coded prototypes to test card density with real estimate data before engineering built anything. Each card shows UniFormat and MasterFormat classification codes — estimators told us in interviews these were non-negotiable for trust.
+We used AI-coded prototypes to test card density with real estimate data before engineering built anything. Each card shows UniFormat and MasterFormat classification codes — estimators told us those were non-negotiable for trust.
 
 <FullBleedImage
   src={joinIdeas04}
@@ -58,7 +58,7 @@ We used AI-coded prototypes to test card density with real estimate data before 
 
 ## Forced comparison
 
-Every recommendation has to be weighed against alternatives before an estimator can accept it. Suggestions are surfaced by the model, but the decision sits with the estimator and nothing gets auto-applied.
+Estimators have to weigh every recommendation against alternatives before accepting. The model surfaces suggestions; the decision sits with the estimator. Nothing auto-applies.
 
 <FullBleedImage
   src={joinIdeas03}
