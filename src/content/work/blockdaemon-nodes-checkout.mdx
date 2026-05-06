@@ -1,9 +1,9 @@
 ---
-title: "How reframing node deployment as a purchase flow drove 23x usage"
+title: "Node Deployment Flow"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Crypto Infrastructure"
-description: "Replacing a multi-week sales cycle."
+description: "Node deployment as e-commerce checkout. Minutes, not weeks. 23x usage growth."
 seoTitle: "Nodes Checkout at Blockdaemon"
 seoDescription: "Reframing blockchain node deployment as an e-commerce checkout at Blockdaemon. Self-serve replaced a multi-week sales cycle and drove 23x usage."
 heroImage: "./images/bd-checkout-hero.png"
@@ -27,15 +27,13 @@ import bdCheckout02 from "./images/bd-checkout-02.png";
 import bdCheckout03 from "./images/bd-checkout-03.png";
 import bdCheckout04 from "./images/bd-checkout-04.png";
 
-Blockdaemon is like AWS for crypto. I joined as the founding designer after Blockdaemon acquired my consultancy. The checkout was my first real product.
+Blockdaemon is like AWS for crypto. I joined the Blockdaemon team as the founding designer after [Blockdaemon acquired my consultancy, Gravy](https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy).
 
-Nodes Checkout is a self-serve purchase flow for blockchain node deployment. Before it, deploying a node meant filing a support ticket and waiting on a sales cycle that ran days to weeks and burned engineering time per customer. The checkout collapses that into minutes.
-
-The original concept was a configuration wizard. The problem: customers read "wizard" as "more forms," not "make a decision." Reframing the flow as a checkout fixed that — DevOps engineers already know how to check out. Same four steps as any cart: pick a chain, configure, review, deploy.
+Nodes Checkout is a self-serve purchase flow. Our goal was to enable teams to deploy blockchain nodes as easily as spinning up an AWS server. Before this, deploying a node meant filing a support ticket and waiting through a sales cycle that ran from days to weeks, burning engineering time per customer. This checkout works in minutes.
 
 ## Purchase metaphor at every step
 
-Every screen reads like e-commerce, not a configuration wizard. DevOps engineers are used to procurement flows at their own companies. Mapping node deployment to that mental model removed the instruction barrier.
+Every screen reads like a Shopify e-commerce experience, not a server configuration wizard. We made sure we mapped node deployment to procurement flows to align with our users' mental model.
 
 <FullBleedImage
   src={bdCheckout01}
@@ -44,16 +42,16 @@ Every screen reads like e-commerce, not a configuration wizard. DevOps engineers
 
 ## Chain-aware progressive disclosure
 
-Solana, Ethereum, and Polkadot don't share a config schema. The checkout hides everything except what the selected chain actually needs, with smart defaults pre-filled. A user never sees the full matrix — they see the form for the chain they picked.
+Bitcoin, Ethereum, and Solana don't share a config schema. The checkout hides everything except what the selected chain actually needs, with smart defaults pre-filled. A user never sees the full matrix; they are guided through a tailored experience for the specific chain they picked.
 
 <FullBleedImage
   src={bdCheckout02}
   alt="Chain selection and network tier view inside the Blockdaemon checkout"
 />
 
-## A review step that earned the commit
+## Confirming user intent
 
-Before committing, the user sees cost, configuration, and the SLA Blockdaemon stands behind. Procurement can sign off on a review screen in a way they can't sign off on a half-filled form.
+Before committing to a purchase, the user sees the cost, configuration, and the SLA that Blockdaemon stands behind. This little detail gave teams the confidence they were purchasing the right product for themselves, resulting in fewer support tickets after nodes were deployed.
 
 <FullBleedImage
   src={bdCheckout03}
@@ -67,7 +65,7 @@ Before committing, the user sees cost, configuration, and the SLA Blockdaemon st
 
 ## Results
 
-Usage grew 23x in the first year. DevOps teams went from opening support tickets to deploying in minutes. Enterprise conversations shifted from "how do we get you a node" to "how many nodes and which chains." Blockdaemon's growth stopped being linear in the sales team's capacity.
+Usage grew 23x within the first year of this redesign. DevOps teams went from opening support tickets weekly to deploying in minutes.
 
 <Credits
   credits={[

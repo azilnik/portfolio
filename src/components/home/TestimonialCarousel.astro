@@ -1,9 +1,12 @@
 ---
 /**
- * TestimonialCarousel — horizontal scroll carousel of quotes.
+ * TestimonialCarousel — full-bleed CSS scroll-snap quote rail.
  *
- * Uses CSS scroll-snap for smooth, snappy scrolling and vanilla JS for
- * dot indicators and optional auto-rotation. No library dependencies.
+ * Pure CSS pattern: a horizontal flex container with `scroll-snap-type:
+ * x mandatory` and dynamic `padding-inline` so the active card lands at
+ * viewport center while neighbors peek over the screen edges. Native
+ * touch swipe, shift+wheel, and the (hidden) scrollbar all just work.
+ * No JavaScript, no autoplay, no hover transforms.
  */
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
@@ -31,205 +34,80 @@ function getInitials(name: string): string {
   "
 >
   <div
-    class="mx-auto px-6"
-    style="max-width: var(--theme-content-width);"
+    class="hide-scrollbar flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-hidden pb-4 animate-in"
+    style="
+      padding-inline: max(1.5rem, calc(50vw - 24rem));
+      scroll-padding-inline: max(1.5rem, calc(50vw - 24rem));
+      overscroll-behavior-x: contain;
+    "
   >
-    {/* Section eyebrow — sits above the carousel without becoming a heavy h2.
-        Testimonials are evidence, not a feature, so the label should be quiet. */}
-    <p
-      class="text-center text-xs font-semibold uppercase animate-in"
-      style="
-        color: var(--theme-text-tertiary);
-        letter-spacing: var(--theme-tracking-wider);
-        margin-bottom: var(--theme-space-5);
-      "
-    >
-      What people say
-    </p>
+    {testimonials.map((t) => (
+      <blockquote
+        class="flex flex-none flex-col p-8"
+        style="width: clamp(280px, 80vw, 48rem); scroll-snap-align: center;"
+      >
+        <p
+          class="leading-relaxed"
+          style="
+            color: var(--theme-text-secondary);
+            font-size: var(--theme-text-lg);
+          "
+        >"{t.data.quote}"</p>
 
-    {/* Scrollable container — snap to each testimonial card.
-        Each card is a flex column (see blockquote below) and cards share the
-        track's cross-axis sizing, so every card in a row grows to match the
-        tallest quote. `mt-auto` on the footer then pushes the author block
-        to the bottom of every card, so names line up horizontally across
-        the row regardless of quote length. */}
-    <div
-      id="testimonial-track"
-      class="hide-scrollbar flex snap-x snap-proximity items-stretch gap-6 overflow-x-auto px-6 pb-4 -mx-6 animate-in"
-      style="--delay: 100ms;"
-    >
-      {testimonials.map((t) => (
-        <blockquote
-          class="flex flex-none w-full snap-center flex-col p-8 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-        >
-          <p
-            class="leading-relaxed"
-            style="
-              color: var(--theme-text-secondary);
-              font-size: var(--theme-text-lg);
-            "
-          >"{t.data.quote}"</p>
-          {/* Wrap the entire footer (avatar + name + title) in one link when LinkedIn is available */}
-          {t.data.linkedinUrl ? (
-            <a href={t.data.linkedinUrl} target="_blank" rel="noopener noreferrer" class="mt-auto pt-6 flex items-center gap-3 group"
-              data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}>
-              {t.data.avatar ? (
-                <Image
-                  src={t.data.avatar}
-                  alt={t.data.authorName}
-                  width={48}
-                  height={48}
-                  class="h-12 w-12 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <div
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                  style="background-color: var(--theme-accent);"
-                >
-                  {getInitials(t.data.authorName)}
-                </div>
-              )}
-              <div>
-                <p class="font-semibold transition-colors" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-                <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
+        {t.data.linkedinUrl ? (
+          <a
+            href={t.data.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-auto pt-6 flex items-center gap-3"
+            data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            {t.data.avatar ? (
+              <Image
+                src={t.data.avatar}
+                alt={t.data.authorName}
+                width={48}
+                height={48}
+                class="h-12 w-12 shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
+                style="background-color: var(--theme-accent);"
+              >
+                {getInitials(t.data.authorName)}
               </div>
-            </a>
-          ) : (
-            <footer class="mt-auto pt-6 flex items-center gap-3">
-              {t.data.avatar ? (
-                <Image
-                  src={t.data.avatar}
-                  alt={t.data.authorName}
-                  width={48}
-                  height={48}
-                  class="h-12 w-12 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <div
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                  style="background-color: var(--theme-accent);"
-                >
-                  {getInitials(t.data.authorName)}
-                </div>
-              )}
-              <div>
-                <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-                <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
+            )}
+            <div>
+              <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
+              <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
+            </div>
+          </a>
+        ) : (
+          <footer class="mt-auto pt-6 flex items-center gap-3">
+            {t.data.avatar ? (
+              <Image
+                src={t.data.avatar}
+                alt={t.data.authorName}
+                width={48}
+                height={48}
+                class="h-12 w-12 shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
+                style="background-color: var(--theme-accent);"
+              >
+                {getInitials(t.data.authorName)}
               </div>
-            </footer>
-          )}
-        </blockquote>
-      ))}
-    </div>
-
-    {/* Dot indicators — use inline styles so JS can swap colors via CSS variables */}
-    <div
-      id="testimonial-dots"
-      class="flex justify-center gap-2"
-      style="margin-top: var(--theme-space-4);"
-    >
-      {testimonials.map((_, i) => (
-        <button
-          class="testimonial-dot h-2 w-2 rounded-full transition-colors"
-          style="background-color: var(--theme-border-strong);"
-          data-index={i}
-          aria-label={`Go to testimonial ${i + 1}`}
-        />
-      ))}
-    </div>
+            )}
+            <div>
+              <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
+              <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
+            </div>
+          </footer>
+        )}
+      </blockquote>
+    ))}
   </div>
 </section>
-
-<script>
-  /**
-   * Testimonial carousel logic — dot indicators + auto-rotation.
-   *
-   * Uses IntersectionObserver to detect which card is currently visible,
-   * then updates the active dot. Auto-advances every 5 seconds, but only
-   * when the carousel is visible on screen (to avoid hijacking page scroll).
-   *
-   * IMPORTANT: We use track.scrollTo() instead of scrollIntoView() so that
-   * scrolling stays inside the carousel container and never moves the page.
-   */
-  function initCarousel() {
-    const track = document.getElementById("testimonial-track");
-    const dots = document.querySelectorAll(".testimonial-dot");
-    if (!track || dots.length === 0) return;
-
-    const cards = track.querySelectorAll("blockquote");
-    let currentIndex = 0;
-    let autoplayInterval: ReturnType<typeof setInterval>;
-    let isVisible = false;
-
-    // Scroll to a specific card by index — only moves the carousel, not the page.
-    function scrollToCard(index: number) {
-      const card = cards[index] as HTMLElement;
-      if (!card) return;
-      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
-    }
-
-    /**
-     * Update which dot is "active" (highlighted).
-     * Uses inline style manipulation instead of Tailwind classes so that
-     * the dot color adapts to the active theme's CSS variables.
-     */
-    function setActiveDot(index: number) {
-      const accentColor = getComputedStyle(document.documentElement).getPropertyValue("--theme-accent").trim();
-      const inactiveColor = getComputedStyle(document.documentElement).getPropertyValue("--theme-border-strong").trim();
-      dots.forEach((dot, i) => {
-        (dot as HTMLElement).style.backgroundColor = i === index ? accentColor : inactiveColor;
-      });
-      currentIndex = index;
-    }
-
-    // Watch which card scrolls into view within the track.
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Array.from(cards).indexOf(entry.target as HTMLElement);
-            if (index >= 0) setActiveDot(index);
-          }
-        });
-      },
-      { root: track, threshold: 0.6 }
-    );
-
-    cards.forEach((card) => cardObserver.observe(card));
-
-    // Track whether the carousel section is visible on the page.
-    // Auto-rotation only runs when the user can actually see it.
-    const sectionObserver = new IntersectionObserver(
-      ([entry]) => { isVisible = entry.isIntersecting; },
-      { threshold: 0.3 }
-    );
-    sectionObserver.observe(track.closest("section")!);
-
-    // Click a dot to scroll to that card.
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const index = Number((dot as HTMLElement).dataset.index);
-        scrollToCard(index);
-      });
-    });
-
-    // Auto-rotate every 5 seconds, pause on hover or when off-screen.
-    function startAutoplay() {
-      autoplayInterval = setInterval(() => {
-        if (!isVisible) return;
-        const next = (currentIndex + 1) % cards.length;
-        scrollToCard(next);
-      }, 5000);
-    }
-
-    track.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
-    track.addEventListener("mouseleave", startAutoplay);
-    startAutoplay();
-
-    // Set the first dot as active initially.
-    setActiveDot(0);
-  }
-
-  initCarousel();
-  document.addEventListener("astro:after-swap", initCarousel);
-</script>

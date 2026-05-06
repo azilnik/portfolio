@@ -1,34 +1,36 @@
 /* ==========================================================================
    Design Tokens — ari.design
 
-   One theme. Warm Tufte-inspired palette: cream backgrounds, warm gray
-   text, Gravy purple accents, Space Grotesk headings. No pure white,
-   no pure black.
+   Warm Signal palette: warm sand backgrounds, forest green accent with
+   terracotta secondary, paired with the existing Space Grotesk + Inter
+   typography stack.
    ========================================================================== */
 
 :root {
-  /* Page backgrounds — warm cream, not white */
-  --theme-bg: #faf8f5;
-  --theme-bg-secondary: #f5f2ee;
-  --theme-bg-tertiary: #edeae5;
+  /* Page backgrounds — warm sand */
+  --theme-bg: #F2EDE6;
+  --theme-bg-secondary: #EBE5DD;
+  --theme-bg-tertiary: #E3DDD4;
 
-  /* Text — warm grays, not blue-gray, never black.
-     Contrast on #faf8f5: primary ~14:1, secondary ~7.5:1, tertiary ~5:1. */
-  --theme-text-primary: #2d2b28;
-  --theme-text-secondary: #55524d;
-  --theme-text-tertiary: #78746d;
-  --theme-text-quaternary: #a09b94;
+  /* Text — warm neutrals, not blue-gray */
+  --theme-text-primary: #1E1E1E;
+  --theme-text-secondary: #5A5550;
+  --theme-text-tertiary: #807B75;
+  --theme-text-quaternary: #A5A09A;
 
-  /* Accent — Gravy purple, darkened for WCAG AA on cream */
-  --theme-accent: #7c5e9e;
-  --theme-accent-hover: #6b4f8b;
-  --theme-accent-subtle: #f0ebe6;
+  /* Primary accent — deep forest green */
+  --theme-accent: #2A5F4F;
+  --theme-accent-hover: #1E4A3B;
+  --theme-accent-subtle: #EDE8E0;
+
+  /* Secondary accent — terracotta (used sparingly) */
+  --theme-accent-secondary: #C65D3E;
 
   /* Surfaces — warm, not white */
-  --theme-surface: #f7f5f1;
-  --theme-surface-hover: #f2efea;
-  --theme-border: #eae7e1;
-  --theme-border-strong: #ddd9d2;
+  --theme-surface: #EDE8E0;
+  --theme-surface-hover: #E5E0D8;
+  --theme-border: #DDD8D0;
+  --theme-border-strong: #CCC7BF;
 
   /* Typography — Space Grotesk headings, Inter body */
   --theme-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -93,39 +95,68 @@
   --theme-radius-2xl: 1.25rem;
   --theme-radius-full: 9999px;
 
-  /* Shadows — warm tint, not blue-black */
-  --theme-shadow-sm: 0 1px 2px rgba(45, 43, 40, 0.05);
-  --theme-shadow-md: 0 4px 12px rgba(45, 43, 40, 0.07);
-  --theme-shadow-lg: 0 12px 32px rgba(45, 43, 40, 0.09);
+  /* Shadows — Josh Comeau's layered technique
+     (joshwcomeau.com/css/designing-shadows). One physical light source,
+     stacked layers at progressively wider offsets/blurs, each cropped
+     with a negative spread. Shadow color picks up a warm dark version
+     of the sand bg so shadows feel native to the palette, not pasted on.
+     Hue 35° is sampled from the bg (#F2EDE6 = hsl(35, 32%, 92%)), kept
+     identical so the shadow reads as warm light hitting a warm surface. */
+  --shadow-color: 35 30% 13%;
 
-  /* Footer — warm dark */
-  --theme-footer-bg: #2d2b28;
-  --theme-footer-text: #f5f2ee;
-  --theme-footer-muted: #a09b94;
+  --shadow-elevation-low:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.14),
+    0.4px 0.8px 1.1px -1.2px hsl(var(--shadow-color) / 0.14),
+    1px 2px 2.7px -2.5px hsl(var(--shadow-color) / 0.14);
+
+  --shadow-elevation-medium:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.16),
+    0.8px 1.6px 2.2px -0.8px hsl(var(--shadow-color) / 0.16),
+    2.1px 4.1px 5.6px -1.7px hsl(var(--shadow-color) / 0.16),
+    5.1px 10.2px 13.8px -2.5px hsl(var(--shadow-color) / 0.16);
+
+  --shadow-elevation-high:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.16),
+    1.5px 2.9px 3.9px -0.4px hsl(var(--shadow-color) / 0.16),
+    2.7px 5.4px 7.3px -0.7px hsl(var(--shadow-color) / 0.16),
+    4.5px 8.9px 12px -1.1px hsl(var(--shadow-color) / 0.16),
+    7.1px 14.3px 19.3px -1.4px hsl(var(--shadow-color) / 0.16),
+    11.2px 22.3px 30.1px -1.8px hsl(var(--shadow-color) / 0.16),
+    17px 33.9px 45.7px -2.1px hsl(var(--shadow-color) / 0.16),
+    25px 50px 67.4px -2.5px hsl(var(--shadow-color) / 0.16);
+
+  --theme-shadow-sm: var(--shadow-elevation-low);
+  --theme-shadow-md: var(--shadow-elevation-medium);
+  --theme-shadow-lg: var(--shadow-elevation-high);
+
+  /* Footer — warm dark brown */
+  --theme-footer-bg: #2A2520;
+  --theme-footer-text: #EDE8E0;
+  --theme-footer-muted: #8A8580;
 
   /* Header */
-  --theme-header-bg: rgba(250, 248, 245, 0.92);
-  --theme-header-border: #eae7e1;
+  --theme-header-bg: rgba(242, 237, 230, 0.92);
+  --theme-header-border: #DDD8D0;
 
   /* Images */
   --theme-image-radius: 0.75rem;
-  --theme-image-shadow: 0 2px 8px rgba(45, 43, 40, 0.07);
+  --theme-image-shadow: var(--shadow-elevation-low);
   --theme-image-border: none;
 
   /* Prose */
   --theme-prose-heading-color: var(--theme-text-primary);
   --theme-prose-body-color: var(--theme-text-secondary);
   --theme-prose-link-color: var(--theme-accent);
-  --theme-prose-quote-border: #7c5e9e;
-  --theme-prose-quote-text: #55524d;
+  --theme-prose-quote-border: #2A5F4F;
+  --theme-prose-quote-text: #5A5550;
   --theme-prose-hr-color: var(--theme-border);
 
-  /* Mesh gradient for the hero */
-  --theme-gradient-1: rgba(230, 215, 200, 0.18);
-  --theme-gradient-2: rgba(210, 220, 235, 0.15);
-  --theme-gradient-3: rgba(225, 218, 210, 0.10);
-  --theme-gradient-4: rgba(235, 218, 210, 0.12);
-  --theme-gradient-5: rgba(215, 225, 230, 0.12);
+  /* Mesh gradient for the hero — warm sand tones */
+  --theme-gradient-1: rgba(221, 210, 196, 0.18);
+  --theme-gradient-2: rgba(198, 93, 62, 0.06);
+  --theme-gradient-3: rgba(42, 95, 79, 0.04);
+  --theme-gradient-4: rgba(221, 210, 196, 0.12);
+  --theme-gradient-5: rgba(237, 232, 224, 0.12);
 
   --theme-bg-gradient:
     radial-gradient(ellipse 80% 50% at 10% 0%,   var(--theme-gradient-1) 0%, transparent 100%),

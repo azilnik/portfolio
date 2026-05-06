@@ -10,13 +10,12 @@ import { Image } from "astro:assets";
 import avatarImage from "../../assets/images/avatar.jpg";
 ---
 
-<div style="background-image: var(--theme-bg-gradient, none);">
-  <section
+<section
     class="mx-auto px-6"
     style="
       max-width: var(--theme-content-width);
-      padding-top: var(--theme-space-8);
-      padding-bottom: var(--theme-space-7);
+      padding-top: var(--theme-space-5);
+      padding-bottom: var(--theme-space-6);
     "
   >
     {/* Avatar + text side by side on desktop, stacked on mobile.
@@ -33,6 +32,7 @@ import avatarImage from "../../assets/images/avatar.jpg";
           width={120}
           height={120}
           class="rounded-2xl object-cover"
+          style="box-shadow: var(--shadow-elevation-low);"
         />
       </div>
 
@@ -83,26 +83,26 @@ import avatarImage from "../../assets/images/avatar.jpg";
       "
     >
       <p>
-        Head of Design at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>. I build products, teams, and systems in construction, fintech, and developer tools.
+        Head of Design at <a href="https://join.build" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Join</a>, helping humanize construction project management. Before that, founding designer at <a href="https://blockdaemon.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Blockdaemon</a>, and design lead at <a href="https://gradle.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Gradle</a> and <a href="https://www.walmart.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-1 underline-offset-2" style="color: var(--theme-text-primary); text-decoration-color: var(--theme-border-strong);">Walmart</a>.
       </p>
     </div>
 
     <div class="flex gap-3 animate-in" style="margin-top: var(--theme-space-5); --delay: 160ms;">
       <a
-        href="mailto:ari@zilnik.com"
+        href="#work"
         class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
         style="background-color: var(--theme-text-primary); color: var(--theme-bg);"
+        data-goatcounter-click="seework-hero"
+      >
+        See my work
+      </a>
+      <a
+        href="mailto:ari@zilnik.com"
+        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
+        style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-secondary);"
         data-goatcounter-click="contact-hero"
       >
         Get in touch
       </a>
-      <a
-        href="#work"
-        class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors"
-        style="border: 1px solid var(--theme-border-strong); color: var(--theme-text-secondary);"
-      >
-        See my work
-      </a>
     </div>
   </section>
-</div>

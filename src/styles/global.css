@@ -66,9 +66,9 @@
   --font-heading: var(--theme-font-heading);
   --font-display: var(--theme-font-display);
 
-  /* Brand accent color — the signature blue used for links and CTAs */
-  --color-accent: rgb(0, 89, 255);
-  --color-accent-hover: rgb(0, 70, 210);
+  /* Brand accent color — forest green */
+  --color-accent: var(--theme-accent);
+  --color-accent-hover: var(--theme-accent-hover);
 
   /* Expose the baseline-grid spacing scale as Tailwind utilities so we can
      write `py-section` / `py-section-lg` / `gap-baseline` etc. everywhere
@@ -192,6 +192,21 @@
 
 .prose :where(p):last-child {
   margin-bottom: 0;
+}
+
+/* Inline links inside prose. The typography plugin isn't installed, so
+   --tw-prose-links has no effect — this is the actual link rule. */
+.prose :where(p, li) a {
+  color: var(--theme-prose-link-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, var(--theme-prose-link-color) 45%, transparent);
+  font-weight: 500;
+  transition: text-decoration-color 0.15s ease;
+}
+.prose :where(p, li) a:hover {
+  text-decoration-color: var(--theme-prose-link-color);
 }
 
 /* Heading type scale & weight. Prose headings use the theme heading font,
