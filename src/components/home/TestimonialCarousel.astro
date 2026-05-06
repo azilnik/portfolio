@@ -28,23 +28,24 @@ function getInitials(name: string): string {
 ---
 
 <section
+  class="mx-auto px-6"
   style="
-    padding-top: var(--theme-space-7);
-    padding-bottom: var(--theme-space-7);
+    max-width: var(--theme-content-width);
+    padding-top: var(--theme-space-5);
+    padding-bottom: var(--theme-space-5);
   "
 >
   <div
-    class="hide-scrollbar flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto overflow-y-hidden pb-4 animate-in"
+    class="hide-scrollbar -mx-6 flex snap-x snap-mandatory items-stretch gap-6 sm:gap-16 overflow-x-auto overflow-y-hidden pb-4 animate-in"
     style="
-      padding-inline: max(1.5rem, calc(50vw - 24rem));
-      scroll-padding-inline: max(1.5rem, calc(50vw - 24rem));
+      padding-inline: 1.5rem;
+      scroll-padding-inline: 1.5rem;
       overscroll-behavior-x: contain;
     "
   >
     {testimonials.map((t) => (
       <blockquote
-        class="flex flex-none flex-col p-8"
-        style="width: clamp(280px, 80vw, 48rem); scroll-snap-align: center;"
+        class="flex flex-none flex-col py-8 w-[75vw] sm:w-[clamp(280px,80vw,36rem)] snap-center sm:snap-start"
       >
         <p
           style="

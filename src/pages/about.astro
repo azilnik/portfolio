@@ -77,6 +77,18 @@ const personJsonLd = {
           About
         </h1>
 
+        {/* Mobile-only avatar, sits between H1 and bio */}
+        <div class="md:hidden" style="margin-top: var(--theme-space-5);">
+          <Image
+            src={avatarImage}
+            alt="Ari Zilnik"
+            width={280}
+            height={280}
+            class="h-32 w-32 rounded-2xl object-cover"
+            style="box-shadow: var(--theme-shadow-lg);"
+          />
+        </div>
+
         <div
           class="font-sans"
           style="
@@ -127,15 +139,15 @@ const personJsonLd = {
         </div>
       </div>
 
-      {/* Right: avatar */}
-      <div class="hidden md:block flex-shrink-0" style="padding-top: var(--theme-space-5);">
+      {/* Desktop-only avatar — sits as the right column at md+ */}
+      <div class="hidden flex-shrink-0 md:block md:pt-12">
         <Image
           src={avatarImage}
           alt="Ari Zilnik"
           width={280}
           height={280}
           class="rounded-2xl object-cover"
-          style="box-shadow: var(--theme-shadow-lg);"
+          style="box-shadow: var(--theme-shadow-lg); width: 280px; height: 280px;"
         />
       </div>
     </div>
