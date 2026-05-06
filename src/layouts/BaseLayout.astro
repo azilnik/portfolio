@@ -63,7 +63,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en" style="background:#faf8f5">
+<html lang="en" style="background:#F2EDE6">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -74,8 +74,10 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
     {/* Explicit robots directive: index + follow + allow large image previews
         in SERPs (important for a visual portfolio). */}
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    {/* Mobile browser chrome color — matches the warm off-white body bg. */}
-    <meta name="theme-color" content="#faf8f5" />
+    {/* Mobile browser chrome color — matches the warm sand body bg
+        (--theme-bg in themes.css) so the iOS Safari status bar and
+        bottom toolbar tint blend into the page. */}
+    <meta name="theme-color" content="#F2EDE6" />
 
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
