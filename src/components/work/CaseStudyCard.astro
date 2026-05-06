@@ -2,11 +2,10 @@
 /**
  * CaseStudyCard — thumbnail + text for homepage and /work listing.
  *
- * No card container, no border, no shadow, no background. The image
- * IS the card. Text sits directly below. Ainara and Tyler both do
- * this: image, then text, nothing wrapping them. The Tufte-warm
- * background is the surface. Adding a container on top of it is
- * a layer that doesn't earn its keep.
+ * No card container or border. The image IS the card. Text sits
+ * directly below. The thumbnail carries a layered Josh-Comeau
+ * shadow so it lifts off the warm sand surface; on hover the
+ * shadow steps up to "high" and the image scales subtly.
  */
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -28,7 +27,10 @@ const { study, featured = false } = Astro.props;
   ]}
 >
   {/* Thumbnail */}
-  <div class="overflow-hidden" style="border-radius: var(--theme-radius-lg);">
+  <div
+    class="case-study-card-thumb overflow-hidden"
+    style="border-radius: var(--theme-radius-lg);"
+  >
     <Image
       src={study.data.thumbnail}
       alt={study.data.thumbnailAlt}
@@ -87,3 +89,18 @@ const { study, featured = false } = Astro.props;
 
   </div>
 </a>
+
+<style>
+  .case-study-card-thumb {
+    box-shadow: var(--shadow-elevation-low);
+    transition: box-shadow 0.4s ease;
+  }
+  .group:hover .case-study-card-thumb {
+    box-shadow: var(--shadow-elevation-medium);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case-study-card-thumb {
+      transition: none;
+    }
+  }
+</style>
