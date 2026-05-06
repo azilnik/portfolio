@@ -27,11 +27,9 @@ import joinNav03 from "./images/join-nav-03.png";
 import joinNav04 from "./images/join-nav-04.png";
 import joinNav05 from "./images/join-nav-05.png";
 
-Join is like Jira for construction. As Head of Design, I lead a small team and ship product across the platform.
+[Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-The new navigation rebuilds Join's structure around projects. The old nav had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was fielding "how do I get to X" tickets. Usability sessions confirmed users couldn't describe Join's structure in the product's own terms. They described it in terms of projects.
-
-Rebuilding around projects collapsed the path between any feature and the portfolio overview to two clicks.
+The new navigation rebuilds Join's structure around projects. The old nav had grown feature-by-feature, with labels that drifted away from how users described their work. Customer success was fielding "how do I get to X" tickets, and usability sessions confirmed that users couldn't describe Join's structure in the product's own terms — they described it in terms of projects. We rebuilt around that mental model and collapsed the path between any feature and the portfolio overview to two clicks.
 
 ## Projects as the top-level unit
 
@@ -42,18 +40,18 @@ The nav is the portfolio, then the project you're working in. Features sit under
   alt="Project-first navigation showing a single project's context with features nested as sub-navigation"
 />
 
-## A two-click zoom rhythm
+## A two-click zoom
 
-Two clicks down from the portfolio to any view inside a project, two clicks back out. The path is the same length in both directions, which is the part users notice.
+Two clicks down from the portfolio to any view inside a project, two clicks back out. The path is the same length in both directions, which made the zoom-out predictable for users who'd previously gotten lost coming back up.
 
 <FullBleedImage
   src={joinNav03}
   alt="The two-click rhythm from portfolio overview into a specific project"
 />
 
-## Feature discovery as a side effect
+## Features in their work context
 
-When a project manager opens a project mid-build, the nav puts change orders and RFIs at the top, not buried under preconstruction tools they used six months ago. People find features by being in the work that uses them, not by hunting through a menu.
+When a project manager opens a project mid-build, the nav surfaces change orders and RFIs at the top rather than burying them under preconstruction tools used six months ago. Features appear in the context of the work that uses them.
 
 <FullBleedImage
   src={joinNav04}
@@ -67,7 +65,7 @@ When a project manager opens a project mid-build, the nav puts change orders and
 
 ## Results
 
-Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had existed in the old nav, technically, but nobody used it because there wasn't a clear path back in.
+Support tickets on navigation questions dropped 32% after launch. Users started reaching for the org-level portfolio views in ways they hadn't before. The zoom-out had been in the old nav technically, but the path back in wasn't clear, so it sat unused.
 
 > "The team at Join is very brave for tackling this kind of UX issue."
 

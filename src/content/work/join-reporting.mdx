@@ -1,5 +1,5 @@
 ---
-title: "Rebuilding Join's reporting platform: reports as primitives every feature plugs into"
+title: "Reporting Platform"
 company: "Join"
 role: "Head of Design"
 industry: "Construction"
@@ -30,11 +30,11 @@ import joinReportingPdfGrid from "./images/join-reporting-pdf-grid.png";
 import joinReportingPdfCover from "./images/join-reporting-pdf-cover.png";
 import joinReportingMilestone from "./images/join-reporting-milestone.png";
 
-Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+[Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-Reports are how preconstruction (precon) teams earn an owner's trust. The Items Report is the working surface where decisions, costs, and status get filtered into the packet that lands in front of an owner on a Friday. Webcor, Leopardo, and McCarthy were spending 5 to 10 hours a week exporting from Join, then stitching PDFs together in Bluebeam to build one coherent submission. Skilled Preconstruction Managers were reverting to Excel macros. Customers told us the Report Builder was too limited for complex projects and too complicated for non-technical ones.
+Reports are how preconstruction teams earn an owner's trust. The Items Report is the working surface where decisions, costs, and status get filtered into the packet that lands in front of an owner on a Friday. Customers like Webcor, Leopardo, and McCarthy were spending 5 to 10 hours a week exporting from Join, then stitching PDFs together in Bluebeam to build one coherent submission. We heard from estimators that the existing Report Builder was too limited for complex projects and too complicated for simpler ones, and that skilled Preconstruction Managers were reverting to Excel macros to get around it.
 
-The reframe was sharp: reports are not a downstream artifact, they're a primitive every Join feature has to plug into.
+We treated reports as a primitive every Join feature plugs into, not a downstream artifact.
 
 <FullBleedImage
   src={joinReportingHero}
@@ -42,9 +42,9 @@ The reframe was sharp: reports are not a downstream artifact, they're a primitiv
   caption="The Items Report working surface — summary widgets up top, AG Grid below."
 />
 
-## Two libraries, two jobs
+## One data shape, two surfaces
 
-AG Grid Enterprise drives the on-screen working view — filter, sort, group, pin, resize before anyone exports anything. For the export side I picked @react-pdf/renderer (a React component model with real typographic control) so a designer-built primitive could live in both places without a translation layer. Both consume the same data shape, so what you arrange in the grid is what comes out the other side. The reason this lives in code and not Figma is mundane: Figma can't run AG Grid, and the prototype had to feel like a live product to be worth showing customers.
+AG Grid Enterprise drives the on-screen working view — filter, sort, group, pin, resize before anyone exports anything. For the export side we picked @react-pdf/renderer, a React component model with real typographic control, so a single primitive could live in both places without a translation layer. Both consume the same data shape, so what you arrange in the grid is what comes out the other side. We built the prototype in code rather than Figma so it could feel like a live product against real data when customers reviewed it.
 
 <FullBleedImage
   src={joinReportingGrouped}
@@ -52,9 +52,9 @@ AG Grid Enterprise drives the on-screen working view — filter, sort, group, pi
   caption="Group by Status: subtotals roll up, summary widgets stay live, and this exact arrangement carries straight to the PDF."
 />
 
-## Parity across interfaces
+## Bringing Scales into the PDF
 
-The harder design problem was making the PDF feel like Join, not like a generic export. I rebuilt our Scales primitives inside react-pdf — PDFTable, PDFScalesDonutChart, a thin set of pdfTokens — so the PDF could use the same type styles and chart styles as the web. The first time I saw a 14-page PDF render with the right donut colors and a filter bar locked to every header, I knew the design-system bet was real. Whatever you arranged in the grid — group-bys, filters, sort order — carried through to the export. That's when the PDF stopped feeling like a degraded snapshot and started feeling like the screen.
+The harder design problem was making the PDF feel like Join, not like a generic export. We rebuilt our Scales primitives inside react-pdf — PDFTable, PDFScalesDonutChart, a thin set of pdfTokens — so the PDF could use the same type styles and chart styles as the web. Whatever you arranged in the grid — group-bys, filters, sort order — carried through to the export, with the same donut colors and a filter bar locked to every header.
 
 <FullBleedImage
   src={joinReportingPdfGrid}
@@ -62,9 +62,9 @@ The harder design problem was making the PDF feel like Join, not like a generic 
   caption="The PDF page that follows the cover. Same grouping, same subtotals, same chart language as the screen."
 />
 
-## The viewing-medium reframe
+## Designing for screens, not paper
 
-I started this thinking PDFs would be printed. Letter, A4, 11x17 — I designed page layouts accordingly. Garrett flipped it in a customer call: PDFs are never printed. They're viewed on desktop, often inside 500-page submission packets. Dynamic page sizing emerged as the number one customer ask. The "Generated by Join" footer got cut the same week — customers have strict branding rules and this is their packet, not ours. One conversation reshaped the entire page-size question.
+We started this thinking PDFs would be printed and designed page layouts for Letter, A4, and 11x17. A customer call reframed it: PDFs are almost never printed. They're viewed on desktop, often inside 500-page submission packets. Dynamic page sizing became the top customer ask, and the "Generated by Join" footer came out the same week — customers have strict branding rules and the packet is theirs, not Join's.
 
 <FullBleedImage
   src={joinReportingPdfCover}
@@ -74,7 +74,7 @@ I started this thinking PDFs would be printed. Letter, A4, 11x17 — I designed 
 
 ## Results
 
-About 25 PRs over two months, AI-coded against real anonymized customer data. The top 20 validated customer requests landed in the prototype, and we put a fresh build on Drew's desk every Monday — that cadence is what got PM, eng, and leadership aligned on reports as primitives. Risks and Buyout reports now plug into the same standard, and that's the part I'm proudest of: the next person designing a report at Join doesn't start from zero.
+About 25 PRs over two months, AI-coded against real anonymized customer data. The top 20 validated customer requests landed in the prototype, and we put a fresh build on leadership's desk every Monday. That cadence got PM, engineering, and leadership aligned on reports as primitives. Risks and Buyout reports now plug into the same standard.
 
 <FullBleedImage
   src={joinReportingMilestone}

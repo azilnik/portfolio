@@ -27,13 +27,11 @@ import Callout from "../../components/mdx/Callout.astro";
 
 import hoodDashboard from "./images/hood-vent-dashboard.png";
 
-Gas stoves emit real pollutants. The mitigation is simple: turn on your hood when you cook. The problem is that most people forget. I have two small kids. I read too many air quality studies. So I automated my range hood.
+Gas stoves emit real pollutants, and the mitigation is simple: turn on your hood when you cook. The problem is that most people forget. I have two small kids and have read too many air quality studies, so I automated my range hood.
 
-Most smart hood automations watch for a temperature threshold: "when the kitchen reaches 26 degrees, turn on the hood." Two problems. It's slow. By the time the kitchen heats up, you've been cooking for 5 to 10 minutes, breathing the pollutants the hood was supposed to remove. And on a hot summer day the kitchen is already at 28 degrees, so the system either fires without a stove or needs seasonal recalibration.
+Most smart hood automations watch for a temperature threshold — "when the kitchen reaches 26 degrees, turn on the hood." That approach has two problems. It's slow: by the time the kitchen heats up, you've already been cooking for 5 to 10 minutes and breathing the pollutants the hood was supposed to remove. And on a hot summer day the kitchen is already at 28 degrees, so the system either fires without a stove or needs seasonal recalibration.
 
-<Callout label="The core insight">
-  A threshold system asks "is it hot?" Rate-of-change detection asks "is it getting hotter?" The second question catches cooking within 30-60 seconds. Same data, different question.
-</Callout>
+Rate-of-change detection asks a different question. Instead of "is it hot?" it asks "is it getting hotter?" — and that catches cooking within 30 to 60 seconds without false triggers on warm days.
 
 When you turn on a burner, the air near the stove starts rising in temperature immediately. The derivative of the reading over a rolling two-minute window spikes almost as soon as the pan heats. When you stop cooking, the rate flattens and the hood shuts off. Hot days don't cause false triggers because the temperature is high but not changing fast.
 
@@ -45,9 +43,9 @@ When you turn on a burner, the air near the stove starts rising in temperature i
 
 ## The product
 
-The automation watches both temperature and humidity rate of change. Temperature catches most cooking. Humidity catches the boiling-water case, where steam arrives before heat.
+The automation watches both temperature and humidity rate of change. Temperature catches most cooking, and humidity catches the boiling-water case where steam arrives before heat.
 
-Every sensitivity setting is a slider on the dashboard, so anyone using this can tune it without editing YAML — the difference between "works for me" and "works in someone else's kitchen." Toggle the hood by hand and the automation backs off for 30 minutes; the system helps, it doesn't fight the person holding the pan. And after two hours straight, the hood forces off and posts a notification, in case I left a pot on and walked out the door.
+Every sensitivity setting is a slider on the dashboard, so anyone using this can tune it without editing YAML. That's the difference between a project that works for me and one that works in someone else's kitchen. Toggle the hood by hand and the automation backs off for 30 minutes — the system supports the cook, it doesn't fight them. After two hours of continuous run, the hood forces off and posts a notification, in case I left a pot on the stove and walked out the door.
 
 <FullBleedGif
   src="/videos/hood-vent-demo.gif"
@@ -57,6 +55,6 @@ Every sensitivity setting is a slider on the dashboard, so anyone using this can
 
 Total cost is about $85: a Zigbee sensor (~$15) and a SwitchBot Bot plus Hub Mini (~$70). No cloud, no subscriptions, no rewiring. Everything runs on the local Home Assistant instance.
 
-I described the rate-of-change idea to Claude Code and it generated the YAML scaffold. I read every line, pushed back on the over-engineered parts, and deployed. The thresholds needed a human and a stove. I ran real cooking sessions and tuned until false triggers hit near zero.
+I described the rate-of-change idea to Claude Code and it generated the YAML scaffold. I read every line, pushed back on the over-engineered parts, and deployed. The thresholds needed a human and a stove — I ran real cooking sessions and tuned until false triggers hit near zero.
 
 The automation has held up through more than a year of daily cooking. The repo is public under MIT.
