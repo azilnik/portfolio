@@ -22,7 +22,7 @@ metrics:
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
 import Callout from "../../components/mdx/Callout.astro";
 
 import hoodDashboard from "./images/hood-vent-dashboard.png";
@@ -47,9 +47,12 @@ The automation watches both temperature and humidity rate of change. Temperature
 
 Every sensitivity setting is a slider on the dashboard, so anyone using this can tune it without editing YAML. That's the difference between a project that works for me and one that works in someone else's kitchen. Toggle the hood by hand and the automation backs off for 30 minutes — the system supports the cook, it doesn't fight them. After two hours of continuous run, the hood forces off and posts a notification, in case I left a pot on the stove and walked out the door.
 
-<FullBleedGif
-  src="/videos/hood-vent-demo.gif"
+<VideoPlayer
+  src="/videos/hood-vent-demo.mp4"
+  webm="/videos/hood-vent-demo.webm"
+  fallback="/videos/hood-vent-demo.gif"
   alt="A stove knob turned on, followed by the range hood activating automatically"
+  size="column"
   caption="Cooking starts. The hood is on before I've finished adjusting the flame."
 />
 

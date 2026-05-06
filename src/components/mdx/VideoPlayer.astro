@@ -1,20 +1,20 @@
 ---
 /**
- * VideoPlayer — HTML5 video with GIF fallback for case study demos.
+ * VideoPlayer — autoplaying, muted, looping HTML5 video for case study demos.
  *
- * Renders an autoplay, muted, looping video. Supports the same `size`
- * prop as FullBleedImage so videos can sit in the prose column or
- * break out for more detail.
+ * Supports both MP4 (h264) and WebM (vp9) sources for browser efficiency.
+ * Pauses playback when scrolled off-screen via IntersectionObserver to keep
+ * long case studies light. Falls back to a static GIF for ancient browsers.
  *
  * Usage in .mdx:
  *   <VideoPlayer
  *     src="/videos/my-demo.mp4"
+ *     webm="/videos/my-demo.webm"
  *     fallback="/videos/my-demo.gif"
  *     alt="Demo of the new checkout flow"
  *   />
  *
- * Video files go in `public/videos/`. Use `scripts/convert-video.sh`
- * to convert screen recordings to mp4 + gif.
+ * Use `scripts/convert-video.sh` to produce the encoded files.
  */
 
 type FigureSize = "column" | "wide" | "full";
@@ -22,6 +22,8 @@ type FigureSize = "column" | "wide" | "full";
 interface Props {
   /** Path to the .mp4 file (in public/videos/). */
   src: string;
+  /** Optional .webm source — preferred by Chromium/Firefox for smaller payloads. */
+  webm?: string;
   /** Path to the .gif fallback (in public/videos/). */
   fallback: string;
   /** Alt text describing the video content. */
@@ -32,7 +34,7 @@ interface Props {
   caption?: string;
 }
 
-const { src, fallback, alt, size = "wide", caption } = Astro.props;
+const { src, webm, fallback, alt, size = "wide", caption } = Astro.props;
 
 const sizeClass = {
   column: "figure-column",
@@ -43,17 +45,17 @@ const sizeClass = {
 
 <figure class={sizeClass}>
   <div class="overflow-hidden" style="border-radius: var(--theme-image-radius);">
-    {/* HTML5 video — autoplay, muted, looping (silent background demo) */}
     <video
       autoplay
       muted
       loop
       playsinline
-      class="w-full h-auto block"
+      preload="metadata"
+      class="w-full h-auto block scroll-pause-video"
       aria-label={alt}
     >
+      {webm && <source src={webm} type="video/webm" />}
       <source src={src} type="video/mp4" />
-      {/* Fallback: if <video> is not supported, show the GIF instead */}
       <img src={fallback} alt={alt} class="w-full h-auto" loading="lazy" />
     </video>
   </div>
@@ -66,3 +68,36 @@ const sizeClass = {
     </figcaption>
   )}
 </figure>
+
+<script>
+  // Pause videos when scrolled out of view so off-screen demos stop decoding
+  // frames. Re-plays when they re-enter the viewport.
+  const setupScrollPause = () => {
+    const videos = document.querySelectorAll<HTMLVideoElement>(".scroll-pause-video");
+    if (!videos.length || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            // play() returns a promise that rejects if autoplay is blocked;
+            // swallow it because the video is muted so it should always succeed.
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      },
+      { rootMargin: "100px 0px", threshold: 0 },
+    );
+
+    videos.forEach((video) => observer.observe(video));
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupScrollPause);
+  } else {
+    setupScrollPause();
+  }
+</script>
