@@ -27,15 +27,13 @@ import joinScenarios01 from "./images/join-scenarios-01.png";
 import joinScenarios02 from "./images/join-scenarios-02.png";
 import joinScenarios03 from "./images/join-scenarios-03.png";
 
-Join is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
+[Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
-Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation. They decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to think one decision at a time, which didn't match how real decisions got made.
+Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation; they decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to evaluate one decision at a time, which didn't match how owners actually weighed options. Real decisions are made on bundled packages — finishes, schedule, scope — against each other.
 
-Owners don't decide one line item at a time. They weigh whole packages — finishes, schedule, scope — against each other.
+## Decisions as packages
 
-## Sets of decisions as the unit
-
-A contractor builds two options — say, premium finishes on a compressed schedule against a value-engineered version that stretches the timeline. Join recalculates every linked line item underneath. The owner gets two packages to compare instead of forty decisions to make.
+A contractor builds two options — say, premium finishes on a compressed schedule against a value-engineered version that stretches the timeline. Join recalculates every linked line item underneath, and the owner reviews two packages instead of forty individual decisions.
 
 <FullBleedImage
   src={joinScenarios01}
@@ -48,9 +46,9 @@ A contractor builds two options — say, premium finishes on a compressed schedu
   caption="Cost propagation across linked line items."
 />
 
-## Tabular comparison without ranking
+## A flat comparison, no ranking
 
-This was the hardest design call. Owners on multi-million-dollar projects don't want to be steered toward a "best" option — they want to weigh the trade-offs themselves. So the comparison is deliberately flat. Every dimension is visible, no option is marked as preferred.
+The hardest design decision was about hierarchy. Owners on multi-million-dollar projects didn't want to be steered toward a "best" option; they wanted to weigh trade-offs themselves. We made the comparison deliberately flat — every dimension visible, no option marked as preferred.
 
 <FullBleedImage
   src={joinScenarios02}
@@ -65,7 +63,7 @@ This was the hardest design call. Owners on multi-million-dollar projects don't 
 
 ## Progressive disclosure
 
-The default view is lean on purpose — users click into specific dimensions when they need detail. The owner-facing read stays calm for sign-off meetings; the contractor side stays rich for internal work.
+The default view is intentionally lean — users click into specific dimensions when they need detail. The owner-facing read stays calm for sign-off meetings while the contractor side keeps the richer working data for internal use.
 
 <FullBleedImage
   src={joinScenarios03}
@@ -80,7 +78,7 @@ The default view is lean on purpose — users click into specific dimensions whe
 
 ## Results
 
-The scenario-decision cycle dropped 50%, measured from creation through owner sign-off. The surprise was the architect audience. 20% of Scenarios users were architects, a segment Join hadn't been designing for. The comparison view matched how they presented design options to their own clients, and they found the feature on their own. That discovery reshaped how Join thought about the product's reach.
+The scenario-decision cycle dropped 50%, measured from creation through owner sign-off. Architects accounted for 20% of Scenarios users — a segment Join hadn't been designing for. The comparison view matched how they presented design options to their own clients, and they found the feature on their own.
 
 > "This is like a happy meal for decision making. Everything you need, all in one place."
 
