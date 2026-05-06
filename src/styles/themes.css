@@ -1,7 +1,7 @@
 /* ==========================================================================
    Design Tokens — ari.design
 
-   Warm Signal palette: warm sand backgrounds, forest green accent with
+   Warm Signal palette: warm sand backgrounds, amethyst purple accent with
    terracotta secondary, paired with the existing Space Grotesk + Inter
    typography stack.
    ========================================================================== */
@@ -18,9 +18,10 @@
   --theme-text-tertiary: #807B75;
   --theme-text-quaternary: #A5A09A;
 
-  /* Primary accent — deep forest green */
-  --theme-accent: #2A5F4F;
-  --theme-accent-hover: #1E4A3B;
+  /* Primary accent — amethyst purple. A shade of #b999d6 darkened enough
+     to clear WCAG AA on the warm sand bg (6.21:1) and on white (7.36:1). */
+  --theme-accent: #6E4196;
+  --theme-accent-hover: #54307A;
   --theme-accent-subtle: #EDE8E0;
 
   /* Secondary accent — terracotta (used sparingly) */
@@ -168,14 +169,14 @@
   --theme-prose-heading-color: var(--theme-text-primary);
   --theme-prose-body-color: var(--theme-text-secondary);
   --theme-prose-link-color: var(--theme-accent);
-  --theme-prose-quote-border: #2A5F4F;
+  --theme-prose-quote-border: #6E4196;
   --theme-prose-quote-text: #5A5550;
   --theme-prose-hr-color: var(--theme-border);
 
   /* Mesh gradient for the hero — warm sand tones */
   --theme-gradient-1: rgba(221, 210, 196, 0.18);
   --theme-gradient-2: rgba(198, 93, 62, 0.06);
-  --theme-gradient-3: rgba(42, 95, 79, 0.04);
+  --theme-gradient-3: rgba(110, 65, 150, 0.04);
   --theme-gradient-4: rgba(221, 210, 196, 0.12);
   --theme-gradient-5: rgba(237, 232, 224, 0.12);
 
