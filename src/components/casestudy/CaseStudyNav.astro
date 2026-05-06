@@ -49,31 +49,37 @@ if (!prev && !next) return;
       <a
         href={`/work/${prev.slug}`}
         data-goatcounter-click={`casestudy-prev-${prev.slug}`}
-        class="group flex flex-col rounded-xl p-5 transition-colors"
+        class="group flex flex-col rounded-xl p-6 transition-colors"
         style="background-color: var(--theme-surface);"
       >
         <span
           class="text-xs font-semibold uppercase"
           style="
             color: var(--theme-text-tertiary);
+            line-height: var(--theme-lh-xs);
             letter-spacing: var(--theme-tracking-wider);
           "
         >
           &larr; Previous
         </span>
         <span
-          class="mt-1 font-heading font-semibold transition-colors group-hover:underline"
+          class="font-heading font-semibold transition-colors group-hover:underline"
           style="
             color: var(--theme-text-primary);
             font-size: var(--theme-text-base);
-            line-height: var(--theme-leading-snug);
+            line-height: var(--theme-lh-base);
+            margin-top: var(--theme-space-1);
           "
         >
           {prev.title}
         </span>
         <span
-          class="mt-1 text-xs"
-          style="color: var(--theme-text-tertiary);"
+          class="text-xs"
+          style="
+            color: var(--theme-text-tertiary);
+            line-height: var(--theme-lh-xs);
+            margin-top: var(--theme-space-1);
+          "
         >
           {prev.company}
         </span>
@@ -86,7 +92,7 @@ if (!prev && !next) return;
         href={`/work/${next.slug}`}
         data-goatcounter-click={`casestudy-next-${next.slug}`}
         class:list={[
-          "group flex flex-col rounded-xl p-5 transition-colors",
+          "group flex flex-col rounded-xl p-6 transition-colors",
           prev ? "sm:text-right sm:items-end" : "",
         ]}
         style="background-color: var(--theme-surface);"
@@ -95,24 +101,30 @@ if (!prev && !next) return;
           class="text-xs font-semibold uppercase"
           style="
             color: var(--theme-text-tertiary);
+            line-height: var(--theme-lh-xs);
             letter-spacing: var(--theme-tracking-wider);
           "
         >
           Next &rarr;
         </span>
         <span
-          class="mt-1 font-heading font-semibold transition-colors group-hover:underline"
+          class="font-heading font-semibold transition-colors group-hover:underline"
           style="
             color: var(--theme-text-primary);
             font-size: var(--theme-text-base);
-            line-height: var(--theme-leading-snug);
+            line-height: var(--theme-lh-base);
+            margin-top: var(--theme-space-1);
           "
         >
           {next.title}
         </span>
         <span
-          class="mt-1 text-xs"
-          style="color: var(--theme-text-tertiary);"
+          class="text-xs"
+          style="
+            color: var(--theme-text-tertiary);
+            line-height: var(--theme-lh-xs);
+            margin-top: var(--theme-space-1);
+          "
         >
           {next.company}
         </span>

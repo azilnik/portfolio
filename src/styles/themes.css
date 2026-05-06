@@ -38,17 +38,36 @@
   --theme-font-display: var(--theme-font-heading);
   --theme-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  /* Type scale */
-  --theme-text-xs: 0.75rem;
-  --theme-text-sm: 0.875rem;
-  --theme-text-base: 1rem;
-  --theme-text-lg: 1.125rem;
-  --theme-text-xl: 1.25rem;
-  --theme-text-2xl: 1.5rem;
-  --theme-text-3xl: 1.875rem;
-  --theme-text-4xl: clamp(2rem, 1.6rem + 1.8vw, 2.5rem);
-  --theme-text-5xl: clamp(2.5rem, 1.9rem + 2.6vw, 3.25rem);
-  --theme-text-6xl: clamp(3rem, 2.2rem + 3.6vw, 4rem);
+  /* Type scale — strict 8px vertical rhythm. Each size pairs with a
+     --theme-lh-* line-height that computes to a multiple of 8px so prose,
+     headings, and inline elements all sit on the same baseline. Sizes are
+     stepped via media queries (not clamp) so the rendered px never falls
+     between two baselines mid-viewport. */
+  --theme-text-xs: 0.75rem;       /* 12 */
+  --theme-text-sm: 0.875rem;      /* 14 */
+  --theme-text-base: 1rem;        /* 16 */
+  --theme-text-lg: 1.125rem;      /* 18 */
+  --theme-text-xl: 1.25rem;       /* 20 */
+  --theme-text-2xl: 1.5rem;       /* 24 */
+  --theme-text-3xl: 2rem;         /* 32 */
+  --theme-text-4xl: 2rem;         /* 32 → 40 ≥ 768 */
+  --theme-text-5xl: 2.5rem;       /* 40 → 48 ≥ 768 → 56 ≥ 1024 */
+  --theme-text-6xl: 3rem;         /* 48 → 56 ≥ 768 → 72 ≥ 1024 */
+
+  /* Per-size line-heights — every size × LH pairing computes to a multiple
+     of 8px. Use --theme-lh-* directly when setting font-size; the unitless
+     --theme-leading-* ratios below are kept for legacy callers but cannot
+     guarantee baseline alignment across every font-size. */
+  --theme-lh-xs:   1rem;          /* 16 / 12  */
+  --theme-lh-sm:   1.5rem;        /* 24 / 14  */
+  --theme-lh-base: 1.5rem;        /* 24 / 16  */
+  --theme-lh-lg:   2rem;          /* 32 / 18  */
+  --theme-lh-xl:   2rem;          /* 32 / 20  */
+  --theme-lh-2xl:  2rem;          /* 32 / 24  */
+  --theme-lh-3xl:  2.5rem;        /* 40 / 32  */
+  --theme-lh-4xl:  2.5rem;        /* 40 / 32 → 48 / 40 */
+  --theme-lh-5xl:  3rem;          /* 48 / 40 → 56 / 48 → 64 / 56 */
+  --theme-lh-6xl:  3.5rem;        /* 56 / 48 → 64 / 56 → 80 / 72 */
 
   /* Weights */
   --theme-weight-normal: 400;
@@ -57,11 +76,13 @@
   --theme-weight-bold: 700;
   --theme-weight-heading: 700;
 
-  /* Leading */
-  --theme-leading-tight: 1.08;
-  --theme-leading-snug: 1.3;
-  --theme-leading-normal: 1.5;
-  --theme-leading-relaxed: 1.65;
+  /* Leading — legacy unitless ratios. Prefer --theme-lh-* for any text
+     where vertical rhythm matters; the ratios are tuned to land on the
+     8px grid only at the most common pairings (body, h2, h3, h4). */
+  --theme-leading-tight: 1.2;     /* 40 → 48; clean for h2 (40) */
+  --theme-leading-snug: 1.333;    /* 24 → 32; clean for h3/h4/lede */
+  --theme-leading-normal: 1.5;    /* 16 → 24; default body */
+  --theme-leading-relaxed: 1.778; /* 18 → 32; long-form prose */
 
   /* Tracking */
   --theme-tracking-tight: -0.025em;
@@ -164,4 +185,26 @@
     radial-gradient(ellipse 70% 50% at 50% 45%,  var(--theme-gradient-3) 0%, transparent 100%),
     radial-gradient(ellipse 80% 60% at 85% 85%,  var(--theme-gradient-4) 0%, transparent 100%),
     radial-gradient(ellipse 60% 60% at 5% 80%,   var(--theme-gradient-5) 0%, transparent 100%);
+}
+
+/* Stepped responsive type — the 4xl, 5xl, 6xl sizes change at 768 and
+   1024 so every rendered font-size and line-height is an 8px multiple. */
+@media (min-width: 48rem) {
+  :root {
+    --theme-text-4xl: 2.5rem;     /* 40 */
+    --theme-lh-4xl:   3rem;       /* 48 */
+    --theme-text-5xl: 3rem;       /* 48 */
+    --theme-lh-5xl:   3.5rem;     /* 56 */
+    --theme-text-6xl: 3.5rem;     /* 56 */
+    --theme-lh-6xl:   4rem;       /* 64 */
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --theme-text-5xl: 3.5rem;     /* 56 */
+    --theme-lh-5xl:   4rem;       /* 64 */
+    --theme-text-6xl: 4.5rem;     /* 72 */
+    --theme-lh-6xl:   5rem;       /* 80 */
+  }
 }

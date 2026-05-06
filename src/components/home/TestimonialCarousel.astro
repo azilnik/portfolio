@@ -47,10 +47,10 @@ function getInitials(name: string): string {
         style="width: clamp(280px, 80vw, 48rem); scroll-snap-align: center;"
       >
         <p
-          class="leading-relaxed"
           style="
             color: var(--theme-text-secondary);
             font-size: var(--theme-text-lg);
+            line-height: var(--theme-lh-lg);
           "
         >"{t.data.quote}"</p>
 
@@ -59,7 +59,7 @@ function getInitials(name: string): string {
             href={t.data.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-auto pt-6 flex items-center gap-3"
+            class="mt-auto pt-6 flex items-center gap-4"
             data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {t.data.avatar ? (
@@ -84,7 +84,7 @@ function getInitials(name: string): string {
             </div>
           </a>
         ) : (
-          <footer class="mt-auto pt-6 flex items-center gap-3">
+          <footer class="mt-auto pt-6 flex items-center gap-4">
             {t.data.avatar ? (
               <Image
                 src={t.data.avatar}

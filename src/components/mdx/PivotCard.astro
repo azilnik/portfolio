@@ -65,6 +65,7 @@ const { summary, cause, result } = Astro.props;
   .pivot-label {
     margin: 0 0 var(--theme-space-2);
     font-size: var(--theme-text-xs);
+    line-height: var(--theme-lh-xs);
     font-weight: var(--theme-weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--theme-tracking-wider);
@@ -74,8 +75,8 @@ const { summary, cause, result } = Astro.props;
   .pivot-summary {
     margin: 0 0 var(--theme-space-3);
     font-size: var(--theme-text-2xl);
+    line-height: var(--theme-lh-2xl);
     font-weight: var(--theme-weight-heading);
-    line-height: var(--theme-leading-tight);
     color: var(--theme-text-primary);
   }
 
@@ -98,19 +99,20 @@ const { summary, cause, result } = Astro.props;
 
   .pivot-row dt {
     font-size: var(--theme-text-xs);
+    line-height: var(--theme-lh-xs);
     font-weight: var(--theme-weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--theme-tracking-wider);
     color: var(--theme-text-tertiary);
-    /* Nudge the small label down so its x-height aligns with the larger
-       dd text beside it. */
-    padding-top: 0.3rem;
+    /* 8px nudge centers the 16px label leading inside the 32px dd
+       leading so both rows rest on the same baseline. */
+    padding-top: var(--theme-space-1);
   }
 
   .pivot-row dd {
     margin: 0;
     font-size: var(--theme-text-lg);
-    line-height: var(--theme-leading-normal);
+    line-height: var(--theme-lh-lg);
     color: var(--theme-text-primary);
   }
 </style>

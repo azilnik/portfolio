@@ -99,7 +99,7 @@
     color: var(--theme-text-primary);
     background-color: var(--theme-bg);
     font-size: var(--theme-text-base);
-    line-height: var(--theme-leading-normal);
+    line-height: var(--theme-lh-base);
     /* Enable OpenType features for Inter: contextual alternates, tabular
        figures in tables, and stylistic set 01 (a nicer single-story "a"). */
     font-feature-settings: "cv11", "ss01", "calt";
@@ -137,15 +137,17 @@
 
    Tailwind's @tailwindcss/typography (prose) uses hardcoded gray colors and
    spacing that doesn't sit on our 8px baseline grid. These overrides make
-   prose content respond to the active theme AND aligns vertical spacing to
-   the baseline. The result is a consistent "beat" through case studies.
+   prose content respond to the active theme AND lock every line-height
+   and gap to the baseline. The result is a consistent "beat" through case
+   studies — every line of body, every heading, every list item lands on
+   an 8px gridline.
 
-   Key targets (body at 18px × 1.6 ≈ 28.8px line-height, ~3.5 baselines):
-     - Paragraph gap:    1.5rem (24px, 3 baselines)
-     - h2 top:           4rem  (64px, 8 baselines) — section break
-     - h2 bottom:        1rem  (16px, 2 baselines) — tight to first p
-     - h3 top:           2.5rem (40px, 5 baselines)
-     - h3 bottom:        0.75rem (12px) — headings hug the content below
+   Rhythm at a glance (body 18px / 32px line — 4 baselines):
+     - Paragraph gap:  24px (3 baselines)
+     - h2 (32 / 40):   64px top, 16px bottom — section break
+     - h3 (24 / 32):   48px top, 16px bottom
+     - h4 (20 / 32):   32px top, 16px bottom
+     - List items:      8px between, 24px below the list
    -------------------------------------------------------------------------- */
 
 .prose {
@@ -166,9 +168,10 @@
   --tw-prose-td-borders: var(--theme-border);
   color: var(--theme-text-secondary);
 
-  /* Body text sits at 18px / 1.65. Keep the measure inside ~65ch so lines
-     don't outgrow the comfortable reading width identified by print
-     typographers (Bringhurst, Tufte).
+  /* Body text sits at 18px / 32px line-height (4 baselines). Strict
+     8px-multiple leading is what locks the prose to the baseline grid.
+     Measure stays inside ~65ch so lines don't outgrow the comfortable
+     reading width identified by print typographers (Bringhurst, Tufte).
 
      The prose column centers inside the page's content shell. This matters
      on wide displays: earlier the prose was anchored to the shell's left
@@ -178,7 +181,7 @@
      full figures still break out of the prose column via negative margins
      so they're wider than the text but stay centered on the same axis. */
   font-size: var(--theme-text-lg);
-  line-height: var(--theme-leading-relaxed);
+  line-height: var(--theme-lh-lg);
   max-width: var(--theme-prose-width);
   margin-left: auto;
   margin-right: auto;
@@ -210,21 +213,24 @@
 }
 
 /* Heading type scale & weight. Prose headings use the theme heading font,
-   not the body font, so they keep their personality across themes. */
+   not the body font, so they keep their personality across themes. Each
+   heading also gets a per-size line-height so its rendered line height
+   sits on the 8px grid (the unitless --theme-leading-tight isn't
+   guaranteed to align across every size). */
 .prose :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--theme-font-heading);
   font-weight: var(--theme-weight-heading);
   color: var(--theme-prose-heading-color);
   letter-spacing: var(--theme-tracking-tight);
-  line-height: var(--theme-leading-tight);
 }
 
 /* h2 — section divider. Big top gap so a new "##" feels like a new chapter;
    small bottom gap so the heading hugs the paragraph below it (tight/loose
    pairing is a core typography principle — things that belong together
-   should sit closer than things that don't). */
+   should sit closer than things that don't). 32 / 40 → 5 baselines. */
 .prose :where(h2) {
   font-size: var(--theme-text-3xl);
+  line-height: var(--theme-lh-3xl);
   margin-top: var(--theme-space-6);
   margin-bottom: var(--theme-space-2);
 }
@@ -234,14 +240,18 @@
   margin-top: 0;
 }
 
+/* h3 — 24 / 32 → 4 baselines. */
 .prose :where(h3) {
   font-size: var(--theme-text-2xl);
+  line-height: var(--theme-lh-2xl);
   margin-top: var(--theme-space-5);
   margin-bottom: var(--theme-space-2);
 }
 
+/* h4 — 20 / 32 → 4 baselines. */
 .prose :where(h4) {
   font-size: var(--theme-text-xl);
+  line-height: var(--theme-lh-xl);
   margin-top: var(--theme-space-4);
   margin-bottom: var(--theme-space-2);
 }
@@ -288,10 +298,11 @@
   margin-bottom: var(--theme-space-5);
 }
 
-/* Figure captions sit tight under the image, small and quiet. */
+/* Figure captions sit tight under the image, small and quiet.
+   14 / 24 → 3 baselines, 16px gap above. */
 .prose :where(figcaption) {
   font-size: var(--theme-text-sm);
-  line-height: var(--theme-leading-snug);
+  line-height: var(--theme-lh-sm);
   color: var(--theme-text-tertiary);
   margin-top: var(--theme-space-2);
   text-align: left;

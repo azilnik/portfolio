@@ -64,9 +64,9 @@ const { study, featured = false } = Astro.props;
         color: var(--theme-text-primary);
         font-weight: var(--theme-weight-heading);
         letter-spacing: var(--theme-tracking-tight);
-        line-height: var(--theme-leading-snug);
+        line-height: ${featured ? "var(--theme-lh-2xl)" : "var(--theme-lh-lg)"};
         font-size: ${featured ? "var(--theme-text-2xl)" : "var(--theme-text-lg)"};
-        margin-top: 0.25rem;
+        margin-top: var(--theme-space-1);
       `}
     >
       {study.data.title}
@@ -74,12 +74,12 @@ const { study, featured = false } = Astro.props;
 
     <p
       class:list={[
-        "leading-relaxed",
         featured ? "" : "line-clamp-2",
       ]}
       style={`
         color: var(--theme-text-secondary);
         font-size: var(--theme-text-sm);
+        line-height: var(--theme-lh-sm);
         margin-top: var(--theme-space-1);
       `}
     >

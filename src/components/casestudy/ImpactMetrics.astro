@@ -56,7 +56,7 @@ const { metrics } = Astro.props;
               style="
                 color: var(--theme-accent);
                 font-size: var(--theme-text-5xl);
-                line-height: var(--theme-leading-tight);
+                line-height: var(--theme-lh-5xl);
                 letter-spacing: var(--theme-tracking-tight);
                 font-weight: var(--theme-weight-heading);
                 font-variant-numeric: tabular-nums;
@@ -65,10 +65,11 @@ const { metrics } = Astro.props;
               {metric.value}
             </p>
             <p
-              class="mt-3 leading-snug"
               style="
                 color: var(--theme-text-secondary);
                 font-size: var(--theme-text-sm);
+                line-height: var(--theme-lh-sm);
+                margin-top: var(--theme-space-2);
                 max-width: 32ch;
               "
             >
