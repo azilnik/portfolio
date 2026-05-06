@@ -1,11 +1,15 @@
 ---
 /**
- * TestimonialCarousel — full-bleed CSS scroll-snap quote rail.
+ * TestimonialCarousel — left-anchored quote rail, shell-bounded.
  *
- * Pure CSS pattern: a horizontal flex container with `scroll-snap-type:
- * x mandatory` and dynamic `padding-inline` so the active card lands at
- * viewport center while neighbors peek over the screen edges. Native
- * touch swipe, shift+wheel, and the (hidden) scrollbar all just work.
+ * The rail lives inside the same content shell as the Hero and Work
+ * sections so the first quote's left edge lines up with everything
+ * else on the page (the site's vertical reading axis). Cards cap at
+ * 40rem so the quote stays at a readable measure on every viewport.
+ * Snap-start pins each card to the rail's left edge on release. A
+ * soft fade on the rail's right edge feathers the next card so the
+ * "more available" signal reads as deliberate, not as a crop.
+ *
  * No JavaScript, no autoplay, no hover transforms.
  */
 import { getCollection } from "astro:content";
@@ -35,17 +39,28 @@ function getInitials(name: string): string {
     padding-bottom: var(--theme-space-5);
   "
 >
+  {/* Shell-bounded scroll rail. The wrapper sits inside the page's
+      content shell (matching Hero, Work, etc.), and `-mx-6` extends
+      the rail back to the shell's edges so cards can scroll past the
+      visible right edge of the section. The first card's left aligns
+      with `padding-inline: 1.5rem`, matching the section's px-6 — so
+      the rail anchors to the same vertical axis as everything above
+      and below. The mask fades the rail's right edge so the peeked
+      neighbor feathers out gracefully instead of getting hard-cropped. */}
   <div
-    class="hide-scrollbar -mx-6 flex snap-x snap-mandatory items-stretch gap-6 sm:gap-16 overflow-x-auto overflow-y-hidden pb-4 animate-in"
+    class="testimonial-rail hide-scrollbar -mx-6 flex snap-x snap-mandatory items-stretch overflow-x-auto overflow-y-hidden pb-4 animate-in"
     style="
+      gap: clamp(2rem, 6vw, 6rem);
       padding-inline: 1.5rem;
-      scroll-padding-inline: 1.5rem;
+      scroll-padding-inline-start: 1.5rem;
+      scroll-padding-inline-end: 1.5rem;
       overscroll-behavior-x: contain;
     "
   >
     {testimonials.map((t) => (
       <blockquote
-        class="flex flex-none flex-col py-8 w-[75vw] sm:w-[clamp(280px,80vw,36rem)] snap-center sm:snap-start"
+        class="flex flex-none flex-col py-8 snap-start"
+        style="width: min(40rem, calc(100vw - 3rem));"
       >
         <p
           style="
@@ -112,3 +127,32 @@ function getInitials(name: string): string {
     ))}
   </div>
 </section>
+
+<style>
+  /* Edge fade on the rail. The right edge feathers wider so the peeked
+     next quote trails off gracefully. The left edge feathers narrowly
+     across the section's px-6 gutter (1.5rem) — sized to land entirely
+     OUTSIDE the inner content column. The focus card's left edge sits
+     at exactly that 1.5rem mark, so at rest it's fully visible and
+     anchored to the page's reading axis; only when scrolling does the
+     previous card's tail slide into the fade region and feather out
+     cleanly instead of clipping against a hard line. */
+  .testimonial-rail {
+    --rail-fade-end: clamp(2rem, 5vw, 6rem);
+    --rail-fade-start: 1.5rem;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--rail-fade-start),
+      #000 calc(100% - var(--rail-fade-end)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--rail-fade-start),
+      #000 calc(100% - var(--rail-fade-end)),
+      transparent 100%
+    );
+  }
+</style>
