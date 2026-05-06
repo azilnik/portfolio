@@ -21,6 +21,7 @@ metrics:
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
 import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
 import PressQuote from "../../components/mdx/PressQuote.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
@@ -57,9 +58,12 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
   alt="Mobile wallet interface showing a portfolio across multiple chains with a WalletConnect dialog"
 />
 
-<FullBleedGif
-  src="/videos/bd-staking-06.gif"
+<VideoPlayer
+  src="/videos/bd-staking-06.mp4"
+  webm="/videos/bd-staking-06.webm"
+  fallback="/videos/bd-staking-06.gif"
   alt="Walkthrough of the staking delegation flow"
+  size="column"
   caption="Staking delegation flow."
 />
 

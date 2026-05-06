@@ -15,7 +15,7 @@ draft: false
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
+import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
 import Credits from "../../components/mdx/Credits.astro";
 
 import gradleFilter01 from "./images/gradle-filter-01.png";
@@ -73,9 +73,12 @@ The same filter chain drove the scoped task list, the diagnostic detail, and the
 
 Customers stopped asking for CSV exports as queries moved back into the product. Other feature teams adopted the omnibar pattern after a customer asked for it on additional filter selectors, and it became the filter language for Gradle Enterprise rather than a one-view feature.
 
-<FullBleedGif
-  src="/videos/gradle-filter-06.gif"
+<VideoPlayer
+  src="/videos/gradle-filter-06.mp4"
+  webm="/videos/gradle-filter-06.webm"
+  fallback="/videos/gradle-filter-06.gif"
   alt="The omnibar in use, showing typed suggestions and stacked conditions"
+  size="column"
   caption="Typed suggestions and stacked filter conditions."
 />
 
