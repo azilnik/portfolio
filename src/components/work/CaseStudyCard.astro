@@ -26,10 +26,14 @@ const { study, featured = false } = Astro.props;
     featured ? "grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6" : "",
   ]}
 >
-  {/* Thumbnail */}
+  {/* Thumbnail — `transition:name` pairs this with the hero image on
+      /work/[slug] so the View Transitions API morphs the tile into the
+      hero on click and reverses the morph on back-navigation. The name
+      must be unique per page, which `study.id` guarantees. */}
   <div
     class="case-study-card-thumb overflow-hidden"
     style="border-radius: var(--theme-radius-lg);"
+    transition:name={`study-thumb-${study.id}`}
   >
     <Image
       src={study.data.thumbnail}

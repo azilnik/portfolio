@@ -11,14 +11,18 @@ import { Image } from "astro:assets";
 interface Props {
   image: ImageMetadata;
   alt: string;
+  /** Case study slug — used to pair this hero with its thumbnail tile
+      on listing pages via the View Transitions API. */
+  slug: string;
 }
 
-const { image, alt } = Astro.props;
+const { image, alt, slug } = Astro.props;
 ---
 
 <div
   class="w-full overflow-hidden animate-in"
   style="border-radius: var(--theme-image-radius); box-shadow: var(--shadow-elevation-medium); --delay: 80ms;"
+  transition:name={`study-thumb-${slug}`}
 >
   <Image
     src={image}

@@ -39,6 +39,9 @@ interface Props {
   metrics?: Array<{ label: string; value: string }>;
   prevStudy?: NavEntry;
   nextStudy?: NavEntry;
+  /** Case study slug — paired with the matching thumbnail on listings
+      so the hero morphs from the clicked tile via View Transitions. */
+  slug: string;
 }
 
 const {
@@ -53,6 +56,7 @@ const {
   metrics,
   prevStudy,
   nextStudy,
+  slug,
 } = Astro.props;
 
 // Title for <title> / OG / Twitter — short and SERP-friendly. BaseLayout
@@ -191,7 +195,7 @@ const jsonLd = [
       style="max-width: var(--theme-content-width);"
     >
       <div class="mx-auto" style="max-width: var(--theme-figure-wide);">
-        <CaseStudyHero image={heroImage} alt={title} />
+        <CaseStudyHero image={heroImage} alt={title} slug={slug} />
       </div>
     </div>
 

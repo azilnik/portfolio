@@ -19,6 +19,7 @@
  *
  * Other layouts (PageLayout, CaseStudyLayout) nest inside this one.
  */
+import { ClientRouter } from "astro:transitions";
 import GoatCounter from "../components/global/GoatCounter.astro";
 import JsonLd from "../components/global/JsonLd.astro";
 import "../styles/global.css";
@@ -126,6 +127,11 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 
     {/* JSON-LD structured data — emitted by individual pages via the jsonLd prop */}
     {jsonLd && jsonLd.length > 0 && jsonLd.map((data) => <JsonLd data={data} />)}
+
+    {/* Astro View Transitions — enables SPA-style navigation so paired
+        elements with `transition:name` (e.g. case study thumbnails ↔ hero
+        images) morph between pages, and back-navigation reverses naturally. */}
+    <ClientRouter />
 
     <GoatCounter />
   </head>
