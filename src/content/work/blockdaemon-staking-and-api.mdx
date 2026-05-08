@@ -3,20 +3,15 @@ title: "Institutional Crypto Staking Dashboard"
 company: "Blockdaemon"
 role: "Director of Design"
 industry: "Fintech, Crypto Infrastructure"
-description: "Zero-to-one staking dashboard and API marketplace. Shipped while scaling the design org 1 to 7."
+description: "Product design portfolio project, zero-to-one staking dashboard and API marketplace. Shipped while scaling the design org 1 to 7."
 seoTitle: "Staking & API at Blockdaemon"
-seoDescription: "Zero-to-one institutional crypto staking at Blockdaemon. Research with treasury teams drove a density-first dashboard design; the design org scaled 1 to 7."
+seoDescription: "Product design portfolio project, zero-to-one institutional crypto staking at Blockdaemon. Research with treasury teams drove a density-first dashboard design; the design org scaled 1 to 7."
 heroImage: "./images/bd-staking-01.png"
 thumbnail: "./images/bd-staking-01.png"
 thumbnailAlt: "Blockdaemon's institutional staking portfolio dashboard showing a multi-chain treasury"
 employer: "blockdaemon"
 sortOrder: 2
 draft: false
-metrics:
-  - label: "Design team grown in 15 months"
-    value: "1 to 7"
-  - label: "Zero-to-one products shipped"
-    value: "2"
 ---
 
 import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
@@ -30,23 +25,21 @@ import bdStaking02 from "./images/bd-staking-02.png";
 import bdStaking03 from "./images/bd-staking-03.png";
 import bdStaking05 from "./images/bd-staking-05.png";
 
-Blockdaemon is like AWS for crypto. Exchanges and institutional custodians use it to deploy nodes and stake assets without operating their own data centers, and enterprises like Goldman Sachs and Microsoft are the customer tier.
+Blockdaemon is like AWS for crypto. Banks, exchanges, and enterprises like Goldman Sachs and Microsoft use it to deploy crypto servers and stake assets without operating their own data centers.
 
-I joined the Blockdaemon team as the founding designer after [Blockdaemon acquired my consultancy, Gravy](https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy). The company raised $207M at a $3.25B valuation during my tenure, and there was no existing design organization when I arrived.
-
-Over 15 months we shipped two zero-to-one products: the institutional staking dashboard and the Ubiquity developer API. Neither had established UX patterns in crypto, so we stood up the research practice to inform both.
+I joined the Blockdaemon team as the founding designer after [Blockdaemon acquired my consultancy, Gravy](https://www.blockdaemon.com/blog/announcing-blockdaemons-acquisition-of-gravy). There was no existing design organization when I arrived.
 
 ## Institutional staking
 
-The staking dashboard was zero-to-one with no competitor design patterns to reference. The users were institutional treasury teams managing portfolios worth hundreds of millions across multiple blockchains, and they needed total value and validator performance on one screen.
+Institutional treasury teams manage portfolios worth hundreds of millions across multiple blockchains. They use Blockdaemon to stake their assets and earn income, but the existing staking experience was built for retail users and didn't meet their needs.
 
 <FullBleedImage
   src={bdStaking01}
   alt="Portfolio dashboard showing a sample $108M institutional portfolio across multiple blockchains"
-  caption="The staking portfolio dashboard. The $108M figure is a sample used in demos."
+  caption="The staking portfolio dashboard."
 />
 
-We hired Blockdaemon's first two researchers and stood up the research practice from scratch. Their interviews with treasury teams shaped the design direction toward density plus real-time trust signals. These users weren't trying to avoid information; they wanted to see all of it on one surface without losing the signal.
+We designed a new dashboard experience for institutional staking customers. The layout focuses heavily on displaying the right level of data density without losing the signal.
 
 <FullBleedImage
   src={bdStaking02}
@@ -58,6 +51,10 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
   alt="Mobile wallet interface showing a portfolio across multiple chains with a WalletConnect dialog"
 />
 
+## Ubiquity API
+
+Ubiquity is Blockdaemon's developer-facing API for interacting with crypto data across chains. We built a dashboard to visualize usage against rate limits and request-log auditing; both surfaced in developer interviews.
+
 <VideoPlayer
   src="/videos/bd-staking-06.mp4"
   webm="/videos/bd-staking-06.webm"
@@ -66,10 +63,6 @@ We hired Blockdaemon's first two researchers and stood up the research practice 
   size="column"
   caption="Staking delegation flow."
 />
-
-## Ubiquity API
-
-Ubiquity was Blockdaemon's developer-facing API for querying crypto data across chains. The dashboard was the first place developers went to debug what their API keys were doing. The highest-value views turned out to be usage against rate limits and request-log auditing — both surfaced in developer interviews.
 
 <FullBleedImage
   src={bdStaking03}
@@ -85,7 +78,7 @@ Ubiquity was Blockdaemon's developer-facing API for querying crypto data across 
 
 ## Results
 
-The staking product shipped into the $207M Series C materials and was part of the investor demo flow when the round closed. We grew the design organization to seven people and set up design reviews and a weekly research cadence for the first time at the company.
+The staking dashboard shipped into the $207M Series C materials and was part of the investor demo flow when the round closed.
 
 <PressQuote
   quote="Blockdaemon nabs $1.3B valuation in $155M funding round. SoftBank Vision Fund 2 led the funding."

@@ -1,5 +1,5 @@
 ---
-title: "Build Data Omnibar"
+title: "Flexible Filtering for Developer Diagnostics"
 company: "Gradle"
 role: "Lead Designer"
 industry: "Developer Tools"
@@ -24,26 +24,20 @@ import gradleFilter03 from "./images/gradle-filter-03.png";
 import gradleFilter04 from "./images/gradle-filter-04.png";
 import gradleFilter05 from "./images/gradle-filter-05.png";
 
-[Gradle](https://gradle.com) builds developer productivity tools. Large engineering organizations like Netflix and Salesforce use Gradle Enterprise (now Develocity) to keep CI/CD pipelines healthy. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
+[Gradle](https://gradle.com) builds developer productivity tools. Large engineering organizations like Netflix and Salesforce use Gradle Enterprise (now Develocity) to keep their development pipelines healthy. 
 
-The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar offers filter conditions they can stack. The signal that started the project was straightforward: customers were exporting to CSV and slicing the data in spreadsheets, which told us the in-product filtering wasn't covering their queries.
-
-The original concept was a visual query builder with a clickable canvas. It was too slow for experts and still too opaque for beginners, so we moved to a typed input that could serve both audiences with one interface.
+The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar offers filter conditions they can stack. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
 ## Typed suggestions surface the taxonomy
 
-A new user types "slow" and the omnibar offers "duration greater than" and "status: failed" as next steps. Filter types become discoverable through use rather than through documentation.
+A new user types `slow` and the omnibar offers `duration greater than` and `status: failed` as next steps. Filters become discoverable through use rather than through documentation (just like an old Nintendo game!).
 
 <FullBleedImage
   src={gradleFilter01}
   alt="The Gradle Enterprise omnibar with typed filter suggestions"
 />
 
-## Implicit AND across stacked filters
-
-Most diagnostic queries are AND chains: "slow tests AND failed AND in module X." V1 defaulted to implicit AND and skipped the full boolean builder, which covered the analytical patterns engineers actually used without the interaction cost of a full query language.
-
-We prototyped against Gradle's actual build event data rather than fixtures, so the edge cases — large datasets, odd chains where suggestions misfired — surfaced early. Engineering caught the failure modes in the prototype and could fix them before V1.
+We prototyped against Gradle's actual build event data rather than fixtures, so the edge cases like large datasets surfaced early. Engineering caught the failure modes in the prototype and could fix them before V1.
 
 <FullBleedImage
   src={gradleFilter02}
@@ -71,7 +65,7 @@ The same filter chain drove the scoped task list, the diagnostic detail, and the
 
 ## Results
 
-Customers stopped asking for CSV exports as queries moved back into the product. Other feature teams adopted the omnibar pattern after a customer asked for it on additional filter selectors, and it became the filter language for Gradle Enterprise rather than a one-view feature.
+The omnibar and its syntax became the filter language for Gradle Enterprise rather than a one-view feature.
 
 <VideoPlayer
   src="/videos/gradle-filter-06.mp4"
@@ -81,8 +75,6 @@ Customers stopped asking for CSV exports as queries moved back into the product.
   size="column"
   caption="Typed suggestions and stacked filter conditions."
 />
-
-> "We'd love to see the ability to add it to other filter selectors as well."
 
 <Credits
   credits={[

@@ -291,6 +291,26 @@
   font-weight: 600;
 }
 
+/* Inline code — examples like `slow` or `duration greater than` read as
+   data, not prose. Horizontal padding only, so the line-height and
+   baseline grid stay intact (no negative-margin compensation needed).
+   0.9em sizing aligns the monospace x-height with surrounding body. */
+.prose :where(:not(pre) > code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  color: var(--theme-text-primary);
+  background-color: var(--theme-bg-tertiary);
+  padding: 0 0.4em;
+  border-radius: var(--theme-radius-sm);
+}
+
+/* Tailwind's typography defaults wrap inline code in backticks via
+   ::before/::after — strip those since the styling already signals it. */
+.prose :where(:not(pre) > code)::before,
+.prose :where(:not(pre) > code)::after {
+  content: none;
+}
+
 .prose :where(hr) {
   border-color: var(--theme-prose-hr-color);
   margin-top: var(--theme-space-5);
