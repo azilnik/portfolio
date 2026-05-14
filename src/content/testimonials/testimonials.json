@@ -9,6 +9,14 @@
   },
   {
     "id": "2",
+    "quote": "Ari is one of the strongest design leaders I've worked with. From a product management perspective, he was an exceptional partner — highly organized, detail-oriented, and deeply thoughtful, while remaining practical and collaborative throughout.",
+    "authorName": "Jeanette Popiel",
+    "authorTitle": "Senior Product Manager, Join",
+    "avatar": "./avatars/jeanette-popiel.jpg",
+    "linkedinUrl": "https://www.linkedin.com/in/jeanette-popiel-60888310/"
+  },
+  {
+    "id": "3",
     "quote": "Ari significantly improved our understanding of UX issues within the main product and led our design system initiative. His understanding of design strategy and his communication skills make him an exceptional leader.",
     "authorName": "Rob Lucha",
     "authorTitle": "Engineering Lead, Gradle",
@@ -16,7 +24,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/rob-lucha/"
   },
   {
-    "id": "3",
+    "id": "4",
     "quote": "Ari is an exceptional product design leader who brings clarity and vision to difficult projects. He built a supportive and collaborative environment, encouraging the team to push creative boundaries and deliver work that mattered.",
     "authorName": "Andrew Athinodorou",
     "authorTitle": "Lead Product Designer, Blockdaemon",
@@ -24,7 +32,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/andrew-athinodorou/"
   },
   {
-    "id": "4",
+    "id": "5",
     "quote": "Ari is a wonderfully positive and creative designer. He pushes himself to go beyond expectations and uses his knowledge of design and human psychology to create great experiences.",
     "authorName": "Nikki Wolfe",
     "authorTitle": "Principal Product Designer, VeraScore",
@@ -32,7 +40,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/nikkiwolfe/"
   },
   {
-    "id": "5",
+    "id": "6",
     "quote": "What stands out about Ari is his desire and ability to focus on the true challenge and solve the problem in every possible way. Time and again, I have watched him be highly influential on teams and with clients in delivering excellent work.",
     "authorName": "David Drake",
     "authorTitle": "Project Manager, Soostone",
@@ -40,7 +48,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/davidbrettdrake/"
   },
   {
-    "id": "6",
+    "id": "7",
     "quote": "Ari has been a tremendous mentor throughout my journey as a designer. He offers clear, constructive feedback grounded in real-world experience, with a unique ability to really listen, understand, and provide relevant advice.",
     "authorName": "Huyen Bui",
     "authorTitle": "Senior UX Designer, Keller Williams",
