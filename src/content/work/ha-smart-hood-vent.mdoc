@@ -21,12 +21,6 @@ metrics:
     value: "236 lines"
 ---
 
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
-import Callout from "../../components/mdx/Callout.astro";
-
-import hoodDashboard from "./images/hood-vent-dashboard.png";
-
 Gas stoves emit real pollutants, and the mitigation is simple: turn on your hood when you cook. The problem is that most people forget. I have two small kids and have read too many air quality studies, so I automated my range hood.
 
 Most smart hood automations watch for a temperature threshold — "when the kitchen reaches 26 degrees, turn on the hood." That approach has two problems. It's slow: by the time the kitchen heats up, you've already been cooking for 5 to 10 minutes and breathing the pollutants the hood was supposed to remove. And on a hot summer day the kitchen is already at 28 degrees, so the system either fires without a stove or needs seasonal recalibration.
@@ -35,11 +29,10 @@ Rate-of-change detection asks a different question. Instead of "is it hot?" it a
 
 When you turn on a burner, the air near the stove starts rising in temperature immediately. The derivative of the reading over a rolling two-minute window spikes almost as soon as the pan heats. When you stop cooking, the rate flattens and the hood shuts off. Hot days don't cause false triggers because the temperature is high but not changing fast.
 
-<FullBleedImage
-  src={hoodDashboard}
-  alt="Home Assistant dashboard during a real cooking session: hood state, rate-of-change spike, and raw temperature"
-  caption="A real cooking session. The rate-of-change spike triggered the hood within a minute, well before raw temperature would have crossed any threshold."
-/>
+{% figure
+   src="/src/content/work/images/hood-vent-dashboard.png"
+   alt="Home Assistant dashboard during a real cooking session: hood state, rate-of-change spike, and raw temperature"
+   caption="A real cooking session. The rate-of-change spike triggered the hood within a minute, well before raw temperature would have crossed any threshold." /%}
 
 ## The product
 
@@ -47,14 +40,13 @@ The automation watches both temperature and humidity rate of change. Temperature
 
 Every sensitivity setting is a slider on the dashboard, so anyone using this can tune it without editing YAML. That's the difference between a project that works for me and one that works in someone else's kitchen. Toggle the hood by hand and the automation backs off for 30 minutes — the system supports the cook, it doesn't fight them. After two hours of continuous run, the hood forces off and posts a notification, in case I left a pot on the stove and walked out the door.
 
-<VideoPlayer
-  src="/videos/hood-vent-demo.mp4"
-  webm="/videos/hood-vent-demo.webm"
-  fallback="/videos/hood-vent-demo.gif"
-  alt="A stove knob turned on, followed by the range hood activating automatically"
-  size="column"
-  caption="Cooking starts. The hood is on before I've finished adjusting the flame."
-/>
+{% video
+   src="/videos/hood-vent-demo.mp4"
+   webm="/videos/hood-vent-demo.webm"
+   fallback="/videos/hood-vent-demo.gif"
+   alt="A stove knob turned on, followed by the range hood activating automatically"
+   size="column"
+   caption="Cooking starts. The hood is on before I've finished adjusting the flame." /%}
 
 Total cost is about $85: a Zigbee sensor (~$15) and a SwitchBot Bot plus Hub Mini (~$70). No cloud, no subscriptions, no rewiring. Everything runs on the local Home Assistant instance.
 

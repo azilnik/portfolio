@@ -17,7 +17,7 @@ import { glob, file } from "astro/loaders";
  * (e.g., `join-navigation.mdx` → `/work/join-navigation`).
  */
 const work = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/work" }),
+  loader: glob({ pattern: "**/*.mdoc", base: "./src/content/work" }),
   schema: ({ image }) =>
     z.object({
       // --- Core metadata ---

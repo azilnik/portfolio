@@ -24,11 +24,16 @@
  *   <FullBleedImage src={myImg} alt="…" size="full" />   // hero-scale
  */
 import { Image } from "astro:assets";
+import { resolveContentImage } from "../../lib/contentImages";
 
 type FigureSize = "column" | "wide" | "full";
 
 interface Props {
-  src: ImageMetadata;
+  /**
+   * Either an imported `ImageMetadata` (legacy MDX) or a string path written
+   * by Keystatic into the Markdoc tag (e.g. `/src/content/work/images/x.png`).
+   */
+  src: ImageMetadata | string;
   alt: string;
   /** Width treatment. Defaults to "wide" — most screenshots benefit from the breakout. */
   size?: FigureSize;
@@ -36,7 +41,8 @@ interface Props {
   caption?: string;
 }
 
-const { src, alt, size = "wide", caption } = Astro.props;
+const { src: rawSrc, alt, size = "wide", caption } = Astro.props;
+const src = resolveContentImage(rawSrc);
 
 // Pick the figure width class defined in global.css.
 const sizeClass = {

@@ -19,15 +19,6 @@ metrics:
     value: "20%"
 ---
 
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import FullBleedGif from "../../components/mdx/FullBleedGif.astro";
-import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
-import Credits from "../../components/mdx/Credits.astro";
-
-import joinScenarios01 from "./images/join-scenarios-01.png";
-import joinScenarios02 from "./images/join-scenarios-02.png";
-import joinScenarios03 from "./images/join-scenarios-03.png";
-
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
 Scenarios is a side-by-side comparison view for construction project decisions. A contractor doesn't decide "which countertop" in isolation; they decide "which finish package for kitchens and bathrooms" against budget and schedule. Before Scenarios, Join asked users to evaluate one decision at a time, which didn't match how owners actually weighed options. Real decisions are made on bundled packages — finishes, schedule, scope — against each other.
@@ -36,52 +27,46 @@ Scenarios is a side-by-side comparison view for construction project decisions. 
 
 A contractor builds two options — say, premium finishes on a compressed schedule against a value-engineered version that stretches the timeline. Join recalculates every linked line item underneath, and the owner reviews two packages instead of forty individual decisions.
 
-<FullBleedImage
-  src={joinScenarios01}
-  alt="Join Scenarios overview listing two alternative versions of a construction project"
-/>
+{% figure
+   src="/src/content/work/images/join-scenarios-01.png"
+   alt="Join Scenarios overview listing two alternative versions of a construction project" /%}
 
-<VideoPlayer
-  src="/videos/join-scenarios-05.mp4"
-  webm="/videos/join-scenarios-05.webm"
-  fallback="/videos/join-scenarios-05.gif"
-  alt="Pricing flow inside Scenarios showing cost propagation across linked line items"
-  size="column"
-  caption="Cost propagation across linked line items."
-/>
+{% video
+   src="/videos/join-scenarios-05.mp4"
+   webm="/videos/join-scenarios-05.webm"
+   fallback="/videos/join-scenarios-05.gif"
+   alt="Pricing flow inside Scenarios showing cost propagation across linked line items"
+   size="column"
+   caption="Cost propagation across linked line items." /%}
 
 ## A flat comparison, no ranking
 
 The hardest design decision was about hierarchy. Owners on multi-million-dollar projects didn't want to be steered toward a "best" option; they wanted to weigh trade-offs themselves. We made the comparison deliberately flat — every dimension visible, no option marked as preferred.
 
-<FullBleedImage
-  src={joinScenarios02}
-  alt="Scenarios comparison view showing two packaged project options side-by-side with their cost and schedule trade-offs"
-/>
+{% figure
+   src="/src/content/work/images/join-scenarios-02.png"
+   alt="Scenarios comparison view showing two packaged project options side-by-side with their cost and schedule trade-offs" /%}
 
-<FullBleedGif
-  src="/videos/join-scenarios-04.gif"
-  alt="Interactive prototype of Scenarios comparing two bundled options with live trade-off calculations"
-  caption="Two bundled options compared side-by-side with cost and schedule trade-offs visible at a glance."
-/>
+{% gif
+   src="/videos/join-scenarios-04.gif"
+   alt="Interactive prototype of Scenarios comparing two bundled options with live trade-off calculations"
+   caption="Two bundled options compared side-by-side with cost and schedule trade-offs visible at a glance." /%}
 
 ## Progressive disclosure
 
 The default view is intentionally lean — users click into specific dimensions when they need detail. The owner-facing read stays calm for sign-off meetings while the contractor side keeps the richer working data for internal use.
 
-<FullBleedImage
-  src={joinScenarios03}
-  alt="Scenarios decision workflow showing a contractor preparing options for an owner sign-off meeting"
-/>
+{% figure
+   src="/src/content/work/images/join-scenarios-03.png"
+   alt="Scenarios decision workflow showing a contractor preparing options for an owner sign-off meeting" /%}
 
-<VideoPlayer
-  src="/videos/join-scenarios-06.mp4"
-  webm="/videos/join-scenarios-06.webm"
-  fallback="/videos/join-scenarios-06.gif"
-  alt="Collaboration features inside Scenarios showing comments and sign-off rituals"
-  size="column"
-  caption="Collaboration around scenario sign-off."
-/>
+{% video
+   src="/videos/join-scenarios-06.mp4"
+   webm="/videos/join-scenarios-06.webm"
+   fallback="/videos/join-scenarios-06.gif"
+   alt="Collaboration features inside Scenarios showing comments and sign-off rituals"
+   size="column"
+   caption="Collaboration around scenario sign-off." /%}
 
 ## Results
 
@@ -91,12 +76,6 @@ The scenario-decision cycle dropped 50%, measured from creation through owner si
 
 > "We used Scenarios on a $150M job and it cut our decision timeline in half."
 
-<Credits
-  credits={[
-    { role: "Design", people: "Ari Zilnik" },
-    { role: "Product", people: "Steve Matthews", url: "https://www.linkedin.com/in/stevenjmatthews/" },
-    { role: "Engineering", people: "Dan Anthony", url: "https://www.linkedin.com/in/dantho/" },
-    { role: "Engineering", people: "Mark Deutsch", url: "https://www.linkedin.com/in/mark-deutsch-7ba21426/" },
-  ]}
-  note="Shipped at Join, 2024."
-/>
+{% credits
+   credits=[{role: "Design", people: "Ari Zilnik"}, {role: "Product", people: "Steve Matthews", url: "https://www.linkedin.com/in/stevenjmatthews/"}, {role: "Engineering", people: "Dan Anthony", url: "https://www.linkedin.com/in/dantho/"}, {role: "Engineering", people: "Mark Deutsch", url: "https://www.linkedin.com/in/mark-deutsch-7ba21426/"}]
+   note="Shipped at Join, 2024." /%}

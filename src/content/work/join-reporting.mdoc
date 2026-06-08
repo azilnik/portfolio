@@ -21,73 +21,53 @@ metrics:
     value: "~25"
 ---
 
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import Credits from "../../components/mdx/Credits.astro";
-
-import joinReportingHero from "./images/join-reporting-hero.png";
-import joinReportingGrouped from "./images/join-reporting-grouped.png";
-import joinReportingPdfGrid from "./images/join-reporting-pdf-grid.png";
-import joinReportingPdfCover from "./images/join-reporting-pdf-cover.png";
-import joinReportingMilestone from "./images/join-reporting-milestone.png";
-
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
 Reports are how preconstruction teams earn an owner's trust. The Items Report is the working surface where decisions, costs, and status get filtered into the packet that lands in front of an owner on a Friday. Customers like Webcor, Leopardo, and McCarthy were spending 5 to 10 hours a week exporting from Join, then stitching PDFs together in Bluebeam to build one coherent submission. We heard from estimators that the existing Report Builder was too limited for complex projects and too complicated for simpler ones, and that skilled Preconstruction Managers were reverting to Excel macros to get around it.
 
 We treated reports as a primitive every Join feature plugs into, not a downstream artifact.
 
-<FullBleedImage
-  src={joinReportingHero}
-  alt="Items Report working view with four donut summary widgets (Items, Past Due, Assignees, Companies) over the items list with status, assignee, due date, cost and schedule impact columns"
-  caption="The Items Report working surface — summary widgets up top, AG Grid below."
-/>
+{% figure
+   src="/src/content/work/images/join-reporting-hero.png"
+   alt="Items Report working view with four donut summary widgets (Items, Past Due, Assignees, Companies) over the items list with status, assignee, due date, cost and schedule impact columns"
+   caption="The Items Report working surface — summary widgets up top, AG Grid below." /%}
 
 ## One data shape, two surfaces
 
 AG Grid Enterprise drives the on-screen working view — filter, sort, group, pin, resize before anyone exports anything. For the export side we picked @react-pdf/renderer, a React component model with real typographic control, so a single primitive could live in both places without a translation layer. Both consume the same data shape, so what you arrange in the grid is what comes out the other side. We built the prototype in code rather than Figma so it could feel like a live product against real data when customers reviewed it.
 
-<FullBleedImage
-  src={joinReportingGrouped}
-  alt="Items Report grouped by Status — Pending (6 items, $1,490,000), Accepted (1 item, $400,000), Rejected (2 items, -$65,000) — with subtotals on the group rows and the same four donut summary widgets above"
-  caption="Group by Status: subtotals roll up, summary widgets stay live, and this exact arrangement carries straight to the PDF."
-/>
+{% figure
+   src="/src/content/work/images/join-reporting-grouped.png"
+   alt="Items Report grouped by Status — Pending (6 items, $1,490,000), Accepted (1 item, $400,000), Rejected (2 items, -$65,000) — with subtotals on the group rows and the same four donut summary widgets above"
+   caption="Group by Status: subtotals roll up, summary widgets stay live, and this exact arrangement carries straight to the PDF." /%}
 
 ## Bringing Scales into the PDF
 
 The harder design problem was making the PDF feel like Join, not like a generic export. We rebuilt our Scales primitives inside react-pdf — PDFTable, PDFScalesDonutChart, a thin set of pdfTokens — so the PDF could use the same type styles and chart styles as the web. Whatever you arranged in the grid — group-bys, filters, sort order — carried through to the export, with the same donut colors and a filter bar locked to every header.
 
-<FullBleedImage
-  src={joinReportingPdfGrid}
-  alt="Page 3 of the exported PDF showing the items list grouped by Status — Pending, Accepted, Rejected — with the same subtotals, columns, and Scales chart language as the working view, plus a header reading 'Grouping: Status, Sort: Item'"
-  caption="The PDF page that follows the cover. Same grouping, same subtotals, same chart language as the screen."
-/>
+{% figure
+   src="/src/content/work/images/join-reporting-pdf-grid.png"
+   alt="Page 3 of the exported PDF showing the items list grouped by Status — Pending, Accepted, Rejected — with the same subtotals, columns, and Scales chart language as the working view, plus a header reading 'Grouping: Status, Sort: Item'"
+   caption="The PDF page that follows the cover. Same grouping, same subtotals, same chart language as the screen." /%}
 
 ## Designing for screens, not paper
 
 We started this thinking PDFs would be printed and designed page layouts for Letter, A4, and 11x17. A customer call reframed it: PDFs are almost never printed. They're viewed on desktop, often inside 500-page submission packets. Dynamic page sizing became the top customer ask, and the "Generated by Join" footer came out the same week — customers have strict branding rules and the packet is theirs, not Join's.
 
-<FullBleedImage
-  src={joinReportingPdfCover}
-  alt="The PDF cover page showing the customer's three logos (Meridian Construction, Atlas Engineering, Greenfield Partners), the project hero photo, and 'Items Report' as the title — with Join's export dialog still visible on the right"
-  caption="The cover page belongs to the customer, not to Join. Their logos, their project, no Join footer."
-/>
+{% figure
+   src="/src/content/work/images/join-reporting-pdf-cover.png"
+   alt="The PDF cover page showing the customer's three logos (Meridian Construction, Atlas Engineering, Greenfield Partners), the project hero photo, and 'Items Report' as the title — with Join's export dialog still visible on the right"
+   caption="The cover page belongs to the customer, not to Join. Their logos, their project, no Join footer." /%}
 
 ## Results
 
 About 25 PRs over two months, AI-coded against real anonymized customer data. The top 20 validated customer requests landed in the prototype, and we put a fresh build on leadership's desk every Monday. That cadence got PM, engineering, and leadership aligned on reports as primitives. Risks and Buyout reports now plug into the same standard.
 
-<FullBleedImage
-  src={joinReportingMilestone}
-  alt="Milestone Report screen using the same grid pattern as Items — Category, Description, Status, Quantity, Unit columns, with rows grouped under A Substructure → A10 Foundations and a running Total at the bottom"
-  caption="Milestone Report — same primitives, different data type."
-/>
+{% figure
+   src="/src/content/work/images/join-reporting-milestone.png"
+   alt="Milestone Report screen using the same grid pattern as Items — Category, Description, Status, Quantity, Unit columns, with rows grouped under A Substructure → A10 Foundations and a running Total at the bottom"
+   caption="Milestone Report — same primitives, different data type." /%}
 
-<Credits
-  credits={[
-    { role: "Design", people: "Ari Zilnik" },
-    { role: "Product", people: "Shea Kusiak", url: "https://www.linkedin.com/in/sheakusiak/" },
-    { role: "Engineering", people: "Jules Becker", url: "https://www.linkedin.com/in/julesbecker/" },
-    { role: "Engineering", people: "Erica Slavin", url: "https://www.linkedin.com/in/ericaslavin/" },
-  ]}
-  note="In flight at Join, 2026."
-/>
+{% credits
+   credits=[{role: "Design", people: "Ari Zilnik"}, {role: "Product", people: "Shea Kusiak", url: "https://www.linkedin.com/in/sheakusiak/"}, {role: "Engineering", people: "Jules Becker", url: "https://www.linkedin.com/in/julesbecker/"}, {role: "Engineering", people: "Erica Slavin", url: "https://www.linkedin.com/in/ericaslavin/"}]
+   note="In flight at Join, 2026." /%}

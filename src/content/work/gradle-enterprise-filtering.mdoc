@@ -14,17 +14,7 @@ sortOrder: 6
 draft: false
 ---
 
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
-import Credits from "../../components/mdx/Credits.astro";
-
-import gradleFilter01 from "./images/gradle-filter-01.png";
-import gradleFilter02 from "./images/gradle-filter-02.png";
-import gradleFilter03 from "./images/gradle-filter-03.png";
-import gradleFilter04 from "./images/gradle-filter-04.png";
-import gradleFilter05 from "./images/gradle-filter-05.png";
-
-[Gradle](https://gradle.com) builds developer productivity tools. Large engineering organizations like Netflix and Salesforce use Gradle Enterprise (now Develocity) to keep their development pipelines healthy. 
+[Gradle](https://gradle.com) builds developer productivity tools. Large engineering organizations like Netflix and Salesforce use Gradle Enterprise (now Develocity) to keep their development pipelines healthy.
 
 The filtering pattern replaces a dozen scattered dropdowns with a single typed input. Users describe what they're looking for and the omnibar offers filter conditions they can stack. As lead designer, I owned how those teams diagnosed slow tests and tracked down flaky failures across thousands of daily builds.
 
@@ -32,54 +22,26 @@ The filtering pattern replaces a dozen scattered dropdowns with a single typed i
 
 A new user types `slow` and the omnibar offers `duration greater than` and `status: failed` as next steps. Filters become discoverable through use rather than through documentation (just like an old Nintendo game!).
 
-<FullBleedImage
-  src={gradleFilter01}
-  alt="The Gradle Enterprise omnibar with typed filter suggestions"
-/>
+{% figure src="/src/content/work/images/gradle-filter-01.png" alt="The Gradle Enterprise omnibar with typed filter suggestions" /%}
 
 We prototyped against Gradle's actual build event data rather than fixtures, so the edge cases like large datasets surfaced early. Engineering caught the failure modes in the prototype and could fix them before V1.
 
-<FullBleedImage
-  src={gradleFilter02}
-  alt="Stacked filter conditions visible as pills inside the omnibar input"
-/>
+{% figure src="/src/content/work/images/gradle-filter-02.png" alt="Stacked filter conditions visible as pills inside the omnibar input" /%}
 
 ## A pattern that fed every diagnostic view
 
 The same filter chain drove the scoped task list, the diagnostic detail, and the summary roll-ups. Once a user learned the omnibar on the build list, the same interaction worked across the rest of the product.
 
-<FullBleedImage
-  src={gradleFilter03}
-  alt="A filtered data view showing slow build tasks scoped to a specific module"
-/>
+{% figure src="/src/content/work/images/gradle-filter-03.png" alt="A filtered data view showing slow build tasks scoped to a specific module" /%}
 
-<FullBleedImage
-  src={gradleFilter04}
-  alt="The diagnostic view after filtering a large dataset"
-/>
+{% figure src="/src/content/work/images/gradle-filter-04.png" alt="The diagnostic view after filtering a large dataset" /%}
 
-<FullBleedImage
-  src={gradleFilter05}
-  alt="A summary view of filter results with counts and trends"
-/>
+{% figure src="/src/content/work/images/gradle-filter-05.png" alt="A summary view of filter results with counts and trends" /%}
 
 ## Results
 
 The omnibar and its syntax became the filter language for Gradle Enterprise rather than a one-view feature.
 
-<VideoPlayer
-  src="/videos/gradle-filter-06.mp4"
-  webm="/videos/gradle-filter-06.webm"
-  fallback="/videos/gradle-filter-06.gif"
-  alt="The omnibar in use, showing typed suggestions and stacked conditions"
-  size="column"
-  caption="Typed suggestions and stacked filter conditions."
-/>
+{% video src="/videos/gradle-filter-06.mp4" webm="/videos/gradle-filter-06.webm" fallback="/videos/gradle-filter-06.gif" alt="The omnibar in use, showing typed suggestions and stacked conditions" size="column" caption="Typed suggestions and stacked filter conditions." /%}
 
-<Credits
-  credits={[
-    { role: "Design", people: "Ari Zilnik" },
-    { role: "Engineering", people: "Rob Lucha", url: "https://www.linkedin.com/in/rob-lucha/" },
-  ]}
-  note="Shipped at Gradle (now Develocity)."
-/>
+{% credits credits=[{role: "Design", people: "Ari Zilnik"}, {role: "Engineering", people: "Rob Lucha", url: "https://www.linkedin.com/in/rob-lucha/"}] note="Shipped at Gradle (now Develocity)." /%}

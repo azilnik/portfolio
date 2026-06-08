@@ -12,7 +12,8 @@ Personal portfolio site for Ari Zilnik — designer building products at the int
 |------|---------|
 | [Astro 5](https://astro.build) | Static site generator with file-based routing |
 | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first CSS via the `@tailwindcss/vite` plugin |
-| [MDX](https://mdxjs.com) | Markdown + components for case study content |
+| [Markdoc](https://markdoc.dev) | Markdown + typed component tags for case study content |
+| [Keystatic](https://keystatic.com) | Local visual editor for case study content (dev-only, at `/keystatic`) |
 | [Sharp](https://sharp.pixelplumbing.com) | Automatic image optimization (WebP/AVIF, srcset, lazy loading) |
 | [GoatCounter](https://www.goatcounter.com) | Privacy-friendly analytics (production only, no cookies) |
 | [GitHub Actions](https://github.com/features/actions) | Automated deploy to GitHub Pages on every push to `main` |
@@ -43,12 +44,13 @@ src/
 │   ├── home/               # Hero, TestimonialCarousel, WorkSection, EmployerBlock
 │   ├── work/               # CaseStudyCard (work listing grid)
 │   ├── casestudy/          # CaseStudyHero, ImpactMetrics
-│   └── mdx/                # FullBleedImage, VideoPlayer, ImageGrid, Callout
+│   └── mdx/                # Body components (FullBleedImage, VideoPlayer, ImageGrid, Callout, …)
 ├── content/
-│   ├── work/               # Case study .mdx files (one per project)
+│   ├── work/               # Case study .mdoc files (one per project)
 │   │   └── images/         # Case study images
 │   └── testimonials/       # testimonials.json
 ├── data/                   # TypeScript data (employers.ts, navigation.ts)
+├── lib/                    # contentImages.ts (resolves body image paths → optimized assets)
 ├── layouts/                # BaseLayout → PageLayout → CaseStudyLayout
 ├── pages/                  # File-based routing
 │   ├── index.astro         # Homepage
@@ -65,19 +67,50 @@ public/
 └── robots.txt
 
 scripts/
-└── convert-video.sh        # FFmpeg: screen recording → mp4 + gif
+├── convert-video.sh        # FFmpeg: screen recording → mp4 + gif
+└── keystatic-roundtrip-check.ts  # Verifies a .mdoc still parses in Keystatic
+
+keystatic.config.ts         # Visual editor schema (the writer)
+markdoc.config.mjs          # Markdoc tag → component mapping (the renderer)
 ```
 
-## Adding a Case Study
+## Editing Content (Visual Editor)
 
-Case studies are MDX files in `src/content/work/`. Each file's frontmatter is validated against a Zod schema at build time — missing or invalid fields will throw a clear error.
+The easiest way to add or edit a case study is the built-in **Keystatic** editor — a visual,
+form-based UI with a rich-text body. No code, no Markdoc syntax.
 
-> Before adding a new case study, skim the SEO/voice rules in [`docs/SEO.md`](./docs/SEO.md) — they prevent the title/description set from drifting over time and include a checklist for what each new study needs to set.
+```bash
+npm run dev
+# then open http://localhost:4321/keystatic
+```
+
+Edits write straight to the `.mdoc` files in `src/content/work/` (and images into
+`src/content/work/images/`). Review the diff and commit when you're happy — nothing publishes
+until you push. The editor runs **only in dev**; the production build stays fully static (no
+server, no admin route).
+
+Two halves keep this working, and they must stay in sync:
+
+- **`keystatic.config.ts`** — the editing form: frontmatter fields + one block per body component.
+- **`markdoc.config.mjs`** — how each `{% tag %}` renders to its Astro component.
+
+A block's key in `keystatic.config.ts` must match its tag name in `markdoc.config.mjs`, or the
+editor will write content that doesn't render. After hand-editing a `.mdoc`, you can sanity-check
+it parses with `npx tsx scripts/keystatic-roundtrip-check.ts <slug>`.
+
+> Before adding a new case study, skim the SEO/voice rules in [`docs/SEO.md`](./docs/SEO.md) — they
+> prevent the title/description set from drifting over time and include a checklist for what each new
+> study needs to set.
+
+## Adding a Case Study by Hand
+
+Case studies are [Markdoc](https://markdoc.dev) (`.mdoc`) files in `src/content/work/`. Frontmatter
+is validated against a Zod schema at build time — missing or invalid fields throw a clear error.
 
 ### 1. Create the file
 
 ```bash
-touch src/content/work/my-project.mdx
+touch src/content/work/my-project.mdoc
 ```
 
 ### 2. Add frontmatter
@@ -94,7 +127,7 @@ seoDescription: "Longer 120-160 char meta description with keyword coverage."
 heroImage: "./images/my-project-hero.jpg"
 thumbnail: "./images/my-project-thumb.jpg"
 thumbnailAlt: "Alt text for the thumbnail"
-employer: "join"          # "join" | "blockdaemon" | "gradle" | "freelance"
+employer: "join"          # "join" | "blockdaemon" | "gradle" | "freelance" | "side-project"
 sortOrder: 1              # Lower numbers appear first
 draft: false              # Set true to hide from production
 metrics:                  # 1–3 impact metrics (optional)
@@ -103,39 +136,49 @@ metrics:                  # 1–3 impact metrics (optional)
 ---
 ```
 
-### 3. Write content with MDX components
+### 3. Write the body with Markdoc tags
 
-```mdx
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import VideoPlayer from "../../components/mdx/VideoPlayer.astro";
-import ImageGrid from "../../components/mdx/ImageGrid.astro";
-import Callout from "../../components/mdx/Callout.astro";
+No imports needed — tags map to components via `markdoc.config.mjs`. Regular markdown
+(paragraphs, headings, lists, links, inline `code`) works as expected.
 
+```markdoc
 ## The Challenge
 
-Regular markdown works here — paragraphs, headings, lists, links, etc.
+A normal paragraph. Straight quotes become “curly” automatically.
 
-<FullBleedImage src={heroImg} alt="Full-width screenshot" />
+{% figure src="/src/content/work/images/my-shot.png" alt="Full-width screenshot"
+   caption="Optional caption." /%}
 
-<Callout label="Key Insight">
-  Callouts highlight important takeaways.
-</Callout>
+{% callout label="Key insight" %}
+Callouts highlight important takeaways.
+{% /callout %}
 
-<ImageGrid images={[img1, img2, img3]} alt="Side-by-side comparison" />
-
-<VideoPlayer src="/videos/my-recording" caption="Prototype walkthrough" />
+{% video src="/videos/my-recording.mp4" webm="/videos/my-recording.webm"
+   fallback="/videos/my-recording.gif" alt="Prototype walkthrough"
+   caption="Prototype walkthrough" /%}
 ```
 
-The page auto-generates at `/work/my-project`.
+Body images use an absolute `/src/content/work/images/…` path (resolved through Sharp by
+`src/lib/contentImages.ts`). Video/GIF paths point at `public/videos/`. The page auto-generates
+at `/work/my-project`.
 
-## MDX Components
+## Body Components
 
-| Component | Purpose |
-|-----------|---------|
-| `FullBleedImage` | Breaks out of the prose container to span the full viewport width |
-| `VideoPlayer` | Autoplay/muted/looping `<video>` with a GIF fallback for older browsers |
-| `ImageGrid` | 2–3 images side-by-side, responsive (stacks on mobile) |
-| `Callout` | Highlighted aside with accent border and optional label |
+Each is both a Markdoc tag (in `markdoc.config.mjs`) and an editor block (in `keystatic.config.ts`).
+
+| Tag | Component | Purpose |
+|-----|-----------|---------|
+| `{% figure %}` | `FullBleedImage` | Captioned figure at column / wide / full width |
+| `{% video %}` | `VideoPlayer` | Autoplay/muted/looping `<video>` with a GIF fallback |
+| `{% gif %}` | `FullBleedGif` | Animated GIF figure (served from `public/videos/`) |
+| `{% imagegrid %}` | `ImageGrid` | 2–3 images side-by-side, responsive (stacks on mobile) |
+| `{% callout %}` | `Callout` | Highlighted aside with accent border and optional label |
+| `{% impact %}` | `Impact` | One-line takeaway lead under a section heading |
+| `{% metacards %}` | `MetaCards` | Row of label / value / note mini-cards |
+| `{% credits %}` | `Credits` | Who worked on the project, by role |
+| `{% lessons %}` | `Lessons` | Bulleted list of takeaways |
+| `{% pivotcard %}` | `PivotCard` | A pivot: summary, cause, result |
+| `{% pressquote %}` | `PressQuote` | Pull quote from press coverage |
 
 ## Converting Screen Recordings
 
