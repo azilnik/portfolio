@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { config, collection, fields } from "@keystatic/core";
 import { block, wrapper } from "@keystatic/core/content-components";
 
@@ -13,6 +14,46 @@ import { block, wrapper } from "@keystatic/core/content-components";
  * `components` mirror markdoc.config.mjs. Keep both in sync — a block whose key
  * doesn't match a Markdoc tag will write content that won't render.
  */
+
+// --- Editor preview helpers -------------------------------------------------
+// Render inline thumbnails inside the body blocks so figures/grids show the
+// actual image rather than a bare "IMAGE / Edit" chrome. Local image fields
+// hand the editor the raw bytes as `data`; we mirror Keystatic's own preview by
+// wrapping them in an object URL and revoking it on unmount.
+function useObjectUrl(data: Uint8Array | null | undefined, extension?: string) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!data) {
+      setUrl(null);
+      return;
+    }
+    const type = extension === "svg" ? "image/svg+xml" : undefined;
+    const objectUrl = URL.createObjectURL(new Blob([new Uint8Array(data)], { type }));
+    setUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [data, extension]);
+  return url;
+}
+
+const thumbStyle = {
+  display: "block",
+  maxHeight: "200px",
+  maxWidth: "100%",
+  borderRadius: "6px",
+} as const;
+
+// Renders one local image-field value (figure / grid item) as a thumbnail.
+function ImageThumb({
+  asset,
+  alt,
+}: {
+  asset: { data: Uint8Array | null; extension: string } | null;
+  alt?: string;
+}) {
+  const url = useObjectUrl(asset?.data, asset?.extension);
+  if (!url) return null;
+  return <img src={url} alt={alt ?? ""} style={thumbStyle} />;
+}
 
 // Width treatment shared by figures, grids, and video. Mirrors the `size`
 // prop and the Markdoc `size` attribute.
@@ -64,6 +105,7 @@ const caseStudyComponents = {
       size: sizeField("wide"),
       caption: fields.text({ label: "Caption" }),
     },
+    ContentView: ({ value }) => <ImageThumb asset={value.src} alt={value.alt} />,
   }),
   gif: block({
     label: "GIF",
@@ -78,6 +120,9 @@ const caseStudyComponents = {
       size: sizeField("column"),
       caption: fields.text({ label: "Caption" }),
     },
+    // GIFs live under public/, served at their literal path during dev.
+    ContentView: ({ value }) =>
+      value.src ? <img src={value.src} alt={value.alt ?? ""} style={thumbStyle} /> : null,
   }),
   imagegrid: block({
     label: "Image grid",
@@ -93,6 +138,13 @@ const caseStudyComponents = {
       size: sizeField("wide"),
       caption: fields.text({ label: "Caption" }),
     },
+    ContentView: ({ value }) => (
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        {value.images.map((image, i) => (
+          <ImageThumb key={i} asset={image.src} alt={image.alt} />
+        ))}
+      </div>
+    ),
   }),
   metacards: block({
     label: "Meta cards",
@@ -118,7 +170,7 @@ const caseStudyComponents = {
           people: fields.text({ label: "People" }),
           url: fields.url({ label: "Link (optional)" }),
         }),
-        { label: "Credits", itemLabel: (p) => p.fields.role.value || "Credit" }
+        { label: "Credits", itemLabel: (p) => p.fields.people.value || p.fields.role.value || "Credit" }
       ),
       note: fields.text({ label: "Note", description: "e.g. “In flight at Join, 2026.”" }),
     },
@@ -163,6 +215,13 @@ const caseStudyComponents = {
       size: sizeField("wide"),
       caption: fields.text({ label: "Caption" }),
     },
+    // Prefer the GIF fallback as a still-friendly poster; fall back to the MP4.
+    ContentView: ({ value }) =>
+      value.fallback ? (
+        <img src={value.fallback} alt={value.alt ?? ""} style={thumbStyle} />
+      ) : value.src ? (
+        <video src={value.src} muted style={thumbStyle} />
+      ) : null,
   }),
 };
 
