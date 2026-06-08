@@ -6,8 +6,8 @@ industry: "Smart Home, Open Source"
 description: "Rate-of-change smoke detection. 30 seconds, not 10 minutes. ~$85, open source."
 seoTitle: "A smart hood vent for Home Assistant"
 seoDescription: "A Home Assistant smart hood vent that detects gas stove cooking in 30-60 seconds, not 5-10 minutes. Open source, $85 in hardware, 236 lines of YAML."
-heroImage: "./images/hood-vent-dashboard.png"
-thumbnail: "./images/hood-vent-dashboard.png"
+heroImage: "./images/ha-smart-hood-vent/hood-vent-dashboard.png"
+thumbnail: "./images/ha-smart-hood-vent/hood-vent-dashboard.png"
 thumbnailAlt: "Home Assistant dashboard showing rate-of-change detection during a cooking session"
 employer: "side-project"
 sortOrder: 3
@@ -30,7 +30,7 @@ Rate-of-change detection asks a different question. Instead of "is it hot?" it a
 When you turn on a burner, the air near the stove starts rising in temperature immediately. The derivative of the reading over a rolling two-minute window spikes almost as soon as the pan heats. When you stop cooking, the rate flattens and the hood shuts off. Hot days don't cause false triggers because the temperature is high but not changing fast.
 
 {% figure
-   src="/src/content/work/images/hood-vent-dashboard.png"
+   src="/src/content/work/images/ha-smart-hood-vent/hood-vent-dashboard.png"
    alt="Home Assistant dashboard during a real cooking session: hood state, rate-of-change spike, and raw temperature"
    caption="A real cooking session. The rate-of-change spike triggered the hood within a minute, well before raw temperature would have crossed any threshold." /%}
 

@@ -13,8 +13,10 @@ import type { ImageMetadata } from "astro";
  * Keystatic writes body-image paths absolute-from-root (`/src/content/...`);
  * we also accept the `./images/...` relative form for safety.
  */
+// Images are namespaced per case study (src/content/work/images/<slug>/…) to
+// match Keystatic's slug-scoped asset paths, so this glob recurses.
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/content/work/images/*.{png,jpg,jpeg,gif,webp,avif,PNG,JPG,JPEG}",
+  "/src/content/work/images/**/*.{png,jpg,jpeg,gif,webp,avif,PNG,JPG,JPEG}",
   { eager: true }
 );
 
