@@ -21,15 +21,6 @@ metrics:
     value: "2 months"
 ---
 
-import FullBleedImage from "../../components/mdx/FullBleedImage.astro";
-import Callout from "../../components/mdx/Callout.astro";
-import PressQuote from "../../components/mdx/PressQuote.astro";
-import Credits from "../../components/mdx/Credits.astro";
-
-import joinIdeas02 from "./images/join-ideas-02.png";
-import joinIdeas03 from "./images/join-ideas-03.png";
-import joinIdeas04 from "./images/join-ideas-04.png";
-
 [Join](https://join.build) is project management for the people who build actual buildings. As Head of Design, I lead a small team and ship product across the platform.
 
 Ideas is an AI recommendation engine that surfaces cost-saving material alternatives inside construction estimates. A less experienced estimator might spec a finish at full cost when a substitute would do the same job for half, and that knowledge gap compounds across every line item in every project. Ideas surfaces those substitutions automatically.
@@ -40,10 +31,7 @@ The original plan was a materials marketplace. Customer interviews moved us off 
 
 AI-generated suggestions appear as contextual carousels ranked by cost-saving potential. Each carousel groups alternatives by where they appear in the estimate and by construction phase, so estimators see relevant options without searching.
 
-<FullBleedImage
-  src={joinIdeas02}
-  alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase"
-/>
+{% figure src="/src/content/work/images/join-ideas-02.png" alt="Join Ideas browsing page with two suggestion carousels: items found in the estimate and items commonly considered at this construction phase" /%}
 
 ## Human review layer
 
@@ -51,36 +39,18 @@ These suggestions affect real buildings and real budgets, so a materials researc
 
 We used AI-coded prototypes to test card density with real estimate data before engineering built anything. Each card shows UniFormat and MasterFormat classification codes — estimators told us in interviews these were non-negotiable for trust.
 
-<FullBleedImage
-  src={joinIdeas04}
-  alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes"
-/>
+{% figure src="/src/content/work/images/join-ideas-04.png" alt="Three Join Ideas suggestion cards showing alternate materials with dollar amounts and construction classification codes" /%}
 
 ## Forced comparison
 
 Every recommendation has to be weighed against alternatives before an estimator can accept it. Suggestions are surfaced by the model, but the decision sits with the estimator and nothing gets auto-applied.
 
-<FullBleedImage
-  src={joinIdeas03}
-  alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart"
-/>
+{% figure src="/src/content/work/images/join-ideas-03.png" alt="Detail view of a material suggestion with tradeoffs and a cost comparison chart" /%}
 
 ## Results
 
 One enterprise customer saved $500K on their first project estimate within 30 days of launch. Decision-making time dropped 50% across the product.
 
-<PressQuote
-  quote="Join secures growth investment from construction giants DPR Construction and STO Building Group."
-  source="EIN Presswire, 2025"
-  url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group"
-/>
+{% pressquote quote="Join secures growth investment from construction giants DPR Construction and STO Building Group." source="EIN Presswire, 2025" url="https://www.einpresswire.com/article/847639958/join-secures-growth-investment-from-construction-giants-dpr-construction-and-sto-building-group" /%}
 
-<Credits
-  credits={[
-    { role: "Design + acting PM", people: "Ari Zilnik" },
-    { role: "Materials research", people: "Kyle Willis", url: "https://www.linkedin.com/in/kyle-willis-ra-7a813894/" },
-    { role: "Engineering", people: "Kevin Rakestraw", url: "https://www.linkedin.com/in/kevinrakestraw/" },
-    { role: "Engineering", people: "Nick Zukoski", url: "https://www.linkedin.com/in/nick-zukoski-54a97b49/" },
-  ]}
-  note="Shipped at Join, 2024."
-/>
+{% credits credits=[{role: "Design + acting PM", people: "Ari Zilnik"}, {role: "Materials research", people: "Kyle Willis", url: "https://www.linkedin.com/in/kyle-willis-ra-7a813894/"}, {role: "Engineering", people: "Kevin Rakestraw", url: "https://www.linkedin.com/in/kevinrakestraw/"}, {role: "Engineering", people: "Nick Zukoski", url: "https://www.linkedin.com/in/nick-zukoski-54a97b49/"}] note="Shipped at Join, 2024." /%}

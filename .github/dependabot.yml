@@ -1,0 +1,25 @@
+# Dependabot keeps dependencies (and the SHA-pinned GitHub Actions) current.
+# Without this, pinning actions to a commit SHA means they never get security
+# patches — Dependabot bumps the SHA and its `# v4` comment together.
+#
+# Monthly + grouped so PRs stay low-noise on a solo project. Security fixes
+# still arrive immediately via Dependabot security updates (enabled in repo
+# settings), independent of this schedule.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      npm-dependencies:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]

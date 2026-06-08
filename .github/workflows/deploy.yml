@@ -1,12 +1,20 @@
 # ============================================================
 # GitHub Actions — Deploy Astro site to GitHub Pages
 #
-# Triggers on every push to `main`. Uses the official Astro
-# GitHub Action to build the site, then deploys to Pages.
+# Triggers on every push to `main`. Builds with the official
+# Astro action, then deploys to Pages.
 #
-# Before this works, you need to enable GitHub Pages in your
-# repo settings:
+# Before this works, enable GitHub Pages in repo settings:
 #   Settings → Pages → Source → "GitHub Actions"
+#
+# Security notes:
+#   - Third-party actions are pinned to a full commit SHA (not a
+#     mutable tag) so a repointed/compromised tag can't inject code
+#     into CI. The trailing comment records the human-readable version;
+#     bump both together when upgrading.
+#   - Permissions are denied by default at the top level and granted
+#     per job (least privilege): the build job only reads the repo;
+#     only the deploy job can write to Pages / mint the OIDC token.
 # ============================================================
 
 name: Deploy to GitHub Pages
@@ -18,11 +26,8 @@ on:
   # Allow running this workflow manually from the Actions tab.
   workflow_dispatch:
 
-# Grant the GITHUB_TOKEN permission to deploy to Pages.
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# Deny all token scopes by default; jobs opt into exactly what they need.
+permissions: {}
 
 # Only allow one deployment at a time (skip queued runs).
 concurrency:
@@ -32,20 +37,29 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          # Don't leave the GITHUB_TOKEN in .git/config for later steps —
+          # the build runs dependency install scripts and doesn't need git auth.
+          persist-credentials: false
 
       - name: Install, build, and upload
-        uses: withastro/action@v3
+        uses: withastro/action@56781b97402ce0487b7e61ce2cb960c0e2cc5289 # v3
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write # deploy to Pages
+      id-token: write # mint the OIDC token Pages deployment verifies
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
