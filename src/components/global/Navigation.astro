@@ -49,6 +49,7 @@ const currentPath = Astro.url.pathname;
             style={isActive
               ? "font-weight: 600; color: var(--theme-accent);"
               : "color: var(--theme-text-secondary);"}
+            {...(isActive ? { "aria-current": "page" } : {})}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             {...(link.href.startsWith("mailto:") ? { "data-goatcounter-click": "contact-nav" } : {})}
             {...(link.label === "LinkedIn" ? { "data-goatcounter-click": "linkedin-nav" } : {})}
