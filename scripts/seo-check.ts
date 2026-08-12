@@ -18,6 +18,7 @@ type Frontmatter = {
   seoDescription?: string;
   thumbnailAlt?: string;
   draft?: boolean;
+  sortOrder?: string;
 };
 
 type Issue = {
@@ -198,10 +199,36 @@ function checkCaseStudy(filePath: string): Result {
   }
 
   return {
-    slug: path.basename(filePath, ".mdx"),
+    slug: path.basename(filePath, ".mdoc"),
     frontmatter: fm,
     issues,
   };
+}
+
+/**
+ * sortOrder must be unique across case studies. Ties fall back to filename
+ * order, which silently reshuffles the /work grid, the homepage, and the
+ * prev/next chain at the bottom of every case study.
+ */
+function checkSortOrderCollisions(results: Result[]) {
+  const bySortOrder = new Map<string, string[]>();
+  for (const r of results) {
+    if (r.frontmatter.sortOrder === undefined) continue;
+    const key = String(r.frontmatter.sortOrder);
+    bySortOrder.set(key, [...(bySortOrder.get(key) ?? []), r.slug]);
+  }
+  for (const [sortOrder, slugs] of bySortOrder) {
+    if (slugs.length < 2) continue;
+    for (const r of results) {
+      if (!slugs.includes(r.slug)) continue;
+      const others = slugs.filter((s) => s !== r.slug).join(", ");
+      r.issues.push({
+        level: "error",
+        field: "sortOrder",
+        message: `Duplicate sortOrder ${sortOrder} (also used by ${others}). Ordering falls back to filename and is unstable.`,
+      });
+    }
+  }
 }
 
 function renderResult(r: Result): string {
@@ -228,10 +255,10 @@ function main() {
   const { slug } = parseArgs();
 
   const targets = slug
-    ? [path.join(workDir, `${slug}.mdx`)]
+    ? [path.join(workDir, `${slug}.mdoc`)]
     : fs
         .readdirSync(workDir)
-        .filter((f) => f.endsWith(".mdx"))
+        .filter((f) => f.endsWith(".mdoc"))
         .map((f) => path.join(workDir, f));
 
   for (const t of targets) {
@@ -242,6 +269,8 @@ function main() {
   }
 
   const results = targets.map(checkCaseStudy);
+  // Cross-file check — only meaningful on a full scan, but harmless with --slug.
+  checkSortOrderCollisions(results);
   const totalErrors = results.reduce(
     (n, r) => n + r.issues.filter((i) => i.level === "error").length,
     0

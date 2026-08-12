@@ -146,20 +146,6 @@ const caseStudyComponents = {
       </div>
     ),
   }),
-  metacards: block({
-    label: "Meta cards",
-    description: "A row of label / value / note mini-cards.",
-    schema: {
-      cards: fields.array(
-        fields.object({
-          label: fields.text({ label: "Label" }),
-          value: fields.text({ label: "Value" }),
-          note: fields.text({ label: "Note" }),
-        }),
-        { label: "Cards", itemLabel: (p) => p.fields.value.value || "Card" }
-      ),
-    },
-  }),
   credits: block({
     label: "Credits",
     description: "Who worked on this, by role.",

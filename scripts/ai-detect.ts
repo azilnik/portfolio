@@ -1,13 +1,13 @@
 // AI-detection check for case study prose via Pangram Labs v3.
 //
-// Reads .mdx files in src/content/work/, strips frontmatter and MDX components,
+// Reads .mdoc files in src/content/work/, strips frontmatter and Markdoc tags,
 // submits paragraph-level + whole-doc text to Pangram, and writes a markdown
 // report + raw JSON to analysis/{slug}/.
 //
 // Usage:
 //   npm run ai-detect                       # scan every case study
 //   npm run ai-detect -- --slug join-scenarios
-//   npm run ai-detect -- --file src/content/work/join-scenarios.mdx
+//   npm run ai-detect -- --file src/content/work/join-scenarios.mdoc
 //
 // Requires PANGRAM_API_KEY in .env. Missing key → graceful skip (exit 0).
 
@@ -87,12 +87,14 @@ function parseArgs() {
   return { slug: get("--slug"), file: get("--file") };
 }
 
-// --- MDX parsing -----------------------------------------------------------
+// --- Markdoc parsing ---------------------------------------------------------
 
 const FRONTMATTER_RE = /^---\n([\s\S]*?)\n---\n?/;
-const IMPORT_RE = /^import\s.+from\s.+;?\s*$/gm;
-const JSX_BLOCK_RE = /<([A-Z][A-Za-z0-9]*)([\s\S]*?)\/>/g;
-const JSX_OPEN_CLOSE_RE = /<([A-Z][A-Za-z0-9]*)([\s\S]*?)>([\s\S]*?)<\/\1>/g;
+// Markdoc tags come in two shapes: self-closing `{% figure src="…" /%}` (often
+// spanning multiple lines) and paired `{% callout %}…{% /callout %}`. Removing
+// every `{% … %}` marker drops self-closing tags whole and unwraps paired tags,
+// leaving their inner prose for the classifier.
+const MARKDOC_TAG_RE = /\{%[\s\S]*?%\}/g;
 const HEADING_RE = /^#{1,6}\s+/gm;
 const BLOCKQUOTE_RE = /^>\s?/gm;
 const INLINE_BOLD_RE = /\*\*(.+?)\*\*/g;
@@ -100,18 +102,14 @@ const INLINE_ITALIC_RE = /\*(.+?)\*/g;
 const INLINE_LINK_RE = /\[(.+?)\]\((.+?)\)/g;
 
 /**
- * Strips MDX-specific syntax to produce plain prose suitable for the
+ * Strips Markdoc-specific syntax to produce plain prose suitable for the
  * Pangram classifier. We keep the natural paragraph breaks (\n\n) so the
  * downstream paragraph splitter still works.
  */
-function mdxToProse(raw: string): string {
+function mdocToProse(raw: string): string {
   let body = raw.replace(FRONTMATTER_RE, "");
-  // Remove import statements
-  body = body.replace(IMPORT_RE, "");
-  // Drop self-closing JSX components (<Image .../>, etc.)
-  body = body.replace(JSX_BLOCK_RE, "");
-  // Drop open/close JSX components (<Callout>...</Callout>) — keep nothing
-  body = body.replace(JSX_OPEN_CLOSE_RE, "");
+  // Drop Markdoc tag markers ({% figure … /%}, {% credits … /%}, etc.)
+  body = body.replace(MARKDOC_TAG_RE, "");
   // Strip markdown decorations
   body = body.replace(HEADING_RE, "");
   body = body.replace(BLOCKQUOTE_RE, "");
@@ -258,9 +256,9 @@ function renderReport(doc: CaseStudyResult): string {
 // --- main ------------------------------------------------------------------
 
 async function scanCaseStudy(filePath: string, apiKey: string): Promise<CaseStudyResult> {
-  const slug = path.basename(filePath, ".mdx");
+  const slug = path.basename(filePath, ".mdoc");
   const raw = fs.readFileSync(filePath, "utf-8");
-  const prose = mdxToProse(raw);
+  const prose = mdocToProse(raw);
   const segments = paragraphSegments(prose);
 
   const result: CaseStudyResult = {
@@ -311,11 +309,11 @@ async function main() {
   if (file) {
     targets = [path.resolve(rootDir, file)];
   } else if (slug) {
-    targets = [path.join(workDir, `${slug}.mdx`)];
+    targets = [path.join(workDir, `${slug}.mdoc`)];
   } else {
     targets = fs
       .readdirSync(workDir)
-      .filter((f) => f.endsWith(".mdx"))
+      .filter((f) => f.endsWith(".mdoc"))
       .map((f) => path.join(workDir, f));
   }
 

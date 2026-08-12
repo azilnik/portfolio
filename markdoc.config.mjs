@@ -78,12 +78,6 @@ export default defineMarkdocConfig({
         caption: { type: String },
       },
     },
-    metacards: {
-      render: component("./src/components/mdx/MetaCards.astro"),
-      attributes: {
-        cards: { type: Array, required: true },
-      },
-    },
     credits: {
       render: component("./src/components/mdx/Credits.astro"),
       attributes: {

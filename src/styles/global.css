@@ -12,25 +12,19 @@
 /* --------------------------------------------------------------------------
    Self-hosted variable fonts
 
-   We load DM Sans (headings) and Inter (body) as variable fonts so a single
-   file covers all weights. The `font-weight` range tells the browser which
-   weights are available in the file.
+   We load Space Grotesk (headings) and Inter (body) as variable fonts so a
+   single file covers all weights. The `font-weight` range tells the browser
+   which weights are available in the file. Space Grotesk is latin-subset only
+   (no italic exists for the family); the range covers curly quotes and dashes
+   (U+2000-206F), so smartQuotes() output renders in-face.
    -------------------------------------------------------------------------- */
 
 @font-face {
-  font-family: "DM Sans";
+  font-family: "Space Grotesk";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 300 700;
   font-display: swap;
-  src: url("/fonts/DMSans-Variable.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Sans";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/DMSans-Variable-Italic.woff2") format("woff2");
+  src: url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
 }
 
 @font-face {

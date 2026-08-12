@@ -1,6 +1,9 @@
 ---
 /**
- * Homepage — Hero → Testimonials → Work → Side Projects.
+ * Homepage — Hero → Work → Testimonials → Side Projects.
+ *
+ * Work sits above testimonials deliberately: the reader forms their own
+ * judgment from the evidence before anyone else's praise asks them to.
  */
 import PageLayout from "../layouts/PageLayout.astro";
 import Hero from "../components/home/Hero.astro";
@@ -52,7 +55,7 @@ const personJsonLd = {
   jsonLd={[personJsonLd]}
 >
   <Hero />
-  <TestimonialCarousel />
   <WorkSection />
+  <TestimonialCarousel />
   <SideProjects />
 </PageLayout>

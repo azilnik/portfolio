@@ -103,7 +103,7 @@ Emitted via `src/components/global/JsonLd.astro`, passed through `BaseLayout`'s 
 
 Mechanical checklist (skip any step and SEO/analytics silently regresses):
 
-1. **Create the file** at `src/content/work/{slug}.mdx` with the frontmatter defined in `src/content.config.ts`.
+1. **Create the file** at `src/content/work/{slug}.mdoc` with the frontmatter defined in `src/content.config.ts`.
 2. **Set `seoTitle`** — short feature-at-company form, ≤60 chars. Don't omit — the fallback is generic.
 3. **Set `description`** — 8-12 word tagline, insight-first.
 4. **Set `seoDescription`** — 120-160 char meta description, third-person, in-voice, keyword-dense.

@@ -62,7 +62,7 @@ src/
 └── styles/                 # global.css (Tailwind v4 theme + fonts)
 
 public/
-├── fonts/                  # Self-hosted variable fonts (DM Sans, Inter)
+├── fonts/                  # Self-hosted variable fonts (Space Grotesk, Inter)
 ├── videos/                 # Converted screen recordings (.mp4 + .gif)
 └── robots.txt
 
@@ -174,7 +174,6 @@ Each is both a Markdoc tag (in `markdoc.config.mjs`) and an editor block (in `ke
 | `{% imagegrid %}` | `ImageGrid` | 2–3 images side-by-side, responsive (stacks on mobile) |
 | `{% callout %}` | `Callout` | Highlighted aside with accent border and optional label |
 | `{% impact %}` | `Impact` | One-line takeaway lead under a section heading |
-| `{% metacards %}` | `MetaCards` | Row of label / value / note mini-cards |
 | `{% credits %}` | `Credits` | Who worked on the project, by role |
 | `{% lessons %}` | `Lessons` | Bulleted list of takeaways |
 | `{% pivotcard %}` | `PivotCard` | A pivot: summary, cause, result |
@@ -204,7 +203,7 @@ Then reference it in MDX:
 The design system is defined in `src/styles/global.css` using Tailwind v4's `@theme` directive:
 
 - **Accent color:** `rgb(0, 89, 255)` → `var(--color-accent)`
-- **Fonts:** DM Sans (headings), Inter (body) — self-hosted variable `.woff2` files
+- **Fonts:** Space Grotesk (headings), Inter (body) — self-hosted variable `.woff2` files
 - **No `tailwind.config.js`** — Tailwind v4 uses CSS-native configuration
 
 ## Layout Hierarchy
