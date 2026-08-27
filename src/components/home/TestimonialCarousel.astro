@@ -32,6 +32,7 @@ function getInitials(name: string): string {
 ---
 
 <section
+  aria-label="Testimonials"
   class="mx-auto px-6"
   style="
     max-width: var(--theme-content-width);
@@ -71,34 +72,39 @@ function getInitials(name: string): string {
         >"{t.data.quote}"</p>
 
         {t.data.linkedinUrl ? (
-          <a
-            href={t.data.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-auto pt-6 flex items-center gap-4"
-            data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            {t.data.avatar ? (
-              <Image
-                src={t.data.avatar}
-                alt={t.data.authorName}
-                width={48}
-                height={48}
-                class="h-12 w-12 shrink-0 rounded-full object-cover"
-              />
-            ) : (
-              <div
-                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                style="background-color: var(--theme-accent);"
-              >
-                {getInitials(t.data.authorName)}
+          {/* HTML spec: blockquote attribution must be in a <footer> or <cite>.
+              Wrap the LinkedIn link in <footer> to match the no-link branch
+              and satisfy the spec. */}
+          <footer class="mt-auto pt-6 flex items-center gap-4">
+            <a
+              href={t.data.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4"
+              data-goatcounter-click={`linkedin-${t.data.authorName.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              {t.data.avatar ? (
+                <Image
+                  src={t.data.avatar}
+                  alt={t.data.authorName}
+                  width={48}
+                  height={48}
+                  class="h-12 w-12 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div
+                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
+                  style="background-color: var(--theme-accent);"
+                >
+                  {getInitials(t.data.authorName)}
+                </div>
+              )}
+              <div>
+                <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
+                <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
               </div>
-            )}
-            <div>
-              <p class="font-semibold" style="color: var(--theme-text-primary);">{t.data.authorName}</p>
-              <p class="text-sm" style="color: var(--theme-text-secondary);">{t.data.authorTitle}</p>
-            </div>
-          </a>
+            </a>
+          </footer>
         ) : (
           <footer class="mt-auto pt-6 flex items-center gap-4">
             {t.data.avatar ? (
